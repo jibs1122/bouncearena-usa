@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --ba-teal: #38b1ab;
+  --ba-teal-hover: #2e9a94;
+  --ba-teal-muted: rgba(56, 177, 171, 0.1);
+  --ba-teal-border: rgba(56, 177, 171, 0.35);
+
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #ffffff;
+  color: var(--foreground);
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  min-height: 100vh;
+  background: #ffffff;
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
