@@ -3,12 +3,22 @@ import path from "path";
 import Papa from "papaparse";
 import type { Product, Brand } from "./types";
 
-const CSV_PATH = path.join(process.cwd(), "data", "products-us.csv");
+const CSV_CANDIDATE_PATHS = [
+  path.join(process.cwd(), "data", "products-us.csv"),
+  path.join(process.cwd(), "bouncearena-us", "data", "products-us.csv"),
+];
 
 type ProductCache = {
   version: number;
   products: Product[];
 };
+
+function resolveCsvPath(): string | null {
+  for (const candidate of CSV_CANDIDATE_PATHS) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return null;
+}
 
 function parseNum(val: string): number | null {
   if (!val || val.trim() === "") return null;
@@ -126,8 +136,9 @@ function rowToProduct(row: Record<string, string>): Product {
 let _cache: ProductCache | null = null;
 
 function getProductsFileVersion(): number {
-  if (!fs.existsSync(CSV_PATH)) return 0;
-  return fs.statSync(CSV_PATH).mtimeMs;
+  const csvPath = resolveCsvPath();
+  if (!csvPath) return 0;
+  return fs.statSync(csvPath).mtimeMs;
 }
 
 export function getProductsDataVersion(): number {
@@ -135,7 +146,8 @@ export function getProductsDataVersion(): number {
 }
 
 export function getAllProducts(): Product[] {
-  if (!fs.existsSync(CSV_PATH)) {
+  const csvPath = resolveCsvPath();
+  if (!csvPath) {
     return [];
   }
 
@@ -144,7 +156,7 @@ export function getAllProducts(): Product[] {
     return _cache.products;
   }
 
-  const raw = fs.readFileSync(CSV_PATH, "utf8");
+  const raw = fs.readFileSync(csvPath, "utf8");
   const { data, errors } = Papa.parse<Record<string, string>>(raw, {
     header: true,
     skipEmptyLines: true,
