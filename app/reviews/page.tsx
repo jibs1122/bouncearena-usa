@@ -60,7 +60,7 @@ export default function ReviewsPage() {
           Owner Reviews
         </h1>
         <p className="text-black/60 mb-10 max-w-2xl">
-          Long-form reviews from real trampoline owners — unsponsored, unedited, and based on months of daily use.
+          Long-form reviews from real trampoline owners.
         </p>
 
         <div className="space-y-6">
