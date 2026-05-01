@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import HeaderWrapper from "@/components/layout/HeaderWrapper";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+function getSiteUrl() {
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us").trim();
+  if (!raw) return "https://bouncearena.us";
+
+  const withProtocol = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+
+  try {
+    return new URL(withProtocol).toString().replace(/\/$/, "");
+  } catch {
+    return "https://bouncearena.us";
+  }
+}
+
+const SITE_URL = getSiteUrl();
 const SITE_NAME = "Bounce Arena";
+const GA_ID = "G-2M6DL32KPB";
 const DEFAULT_DESCRIPTION =
   "Independent trampoline reviews and comparisons for US buyers. We compare safety ratings, sizes, and prices to help you find the best trampoline for your family.";
 
@@ -45,6 +60,21 @@ const organizationSchema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-US" style={{ background: "#ffffff" }}>
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
+      </head>
       <body suppressHydrationWarning className="flex flex-col min-h-screen bg-white">
         <JsonLd data={organizationSchema} />
         <HeaderWrapper />
