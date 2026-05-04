@@ -1,6 +1,6 @@
 import { getAllProducts, getProductsDataVersion } from '@/lib/products';
 import { QUIZ_BRAND_DATA, type QuizBrandData } from '@/lib/quizBrands';
-import { BRAND_SHOP_URLS } from '@/lib/brandLogos';
+import { getPreferredModelUrl } from '@/lib/productLinks';
 import { QUIZ_MODEL_DATA } from '@/lib/quizModelData';
 import type { GroundType } from '@/lib/types';
 
@@ -150,10 +150,7 @@ function buildQuizEntries(): QuizEntryAdmin[] {
       ...(model_?.matchReasons ?? {}),
     };
 
-    // Best source URL: prefer model-specific product page, fall back to brand shop
-    const modelSourceUrl = ps.flatMap(p => p.sourceUrls)[0] ?? null;
-    const shopUrl = BRAND_SHOP_URLS[brand] ?? null;
-    const sourceUrl = modelSourceUrl ?? shopUrl;
+    const sourceUrl = getPreferredModelUrl(brand, ps);
 
     const exclusionReasons: string[] = [];
     if (priceFrom !== null && priceFrom < 150) exclusionReasons.push('price-below-150');

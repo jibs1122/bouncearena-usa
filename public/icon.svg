@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" fill="white"/>
+  <g transform="translate(56 41) scale(2)">
+    <path d="M30 152 L8 190 L52 190 Z" fill="#111" stroke="#111" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M170 152 L192 190 L148 190 Z" fill="#111" stroke="#111" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M52 190 L100 196 L148 190" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="100" y1="155" x2="100" y2="194" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="100" cy="145" rx="94" ry="23" stroke="#111" stroke-width="5" fill="white"/>
+    <ellipse cx="100" cy="143" rx="80" ry="18" stroke="#111" stroke-width="2" fill="#ddd"/>
+    <ellipse cx="100" cy="142" rx="66" ry="14" fill="#111"/>
+    <line x1="8" y1="142" x2="14" y2="20" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+    <line x1="40" y1="154" x2="44" y2="12" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+    <line x1="82" y1="163" x2="84" y2="5" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+    <line x1="118" y1="163" x2="116" y2="5" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+    <line x1="160" y1="154" x2="156" y2="12" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+    <line x1="192" y1="142" x2="186" y2="20" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+    <path d="M14 20 Q44 8 84 5" stroke="#111" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M84 5 Q100 1 116 5" stroke="#111" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M116 5 Q156 8 186 20" stroke="#111" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M8 142 Q44 96 44 12" stroke="#111" stroke-width="1.5" fill="none" opacity="0.55"/>
+    <path d="M40 154 Q62 100 84 5" stroke="#111" stroke-width="1.5" fill="none" opacity="0.55"/>
+    <path d="M9 128 Q40 136 41 137" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M10 113 Q41 121 42 122" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M11 97 Q42 104 43 105" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M12 81 Q43 87 44 88" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M12 65 Q43 70 44 71" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M13 49 Q44 54 45 55" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M13 33 Q44 37 45 38" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M160 154 Q138 100 116 5" stroke="#111" stroke-width="1.5" fill="none" opacity="0.55"/>
+    <path d="M192 142 Q156 96 156 12" stroke="#111" stroke-width="1.5" fill="none" opacity="0.55"/>
+    <path d="M191 128 Q160 136 159 137" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M190 113 Q159 121 158 122" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M189 97 Q158 104 157 105" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M188 81 Q157 87 156 88" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M188 65 Q157 70 155 71" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M187 49 Q156 54 155 55" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M187 33 Q156 37 155 38" stroke="#111" stroke-width="1.2" fill="none" opacity="0.55"/>
+  </g>
+</svg>

@@ -32,6 +32,7 @@ export interface ScoredEntry extends QuizEntry {
 type PriorityId = 'bounce' | 'durability' | 'value' | 'assembly' | 'warranty';
 const JOEY_RATING_SCORE_BONUS = 10;
 const JOEY_RATING_MERIT_BONUS = 2;
+const SPRINGLESS_BOUNCE_PRIORITY_PENALTY = 10;
 
 export interface ScoreBreakdown {
   size: number;
@@ -146,9 +147,15 @@ function scoreBudget(entry: QuizEntry, budgets: BudgetId[]): number {
 }
 
 function scorePriorities(entry: QuizEntry, priorities: PriorityId[]): number {
-  return priorities
+  let total = priorities
     .slice(0, 2)
     .reduce((total, priority) => total + entry.metricScores[priority] * 2, 0);
+
+  if (priorities.includes('bounce') && entry.springType === 'springless') {
+    total -= SPRINGLESS_BOUNCE_PRIORITY_PENALTY;
+  }
+
+  return total;
 }
 
 function isHardExcluded(entry: QuizEntry, answers: QuizAnswers): boolean {

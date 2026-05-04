@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
 import type { GroundType, Product } from '@/lib/types';
-import { BRAND_SHOP_URLS } from '@/lib/brandLogos';
+import { getPreferredModelUrl, getPreferredProductUrl } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
@@ -28,6 +28,18 @@ function variantLabel(p: Product): string {
 
 function fmtPrice(n: number) {
   return formatUsd(n);
+}
+
+function normalizeShapeFilterValue(shape: string): string {
+  const normalized = shape.trim().toLowerCase();
+  if (!normalized || normalized === 'custom') return '';
+  if (normalized === 'rectangle' || normalized === 'rectangular') return 'rectangle';
+  return normalized;
+}
+
+function shapeFilterLabel(shape: string): string {
+  if (shape === 'rectangle') return 'Rectangle';
+  return shape.charAt(0).toUpperCase() + shape.slice(1);
 }
 
 // ─── brand colours ───────────────────────────────────────────────────────────
@@ -217,8 +229,7 @@ function buildRows(products: Product[]): ModelRow[] {
     const weights = ps.map(p => p.maxSingleUserWeightLb).filter((w): w is number => w !== null);
     const warranties = ps.map(p => p.warrantyFrameYears).filter((w): w is number => w !== null);
     const sizes = ps.map(p => sizeFt(p)).filter((s): s is number => s !== null);
-    const allSourceUrls = ps.flatMap(p => p.sourceUrls);
-    const shopUrl = BRAND_SHOP_URLS[brand] ?? (allSourceUrls[0] || null);
+    const shopUrl = getPreferredModelUrl(brand, ps);
 
     return {
       brand, model, shape, groundType, springSystem, springless, astmCertified,
@@ -241,7 +252,11 @@ export default function CompareClient({ products }: { products: Product[] }) {
   const allRows = useMemo(() => buildRows(products), [products]);
 
   const allBrands = useMemo(() => [...new Set(allRows.map(r => r.brand))].sort(), [allRows]);
-  const allShapes = useMemo(() => [...new Set(allRows.map(r => r.shape).filter(Boolean))].sort(), [allRows]);
+  const allShapes = useMemo(
+    () =>
+      [...new Set(allRows.map((r) => normalizeShapeFilterValue(r.shape)).filter(Boolean))].sort(),
+    [allRows]
+  );
 
   const globalMaxPrice = useMemo(() => {
     const prices = allRows.map(r => r.maxPrice).filter((p): p is number => p !== null);
@@ -282,7 +297,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
   const filtered = useMemo(() => {
     let rows = allRows;
     if (selectedBrands.size > 0) rows = rows.filter(r => selectedBrands.has(r.brand));
-    if (selectedShapes.size > 0) rows = rows.filter(r => selectedShapes.has(r.shape));
+    if (selectedShapes.size > 0) {
+      rows = rows.filter((r) => selectedShapes.has(normalizeShapeFilterValue(r.shape)));
+    }
     if (selectedGroundTypes.size > 0) {
       rows = rows.filter((r) => r.groundType === 'both' || selectedGroundTypes.has(r.groundType));
     }
@@ -366,7 +383,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                 {allShapes.map(s => (
                   <button key={s} onClick={() => toggleShape(s)}
                     className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${selectedShapes.has(s) ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
-                    {s}
+                    {shapeFilterLabel(s)}
                   </button>
                 ))}
               </div>
@@ -561,8 +578,8 @@ export default function CompareClient({ products }: { products: Product[] }) {
                           {(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null
                             ? fmtPrice((v.exactSizePriceUsd ?? v.modelFromPriceUsd)!)
                             : '—'}
-                          {v.sourceUrls[0] && (
-                            <a href={v.sourceUrls[0]} target="_blank" rel="noopener noreferrer nofollow sponsored"
+                          {getPreferredProductUrl(v) && (
+                            <a href={getPreferredProductUrl(v)!} target="_blank" rel="noopener noreferrer nofollow sponsored"
                               className="block text-[#38b1ab] hover:underline text-[10px] font-medium mt-0.5">
                               View →
                             </a>

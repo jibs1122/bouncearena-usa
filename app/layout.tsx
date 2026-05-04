@@ -49,6 +49,13 @@ export const metadata: Metadata = {
   verification: {
     google: "qVElmmc7dnFAI7y4tij8STQ1tixvjCbJ0KeZlVzxkcg",
   },
+  icons: {
+    icon: [
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon.svg", sizes: "any", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 const organizationSchema = {

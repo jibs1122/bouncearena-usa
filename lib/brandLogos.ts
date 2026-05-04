@@ -59,5 +59,5 @@ export function getBrandLogoUrl(brandName: string): string | null {
 }
 
 export function getBrandShopUrl(brandName: string, csvFallback: string | null): string | null {
-  return BRAND_SHOP_URLS[brandName] ?? csvFallback;
+  return csvFallback ?? BRAND_SHOP_URLS[brandName];
 }

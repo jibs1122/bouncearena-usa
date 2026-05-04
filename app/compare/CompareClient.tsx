@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
 import type { Product } from '@/lib/types';
-import { BRAND_SHOP_URLS } from '@/lib/brandLogos';
+import { getPreferredModelUrl, getPreferredProductUrl } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
@@ -208,8 +208,7 @@ function buildRows(products: Product[]): ModelRow[] {
     const weights = ps.map(p => p.maxSingleUserWeightLb).filter((w): w is number => w !== null);
     const warranties = ps.map(p => p.warrantyFrameYears).filter((w): w is number => w !== null);
     const sizes = ps.map(p => sizeFt(p)).filter((s): s is number => s !== null);
-    const allSourceUrls = ps.flatMap(p => p.sourceUrls);
-    const shopUrl = BRAND_SHOP_URLS[brand] ?? (allSourceUrls[0] || null);
+    const shopUrl = getPreferredModelUrl(brand, ps);
 
     return {
       brand, model, shape, springSystem, springless, astmCertified,
@@ -514,8 +513,8 @@ export default function CompareClient({ products }: { products: Product[] }) {
                           {(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null
                             ? fmtPrice((v.exactSizePriceUsd ?? v.modelFromPriceUsd)!)
                             : '—'}
-                          {v.sourceUrls[0] && (
-                            <a href={v.sourceUrls[0]} target="_blank" rel="noopener noreferrer nofollow sponsored"
+                          {getPreferredProductUrl(v) && (
+                            <a href={getPreferredProductUrl(v)!} target="_blank" rel="noopener noreferrer nofollow sponsored"
                               className="block text-[#38b1ab] hover:underline text-[10px] font-medium mt-0.5">
                               View →
                             </a>

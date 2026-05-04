@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllBrands, getBrand } from "@/lib/products";
-import { getBrandShopUrl } from "@/lib/brandLogos";
 import { getApprovedComparisons } from "@/lib/comparisons";
 import { BRAND_INTROS } from "@/lib/brandIntros";
 import ComparisonTable from "@/components/ui/ComparisonTable";
@@ -10,6 +9,7 @@ import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import { formatUsd } from "@/lib/price";
+import { getPreferredBrandUrl } from "@/lib/productLinks";
 import { isVulyBrand } from "@/lib/vuly";
 
 type Props = {
@@ -132,9 +132,9 @@ export default async function BrandPage({ params }: Props) {
               </div>
             </div>
 
-            {getBrandShopUrl(brand.name, brand.sourceUrl) && (
+            {getPreferredBrandUrl(brand.name, brand.sourceUrl) && (
               <a
-                href={getBrandShopUrl(brand.name, brand.sourceUrl)!}
+                href={getPreferredBrandUrl(brand.name, brand.sourceUrl)!}
                 target="_blank"
                 rel="noopener noreferrer nofollow sponsored"
                 className="flex-shrink-0 inline-flex items-center px-5 py-2.5 rounded-xl bg-[#38b1ab] text-white font-semibold hover:bg-[#2e9a94] transition-colors text-sm"

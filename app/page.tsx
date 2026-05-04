@@ -198,8 +198,8 @@ export default function HomePage() {
               Not sure which trampoline to buy?
             </h2>
             <p className="text-black/60 mb-6 max-w-md mx-auto">
-              Answer 6 quick questions and we&apos;ll match you with the best trampoline for your
-              family — based on yard size, safety priorities, and budget.
+              Answer a few quick questions and we&apos;ll match you with the best trampoline for
+              your family — based on yard size, safety priorities, and budget.
             </p>
             <Link
               href="/quiz/"
