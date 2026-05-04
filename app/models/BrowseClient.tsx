@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
-import type { Product } from '@/lib/types';
+import type { GroundType, Product } from '@/lib/types';
 import { BRAND_SHOP_URLS } from '@/lib/brandLogos';
 import { formatUsd } from '@/lib/price';
 
@@ -60,6 +60,7 @@ interface ModelRow {
   brand: string;
   model: string;
   shape: string;
+  groundType: GroundType;
   springSystem: string;
   springless: boolean;
   astmCertified: boolean | null;
@@ -196,11 +197,19 @@ function buildRows(products: Product[]): ModelRow[] {
   return Array.from(grouped.entries()).map(([key, ps]) => {
     const [brand, model] = key.split('|||');
     const shape = ps[0].shape || '';
+    const groundTypes = new Set(ps.map((p) => p.groundType));
+    const groundType: GroundType =
+      groundTypes.has('both') || (groundTypes.has('above-ground') && groundTypes.has('in-ground'))
+        ? 'both'
+        : groundTypes.has('in-ground')
+          ? 'in-ground'
+          : 'above-ground';
     const springSystem = ps[0].springSystem || '';
     const springless = ps.some(p =>
       p.springSystem?.toLowerCase().includes('springless') ||
       p.springSystem?.toLowerCase().includes('rod') ||
-      p.springSystem?.toLowerCase().includes('bungee')
+      p.springSystem?.toLowerCase().includes('bungee') ||
+      p.springSystem?.toLowerCase().includes('leaf')
     );
     const astmCertified = ps.some(p => p.meetsUsStandard === true) ? true
       : ps.every(p => p.meetsUsStandard === false) ? false : null;
@@ -212,7 +221,7 @@ function buildRows(products: Product[]): ModelRow[] {
     const shopUrl = BRAND_SHOP_URLS[brand] ?? (allSourceUrls[0] || null);
 
     return {
-      brand, model, shape, springSystem, springless, astmCertified,
+      brand, model, shape, groundType, springSystem, springless, astmCertified,
       minPrice: prices.length ? Math.min(...prices) : null,
       maxPrice: prices.length ? Math.max(...prices) : null,
       maxWeightLb: weights.length ? Math.max(...weights) : null,
@@ -245,6 +254,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
   const [selectedBrands, setSelectedBrands] = useState<Set<string>>(new Set());
   const [selectedShapes, setSelectedShapes] = useState<Set<string>>(new Set());
+  const [selectedGroundTypes, setSelectedGroundTypes] = useState<Set<GroundType>>(new Set());
   const [springlessOnly, setSpringlessOnly] = useState(false);
   const [astmOnly, setAstmOnly] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
@@ -259,6 +269,8 @@ export default function CompareClient({ products }: { products: Product[] }) {
     setSelectedBrands(prev => { const n = new Set(prev); n.has(b) ? n.delete(b) : n.add(b); return n; }), []);
   const toggleShape = useCallback((s: string) =>
     setSelectedShapes(prev => { const n = new Set(prev); n.has(s) ? n.delete(s) : n.add(s); return n; }), []);
+  const toggleGroundType = useCallback((groundType: GroundType) =>
+    setSelectedGroundTypes(prev => { const n = new Set(prev); n.has(groundType) ? n.delete(groundType) : n.add(groundType); return n; }), []);
   const toggleExpanded = useCallback((key: string) =>
     setExpandedKeys(prev => { const n = new Set(prev); n.has(key) ? n.delete(key) : n.add(key); return n; }), []);
 
@@ -271,9 +283,16 @@ export default function CompareClient({ products }: { products: Product[] }) {
     let rows = allRows;
     if (selectedBrands.size > 0) rows = rows.filter(r => selectedBrands.has(r.brand));
     if (selectedShapes.size > 0) rows = rows.filter(r => selectedShapes.has(r.shape));
+    if (selectedGroundTypes.size > 0) {
+      rows = rows.filter((r) => r.groundType === 'both' || selectedGroundTypes.has(r.groundType));
+    }
     if (springlessOnly) rows = rows.filter(r => r.springless);
     if (astmOnly) rows = rows.filter(r => r.astmCertified === true);
-    if (minPrice > 0 || maxPrice < globalMaxPrice) rows = rows.filter(r => r.minPrice === null || (r.minPrice >= minPrice && r.minPrice <= maxPrice));
+    if (minPrice > 0 || maxPrice < globalMaxPrice) {
+      rows = rows.filter(
+        (r) => r.minPrice !== null && r.minPrice >= minPrice && r.minPrice <= maxPrice
+      );
+    }
     if (minSize > 4 || maxSize < globalMaxSize) rows = rows.filter(r => r.maxSizeFt === null || (r.maxSizeFt >= minSize && r.minSizeFt !== null && r.minSizeFt <= maxSize));
 
     return [...rows].sort((a, b) => {
@@ -291,6 +310,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
     allRows,
     selectedBrands,
     selectedShapes,
+    selectedGroundTypes,
     springlessOnly,
     astmOnly,
     minPrice,
@@ -353,6 +373,21 @@ export default function CompareClient({ products }: { products: Product[] }) {
             </div>
           )}
 
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-black/40 mb-2">Ground type</p>
+            <div className="flex flex-wrap gap-1.5">
+              {([
+                { id: 'above-ground', label: 'Above-ground' },
+                { id: 'in-ground', label: 'In-ground' },
+              ] as const).map((option) => (
+                <button key={option.id} onClick={() => toggleGroundType(option.id)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${selectedGroundTypes.has(option.id) ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* type toggles */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wide text-black/40 mb-2">Type</p>
@@ -402,6 +437,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                     Size <span className="text-[10px]">{sortKey === 'size' ? (sortDir === 'asc' ? '↑' : '↓') : '↕'}</span>
                   </button>
                 </th>
+                <th className="text-left px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 hidden md:table-cell min-w-[120px]">Ground type</th>
                 <th className="text-left px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 hidden md:table-cell min-w-[110px]">Spring type</th>
                 <SortTh col="price" label="Price" />
                 <SortTh col="weight" label="Max weight" tip="Max single-user weight in lb" />
@@ -415,21 +451,22 @@ export default function CompareClient({ products }: { products: Product[] }) {
             <tbody>
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="py-16 text-center text-black/40 text-sm">
+                  <td colSpan={9} className="py-16 text-center text-black/40 text-sm">
                     No models match your filters.
                   </td>
                 </tr>
               )}
               {filtered.map(row => {
                 const key = `${row.brand}|||${row.model}`;
-                const isExpanded = expandedKeys.has(key);
+                const canExpand = row.variants.length > 1;
+                const isExpanded = canExpand && expandedKeys.has(key);
                 const badge = brandBadge(row.brand);
 
                 return (
                   <Fragment key={key}>
                     <tr
-                      className="border-t border-black/[0.06] hover:bg-black/[0.012] transition-colors cursor-pointer"
-                      onClick={() => toggleExpanded(key)}>
+                      className={`border-t border-black/[0.06] transition-colors ${canExpand ? 'cursor-pointer hover:bg-black/[0.012]' : ''}`}
+                      onClick={canExpand ? () => toggleExpanded(key) : undefined}>
 
                       {/* model */}
                       <td className="px-4 py-3 align-top">
@@ -452,6 +489,11 @@ export default function CompareClient({ products }: { products: Product[] }) {
                             </span>
                           ))}
                         </div>
+                      </td>
+
+                      {/* spring type */}
+                      <td className="px-3 py-3 align-top text-sm text-black/50 hidden md:table-cell whitespace-nowrap">
+                        {row.groundType === 'above-ground' ? 'Above-ground' : row.groundType === 'in-ground' ? 'In-ground' : 'Both'}
                       </td>
 
                       {/* spring type */}
@@ -497,10 +539,12 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
                       {/* expand arrow */}
                       <td className="px-4 py-3 align-top text-right">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                          className={`text-black/25 transition-transform inline-block ${isExpanded ? 'rotate-180' : ''}`}>
-                          <path d="M4 6l4 4 4-4" />
-                        </svg>
+                        {canExpand ? (
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                            className={`text-black/25 transition-transform inline-block ${isExpanded ? 'rotate-180' : ''}`}>
+                            <path d="M4 6l4 4 4-4" />
+                          </svg>
+                        ) : null}
                       </td>
                     </tr>
 
@@ -509,6 +553,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
                       <tr key={`${key}-${i}`} className="border-t border-black/[0.04] bg-black/[0.015]">
                         <td className="pl-8 pr-3 py-2 text-xs text-black/50">↳ {variantLabel(v)}</td>
                         <td className="px-3 py-2 text-xs text-black/40">{v.shape}</td>
+                        <td className="px-3 py-2 text-xs text-black/40 hidden md:table-cell">
+                          {v.groundType === 'above-ground' ? 'Above-ground' : v.groundType === 'in-ground' ? 'In-ground' : 'Both'}
+                        </td>
                         <td className="px-3 py-2 text-xs text-black/40 hidden md:table-cell">{v.springSystem || '—'}</td>
                         <td className="px-3 py-2 text-xs font-medium text-black/70 whitespace-nowrap">
                           {(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null

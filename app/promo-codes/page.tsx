@@ -5,9 +5,9 @@ import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Trampoline Promo Codes & Discount Codes 2026 — US",
+  title: "Trampoline Promo Codes & Discount Codes 2026",
   description:
-    "Find the latest trampoline promo codes and discount codes for US brands — Springfree, Acon, Vuly, Skywalker, and more. Click to copy and save on your purchase.",
+    "Find the latest trampoline promo codes and discount codes — Springfree, Acon, Vuly, Skywalker, and more. Click to copy and save on your purchase.",
 };
 
 const PROMOS: { brand: string; code: string; description: string; expires?: string; affiliateUrl?: string }[] = [
@@ -53,7 +53,7 @@ export default function PromoCodesPage() {
           Trampoline Promo Codes
         </h1>
         <p className="text-black/60 mb-2 max-w-2xl">
-          Current discount codes for US trampoline brands. Click &ldquo;Copy&rdquo; to copy
+          Current discount codes for trampoline brands. Click &ldquo;Copy&rdquo; to copy
           the code, then paste at checkout on the brand&apos;s website.
         </p>
         <p className="text-sm text-black/50 border border-black/[0.08] bg-black/[0.02] rounded-lg px-4 py-2 mb-6 inline-block">

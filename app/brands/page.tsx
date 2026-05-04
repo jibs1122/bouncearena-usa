@@ -5,18 +5,19 @@ import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
 import { getApprovedComparisons } from "@/lib/comparisons";
+import { isVulyBrand } from "@/lib/vuly";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
 
 export const metadata: Metadata = {
-  title: "All Trampoline Brands — Compare US Brands 2026",
+  title: "All Trampoline Brands — Compare Brands 2026",
   description:
-    "Browse every major US trampoline brand — Springfree, Acon, Vuly, Skywalker, JumpKing, and more. Filter by price, size (ft/in), and ASTM safety certification.",
+    "Browse major trampoline brands — Springfree, Acon, Vuly, Skywalker, JumpKing, and more. Filter by price, size (ft/in), and ASTM safety certification.",
   alternates: { canonical: `${SITE_URL}/brands/` },
   openGraph: {
-    title: "All Trampoline Brands — Compare US Brands 2026",
+    title: "All Trampoline Brands — Compare Brands 2026",
     description:
-      "Browse every major US trampoline brand — Springfree, Acon, Vuly, Skywalker, JumpKing, and more. Filter by price, size, and ASTM safety certification.",
+      "Browse major trampoline brands — Springfree, Acon, Vuly, Skywalker, JumpKing, and more. Filter by price, size, and ASTM safety certification.",
     url: `${SITE_URL}/brands/`,
   },
 };
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 export default function BrandsPage() {
   const brands = getAllBrands();
   const comparisons = getApprovedComparisons(6);
+  const showAffiliateDisclosure = brands.some((brand) => isVulyBrand(brand.name));
 
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -66,11 +68,11 @@ export default function BrandsPage() {
           Trampoline Brands
         </h1>
         <p className="text-black/60 max-w-2xl mb-8">
-          {brands.length} brands independently reviewed and compared for the US market.
+          {brands.length} brands independently reviewed and compared.
           All dimensions in feet and inches.
         </p>
 
-        <AffiliateDisclosure className="mb-8" />
+        {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
 
         {brands.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">

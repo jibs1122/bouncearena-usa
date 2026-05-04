@@ -8,26 +8,24 @@ import {
   buildSummaryText,
   getRecommendations,
   parseAnswers,
-  selectMatchReasons,
   type QuizAnswers,
   type ScoredEntry,
 } from '@/lib/quizScoring';
 import type { QuizEntry } from '@/lib/quizTrampolines';
 import { formatUsd } from '@/lib/price';
+import { isVulyBrand } from '@/lib/vuly';
 
 // ─── Result card ──────────────────────────────────────────────────────────────
 
 function ResultCard({
   rec,
-  answers,
   rank,
 }: {
   rec: ScoredEntry;
-  answers: QuizAnswers;
   rank: number;
 }) {
   const isTop = rank === 1;
-  const reasons = selectMatchReasons(rec, answers);
+  const reasons = rec.matchReasonsList;
   const href = rec.sourceUrl;
 
   return (
@@ -130,6 +128,7 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
     () => (answers ? getRecommendations(entries, answers) : []),
     [entries, answers],
   );
+  const showAffiliateDisclosure = recommendations.some((rec) => isVulyBrand(rec.brand));
 
   if (!answers) {
     return (
@@ -182,12 +181,12 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
       {recommendations.length > 0 && (
         <div className="space-y-6">
           {recommendations.map((rec, i) => (
-            <ResultCard key={rec.id} rec={rec} answers={answers} rank={i + 1} />
+            <ResultCard key={rec.id} rec={rec} rank={i + 1} />
           ))}
         </div>
       )}
 
-      {recommendations.length > 0 && (
+      {recommendations.length > 0 && showAffiliateDisclosure && (
         <div className="mt-12 border-t border-black/[0.06] pt-6 space-y-5">
           <div className="text-center">
             <Link

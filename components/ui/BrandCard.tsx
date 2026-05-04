@@ -11,6 +11,7 @@ export default function BrandCard({ brand }: { brand: Brand }) {
   const logoUrl = getBrandLogoUrl(brand.name);
   const [failed, setFailed] = useState(false);
   const hasLogo = Boolean(logoUrl && !failed);
+  const isAGame = brand.name.trim().toLowerCase() === 'agame';
 
   return (
     <Link
@@ -24,8 +25,8 @@ export default function BrandCard({ brand }: { brand: Brand }) {
           </div>
         ) : (
           <div className="flex aspect-square w-32 flex-shrink-0 items-center justify-center rounded-xl bg-white sm:w-36">
-            <span className="font-bold text-3xl leading-none text-[#38b1ab]">
-              {brand.name[0]}
+            <span className={`font-bold leading-none text-[#38b1ab] ${isAGame ? 'text-xl' : 'text-3xl'}`}>
+              {isAGame ? 'AGame' : brand.name[0]}
             </span>
           </div>
         )}

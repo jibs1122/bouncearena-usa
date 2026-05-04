@@ -1,10 +1,11 @@
 import fs from "fs";
 import path from "path";
 import Papa from "papaparse";
-import type { Product, Brand } from "./types";
+import type { Product, Brand, GroundType } from "./types";
 
 // Keep the CSV path statically scoped so Next/Vercel can trace it into production.
 const CSV_PATH = path.join(process.cwd(), "data", "products-us.csv");
+const EXCLUDED_BRANDS = new Set(["JumpSport"]);
 
 type ProductCache = {
   version: number;
@@ -31,6 +32,17 @@ function parseUrls(val: string): string[] {
     .split(/\s*[|,]\s*|\n/)
     .map((u) => u.trim())
     .filter((u) => u.startsWith("http"));
+}
+
+function parseGroundType(val: string): GroundType {
+  const normalized = (val ?? "").trim().toLowerCase();
+  if (!normalized) return "above-ground";
+  if (normalized.includes("both")) return "both";
+  if (normalized.includes("in") && normalized.includes("ground")) return "in-ground";
+  if (normalized.includes("above") && normalized.includes("ground")) return "above-ground";
+  if (normalized.includes("inground")) return "in-ground";
+  if (normalized.includes("aboveground")) return "above-ground";
+  return "above-ground";
 }
 
 function parsePriceFields(row: Record<string, string>) {
@@ -84,6 +96,7 @@ function rowToProduct(row: Record<string, string>): Product {
     model: (row["model"] ?? row["Model"] ?? "").trim(),
     size: (row["size"] ?? row["Size"] ?? "").trim(),
     shape: (row["shape"] ?? row["Shape"] ?? "").trim(),
+    groundType: parseGroundType(row["ground_type"] ?? ""),
     maxDiameterIn: parseNum(row["max_diameter_in"]),
     overallLengthIn: parseNum(row["overall_length_in"]),
     overallWidthIn: parseNum(row["overall_width_in"]),
@@ -161,7 +174,9 @@ export function getAllProducts(): Product[] {
     .map(rowToProduct);
 
   // Silently drop rows missing required fields
-  const validProducts = products.filter((p) => p.brand && p.model);
+  const validProducts = products.filter(
+    (p) => p.brand && p.model && !EXCLUDED_BRANDS.has(p.brand)
+  );
   _cache = {
     version,
     products: validProducts,

@@ -75,7 +75,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Springfree',
     dataBrandA: 'AlleyOOP',
     dataBrandB: 'Springfree',
-    intro: `AlleyOOP (the premium line from JumpSport) and Springfree are both safety-positioned premium brands, but they take different mechanical paths. AlleyOOP places its springs above the jumping surface and offers an optional DoubleBounce two-mat system. Springfree uses no springs at all. Both price from around $1,500 upward, both come with long warranties, and both target the same buyer: parents who've decided the mass-market $500 trampoline isn't what they want.`,
+    intro: `AlleyOOP and Springfree are both safety-positioned premium brands, but they take different mechanical paths. AlleyOOP places its springs above the jumping surface and offers an optional DoubleBounce two-mat system. Springfree uses no springs at all. Both price from around $1,500 upward, both come with long warranties, and both target the same buyer: parents who've decided the mass-market $500 trampoline isn't what they want.`,
   },
   {
     slug: 'alleyoop-vs-acon',
@@ -99,7 +99,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'ACON',
     dataBrandA: 'Skywalker',
     dataBrandB: 'ACON',
-    intro: `Skywalker is the volume leader in US retail at $400 to $900. ACON is a Finnish premium brand priced from roughly $1,500 upward. The price gap is real, and so are the differences across spring count, mat material, frame gauge, and warranty length. If you're cross-shopping these two, you're deciding between a known mid-tier option and a step up that costs three to four times as much.`,
+    intro: `Skywalker is a volume leader in mass-market retail at $400 to $900. ACON is a Finnish premium brand priced from roughly $1,500 upward. The price gap is real, and so are the differences across spring count, mat material, frame gauge, and warranty length. If you're cross-shopping these two, you're deciding between a known mid-tier option and a step up that costs three to four times as much.`,
   },
   {
     slug: 'skywalker-vs-vuly',
@@ -107,7 +107,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Vuly',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Vuly',
-    intro: `Skywalker dominates US mid-tier retail at $400 to $900. Vuly competes in the premium tier with its Leaf Spring system, typically at two to three times the price. Most parents reach this comparison after deciding whether a $500 trampoline meets their needs or whether they want to spend more for a longer warranty and a different build standard.`,
+    intro: `Skywalker dominates mid-tier retail at $400 to $900. Vuly competes in the premium tier with its Leaf Spring system, typically at two to three times the price. Most parents reach this comparison after deciding whether a $500 trampoline meets their needs or whether they want to spend more for a longer warranty and a different build standard.`,
   },
   {
     slug: 'zupapa-vs-springfree',
@@ -131,7 +131,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Zupapa',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Zupapa',
-    intro: `If you're shopping Amazon or Walmart in the $400 to $900 range, this is the comparison you're probably already making. Skywalker has stronger US retail distribution and broader brand recognition. Zupapa typically lists longer warranties, higher weight ratings, and more springs at similar price points. The two are the most cross-shopped pair in the mid-tier.`,
+    intro: `If you're shopping Amazon or Walmart in the $400 to $900 range, this is the comparison you're probably already making. Skywalker has broader retail distribution and stronger brand recognition. Zupapa typically lists longer warranties, higher weight ratings, and more springs at similar price points. The two are the most cross-shopped pair in the mid-tier.`,
   },
   {
     slug: 'skywalker-vs-jumpking',
@@ -139,15 +139,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'JumpKing',
     dataBrandA: 'Skywalker',
     dataBrandB: 'JumpKing',
-    intro: `Both Skywalker and JumpKing are legacy US mid-tier brands with broad retail availability and overlapping pricing. JumpKing has historically offered more rectangular models, which appeals to gymnastics-focused families. Skywalker covers a wider range of round-trampoline sizes. Most parents choose between them based on what's in stock locally and the size they need.`,
-  },
-  {
-    slug: 'skywalker-vs-jumpsport',
-    labelA: 'Skywalker',
-    labelB: 'JumpSport',
-    dataBrandA: 'Skywalker',
-    dataBrandB: 'JumpSport',
-    intro: `Skywalker prices in the mid-tier mass-market range. JumpSport prices a tier above, using its proprietary StagedBounce spring system, with higher listed weight ratings and longer warranty terms. This is the comparison parents make when they're stepping up from a first-trampoline budget to something they want to last longer.`,
+    intro: `Both Skywalker and JumpKing are legacy mid-tier brands with broad retail availability and overlapping pricing. JumpKing has historically offered more rectangular models, which appeals to gymnastics-focused families. Skywalker covers a wider range of round-trampoline sizes. Most parents choose between them based on what's in stock locally and the size they need.`,
   },
   {
     slug: 'zupapa-vs-jumpking',
@@ -156,22 +148,6 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     dataBrandA: 'Zupapa',
     dataBrandB: 'JumpKing',
     intro: `Both Zupapa and JumpKing compete in the mid-tier, but they reach different buyers. Zupapa skews Amazon-direct with longer listed warranty terms and higher spring counts. JumpKing has broader traditional retail presence and stronger brand recognition. The choice often comes down to whether you trust the Amazon-direct brand with more generous specs or the established name with shorter warranty terms.`,
-  },
-  {
-    slug: 'jumpsport-vs-springfree',
-    labelA: 'JumpSport',
-    labelB: 'Springfree',
-    dataBrandA: 'JumpSport',
-    dataBrandB: 'Springfree',
-    intro: `JumpSport and Springfree are both premium brands focused on bounce engineering. JumpSport uses its proprietary StagedBounce spring system, which is designed to soften the early stage of impact. Springfree uses a springless fiberglass rod design. Both price in the premium range and both come with long warranty terms.`,
-  },
-  {
-    slug: 'jumpsport-vs-acon',
-    labelA: 'JumpSport',
-    labelB: 'ACON',
-    dataBrandA: 'JumpSport',
-    dataBrandB: 'ACON',
-    intro: `JumpSport and ACON are both premium brands using spring systems, but they're tuned differently. JumpSport's StagedBounce design dampens the early stage of bounce. ACON's traditional coil setup is tuned for higher rebound. Parents usually choose based on how their kids will use the trampoline, casual jumping versus serious bouncing.`,
   },
   {
     slug: 'orcc-vs-zupapa',
@@ -211,7 +187,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Skywalker',
     dataBrandA: 'Upper Bounce',
     dataBrandB: 'Skywalker',
-    intro: `Upper Bounce is best known for replacement parts and budget complete units. Skywalker is a volume leader in US mid-tier retail. Upper Bounce typically prices below Skywalker with shorter warranty terms. If you're shopping the lower end of the market, this is the practical comparison.`,
+    intro: `Upper Bounce is best known for replacement parts and budget complete units. Skywalker is a volume leader in mid-tier retail. Upper Bounce typically prices below Skywalker with shorter warranty terms. If you're shopping the lower end of the market, this is the practical comparison.`,
   },
   {
     slug: 'skywalker-vs-sportspower',

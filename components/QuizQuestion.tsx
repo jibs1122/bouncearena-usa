@@ -29,6 +29,7 @@ export interface Question {
     href: string;
   };
   cardLayout?: boolean;
+  allowSkip?: boolean;
 }
 
 interface QuizQuestionProps {
@@ -275,7 +276,7 @@ export default function QuizQuestion({
       )}
 
       {/* Skip — single-select questions */}
-      {question.type === 'single' && (
+      {question.type === 'single' && question.allowSkip !== false && (
         <div className="mt-5 text-center">
           <button
             type="button"

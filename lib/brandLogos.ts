@@ -1,5 +1,8 @@
 // Local logo files take priority. Clearbit is only used as fallback for brands not listed here.
 const BRAND_LOCAL_LOGOS: Record<string, string> = {
+  'Akrobat':                  '/brand-logos/akrobat.svg',
+  'Texas Trampolines':        '/brand-logos/texas-trampolines.png',
+  'Crazy Ape':                '/brand-logos/crazy-ape.svg',
   'ACON':                     '/brand-logos/acon.png',
   'AlleyOOP':                 '/brand-logos/alleyoop.png',
   'Avyna':                    '/brand-logos/avyna.png',
@@ -32,6 +35,9 @@ const BRAND_CLEARBIT_DOMAINS: Record<string, string> = {
 
 // Preferred brand shop/collection URLs for outbound CTAs.
 export const BRAND_SHOP_URLS: Record<string, string> = {
+  'Akrobat':                  'https://www.akrobat.com/us/trampolines/all-trampolines',
+  'Texas Trampolines':        'http://www.texastrampolines.com/display.asp?departmentID=262&view=all',
+  'Crazy Ape':                'https://crazyape.shop/collections/trampolines',
   'Springfree':               'https://www.springfreetrampoline.com/collections/trampolines',
   'ACON':                     'https://us.acon24.com/collections/menu-trampolines',
   'Jumpflex':                 'https://www.jumpflex.com/',

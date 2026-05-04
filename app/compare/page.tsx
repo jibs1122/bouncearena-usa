@@ -8,12 +8,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
 export const metadata: Metadata = {
   title: "Trampoline Head-to-Head Comparisons 2026 | Bounce Arena",
   description:
-    "Side-by-side trampoline comparisons — Springfree vs ACON, Vuly vs Skywalker, and more. Independent specs and analysis for every major US brand matchup.",
+    "Side-by-side trampoline comparisons — Springfree vs ACON, Vuly vs Skywalker, and more. Independent specs and analysis for major brand matchups.",
   alternates: { canonical: `${SITE_URL}/compare/` },
   openGraph: {
     title: "Trampoline Head-to-Head Comparisons 2026",
     description:
-      "Side-by-side trampoline comparisons — Springfree vs ACON, Vuly vs Skywalker, and more. Independent specs and analysis for every major US brand matchup.",
+      "Side-by-side trampoline comparisons — Springfree vs ACON, Vuly vs Skywalker, and more. Independent specs and analysis for major brand matchups.",
     url: `${SITE_URL}/compare/`,
   },
 };
@@ -31,8 +31,6 @@ const COMPARISON_GROUPS = [
       "vuly-vs-jumpflex",
       "alleyoop-vs-springfree",
       "alleyoop-vs-acon",
-      "jumpsport-vs-springfree",
-      "jumpsport-vs-acon",
     ],
   },
   {
@@ -42,14 +40,13 @@ const COMPARISON_GROUPS = [
       "skywalker-vs-springfree",
       "skywalker-vs-acon",
       "skywalker-vs-vuly",
-      "skywalker-vs-jumpsport",
       "zupapa-vs-springfree",
       "zupapa-vs-acon",
     ],
   },
   {
     label: "Mid-Range & Budget",
-    description: "The most cross-shopped brands in US retail and on Amazon.",
+    description: "The most cross-shopped brands in mass-market retail and on Amazon.",
     slugs: [
       "skywalker-vs-zupapa",
       "skywalker-vs-jumpking",
@@ -121,7 +118,7 @@ export default function CompareHubPage() {
           Head-to-Head Comparisons
         </h1>
         <p className="text-black/60 mb-12 max-w-2xl">
-          In-depth side-by-side breakdowns of the top US trampoline brands. Independent specs, honest analysis, no fluff.
+          In-depth side-by-side breakdowns of leading trampoline brands. Independent specs, honest analysis, no fluff.
         </p>
 
         <div className="space-y-14">

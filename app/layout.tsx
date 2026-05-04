@@ -22,7 +22,7 @@ const SITE_URL = getSiteUrl();
 const SITE_NAME = "Bounce Arena";
 const GA_ID = "G-2M6DL32KPB";
 const DEFAULT_DESCRIPTION =
-  "Independent trampoline reviews and comparisons for US buyers. We compare safety ratings, sizes, and prices to help you find the best trampoline for your family.";
+  "Independent trampoline reviews and comparisons. We compare safety ratings, sizes, and prices to help you find the best trampoline for your family.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -45,6 +45,9 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  verification: {
+    google: "qVElmmc7dnFAI7y4tij8STQ1tixvjCbJ0KeZlVzxkcg",
   },
 };
 

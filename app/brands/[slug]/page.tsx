@@ -10,6 +10,7 @@ import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import { formatUsd } from "@/lib/price";
+import { isVulyBrand } from "@/lib/vuly";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -30,12 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
   return {
-    title: `${brand.name} Trampolines Review 2026 — US Specs & Prices`,
-    description: `In-depth review of ${brand.name} trampolines${priceStr}. Sizes in feet/inches, weight limits in lb, ASTM safety certification status, and warranty details for the US market.`,
+    title: `${brand.name} Trampolines Review 2026 — Specs & Prices`,
+    description: `In-depth review of ${brand.name} trampolines${priceStr}. Sizes in feet/inches, weight limits in lb, ASTM safety certification status, and warranty details.`,
     alternates: { canonical: `${siteUrl}/brands/${slug}/` },
     openGraph: {
-      title: `${brand.name} Trampolines — US Review & Specs`,
-      description: `Full spec breakdown of all ${brand.name} trampoline models available in the US. Pricing, ASTM compliance, and warranty data.`,
+      title: `${brand.name} Trampolines — Review & Specs`,
+      description: `Full spec breakdown of ${brand.name} trampoline models. Pricing, ASTM compliance, and warranty data.`,
       url: `${siteUrl}/brands/${slug}/`,
     },
   };
@@ -78,6 +79,7 @@ export default async function BrandPage({ params }: Props) {
     }));
 
   const hasAffiliate = brand.products.some((p) => p.sourceUrls.length > 0);
+  const showAffiliateDisclosure = hasAffiliate && isVulyBrand(brand.name);
   const astmCount = brand.products.filter((p) => p.meetsUsStandard === true).length;
   const minPrice = brand.fromPriceUsd;
 
@@ -104,9 +106,9 @@ export default async function BrandPage({ params }: Props) {
 
           {/* Brand header */}
           <div className="flex flex-col sm:flex-row sm:items-start gap-6 mb-8">
-            <div className="flex aspect-square w-28 items-center justify-center rounded-2xl border border-black/[0.05] bg-[#f7fbfa] p-3 flex-shrink-0 sm:w-32">
-              <div className="flex aspect-square h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-3.5">
-                <BrandLogoAvatar name={brand.name} size={92} fillContainer />
+            <div className="flex aspect-square w-32 items-center justify-center rounded-2xl border border-black/[0.05] bg-[#f7fbfa] p-3 flex-shrink-0 sm:w-[9.75rem]">
+              <div className="flex aspect-square h-full w-full items-center justify-center rounded-xl bg-white p-2.5 sm:p-3">
+                <BrandLogoAvatar name={brand.name} size={120} fillContainer />
               </div>
             </div>
             <div className="flex-1">
@@ -142,7 +144,7 @@ export default async function BrandPage({ params }: Props) {
             )}
           </div>
 
-          {hasAffiliate && <AffiliateDisclosure className="mb-8" />}
+          {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
 
           {/* Brand intro */}
           {BRAND_INTROS[brand.name] && (

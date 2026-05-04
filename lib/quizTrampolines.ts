@@ -2,11 +2,14 @@ import { getAllProducts, getProductsDataVersion } from '@/lib/products';
 import { QUIZ_BRAND_DATA, type QuizBrandData } from '@/lib/quizBrands';
 import { BRAND_SHOP_URLS } from '@/lib/brandLogos';
 import { QUIZ_MODEL_DATA } from '@/lib/quizModelData';
+import type { GroundType } from '@/lib/types';
 
 export interface QuizEntry {
   id: string;           // brand-slug + model-slug
   brand: string;
   model: string;
+  joeyRating: boolean;
+  groundType: GroundType;
   springType: 'traditional' | 'springless';
   advancedSafety: boolean;
   meetsUSStandards: boolean | null;
@@ -29,6 +32,23 @@ export interface QuizEntryAdmin extends QuizEntry {
 }
 
 const DEFAULT_METRICS = { bounce: 6, durability: 6, value: 6, assembly: 6, warranty: 6 };
+const JOEY_RATED_BRAND_SLUGS = new Set([
+  'alleyoop',
+  'avyna',
+  'akrobat',
+  'north',
+  'west-coast-jump',
+  'crazy-ape',
+  'maxair',
+  'maxx-air',
+  'vuly',
+  'springfree',
+  'acon',
+  'texas-trampolines',
+  'beast',
+  'jumpflex',
+  'berg',
+]);
 
 export function modelSlug(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -81,6 +101,7 @@ function buildQuizEntries(): QuizEntryAdmin[] {
     const bSlug = brandSlug(brand);
     const static_ = staticDataMap.get(bSlug);
     const model_ = modelDataMap.get(`${bSlug}|||${modelSlug(model)}`);
+    const joeyRating = JOEY_RATED_BRAND_SLUGS.has(bSlug);
 
     const prices = ps.map(p => p.exactSizePriceUsd ?? p.modelFromPriceUsd).filter((p): p is number => p !== null);
     const priceFrom = prices.length ? Math.min(...prices) : null;
@@ -91,6 +112,13 @@ function buildQuizEntries(): QuizEntryAdmin[] {
     const minSizeIn = sizesIn.length ? Math.min(...sizesIn) : null;
 
     const shape = ps[0].shape ?? '';
+    const groundTypes = new Set(ps.map((p) => p.groundType));
+    const groundType: GroundType =
+      groundTypes.has('both') || (groundTypes.has('above-ground') && groundTypes.has('in-ground'))
+        ? 'both'
+        : groundTypes.has('in-ground')
+          ? 'in-ground'
+          : 'above-ground';
     const isLongNarrow = shape === 'Rectangle' || shape === 'Oval';
 
     // Derive yard fit from actual model sizes (in inches; 1ft = 12in)
@@ -135,6 +163,8 @@ function buildQuizEntries(): QuizEntryAdmin[] {
       id: `${bSlug}-${modelSlug(model)}`,
       brand,
       model,
+      joeyRating,
+      groundType,
       springType,
       advancedSafety,
       meetsUSStandards,

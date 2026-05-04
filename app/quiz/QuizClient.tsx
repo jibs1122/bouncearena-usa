@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ProgressBar from '@/components/ProgressBar';
 import QuizQuestion from '@/components/QuizQuestion';
@@ -13,7 +13,10 @@ const SKIP_DEFAULTS: Record<string, string | string[]> = {
   safetyFeatures: 'nice-to-have',
   springType: 'not-sure',
   backyardSize: 'not-sure',
+  groundTypePreference: 'above-ground',
+  shapePreference: 'not-sure',
   standards: 'no',
+  jumperAges: [],
   budget: ['flexible'],
   priorities: [],
 };
@@ -21,6 +24,9 @@ const SKIP_DEFAULTS: Record<string, string | string[]> = {
 function isCompleteAnswers(answers: PartialQuizAnswers): answers is QuizAnswers {
   return Boolean(
     answers.backyardSize &&
+      answers.groundTypePreference &&
+      answers.shapePreference &&
+      Array.isArray(answers.jumperAges) &&
       answers.standards &&
       answers.safetyFeatures &&
       answers.springType &&
@@ -32,15 +38,11 @@ function isCompleteAnswers(answers: PartialQuizAnswers): answers is QuizAnswers 
 
 export default function QuizClient() {
   const router = useRouter();
-  const [answers, setAnswers] = useState<PartialQuizAnswers>({ priorities: [] });
+  const [answers, setAnswers] = useState<PartialQuizAnswers>({ priorities: [], jumperAges: [] });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const quizContentRef = useRef<HTMLElement | null>(null);
   const hasMountedQuestionRef = useRef(false);
-
-  const handlePreviewPrioritiesChange = useCallback((_vals: string[]) => {
-    // No Vuly bias logic needed — kept for API compatibility with QuizQuestion
-  }, []);
 
   const questions = useMemo(() => buildQuestions(), []);
   const currentQuestion = questions[currentIndex];
@@ -60,6 +62,7 @@ export default function QuizClient() {
 
   function selectedValues(questionId: string): string[] {
     if (questionId === 'priorities') return answers.priorities ?? [];
+    if (questionId === 'jumperAges') return answers.jumperAges ?? [];
     if (questionId === 'budget') return answers.budget ?? [];
     const value = answers[questionId as keyof PartialQuizAnswers];
     return typeof value === 'string' ? [value] : [];
@@ -81,6 +84,8 @@ export default function QuizClient() {
 
     if (questionId === 'priorities') {
       nextAnswers.priorities = value as Array<'bounce' | 'durability' | 'value' | 'assembly' | 'warranty'>;
+    } else if (questionId === 'jumperAges') {
+      nextAnswers.jumperAges = value as QuizAnswers['jumperAges'];
     } else if (questionId === 'budget') {
       nextAnswers.budget = value as QuizAnswers['budget'];
     } else {
@@ -106,6 +111,8 @@ export default function QuizClient() {
 
     if (questionId === 'priorities') {
       nextAnswers.priorities = [];
+    } else if (questionId === 'jumperAges') {
+      nextAnswers.jumperAges = [];
     } else if (questionId === 'budget') {
       nextAnswers.budget = ['flexible'];
     } else {
@@ -135,8 +142,8 @@ export default function QuizClient() {
             Trampoline quiz — find the right option for your family
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-7 text-black/55">
-            Answer 6 quick questions and we&apos;ll match you with the best trampoline for your
-            family — based on your safety priorities, spring preference, backyard size, and budget.
+            Answer 9 quick questions and we&apos;ll match you with the best trampoline for your
+            family — based on your safety priorities, ground type, spring preference, backyard size, shape preference, and budget.
           </p>
         </div>
       )}
@@ -149,13 +156,6 @@ export default function QuizClient() {
           {currentIndex + 1} / {questions.length}
         </div>
       </div>
-
-      {currentIndex === 0 && (
-        <p className="mb-4 text-xs text-black/30">
-          This quiz contains affiliate links and we may earn a commission on purchases.
-        </p>
-      )}
-
       <div
         key={currentQuestion.id}
         className={direction === 'back' ? 'question-enter-back' : 'question-enter-forward'}
@@ -166,22 +166,9 @@ export default function QuizClient() {
           selected={selectedValues(currentQuestion.id)}
           onAnswer={handleAnswer}
           onSkip={handleSkip}
-          onSelectionChange={
-            currentQuestion.id === 'priorities'
-              ? handlePreviewPrioritiesChange
-              : undefined
-          }
           continueLabel={currentQuestion.id === 'priorities' ? 'See my results →' : 'Continue →'}
         />
       </div>
-
-      {currentQuestion.id === 'priorities' && (
-        <p className="mt-6 text-xs text-black/30">
-          We earn a commission when you buy through some links. It doesn&apos;t change which
-          trampoline we recommend.
-        </p>
-      )}
-
       <div className="mt-4 border-t border-black/[0.06] pt-5">
         <div className="flex items-center justify-between">
           <button

@@ -5,7 +5,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
 
 export const metadata: Metadata = {
   title: "About Bounce Arena",
-  description: "About Bounce Arena — independent trampoline reviews and comparisons for US buyers.",
+  description: "About Bounce Arena — independent trampoline reviews and comparisons.",
   alternates: { canonical: `${SITE_URL}/about/` },
 };
 
@@ -22,8 +22,7 @@ export default function AboutPage() {
 
       <div className="space-y-6 text-black/70 leading-relaxed">
         <p>
-          Bounce Arena is an independent trampoline review and comparison site built for
-          US buyers. Our goal is to cut through marketing noise and give you accurate,
+          Bounce Arena is an independent trampoline review and comparison site. Our goal is to cut through marketing noise and give you accurate,
           spec-verified information to make a confident buying decision.
         </p>
 
@@ -37,11 +36,6 @@ export default function AboutPage() {
         <p>
           All prices are sourced from official brand websites. We flag where pricing could not be independently verified.
         </p>
-
-        <p className="text-sm text-black/40">
-          <strong className="text-black/50">Affiliate Disclosure:</strong> Some links on this site are affiliate links. If you click through and make a purchase, we may earn a commission at no additional cost to you. Affiliate status never influences our ratings or recommendations.
-        </p>
-
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <Link
             href="/brands/"

@@ -8,8 +8,15 @@ export type BudgetId =
   | '2500-plus'
   | 'flexible';
 
+export type JumperAgeId = 'under-6' | '6-12' | '13-17' | '18plus';
+export type ShapePreferenceId = 'round' | 'rectangle' | 'not-sure';
+export type GroundTypePreferenceId = 'above-ground' | 'in-ground';
+
 export interface QuizAnswers {
   backyardSize: 'small' | 'medium' | 'large' | 'long-narrow' | 'not-sure';
+  groundTypePreference: GroundTypePreferenceId;
+  shapePreference: ShapePreferenceId;
+  jumperAges: JumperAgeId[];
   standards: 'yes' | 'no';
   safetyFeatures: 'essential' | 'nice-to-have' | 'not-important';
   springType: 'traditional' | 'springless' | 'not-sure';
@@ -23,14 +30,20 @@ export interface ScoredEntry extends QuizEntry {
 }
 
 type PriorityId = 'bounce' | 'durability' | 'value' | 'assembly' | 'warranty';
+const JOEY_RATING_SCORE_BONUS = 10;
+const JOEY_RATING_MERIT_BONUS = 2;
 
 export interface ScoreBreakdown {
   size: number;
+  groundType: number;
+  shape: number;
+  ages: number;
   standards: number;
   safety: number;
   springType: number;
   budget: number;
   priorities: number;
+  joey: number;
   total: number;
   hardExcluded: boolean;
 }
@@ -46,18 +59,51 @@ export const budgetRanges: Record<BudgetId, [number, number]> = {
 
 // ─── Individual scoring functions ──────────────────────────────────────────────
 
+function getEffectiveBackyardSize(
+  backyardSize: QuizAnswers['backyardSize']
+): Exclude<QuizAnswers['backyardSize'], 'not-sure'> {
+  return backyardSize === 'not-sure' ? 'medium' : backyardSize;
+}
+
 function scoreSize(entry: QuizEntry, backyardSize: QuizAnswers['backyardSize']): number {
-  if (backyardSize === 'not-sure') return 0;
-  if (backyardSize === 'long-narrow') {
+  const effectiveBackyardSize = getEffectiveBackyardSize(backyardSize);
+  if (effectiveBackyardSize === 'long-narrow') {
     return entry.fitsYard.longNarrow ? 40 : -20;
   }
   const fits =
-    backyardSize === 'small'
+    effectiveBackyardSize === 'small'
       ? entry.fitsYard.small
-      : backyardSize === 'medium'
+      : effectiveBackyardSize === 'medium'
         ? entry.fitsYard.medium
         : entry.fitsYard.large;
   return fits ? 30 : -100;
+}
+
+function scoreGroundType(
+  entry: QuizEntry,
+  groundTypePreference: QuizAnswers['groundTypePreference']
+): number {
+  if (entry.groundType === 'both') return 25;
+  return entry.groundType === groundTypePreference ? 25 : -100;
+}
+
+function scoreShape(entry: QuizEntry, shapePreference: QuizAnswers['shapePreference']): number {
+  if (shapePreference === 'not-sure') return 0;
+  const shape = entry.shape.trim().toLowerCase();
+  const isRound = shape === 'round';
+  const isRectangleLike = shape === 'rectangle' || shape === 'square' || shape === 'oval';
+
+  if (shapePreference === 'round') return isRound ? 15 : -10;
+  return isRectangleLike ? 15 : -10;
+}
+
+function scoreJumperAges(entry: QuizEntry, jumperAges: JumperAgeId[]): number {
+  if (jumperAges.length === 0 || entry.springType !== 'springless') return 0;
+  const hasYoung = jumperAges.includes('under-6') || jumperAges.includes('6-12');
+  const hasOlder = jumperAges.includes('13-17') || jumperAges.includes('18plus');
+  if (hasYoung && !hasOlder) return 15;
+  if (hasYoung && hasOlder) return 0;
+  return -15; // older/adults only
 }
 
 function scoreStandards(entry: QuizEntry, standards: QuizAnswers['standards']): number {
@@ -94,7 +140,7 @@ function scoreBudget(entry: QuizEntry, budgets: BudgetId[]): number {
   if (price === null) return 0;
   const [min, max] = bounds;
   if (price >= min && price <= max) return 25;
-  if (price < min) return -20;
+  if (price < min) return 0;
   const ratio = price / Math.max(max, 1);
   return ratio > 1.5 ? -100 : -30;
 }
@@ -107,6 +153,7 @@ function scorePriorities(entry: QuizEntry, priorities: PriorityId[]): number {
 
 function isHardExcluded(entry: QuizEntry, answers: QuizAnswers): boolean {
   if (scoreSize(entry, answers.backyardSize) <= -100) return true;
+  if (scoreGroundType(entry, answers.groundTypePreference) <= -100) return true;
   if (scoreSpringType(entry, answers.springType) <= -100) return true;
   if (scoreBudget(entry, answers.budget) <= -100) return true;
   return false;
@@ -115,6 +162,8 @@ function isHardExcluded(entry: QuizEntry, answers: QuizAnswers): boolean {
 function countSignals(answers: QuizAnswers): number {
   let signals = 0;
   if (answers.backyardSize !== 'not-sure') signals++;
+  if (answers.shapePreference !== 'not-sure') signals++;
+  if (answers.jumperAges.length > 0) signals++;
   if (answers.standards === 'yes') signals++;
   if (answers.safetyFeatures === 'essential') signals++;
   if (answers.springType !== 'not-sure') signals++;
@@ -130,29 +179,35 @@ export function baseMeritScore(entry: QuizEntry): number {
     entry.metricScores.value +
     entry.metricScores.assembly +
     entry.metricScores.warranty +
-    (entry.advancedSafety ? 3 : 0)
+    (entry.advancedSafety ? 3 : 0) +
+    (entry.joeyRating ? JOEY_RATING_MERIT_BONUS : 0)
   );
 }
 
 export function getScoreBreakdown(entry: QuizEntry, answers: QuizAnswers): ScoreBreakdown {
   const size = scoreSize(entry, answers.backyardSize);
+  const groundType = scoreGroundType(entry, answers.groundTypePreference);
+  const shape = scoreShape(entry, answers.shapePreference);
+  const ages = scoreJumperAges(entry, answers.jumperAges);
   const standards = scoreStandards(entry, answers.standards);
   const safety = scoreSafety(entry, answers.safetyFeatures);
   const springType = scoreSpringType(entry, answers.springType);
   const budget = scoreBudget(entry, answers.budget);
   const priorities = scorePriorities(entry, answers.priorities as PriorityId[]);
+  const joey = entry.joeyRating ? JOEY_RATING_SCORE_BONUS : 0;
   return {
     size,
+    groundType,
+    shape,
+    ages,
     standards,
     safety,
     springType,
     budget,
     priorities,
-    total: size + standards + safety + springType + budget + priorities,
-    hardExcluded:
-      size <= -100 ||
-      springType <= -100 ||
-      budget <= -100,
+    joey,
+    total: size + groundType + shape + ages + standards + safety + springType + budget + priorities + joey,
+    hardExcluded: isHardExcluded(entry, answers),
   };
 }
 
@@ -188,7 +243,7 @@ function getDiverseRecommendations(entries: QuizEntry[], answers: QuizAnswers): 
 
   return picks.slice(0, 3).map((e) => ({
     ...e,
-    score: 1,
+    score: baseMeritScore(e),
     matchReasonsList: selectMatchReasons(e, answers),
   }));
 }
@@ -229,21 +284,37 @@ export function getRecommendations(entries: QuizEntry[], answers: QuizAnswers): 
 export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): string[] {
   const reasons: string[] = [];
   const mr = entry.matchReasons;
+  const effectiveBackyardSize = getEffectiveBackyardSize(answers.backyardSize);
+
+  if (answers.groundTypePreference === 'above-ground' && ['above-ground', 'both'].includes(entry.groundType)) {
+    reasons.push('Matches your preference for an above-ground trampoline');
+  } else if (answers.groundTypePreference === 'in-ground' && ['in-ground', 'both'].includes(entry.groundType)) {
+    reasons.push('Matches your preference for an in-ground trampoline');
+  }
 
   if (answers.springType === 'springless' && mr.springless) reasons.push(mr.springless);
   else if (answers.springType === 'traditional' && mr.traditional) reasons.push(mr.traditional);
 
   const sizeSnippet =
-    answers.backyardSize === 'small'
+    effectiveBackyardSize === 'small'
       ? mr.smallYard
-      : answers.backyardSize === 'medium'
+      : effectiveBackyardSize === 'medium'
         ? mr.mediumYard
-        : answers.backyardSize === 'large'
+        : effectiveBackyardSize === 'large'
           ? mr.largeYard
-          : answers.backyardSize === 'long-narrow'
+          : effectiveBackyardSize === 'long-narrow'
             ? mr.longNarrowYard
             : undefined;
   if (sizeSnippet) reasons.push(sizeSnippet);
+
+  if (answers.shapePreference === 'round' && entry.shape.trim().toLowerCase() === 'round') {
+    reasons.push('Matches your preference for a round trampoline shape');
+  } else if (
+    answers.shapePreference === 'rectangle' &&
+    ['rectangle', 'square', 'oval'].includes(entry.shape.trim().toLowerCase())
+  ) {
+    reasons.push('Matches your preference for a rectangular-style trampoline shape');
+  }
 
   if (answers.safetyFeatures === 'essential' && mr.safetyEssential) {
     reasons.push(mr.safetyEssential);
@@ -300,6 +371,15 @@ export function buildSummaryText(answers: QuizAnswers): string {
     traditional: 'traditional springs',
     'not-sure': 'either spring system',
   };
+  const shapeLabel: Record<ShapePreferenceId, string> = {
+    round: 'a round shape',
+    rectangle: 'a rectangular-style shape',
+    'not-sure': 'either shape',
+  };
+  const groundTypeLabel: Record<GroundTypePreferenceId, string> = {
+    'above-ground': 'an above-ground installation',
+    'in-ground': 'an in-ground installation',
+  };
 
   const priorityLabel: Record<PriorityId, string> = {
     bounce: 'bounce quality',
@@ -331,7 +411,7 @@ export function buildSummaryText(answers: QuizAnswers): string {
             return `a budget range from ${lower} to ${upper}`;
           })();
 
-  return `Based on your focus on ${priorities}, your preference for ${springLabel[answers.springType]}, and ${budgetSummary}, these are the strongest matches for your family.`;
+  return `Based on your focus on ${priorities}, your preference for ${groundTypeLabel[answers.groundTypePreference]}, ${springLabel[answers.springType]}, ${shapeLabel[answers.shapePreference]}, and ${budgetSummary}, these are the strongest matches for your family.`;
 }
 
 // ─── URL serialization ──────────────────────────────────────────────────────────
@@ -339,6 +419,9 @@ export function buildSummaryText(answers: QuizAnswers): string {
 export function encodeAnswers(answers: QuizAnswers): string {
   const params = new URLSearchParams();
   params.set('backyardSize', answers.backyardSize);
+  params.set('groundTypePreference', answers.groundTypePreference);
+  params.set('shapePreference', answers.shapePreference);
+  params.set('jumperAges', answers.jumperAges.join(','));
   params.set('standards', answers.standards);
   params.set('safetyFeatures', answers.safetyFeatures);
   params.set('springType', answers.springType);
@@ -349,9 +432,17 @@ export function encodeAnswers(answers: QuizAnswers): string {
 
 export function parseAnswers(searchParams: URLSearchParams): QuizAnswers | null {
   const backyardSize = searchParams.get('backyardSize');
+  const groundTypePreference =
+    (searchParams.get('groundTypePreference') as GroundTypePreferenceId | null) ?? 'above-ground';
+  const shapePreference = searchParams.get('shapePreference') ?? 'not-sure';
   const standards = searchParams.get('standards');
   const safetyFeatures = searchParams.get('safetyFeatures');
   const springType = searchParams.get('springType');
+  const jumperAges = (searchParams.get('jumperAges') ?? '')
+    .split(',')
+    .filter((v): v is JumperAgeId =>
+      ['under-6', '6-12', '13-17', '18plus'].includes(v),
+    );
   const budget = (searchParams.get('budget') ?? '')
     .split(',')
     .map((value) => value.trim())
@@ -369,6 +460,11 @@ export function parseAnswers(searchParams: URLSearchParams): QuizAnswers | null 
       backyardSize !== 'large' &&
       backyardSize !== 'long-narrow' &&
       backyardSize !== 'not-sure') ||
+    (groundTypePreference !== 'above-ground' &&
+      groundTypePreference !== 'in-ground') ||
+    (shapePreference !== 'round' &&
+      shapePreference !== 'rectangle' &&
+      shapePreference !== 'not-sure') ||
     (standards !== 'yes' && standards !== 'no') ||
     (safetyFeatures !== 'essential' &&
       safetyFeatures !== 'nice-to-have' &&
@@ -383,6 +479,9 @@ export function parseAnswers(searchParams: URLSearchParams): QuizAnswers | null 
 
   return {
     backyardSize,
+    groundTypePreference,
+    shapePreference,
+    jumperAges,
     standards,
     safetyFeatures,
     springType,

@@ -27,14 +27,7 @@ export default function Footer() {
             ))}
           </nav>
         </div>
-
-        <p className="mt-6 text-xs text-black/30 leading-relaxed">
-          <strong className="text-black/40">Affiliate Disclosure:</strong> Bounce Arena participates in
-          affiliate marketing. Some links on this site are affiliate links — we may earn a commission if you
-          click through and make a purchase, at no extra cost to you.
-        </p>
-
-        <p className="mt-3 text-center text-xs text-black/30">
+        <p className="mt-6 text-center text-xs text-black/30">
           © Bounce Arena {new Date().getFullYear()}
         </p>
       </div>

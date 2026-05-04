@@ -1,8 +1,11 @@
+export type GroundType = 'above-ground' | 'in-ground' | 'both';
+
 export interface Product {
   brand: string;
   model: string;
   size: string;
   shape: string;
+  groundType: GroundType;
   maxDiameterIn: number | null;
   overallLengthIn: number | null;
   overallWidthIn: number | null;

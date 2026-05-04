@@ -16,6 +16,7 @@ export interface Question {
   maxSelect?: number;
   options: QuizOption[];
   cardLayout?: boolean;
+  allowSkip?: boolean;
 }
 
 export function buildQuestions(): Question[] {
@@ -40,7 +41,61 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q2 — Budget
+    // Q2 — Jumper ages
+    {
+      id: 'jumperAges',
+      title: 'Who will be jumping?',
+      subtitle: 'Select all ages that apply — we use this to fine-tune safety and spring recommendations.',
+      type: 'multi',
+      maxSelect: 4,
+      options: [
+        { id: 'under-6', label: 'Under 6', description: 'Toddlers and young children' },
+        { id: '6-12', label: '6 to 12', description: 'School-age kids' },
+        { id: '13-17', label: 'Teens (13–17)' },
+        { id: '18plus', label: 'Adults (18+)' },
+      ],
+    },
+
+    {
+      id: 'groundTypePreference',
+      title: 'Do you want an above-ground or in-ground trampoline?',
+      subtitle:
+        'This is treated as a hard requirement in the quiz. Above-ground models are easier to set up and move. In-ground models sit lower in the yard and have a cleaner look, but usually require more installation work.',
+      type: 'single',
+      allowSkip: false,
+      options: [
+        { id: 'above-ground', label: 'Above-ground', description: 'Easier setup and more flexibility' },
+        { id: 'in-ground', label: 'In-ground', description: 'Cleaner look and lower profile in the yard' },
+      ],
+    },
+
+    // Q3 — Shape preference
+    {
+      id: 'shapePreference',
+      title: 'Do you have a shape preference?',
+      subtitle:
+        'Round trampolines are usually more common, more forgiving for casual family play, and often cost less. Rectangular-style models give a more even bounce and suit gymnastics-style use, but they usually cost more and need more yard space.',
+      type: 'single',
+      options: [
+        {
+          id: 'round',
+          label: 'Round / circle',
+          description: 'Usually better value and a common choice for general family use',
+        },
+        {
+          id: 'rectangle',
+          label: 'Rectangle',
+          description: 'More even bounce across the mat, but usually pricier and larger',
+        },
+        {
+          id: 'not-sure',
+          label: 'No preference',
+          description: 'Show me the best options regardless of shape',
+        },
+      ],
+    },
+
+    // Q4 — Budget
     {
       id: 'budget',
       title: "What's your budget?",
@@ -57,7 +112,7 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q3 — Spring type (visual card layout)
+    // Q5 — Spring type (visual card layout)
     {
       id: 'springType',
       title: 'What type of spring system do you prefer?',
@@ -89,15 +144,12 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q4 — Safety features
+    // Q6 — Safety features
     {
       id: 'safetyFeatures',
       title: 'How important are advanced safety features to you?',
       subtitle:
         'Advanced features include curved safety poles that angle away from jumpers, springs positioned outside the enclosure, and a frame zone that keeps the jumping area clear of hard edges.',
-      subtitleExtra:
-        'These features are most associated with springless designs like Springfree.',
-      questionImage: '/quiz-images/trampoline-safety-features.png',
       type: 'single',
       options: [
         {
@@ -118,7 +170,7 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q5 — ASTM standards
+    // Q7 — ASTM standards
     {
       id: 'standards',
       title: 'Is ASTM certification important to you?',
@@ -131,7 +183,7 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q6 — Priorities (multi-select)
+    // Q8 — Priorities (multi-select)
     {
       id: 'priorities',
       title: 'What matters most to you?',

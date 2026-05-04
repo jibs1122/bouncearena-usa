@@ -7,6 +7,7 @@ import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import JsonLd from "@/components/seo/JsonLd";
 import { formatUsd } from "@/lib/price";
 import { REVIEW_CARDS } from "@/lib/reviews";
+import { isVulyBrand } from "@/lib/vuly";
 
 export const metadata: Metadata = {
   title: "Best Trampolines 2026 — Reviews & Comparisons | Bounce Arena",
@@ -20,8 +21,15 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const brands = getAllBrands().slice(0, 6);
+  const allBrands = getAllBrands();
+  const featuredBrandNames = ["AlleyOOP", "Avyna", "Beast", "North", "West Coast Jump", "MaxAir"];
+  const brands = featuredBrandNames
+    .map((name) => allBrands.find((brand) => brand.name === name))
+    .filter((brand): brand is NonNullable<typeof brand> => Boolean(brand));
   const reviews = REVIEW_CARDS.slice(0, 2);
+  const showAffiliateDisclosure =
+    brands.some((brand) => isVulyBrand(brand.name)) ||
+    reviews.some((review) => isVulyBrand(review.brand));
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
@@ -95,7 +103,7 @@ export default function HomePage() {
                 All brands →
               </Link>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {brands.map((brand) => (
                 <Link
                   key={brand.slug}
@@ -202,7 +210,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <AffiliateDisclosure />
+        {showAffiliateDisclosure ? <AffiliateDisclosure /> : null}
       </div>
     </>
   );
