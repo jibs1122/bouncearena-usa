@@ -2,12 +2,14 @@ import type { MetadataRoute } from "next";
 import { getAllBrands } from "@/lib/products";
 import { getApprovedComparisons } from "@/lib/comparisons";
 import { REVIEW_CARDS } from "@/lib/reviews";
+import { getAllBlogPosts } from "@/lib/blog";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const brands = getAllBrands();
   const comparisons = getApprovedComparisons();
+  const blogPosts = getAllBlogPosts();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
@@ -16,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/models/`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/compare/`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/reviews/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/blog/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/about/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.4 },
     { url: `${SITE_URL}/privacy/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/terms/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
@@ -42,5 +45,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...brandPages, ...comparePages, ...reviewPages];
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${SITE_URL}${post.href}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...brandPages, ...comparePages, ...reviewPages, ...blogPages];
 }

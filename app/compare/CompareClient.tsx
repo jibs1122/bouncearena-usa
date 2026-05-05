@@ -2,8 +2,13 @@
 
 import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
 import type { Product } from '@/lib/types';
-import { getPreferredModelUrl, getPreferredProductUrl } from '@/lib/productLinks';
+import {
+  getPreferredModelUrl,
+  getPreferredProductUrl,
+  getShopDestinationLabel,
+} from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
+import { formatWarrantyYears } from '@/lib/warranty';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -28,6 +33,10 @@ function variantLabel(p: Product): string {
 
 function fmtPrice(n: number) {
   return formatUsd(n);
+}
+
+function shopCtaLabel(url: string | null, brand: string) {
+  return `View at ${getShopDestinationLabel(url, brand)} \u2192`;
 }
 
 // ─── brand colours ───────────────────────────────────────────────────────────
@@ -470,7 +479,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                               <a href={row.shopUrl} target="_blank" rel="noopener noreferrer nofollow sponsored"
                                 onClick={e => e.stopPropagation()}
                                 className="block text-[#38b1ab] hover:underline text-xs mt-0.5 font-medium">
-                                View best price →
+                                {shopCtaLabel(row.shopUrl, row.brand)}
                               </a>
                             )}
                           </>
@@ -484,7 +493,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
                       {/* warranty */}
                       <td className="px-3 py-3 align-top text-sm text-black/60 whitespace-nowrap">
-                        {row.warrantyFrameYrs !== null ? `${row.warrantyFrameYrs} yr` : '—'}
+                        {formatWarrantyYears(row.warrantyFrameYrs)}
                       </td>
 
                       {/* ASTM */}
@@ -504,7 +513,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
                     </tr>
 
                     {/* expanded variant rows */}
-                    {isExpanded && row.variants.map((v, i) => (
+                    {isExpanded && row.variants.map((v, i) => {
+                      const variantUrl = getPreferredProductUrl(v);
+                      return (
                       <tr key={`${key}-${i}`} className="border-t border-black/[0.04] bg-black/[0.015]">
                         <td className="pl-8 pr-3 py-2 text-xs text-black/50">↳ {variantLabel(v)}</td>
                         <td className="px-3 py-2 text-xs text-black/40">{v.shape}</td>
@@ -513,15 +524,15 @@ export default function CompareClient({ products }: { products: Product[] }) {
                           {(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null
                             ? fmtPrice((v.exactSizePriceUsd ?? v.modelFromPriceUsd)!)
                             : '—'}
-                          {getPreferredProductUrl(v) && (
-                            <a href={getPreferredProductUrl(v)!} target="_blank" rel="noopener noreferrer nofollow sponsored"
+                          {variantUrl && (
+                            <a href={variantUrl} target="_blank" rel="noopener noreferrer nofollow sponsored"
                               className="block text-[#38b1ab] hover:underline text-[10px] font-medium mt-0.5">
-                              View →
+                              {shopCtaLabel(variantUrl, row.brand)}
                             </a>
                           )}
                         </td>
                         <td className="px-3 py-2 text-xs text-black/50">{v.maxSingleUserWeightLb ? `${v.maxSingleUserWeightLb} lb` : '—'}</td>
-                        <td className="px-3 py-2 text-xs text-black/50">{v.warrantyFrameYears ? `${v.warrantyFrameYears} yr` : '—'}</td>
+                        <td className="px-3 py-2 text-xs text-black/50">{formatWarrantyYears(v.warrantyFrameYears)}</td>
                         <td className="px-3 py-2 text-center text-xs">
                           {v.meetsUsStandard === true
                             ? <span className="text-emerald-600">✓</span>
@@ -529,7 +540,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                         </td>
                         <td />
                       </tr>
-                    ))}
+                    )})}
                   </Fragment>
                 );
               })}
@@ -539,7 +550,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
       </div>
 
       <p className="text-xs text-black/30 mt-4 text-center">
-        Prices are approximate. Click &ldquo;View best price&rdquo; for current pricing from the brand.
+        Prices are approximate. Click a &ldquo;View at ...&rdquo; link for current pricing.
       </p>
     </div>
   );

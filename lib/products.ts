@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import Papa from "papaparse";
 import type { Product, Brand, GroundType } from "./types";
+import { parseWarrantyYears } from "./warranty";
 
 // Keep the CSV path statically scoped so Next/Vercel can trace it into production.
 const CSV_PATH = path.join(process.cwd(), "data", "products-us.csv");
@@ -115,12 +116,12 @@ function rowToProduct(row: Record<string, string>): Product {
     matMaterial: (row["mat_material"] ?? "").trim(),
     netMaterial: (row["net_material"] ?? "").trim(),
     paddingMaterial: (row["padding_material"] ?? "").trim(),
-    warrantyFrameYears: parseNum(row["warranty_frame_years"] ?? row["warranty years frame"]),
-    warrantyMatYears: parseNum(row["warranty_mat_years"] ?? row["warranty years mat"]),
-    warrantySpringsYears: parseNum(row["warranty_springs_years"] ?? row["warranty years springs"]),
-    warrantyNetYears: parseNum(row["warranty_net_years"] ?? row["warranty years net"]),
-    warrantyPadsYears: parseNum(row["warranty_pads_years"] ?? row["warranty years pads"]),
-    warrantyPartsYears: parseNum(row["warranty_parts_years"] ?? row["warranty years parts"]),
+    warrantyFrameYears: parseWarrantyYears(row["warranty_frame_years"] ?? row["warranty years frame"]),
+    warrantyMatYears: parseWarrantyYears(row["warranty_mat_years"] ?? row["warranty years mat"]),
+    warrantySpringsYears: parseWarrantyYears(row["warranty_springs_years"] ?? row["warranty years springs"]),
+    warrantyNetYears: parseWarrantyYears(row["warranty_net_years"] ?? row["warranty years net"]),
+    warrantyPadsYears: parseWarrantyYears(row["warranty_pads_years"] ?? row["warranty years pads"]),
+    warrantyPartsYears: parseWarrantyYears(row["warranty_parts_years"] ?? row["warranty years parts"]),
     meetsUsStandard: parseBool(row["meets_us_standard"]),
     usStandardDetails: (row["us_standard_details"] ?? "").trim(),
     otherStandards: (row["other_standards"] ?? "").trim(),

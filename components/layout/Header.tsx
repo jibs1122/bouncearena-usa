@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: '/models/', label: 'MODELS' },
   { href: '/compare/', label: 'COMPARE' },
   { href: '/reviews/', label: 'REVIEWS' },
+  { href: '/blog/', label: 'BLOG' },
   ...(process.env.NODE_ENV !== 'production' ? [{ href: '/admin/', label: 'ADMIN' }] : []),
 ];
 

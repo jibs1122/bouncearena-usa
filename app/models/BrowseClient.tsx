@@ -1,9 +1,14 @@
 'use client';
 
-import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
+import { useState, useMemo, useCallback, Fragment, useRef, type ReactNode } from 'react';
 import type { GroundType, Product } from '@/lib/types';
-import { getPreferredModelUrl, getPreferredProductUrl } from '@/lib/productLinks';
+import {
+  getPreferredModelUrl,
+  getPreferredProductUrl,
+  getShopDestinationLabel,
+} from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
+import { formatWarrantyYears } from '@/lib/warranty';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -40,6 +45,10 @@ function normalizeShapeFilterValue(shape: string): string {
 function shapeFilterLabel(shape: string): string {
   if (shape === 'rectangle') return 'Rectangle';
   return shape.charAt(0).toUpperCase() + shape.slice(1);
+}
+
+function shopCtaLabel(url: string | null, brand: string) {
+  return `View at ${getShopDestinationLabel(url, brand)} \u2192`;
 }
 
 // ─── brand colours ───────────────────────────────────────────────────────────
@@ -343,10 +352,22 @@ export default function CompareClient({ products }: { products: Product[] }) {
   const matchingSizes = useMemo(() =>
     filtered.reduce((sum, r) => sum + r.variants.length, 0), [filtered]);
 
-  const SortTh = ({ col, label, tip }: { col: SortKey; label: string; tip?: string }) => (
-    <th className="text-left px-3 py-3 whitespace-nowrap">
+  const SortTh = ({
+    col,
+    label,
+    tip,
+    className = '',
+    labelClassName = '',
+  }: {
+    col: SortKey;
+    label: ReactNode;
+    tip?: string;
+    className?: string;
+    labelClassName?: string;
+  }) => (
+    <th className={`text-left px-3 py-3 whitespace-nowrap ${className}`}>
       <button onClick={() => cycleSort(col)}
-        className={`flex items-center gap-1 text-xs font-semibold uppercase tracking-wide ${sortKey === col ? 'text-black' : 'text-black/40'} hover:text-black transition-colors`}>
+        className={`flex items-center gap-1 text-xs font-semibold uppercase tracking-wide ${sortKey === col ? 'text-black' : 'text-black/40'} hover:text-black transition-colors ${labelClassName}`}>
         {label}
         {tip && <Tip text={tip} />}
         <span className="ml-0.5 text-[10px]">{sortKey === col ? (sortDir === 'asc' ? '↑' : '↓') : '↕'}</span>
@@ -455,10 +476,25 @@ export default function CompareClient({ products }: { products: Product[] }) {
                   </button>
                 </th>
                 <th className="text-left px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 hidden md:table-cell min-w-[120px]">Ground type</th>
-                <th className="text-left px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 hidden md:table-cell min-w-[110px]">Spring type</th>
+                <th className="text-left px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 hidden md:table-cell min-w-[88px]">
+                  <span className="inline-flex flex-col leading-tight">
+                    <span>Spring</span>
+                    <span>type</span>
+                  </span>
+                </th>
                 <SortTh col="price" label="Price" />
                 <SortTh col="weight" label="Max weight" tip="Max single-user weight in lb" />
-                <SortTh col="warranty" label="Frame warranty" />
+                <SortTh
+                  col="warranty"
+                  label={
+                    <span className="inline-flex flex-col leading-tight">
+                      <span>Frame</span>
+                      <span>warranty</span>
+                    </span>
+                  }
+                  className="min-w-[88px]"
+                  labelClassName="whitespace-normal"
+                />
                 <th className="text-center px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 min-w-[60px]">
                   ASTM <Tip text="ASTM F381/F2225 certified per official brand documentation" />
                 </th>
@@ -514,7 +550,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                       </td>
 
                       {/* spring type */}
-                      <td className="px-3 py-3 align-top text-sm text-black/50 hidden md:table-cell whitespace-nowrap">
+                      <td className="px-3 py-3 align-top text-sm text-black/50 hidden md:table-cell">
                         {row.springSystem || '—'}
                       </td>
 
@@ -530,7 +566,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                               <a href={row.shopUrl} target="_blank" rel="noopener noreferrer nofollow sponsored"
                                 onClick={e => e.stopPropagation()}
                                 className="block text-[#38b1ab] hover:underline text-xs mt-0.5 font-medium">
-                                View best price →
+                                {shopCtaLabel(row.shopUrl, row.brand)}
                               </a>
                             )}
                           </>
@@ -544,7 +580,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
                       {/* warranty */}
                       <td className="px-3 py-3 align-top text-sm text-black/60 whitespace-nowrap">
-                        {row.warrantyFrameYrs !== null ? `${row.warrantyFrameYrs} yr` : '—'}
+                        {formatWarrantyYears(row.warrantyFrameYrs)}
                       </td>
 
                       {/* ASTM */}
@@ -566,7 +602,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
                     </tr>
 
                     {/* expanded variant rows */}
-                    {isExpanded && row.variants.map((v, i) => (
+                    {isExpanded && row.variants.map((v, i) => {
+                      const variantUrl = getPreferredProductUrl(v);
+                      return (
                       <tr key={`${key}-${i}`} className="border-t border-black/[0.04] bg-black/[0.015]">
                         <td className="pl-8 pr-3 py-2 text-xs text-black/50">↳ {variantLabel(v)}</td>
                         <td className="px-3 py-2 text-xs text-black/40">{v.shape}</td>
@@ -578,15 +616,15 @@ export default function CompareClient({ products }: { products: Product[] }) {
                           {(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null
                             ? fmtPrice((v.exactSizePriceUsd ?? v.modelFromPriceUsd)!)
                             : '—'}
-                          {getPreferredProductUrl(v) && (
-                            <a href={getPreferredProductUrl(v)!} target="_blank" rel="noopener noreferrer nofollow sponsored"
+                          {variantUrl && (
+                            <a href={variantUrl} target="_blank" rel="noopener noreferrer nofollow sponsored"
                               className="block text-[#38b1ab] hover:underline text-[10px] font-medium mt-0.5">
-                              View →
+                              {shopCtaLabel(variantUrl, row.brand)}
                             </a>
                           )}
                         </td>
                         <td className="px-3 py-2 text-xs text-black/50">{v.maxSingleUserWeightLb ? `${v.maxSingleUserWeightLb} lb` : '—'}</td>
-                        <td className="px-3 py-2 text-xs text-black/50">{v.warrantyFrameYears ? `${v.warrantyFrameYears} yr` : '—'}</td>
+                        <td className="px-3 py-2 text-xs text-black/50">{formatWarrantyYears(v.warrantyFrameYears)}</td>
                         <td className="px-3 py-2 text-center text-xs">
                           {v.meetsUsStandard === true
                             ? <span className="text-emerald-600">✓</span>
@@ -594,7 +632,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                         </td>
                         <td />
                       </tr>
-                    ))}
+                    )})}
                   </Fragment>
                 );
               })}
@@ -603,8 +641,8 @@ export default function CompareClient({ products }: { products: Product[] }) {
         </div>
       </div>
 
-      <p className="text-xs text-black/30 mt-4 text-center">
-        Prices are approximate. Click &ldquo;View best price&rdquo; for current pricing from the brand.
+      <p className="mt-4 text-center text-xs text-black/30">
+        We&apos;ve done our best to source these specifications accurately, but details can change and may be incomplete or incorrect. Always verify key specs, pricing, and warranty terms directly with the manufacturer or retailer before buying.
       </p>
     </div>
   );

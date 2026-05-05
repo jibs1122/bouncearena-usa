@@ -1,5 +1,6 @@
 import type { Product } from "@/lib/types";
 import { formatUsd } from "@/lib/price";
+import { formatWarrantyYears } from "@/lib/warranty";
 
 interface SpecRow {
   label: string;
@@ -32,10 +33,10 @@ const SPEC_ROWS: SpecRow[] = [
   { label: "Made in", getValue: (p) => p.countryMadeIn || "—" },
   { label: "ASTM certified", getValue: (p) => p.meetsUsStandard === true ? "✅ Yes" : p.meetsUsStandard === false ? "❌ No" : "—" },
   { label: "Standard details", getValue: (p) => p.usStandardDetails || "—" },
-  { label: "Warranty — frame", getValue: (p) => p.warrantyFrameYears ? `${p.warrantyFrameYears} yr` : "—" },
-  { label: "Warranty — mat", getValue: (p) => p.warrantyMatYears ? `${p.warrantyMatYears} yr` : "—" },
-  { label: "Warranty — springs", getValue: (p) => p.warrantySpringsYears ? `${p.warrantySpringsYears} yr` : "—" },
-  { label: "Warranty — net", getValue: (p) => p.warrantyNetYears ? `${p.warrantyNetYears} yr` : "—" },
+  { label: "Warranty — frame", getValue: (p) => formatWarrantyYears(p.warrantyFrameYears) },
+  { label: "Warranty — mat", getValue: (p) => formatWarrantyYears(p.warrantyMatYears) },
+  { label: "Warranty — springs", getValue: (p) => formatWarrantyYears(p.warrantySpringsYears) },
+  { label: "Warranty — net", getValue: (p) => formatWarrantyYears(p.warrantyNetYears) },
   { label: "Price", getValue: (p) => p.exactSizePriceUsd ? formatUsd(p.exactSizePriceUsd) : p.modelFromPriceUsd ? `From ${formatUsd(p.modelFromPriceUsd)}` : "—" },
 ];
 
