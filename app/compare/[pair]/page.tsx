@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ComparisonTable from "@/components/ui/ComparisonTable";
-import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import {
   getApprovedComparison,
   getApprovedComparisons,
 } from "@/lib/comparisons";
-import { isVulyBrand } from "@/lib/vuly";
 
 type Props = { params: Promise<{ pair: string }> };
 
@@ -42,7 +40,6 @@ export default async function ComparePairPage({ params }: Props) {
 
   const { brandA, brandB } = comparison;
   const allProducts = [...brandA.products, ...brandB.products];
-  const showAffiliateDisclosure = isVulyBrand(brandA.name) || isVulyBrand(brandB.name);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
     .filter((item) => item.slug !== comparison.slug)
@@ -109,8 +106,6 @@ export default async function ComparePairPage({ params }: Props) {
             {comparison.intro}
           </p>
           <div className="mb-8" />
-
-          {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
 
           <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
             <h2 className="text-lg font-bold text-black mb-2">Not sure which brand fits best?</h2>

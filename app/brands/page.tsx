@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { getAllBrands } from "@/lib/products";
 import BrandCard from "@/components/ui/BrandCard";
-import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
 import { getApprovedComparisons } from "@/lib/comparisons";
-import { isVulyBrand } from "@/lib/vuly";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
@@ -25,7 +23,6 @@ export const metadata: Metadata = {
 export default function BrandsPage() {
   const brands = getAllBrands();
   const comparisons = getApprovedComparisons(6);
-  const showAffiliateDisclosure = brands.some((brand) => isVulyBrand(brand.name));
 
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -71,8 +68,6 @@ export default function BrandsPage() {
           {brands.length} brands independently reviewed and compared.
           All dimensions in feet and inches.
         </p>
-
-        {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
 
         {brands.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">

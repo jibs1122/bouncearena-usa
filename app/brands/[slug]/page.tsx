@@ -125,8 +125,23 @@ export default async function BrandPage({ params }: Props) {
                   </span>
                 )}
                 {astmCount > 0 && (
-                  <span className="px-3 py-1 bg-black/[0.04] text-black/60 rounded-full">
-                    ✅ ASTM certified models available
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/[0.04] text-black/60 rounded-full">
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 20 20"
+                      className="h-4 w-4 text-[#38b1ab]"
+                      fill="none"
+                    >
+                      <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.8" />
+                      <path
+                        d="M6.5 10.2 8.8 12.5 13.6 7.7"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    ASTM certified models available
                   </span>
                 )}
               </div>

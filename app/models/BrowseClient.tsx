@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, Fragment, useRef, type ReactNode } from 'react';
+import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import type { GroundType, Product } from '@/lib/types';
 import {
   getPreferredModelUrl,
@@ -9,6 +10,7 @@ import {
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
+import { isVulyBrand } from '@/lib/vuly';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -351,6 +353,10 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
   const matchingSizes = useMemo(() =>
     filtered.reduce((sum, r) => sum + r.variants.length, 0), [filtered]);
+  const showAffiliateDisclosure = useMemo(
+    () => filtered.some((row) => isVulyBrand(row.brand) && row.shopUrl !== null),
+    [filtered],
+  );
 
   const SortTh = ({
     col,
@@ -644,6 +650,8 @@ export default function CompareClient({ products }: { products: Product[] }) {
       <p className="mt-4 text-center text-xs text-black/30">
         We&apos;ve done our best to source these specifications accurately, but details can change and may be incomplete or incorrect. Always verify key specs, pricing, and warranty terms directly with the manufacturer or retailer before buying.
       </p>
+
+      {showAffiliateDisclosure ? <AffiliateDisclosure className="mt-3 text-center" /> : null}
     </div>
   );
 }

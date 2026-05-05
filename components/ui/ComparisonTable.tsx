@@ -1,14 +1,56 @@
+import type { ReactNode } from "react";
 import type { Product } from "@/lib/types";
 import { formatUsd } from "@/lib/price";
 import { formatWarrantyYears } from "@/lib/warranty";
 
 interface SpecRow {
   label: string;
-  getValue: (p: Product) => string;
+  getValue: (p: Product) => ReactNode;
 }
 
-function hasMeaningfulValue(value: string) {
-  return value.trim() !== "" && value.trim() !== "—";
+function hasMeaningfulValue(value: ReactNode) {
+  return !(typeof value === "string" && (value.trim() === "" || value.trim() === "—"));
+}
+
+function StatusIcon({ ok }: { ok: boolean }) {
+  return ok ? (
+    <span className="inline-flex items-center gap-1.5">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 20 20"
+        className="h-4 w-4 text-[#38b1ab]"
+        fill="none"
+      >
+        <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.8" />
+        <path
+          d="M6.5 10.2 8.8 12.5 13.6 7.7"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      Yes
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-1.5">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 20 20"
+        className="h-4 w-4 text-black/35"
+        fill="none"
+      >
+        <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.8" />
+        <path
+          d="M7.2 7.2 12.8 12.8M12.8 7.2 7.2 12.8"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+      </svg>
+      No
+    </span>
+  );
 }
 
 const SPEC_ROWS: SpecRow[] = [
@@ -31,7 +73,11 @@ const SPEC_ROWS: SpecRow[] = [
   { label: "Net material", getValue: (p) => p.netMaterial || "—" },
   { label: "Padding material", getValue: (p) => p.paddingMaterial || "—" },
   { label: "Made in", getValue: (p) => p.countryMadeIn || "—" },
-  { label: "ASTM certified", getValue: (p) => p.meetsUsStandard === true ? "✅ Yes" : p.meetsUsStandard === false ? "❌ No" : "—" },
+  {
+    label: "ASTM certified",
+    getValue: (p) =>
+      p.meetsUsStandard === true ? <StatusIcon ok /> : p.meetsUsStandard === false ? <StatusIcon ok={false} /> : "—",
+  },
   { label: "Standard details", getValue: (p) => p.usStandardDetails || "—" },
   { label: "Warranty — frame", getValue: (p) => formatWarrantyYears(p.warrantyFrameYears) },
   { label: "Warranty — mat", getValue: (p) => formatWarrantyYears(p.warrantyMatYears) },

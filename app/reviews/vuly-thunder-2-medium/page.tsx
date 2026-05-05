@@ -197,6 +197,15 @@ export default function VulyThunder2MediumReview() {
           </section>
 
           <section className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-6">
+            <h2 className="text-lg font-bold text-black mb-2">Review disclosure</h2>
+            <p>
+              We paid the reviewer a production fee for their time. The trampoline was already
+              owned by the reviewer and the opinions expressed are their own. The brand did not
+              approve or edit this review.
+            </p>
+          </section>
+
+          <section className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-6">
             <h2 className="text-lg font-bold text-black mb-4">Related Reading</h2>
             <div className="flex flex-wrap gap-3">
               <Link

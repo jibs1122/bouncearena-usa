@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
+import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import type { Product } from '@/lib/types';
 import {
   getPreferredModelUrl,
@@ -9,6 +10,7 @@ import {
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
+import { isVulyBrand } from '@/lib/vuly';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -313,6 +315,10 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
   const matchingSizes = useMemo(() =>
     filtered.reduce((sum, r) => sum + r.variants.length, 0), [filtered]);
+  const showAffiliateDisclosure = useMemo(
+    () => filtered.some((row) => isVulyBrand(row.brand) && row.shopUrl !== null),
+    [filtered],
+  );
 
   const SortTh = ({ col, label, tip }: { col: SortKey; label: string; tip?: string }) => (
     <th className="text-left px-3 py-3 whitespace-nowrap">
@@ -549,9 +555,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
         </div>
       </div>
 
-      <p className="text-xs text-black/30 mt-4 text-center">
-        Prices are approximate. Click a &ldquo;View at ...&rdquo; link for current pricing.
-      </p>
+      {showAffiliateDisclosure ? <AffiliateDisclosure className="mt-4 text-center" /> : null}
     </div>
   );
 }

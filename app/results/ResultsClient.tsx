@@ -12,6 +12,7 @@ import {
   type ScoredEntry,
 } from '@/lib/quizScoring';
 import type { QuizEntry } from '@/lib/quizTrampolines';
+import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import { formatUsd } from '@/lib/price';
 import { isVulyBrand } from '@/lib/vuly';
 
@@ -196,10 +197,7 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
               ← Retake the quiz
             </Link>
           </div>
-          <p className="text-center text-xs text-black/25">
-            We earn a commission when you buy through some links. It doesn&apos;t affect which
-            trampoline we recommend.
-          </p>
+          <AffiliateDisclosure className="text-center" />
         </div>
       )}
     </section>
