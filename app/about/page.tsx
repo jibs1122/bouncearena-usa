@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import EmailContact from "@/components/ui/EmailContact";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "About Bounce Arena",
@@ -22,33 +23,56 @@ export default function AboutPage() {
 
       <div className="space-y-6 text-black/70 leading-relaxed">
         <p>
-          Bounce Arena is an independent trampoline review and comparison site. Our goal is to cut through marketing noise and give you accurate,
-          spec-verified information to make a confident buying decision.
+          Bounce Arena helps families pick a trampoline they won&apos;t regret in eighteen months.
         </p>
 
         <p>
-          Every trampoline specification on this site — dimensions, weight limits, safety
-          certifications — is sourced directly from official brand documentation, not marketing
-          copy. We reference <strong>ASTM F381</strong> and <strong>ASTM F2225</strong> as
-          the US safety benchmarks, consistent with CPSC guidelines.
+          We&apos;re a review and comparison site, focused on three things:
         </p>
 
-        <p>
-          All prices are sourced from official brand websites. We flag where pricing could not be independently verified.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 pt-2">
-          <Link
-            href="/brands/"
-            className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] hover:bg-[#2e9a94] text-white font-semibold px-7 py-3 transition-colors"
-          >
-            Browse trampoline brands
-          </Link>
-          <Link
-            href="/compare/"
-            className="inline-flex items-center justify-center rounded-xl border border-black/15 hover:border-black/30 text-black font-medium px-7 py-3 transition-colors"
-          >
-            Compare brands
-          </Link>
+        <ol className="list-decimal space-y-4 pl-6">
+          <li>
+            We pull the specs together in one place. Sizes, weight limits, spring or springless,
+            warranty terms, and frame materials, organised so you can compare them without tabbing
+            between six brand websites.
+          </li>
+          <li>
+            We publish real owner reviews. Owners who&apos;ve had the trampoline for a few months can
+            speak to the things product pages can&apos;t, including assembly, build quality after a
+            winter outside, and how it holds up to two kids using it daily.
+          </li>
+          <li>
+            We put trampolines side by side. Choosing a trampoline is mostly a comparison problem
+            (bouncier or safer, larger or cheaper, leaf-spring or coil spring etc). Direct
+            comparisons answer those questions faster than reading six separate reviews.
+          </li>
+        </ol>
+
+        <div className="space-y-3">
+          <h2 className="text-xl font-bold text-black">How we make money</h2>
+          <p>
+            Bounce Arena earns commissions when readers click our links and buy, which is how the
+            site is funded. However, we cover brands we don&apos;t earn from, and if a trampoline is
+            worth comparing, it&apos;s in the comparisons.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h2 className="text-xl font-bold text-black">On safety standards</h2>
+          <p>
+            In the US, the relevant safety benchmarks are <strong>ASTM F381</strong> (above-ground
+            trampolines) and <strong>ASTM F2225</strong> (enclosures), aligned with CPSC guidance.
+            We reference these where brands publish to them.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h2 className="text-xl font-bold text-black">Contact</h2>
+          <p>
+            If you want to flag a correction, ask a question, or get in touch about the site, you
+            can reach Bounce Arena here:
+          </p>
+          <EmailContact />
         </div>
       </div>
     </div>

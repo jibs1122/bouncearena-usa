@@ -26,7 +26,7 @@ const PROMOS: { brand: string; code: string; description: string; expires?: stri
 ];
 
 export default function PromoCodesPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const promos = PROMOS;
 
   const breadcrumb = {

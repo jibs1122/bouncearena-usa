@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import JsonLd from "@/components/seo/JsonLd";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 type PageProps = {
   params: Promise<{ slug: string }>;

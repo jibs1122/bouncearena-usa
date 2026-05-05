@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? ` from ${formatUsd(brand.fromPriceUsd)}`
     : "";
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   return {
     title: `${brand.name} Trampolines Review 2026 — Specs & Prices`,
     description: `In-depth review of ${brand.name} trampolines${priceStr}. Sizes in feet/inches, weight limits in lb, ASTM safety certification status, and warranty details.`,
@@ -47,7 +47,7 @@ export default async function BrandPage({ params }: Props) {
   const brand = getBrand(slug);
   if (!brand) notFound();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
   const breadcrumb = {
     "@context": "https://schema.org",

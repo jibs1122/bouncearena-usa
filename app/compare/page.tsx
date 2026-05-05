@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getApprovedComparisons } from "@/lib/comparisons";
 import JsonLd from "@/components/seo/JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "Trampoline Head-to-Head Comparisons 2026 | Bounce Arena",

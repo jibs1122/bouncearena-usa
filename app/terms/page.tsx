@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "Terms of Use — Bounce Arena",
@@ -27,7 +27,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-bold text-black mb-2">Acceptance</h2>
           <p>
-            By using Bounce Arena (<strong>bouncearena.us</strong>), you agree to these terms.
+            By using Bounce Arena (<strong>www.bouncearenareviews.com</strong>), you agree to these terms.
             If you disagree, please do not use this site.
           </p>
         </section>
@@ -65,8 +65,8 @@ export default function TermsPage() {
           <h2 className="text-lg font-bold text-black mb-2">Intellectual Property</h2>
           <p>
             All content on this site, including text and data compilations, is owned by Bounce Arena
-            USA unless otherwise noted. You may not reproduce or redistribute content without
-            written permission.
+            unless otherwise noted. You may not reproduce or redistribute content without written
+            permission.
           </p>
         </section>
 

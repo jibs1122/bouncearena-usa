@@ -6,15 +6,15 @@ import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
 
 function getSiteUrl() {
-  const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us").trim();
-  if (!raw) return "https://bouncearena.us";
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com").trim();
+  if (!raw) return "https://www.bouncearenareviews.com";
 
   const withProtocol = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
 
   try {
     return new URL(withProtocol).toString().replace(/\/$/, "");
   } catch {
-    return "https://bouncearena.us";
+    return "https://www.bouncearenareviews.com";
   }
 }
 

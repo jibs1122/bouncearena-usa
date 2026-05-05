@@ -58,23 +58,52 @@ export const budgetRanges: Record<BudgetId, [number, number]> = {
   flexible: [0, 999999],
 };
 
-// ─── Individual scoring functions ──────────────────────────────────────────────
+const MODEL_FAMILY_TOKENS = [
+  'air',
+  'flex',
+  'hero',
+  'mega',
+  'ultra',
+  'thunder',
+  'pro',
+  'classic',
+  'prime',
+  'primus',
+  'xcityx',
+  'goliath',
+  'silverback',
+  'apex',
+  'alpha',
+  'hyper',
+];
 
-function getEffectiveBackyardSize(
-  backyardSize: QuizAnswers['backyardSize']
-): Exclude<QuizAnswers['backyardSize'], 'not-sure'> {
-  return backyardSize === 'not-sure' ? 'medium' : backyardSize;
+function mentionsOtherModelFamily(reason: string, model: string): boolean {
+  const reasonLower = reason.toLowerCase();
+  const modelLower = model.toLowerCase();
+
+  const mentionedFamilies = MODEL_FAMILY_TOKENS.filter((token) =>
+    new RegExp(`\\b${token}\\b`, 'i').test(reasonLower),
+  );
+
+  return mentionedFamilies.some((token) => !new RegExp(`\\b${token}\\b`, 'i').test(modelLower));
 }
 
+// ─── Individual scoring functions ──────────────────────────────────────────────
+
 function scoreSize(entry: QuizEntry, backyardSize: QuizAnswers['backyardSize']): number {
-  const effectiveBackyardSize = getEffectiveBackyardSize(backyardSize);
-  if (effectiveBackyardSize === 'long-narrow') {
+  if (backyardSize === 'not-sure') {
+    if (entry.fitsYard.medium) return 30;
+    if (entry.fitsYard.large) return 24;
+    return -100;
+  }
+
+  if (backyardSize === 'long-narrow') {
     return entry.fitsYard.longNarrow ? 40 : -20;
   }
   const fits =
-    effectiveBackyardSize === 'small'
+    backyardSize === 'small'
       ? entry.fitsYard.small
-      : effectiveBackyardSize === 'medium'
+      : backyardSize === 'medium'
         ? entry.fitsYard.medium
         : entry.fitsYard.large;
   return fits ? 30 : -100;
@@ -291,7 +320,6 @@ export function getRecommendations(entries: QuizEntry[], answers: QuizAnswers): 
 export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): string[] {
   const reasons: string[] = [];
   const mr = entry.matchReasons;
-  const effectiveBackyardSize = getEffectiveBackyardSize(answers.backyardSize);
 
   if (answers.groundTypePreference === 'above-ground' && ['above-ground', 'both'].includes(entry.groundType)) {
     reasons.push('Matches your preference for an above-ground trampoline');
@@ -302,17 +330,19 @@ export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): stri
   if (answers.springType === 'springless' && mr.springless) reasons.push(mr.springless);
   else if (answers.springType === 'traditional' && mr.traditional) reasons.push(mr.traditional);
 
-  const sizeSnippet =
-    effectiveBackyardSize === 'small'
-      ? mr.smallYard
-      : effectiveBackyardSize === 'medium'
-        ? mr.mediumYard
-        : effectiveBackyardSize === 'large'
-          ? mr.largeYard
-          : effectiveBackyardSize === 'long-narrow'
-            ? mr.longNarrowYard
-            : undefined;
-  if (sizeSnippet) reasons.push(sizeSnippet);
+  if (answers.backyardSize !== 'not-sure') {
+    const sizeSnippet =
+      answers.backyardSize === 'small'
+        ? mr.smallYard
+        : answers.backyardSize === 'medium'
+          ? mr.mediumYard
+          : answers.backyardSize === 'large'
+            ? mr.largeYard
+            : answers.backyardSize === 'long-narrow'
+              ? mr.longNarrowYard
+              : undefined;
+    if (sizeSnippet && !mentionsOtherModelFamily(sizeSnippet, entry.model)) reasons.push(sizeSnippet);
+  }
 
   if (answers.shapePreference === 'round' && entry.shape.trim().toLowerCase() === 'round') {
     reasons.push('Matches your preference for a round trampoline shape');

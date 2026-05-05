@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const comparison = getApprovedComparison(pair);
   if (!comparison) return {};
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   return {
     title: `${comparison.title} — Trampoline Comparison 2026`,
     description: comparison.intro,
@@ -43,7 +43,7 @@ export default async function ComparePairPage({ params }: Props) {
   const { brandA, brandB } = comparison;
   const allProducts = [...brandA.products, ...brandB.products];
   const showAffiliateDisclosure = isVulyBrand(brandA.name) || isVulyBrand(brandB.name);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
     .filter((item) => item.slug !== comparison.slug)
     .filter(

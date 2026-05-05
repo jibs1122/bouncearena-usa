@@ -7,7 +7,7 @@ import Link from "next/link";
 import { getApprovedComparisons } from "@/lib/comparisons";
 import { isVulyBrand } from "@/lib/vuly";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "All Trampoline Brands — Compare Brands 2026",

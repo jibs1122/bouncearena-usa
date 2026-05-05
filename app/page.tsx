@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllBrands } from "@/lib/products";
-import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import JsonLd from "@/components/seo/JsonLd";
 import { formatUsd } from "@/lib/price";
 import { REVIEW_CARDS } from "@/lib/reviews";
-import { isVulyBrand } from "@/lib/vuly";
 
 export const metadata: Metadata = {
   title: "Best Trampolines 2026 — Reviews & Comparisons | Bounce Arena",
@@ -22,26 +20,23 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const allBrands = getAllBrands();
-  const featuredBrandNames = ["AlleyOOP", "Avyna", "Beast", "North", "West Coast Jump", "MaxAir"];
+  const featuredBrandNames = ["AlleyOOP", "Avyna", "Beast", "North", "West Coast Jump", "ACON"];
   const brands = featuredBrandNames
     .map((name) => allBrands.find((brand) => brand.name === name))
     .filter((brand): brand is NonNullable<typeof brand> => Boolean(brand));
   const reviews = REVIEW_CARDS.slice(0, 2);
-  const showAffiliateDisclosure =
-    brands.some((brand) => isVulyBrand(brand.name)) ||
-    reviews.some((review) => isVulyBrand(review.brand));
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Bounce Arena",
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us",
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com",
     description: "Independent trampoline reviews and comparisons.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us"}/brands/?q={search_term_string}`,
+        urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com"}/brands/?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -56,10 +51,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-5 sm:px-8 py-14 sm:py-20 flex flex-col md:flex-row items-center gap-10 md:gap-16">
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-4xl sm:text-5xl font-bold text-black leading-tight mb-4">
-              Find the perfect <span className="text-[#38b1ab]">trampoline</span> for your family
+              Find the right <span className="text-[#38b1ab]">trampoline</span> for your family
             </h1>
             <p className="text-lg text-black/60 mb-8 max-w-lg mx-auto md:mx-0">
-              Unbiased reviews and expert comparisons of the top trampoline brands — Springfree, Acon, Vuly, Skywalker, and more.
+              Compare specs, prices, and owner reviews across Springfree, Acon, Vuly, North, Skywalker, and more.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
               <Link
@@ -209,8 +204,6 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
-
-        {showAffiliateDisclosure ? <AffiliateDisclosure /> : null}
       </div>
     </>
   );

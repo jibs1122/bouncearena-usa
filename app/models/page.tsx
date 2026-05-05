@@ -4,7 +4,7 @@ import { getAllProducts } from "@/lib/products";
 import JsonLd from "@/components/seo/JsonLd";
 import BrowseClient from "./BrowseClient";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "Browse All Trampoline Models — Filter by Price, Size & Brand | Bounce Arena",

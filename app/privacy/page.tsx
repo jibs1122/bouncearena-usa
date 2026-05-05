@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Bounce Arena",
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-bold text-black mb-2">Information We Collect</h2>
           <p>
-            Bounce Arena (<strong>bouncearena.us</strong>) is a static informational website.
+            Bounce Arena (<strong>www.bouncearenareviews.com</strong>) is a static informational website.
             We do not require account registration or collect personal information directly.
           </p>
           <p className="mt-2">
@@ -59,8 +59,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-bold text-black mb-2">Contact</h2>
           <p>
-            For privacy questions, contact us at the email address listed on our{" "}
-            <Link href="/about/" className="text-[#38b1ab] hover:underline">About page</Link>.
+            For privacy questions, use our{" "}
+            <Link href="/contact/" className="text-[#38b1ab] hover:underline">Contact page</Link>.
           </p>
         </section>
       </div>

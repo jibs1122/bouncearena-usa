@@ -4,7 +4,7 @@ import { getApprovedComparisons } from "@/lib/comparisons";
 import { REVIEW_CARDS } from "@/lib/reviews";
 import { getAllBlogPosts } from "@/lib/blog";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bouncearena.us";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const brands = getAllBrands();
