@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import EmailContact from "@/components/ui/EmailContact";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
@@ -32,28 +31,33 @@ export default function AboutPage() {
 
         <ol className="list-decimal space-y-4 pl-6">
           <li>
-            We pull the specs together in one place. Sizes, weight limits, spring or springless,
-            warranty terms, and frame materials, organised so you can compare them without tabbing
-            between six brand websites.
+            <strong className="text-black">We pull the specs together in one place.</strong>{" "}
+            Sizes, weight limits, spring or springless, warranty terms, and frame materials,
+            organised so you can compare them without tabbing between six brand websites.
           </li>
           <li>
-            We publish real owner reviews. Owners who&apos;ve had the trampoline for a few months can
-            speak to the things product pages can&apos;t, including assembly, build quality after a
-            winter outside, and how it holds up to two kids using it daily.
+            <strong className="text-black">We publish real owner reviews.</strong> Owners
+            who&apos;ve lived with the trampoline long enough can speak to the things product pages
+            can&apos;t: assembly, build quality after a winter outside, and how it holds up to two
+            kids using it daily.
           </li>
           <li>
-            We put trampolines side by side. Choosing a trampoline is mostly a comparison problem
-            (bouncier or safer, larger or cheaper, leaf-spring or coil spring etc). Direct
-            comparisons answer those questions faster than reading six separate reviews.
+            <strong className="text-black">We put trampolines side by side.</strong> Choosing a
+            trampoline is mostly a comparison problem (bouncier or safer, larger or cheaper,
+            leaf-spring or coil). Direct comparisons answer those questions faster than reading
+            six separate reviews.
           </li>
         </ol>
 
         <div className="space-y-3">
           <h2 className="text-xl font-bold text-black">How we make money</h2>
           <p>
-            Bounce Arena earns commissions when readers click our links and buy, which is how the
-            site is funded. However, we cover brands we don&apos;t earn from, and if a trampoline is
-            worth comparing, it&apos;s in the comparisons.
+            Bounce Arena earns commissions when readers click our links and buy. That&apos;s how the
+            site is funded.
+          </p>
+          <p>
+            However, we cover brands we don&apos;t earn from, and if a trampoline is worth comparing,
+            it&apos;s in the comparisons.
           </p>
         </div>
 
@@ -70,10 +74,14 @@ export default function AboutPage() {
           <h2 className="text-xl font-bold text-black">Contact</h2>
           <p>
             If you want to flag a correction, ask a question, or get in touch about the site, you
-            can reach Bounce Arena here:
+            can reach us at hello [at] bouncearenareviews.com.
           </p>
-          <EmailContact />
         </div>
+
+        <p>
+          Bounce Arena is owned and operated by Lobo Media Pty Ltd, an independent publisher of
+          consumer review sites.
+        </p>
       </div>
     </div>
   );
