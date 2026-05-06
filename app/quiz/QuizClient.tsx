@@ -87,7 +87,8 @@ export default function QuizClient() {
     } else if (questionId === 'jumperAges') {
       nextAnswers.jumperAges = value as QuizAnswers['jumperAges'];
     } else if (questionId === 'budget') {
-      nextAnswers.budget = value as QuizAnswers['budget'];
+      const budgetVal = value as QuizAnswers['budget'];
+      nextAnswers.budget = budgetVal.length > 0 ? budgetVal : ['flexible'];
     } else {
       (nextAnswers as Record<string, unknown>)[questionId] = value;
     }
@@ -179,9 +180,6 @@ export default function QuizClient() {
           >
             ← Back
           </button>
-          <p className="text-xs text-black/25">
-            {currentQuestion.type === 'multi' ? 'Choose up to two and continue' : 'Tap an answer to continue'}
-          </p>
         </div>
       </div>
     </section>

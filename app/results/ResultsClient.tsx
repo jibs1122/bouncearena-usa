@@ -6,8 +6,10 @@ import { useSearchParams } from 'next/navigation';
 import BrandLogoAvatar from '@/components/ui/BrandLogoAvatar';
 import {
   buildSummaryText,
+  getBudgetBounds,
   getRecommendations,
   parseAnswers,
+  type BudgetId,
   type QuizAnswers,
   type ScoredEntry,
 } from '@/lib/quizScoring';
@@ -18,16 +20,28 @@ import { isVulyBrand } from '@/lib/vuly';
 
 // ─── Result card ──────────────────────────────────────────────────────────────
 
+function budgetNote(priceFrom: number | null, budgets: BudgetId[]): string | null {
+  if (priceFrom === null) return null;
+  const bounds = getBudgetBounds(budgets);
+  if (!bounds) return null;
+  const [, max] = bounds;
+  if (priceFrom > max) return `Starting price is above your stated budget — worth checking current pricing`;
+  return null;
+}
+
 function ResultCard({
   rec,
   rank,
+  answers,
 }: {
   rec: ScoredEntry;
   rank: number;
+  answers: QuizAnswers;
 }) {
   const isTop = rank === 1;
   const reasons = rec.matchReasonsList;
   const href = rec.sourceUrl;
+  const note = budgetNote(rec.priceFrom, answers.budget);
 
   return (
     <article
@@ -88,8 +102,14 @@ function ResultCard({
             {rec.availableSizesIn.length > 0 && ` · ${rec.availableSizesIn.length} size${rec.availableSizesIn.length !== 1 ? 's' : ''}`}
           </p>
 
+          {note && (
+            <p className={`text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 ${isTop ? 'mt-4' : 'mt-3'}`}>
+              ⚠ {note}
+            </p>
+          )}
+
           {reasons.length > 0 && (
-            <ul className={`space-y-1.5 ${isTop ? 'mt-4' : 'mt-3'}`}>
+            <ul className={`space-y-1.5 ${note ? 'mt-2' : isTop ? 'mt-4' : 'mt-3'}`}>
               {reasons.map((reason, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-black/60 leading-snug">
                   <span className="text-[#38b1ab] mt-0.5 flex-shrink-0">✓</span>
@@ -159,9 +179,11 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl leading-tight">
           {recommendations.length === 1 ? 'Your Trampoline Match' : 'Your Trampoline Matches'}
         </h1>
-        <p className="mt-3 text-base leading-7 text-black/50 max-w-xl">
-          {buildSummaryText(answers)}
-        </p>
+        {recommendations.length > 0 && (
+          <p className="mt-3 text-base leading-7 text-black/50 max-w-xl">
+            {buildSummaryText(answers)}
+          </p>
+        )}
       </div>
 
       {recommendations.length === 0 && (
@@ -182,12 +204,12 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
       {recommendations.length > 0 && (
         <div className="space-y-6">
           {recommendations.map((rec, i) => (
-            <ResultCard key={rec.id} rec={rec} rank={i + 1} />
+            <ResultCard key={rec.id} rec={rec} rank={i + 1} answers={answers} />
           ))}
         </div>
       )}
 
-      {recommendations.length > 0 && showAffiliateDisclosure && (
+      {recommendations.length > 0 && (
         <div className="mt-12 border-t border-black/[0.06] pt-6 space-y-5">
           <div className="text-center">
             <Link
@@ -197,7 +219,7 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
               ← Retake the quiz
             </Link>
           </div>
-          <AffiliateDisclosure className="text-center" />
+          {showAffiliateDisclosure && <AffiliateDisclosure className="text-center" />}
         </div>
       )}
     </section>

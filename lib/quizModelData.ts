@@ -10,9 +10,15 @@ export interface QuizModelData {
   advancedSafety?: boolean;
   metricScores?: PartialMetricScores;
   matchReasons?: PartialMatchReasons;
+  quizExclude?: boolean; // true = never surface in quiz results (specialty/trick products)
 }
 
 export const QUIZ_MODEL_DATA: QuizModelData[] = [
+  {
+    brandSlug: 'beast',
+    model: 'Beast 9x6 ft Mini Rectangle Trick Tramp',
+    quizExclude: true,
+  },
   {
     brandSlug: 'vuly',
     model: 'Ultra 2',

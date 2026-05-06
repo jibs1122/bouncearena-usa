@@ -154,7 +154,9 @@ function buildQuizEntries(): QuizEntryAdmin[] {
 
     const exclusionReasons: string[] = [];
     if (priceFrom !== null && priceFrom < 150) exclusionReasons.push('price-below-150');
+    if (maxSizeIn !== null && maxSizeIn < 84) exclusionReasons.push('size-too-small');
     if (sourceUrl === null) exclusionReasons.push('missing-source-url');
+    if (model_?.quizExclude) exclusionReasons.push('quiz-excluded-specialty');
 
     return {
       id: `${bSlug}-${modelSlug(model)}`,

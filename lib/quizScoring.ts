@@ -154,7 +154,7 @@ function scoreSpringType(entry: QuizEntry, springType: QuizAnswers['springType']
   return entry.springType === springType ? 40 : -100;
 }
 
-function getBudgetBounds(budgets: BudgetId[]): [number, number] | null {
+export function getBudgetBounds(budgets: BudgetId[]): [number, number] | null {
   if (budgets.length === 0 || budgets.includes('flexible')) return null;
   const ranges = budgets.map((budget) => budgetRanges[budget]);
   return [
@@ -388,10 +388,54 @@ export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): stri
     else if (priority === 'warranty' && mr.warranty) reasons.push(mr.warranty);
   }
 
+  // Fallback merit reasons when signals are low and card is sparse
+  if (reasons.length < 2) {
+    if (entry.joeyRating && !reasons.some(r => r.includes('reviewed'))) {
+      reasons.push('Rated and reviewed by the Bounce Arena team');
+    }
+    if (reasons.length < 2 && entry.metricScores.durability >= 8 && !reasons.some(r => r.toLowerCase().includes('durabilit'))) {
+      reasons.push('Rates highly for durability and long-term build quality');
+    }
+    if (reasons.length < 2 && entry.metricScores.bounce >= 8 && !reasons.some(r => r.toLowerCase().includes('bounce'))) {
+      reasons.push('Strong bounce quality rating among tested trampolines');
+    }
+    if (reasons.length < 2 && entry.metricScores.value >= 8 && !reasons.some(r => r.toLowerCase().includes('value') || r.toLowerCase().includes('price'))) {
+      reasons.push('Competitive value for money across its size range');
+    }
+  }
+
   return reasons.slice(0, 4);
 }
 
 // ─── Summary text ──────────────────────────────────────────────────────────────
+
+function describeJumperAges(ages: JumperAgeId[]): string | null {
+  if (ages.length === 0) return null;
+  const hasToddlers = ages.includes('under-6');
+  const hasKids = ages.includes('6-12');
+  const hasTeens = ages.includes('13-17');
+  const hasAdults = ages.includes('18plus');
+  if (hasToddlers && hasKids && hasTeens && hasAdults) return 'all ages';
+  if (hasToddlers && hasKids && hasTeens) return 'kids and teens';
+  if (hasKids && hasTeens && hasAdults) return 'older kids through adults';
+  if (hasToddlers && hasKids) return 'young children';
+  if (hasKids && hasTeens) return 'kids and teens';
+  if (hasTeens && hasAdults) return 'teens and adults';
+  if (hasToddlers) return 'toddlers';
+  if (hasKids) return 'school-age kids';
+  if (hasTeens) return 'teens';
+  if (hasAdults) return 'adults';
+  return null;
+}
+
+function describeBackyardSize(size: QuizAnswers['backyardSize']): string | null {
+  if (size === 'not-sure') return null;
+  if (size === 'small') return 'a small yard';
+  if (size === 'medium') return 'a medium yard';
+  if (size === 'large') return 'a large yard';
+  if (size === 'long-narrow') return 'a long, narrow yard';
+  return null;
+}
 
 export function buildSummaryText(answers: QuizAnswers): string {
   const budgetLabel: Record<BudgetId, string> = {
@@ -448,7 +492,17 @@ export function buildSummaryText(answers: QuizAnswers): string {
             return `a budget range from ${lower} to ${upper}`;
           })();
 
-  return `Based on your focus on ${priorities}, your preference for ${groundTypeLabel[answers.groundTypePreference]}, ${springLabel[answers.springType]}, ${shapeLabel[answers.shapePreference]}, and ${budgetSummary}, these are the strongest matches for your family.`;
+  const yardClause = describeBackyardSize(answers.backyardSize);
+  const agesClause = describeJumperAges(answers.jumperAges);
+
+  const installationPhrase = yardClause
+    ? `${groundTypeLabel[answers.groundTypePreference]} in ${yardClause}`
+    : groundTypeLabel[answers.groundTypePreference];
+
+  const tailClauses = [springLabel[answers.springType], shapeLabel[answers.shapePreference], budgetSummary];
+  if (agesClause) tailClauses.push(`${agesClause} jumping`);
+
+  return `Based on your focus on ${priorities}, your preference for ${installationPhrase}, ${tailClauses.join(', ')}, these are the strongest matches for your family.`;
 }
 
 // ─── URL serialization ──────────────────────────────────────────────────────────

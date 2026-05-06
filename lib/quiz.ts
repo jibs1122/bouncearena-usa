@@ -112,29 +112,25 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q5 — Spring type (visual card layout)
+    // Q5 — Spring type
     {
       id: 'springType',
       title: 'What type of spring system do you prefer?',
-      subtitle: 'Choose the system you want, or let the quiz compare both.',
+      subtitle: 'Choose the system you want, or select "Not sure" to see both.',
       type: 'single',
-      cardLayout: true,
+      allowSkip: false,
       options: [
         {
           id: 'traditional',
           label: 'Traditional springs',
           description:
             'Metal coil springs around the outside of the frame. Generally more affordable and easier to replace. Springs are covered by padding, but the pad can shift over time.',
-          imageSrc: '/quiz-images/traditional-springs.png',
-          imageAlt: 'Traditional spring trampoline',
         },
         {
           id: 'springless',
           label: 'Springless',
           description:
             'No exposed metal springs. Uses fiberglass rods or elastic straps attached under or inside the frame — keeping the jumping area clear of pinch points.',
-          imageSrc: '/quiz-images/springless-trampoline.png',
-          imageAlt: 'Springless trampoline',
         },
         {
           id: 'not-sure',
