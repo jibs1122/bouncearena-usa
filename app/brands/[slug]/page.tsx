@@ -25,18 +25,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = getBrand(slug);
   if (!brand) return {};
 
+  const brandTitle = brand.name.endsWith("Trampolines")
+    ? brand.name
+    : `${brand.name} Trampolines`;
   const priceStr = brand.fromPriceUsd
     ? ` from ${formatUsd(brand.fromPriceUsd)}`
     : "";
+  const brandDescriptionLabel = brand.name.endsWith("Trampolines")
+    ? brand.name
+    : `${brand.name} trampolines`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   return {
-    title: `${brand.name} Trampolines Review 2026 — Specs & Prices`,
-    description: `In-depth review of ${brand.name} trampolines${priceStr}. Sizes in feet/inches, weight limits in lb, ASTM safety certification status, and warranty details.`,
+    title: `${brandTitle} Review 2026 — Specs & Prices`,
+    description: `In-depth review of ${brandDescriptionLabel}${priceStr}. Sizes in feet/inches, weight limits in lb, ASTM safety certification status, and warranty details.`,
     alternates: { canonical: `${siteUrl}/brands/${slug}/` },
     openGraph: {
-      title: `${brand.name} Trampolines — Review & Specs`,
-      description: `Full spec breakdown of ${brand.name} trampoline models. Pricing, ASTM compliance, and warranty data.`,
+      title: `${brandTitle} — Review & Specs`,
+      description: `Full spec breakdown of ${brand.name} models. Pricing, ASTM compliance, and warranty data.`,
       url: `${siteUrl}/brands/${slug}/`,
     },
   };
@@ -46,6 +52,9 @@ export default async function BrandPage({ params }: Props) {
   const { slug } = await params;
   const brand = getBrand(slug);
   if (!brand) notFound();
+  const brandTitle = brand.name.endsWith("Trampolines")
+    ? brand.name
+    : `${brand.name} Trampolines`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
@@ -113,7 +122,7 @@ export default async function BrandPage({ params }: Props) {
             </div>
             <div className="flex-1">
               <h1 className="text-3xl sm:text-4xl font-bold text-black mb-2">
-                {brand.name} Trampolines
+                {brandTitle}
               </h1>
               <div className="flex flex-wrap gap-3 text-sm">
                 <span className="px-3 py-1 bg-[#38b1ab]/10 text-[#38b1ab] rounded-full">
@@ -163,9 +172,13 @@ export default async function BrandPage({ params }: Props) {
 
           {/* Brand intro */}
           {BRAND_INTROS[brand.name] && (
-            <p className="text-black/70 leading-relaxed mb-10 max-w-3xl">
-              {BRAND_INTROS[brand.name]}
-            </p>
+            <div className="mb-10 max-w-3xl space-y-3">
+              {BRAND_INTROS[brand.name].map((para, i) => (
+                <p key={i} className="text-black/70 leading-relaxed">
+                  {para}
+                </p>
+              ))}
+            </div>
           )}
 
           {/* Spec table */}

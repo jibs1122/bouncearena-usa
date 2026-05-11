@@ -11,6 +11,23 @@ import {
 
 type Props = { params: Promise<{ pair: string }> };
 
+function splitIntroIntoParagraphs(intro: string): string[] {
+  const sentences = intro.match(/[^.!?]+[.!?]+(?:["')\]]+)?|[^.!?]+$/g);
+
+  if (!sentences) {
+    return [intro];
+  }
+
+  const cleanedSentences = sentences.map((sentence) => sentence.trim()).filter(Boolean);
+  const paragraphs: string[] = [];
+
+  for (let index = 0; index < cleanedSentences.length; index += 2) {
+    paragraphs.push(cleanedSentences.slice(index, index + 2).join(" "));
+  }
+
+  return paragraphs;
+}
+
 export async function generateStaticParams() {
   return getApprovedComparisons().map((comparison) => ({ pair: comparison.slug }));
 }
@@ -39,6 +56,7 @@ export default async function ComparePairPage({ params }: Props) {
   if (!comparison) notFound();
 
   const { brandA, brandB } = comparison;
+  const introParagraphs = splitIntroIntoParagraphs(comparison.intro);
   const allProducts = [...brandA.products, ...brandB.products];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
@@ -102,9 +120,13 @@ export default async function ComparePairPage({ params }: Props) {
               </div>
             </Link>
           </div>
-          <p className="text-black/60 mb-4 max-w-3xl leading-7">
-            {comparison.intro}
-          </p>
+          <div className="mb-4 max-w-3xl space-y-4 text-black/60">
+            {introParagraphs.map((paragraph, index) => (
+              <p key={`${comparison.slug}-intro-${index}`} className="leading-7">
+                {paragraph}
+              </p>
+            ))}
+          </div>
           <div className="mb-8" />
 
           <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">

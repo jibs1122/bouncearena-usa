@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { formatUsd } from '@/lib/price';
 import {
+  baseMeritScore,
   budgetRanges,
+  getRecommendations,
   getScoreBreakdown,
   parseAnswers,
   type BudgetId,
   type QuizAnswers,
 } from '@/lib/quizScoring';
-import { baseMeritScore } from '@/lib/quizScoring';
-import { formatUsd } from '@/lib/price';
-import { getQuizEntriesForAdmin } from '@/lib/quizTrampolines';
+import { getQuizEntriesForAdmin, type QuizEntryAdmin } from '@/lib/quizTrampolines';
 
 export const metadata: Metadata = {
   title: 'Quiz Admin | Bounce Arena',
@@ -27,6 +28,29 @@ const DEFAULT_QUERY: Record<string, string> = {
   budget: 'flexible',
   priorities: 'bounce,durability',
 };
+
+const ANSWER_PARAM_KEYS = [
+  'backyardSize',
+  'groundTypePreference',
+  'shapePreference',
+  'jumperAges',
+  'standards',
+  'safetyFeatures',
+  'springType',
+  'budget',
+  'priorities',
+] as const;
+
+const FILTER_PARAM_KEYS = [
+  'q',
+  'brand',
+  'quizSpring',
+  'surfaced',
+  'eligibility',
+  'sort',
+  'onlyAdvancedSafety',
+  'onlyJoey',
+] as const;
 
 const PRESETS = [
   {
@@ -61,13 +85,112 @@ const PRESETS = [
   },
 ];
 
-function formatFeet(inches: number | null) {
-  if (inches === null) return '—';
-  return `${Math.round((inches / 12) * 10) / 10} ft`;
+type SearchParams = Record<string, string | string[] | undefined>;
+type FilterState = {
+  q: string;
+  brand: string;
+  quizSpring: 'all' | 'springless' | 'traditional';
+  surfaced: 'all' | 'surfaced' | 'hidden';
+  eligibility: 'all' | 'eligible' | 'hard-excluded' | 'non-positive';
+  sort: 'rank' | 'total' | 'merit' | 'price' | 'bounce' | 'durability';
+  onlyAdvancedSafety: boolean;
+  onlyJoey: boolean;
+};
+
+type RowData = {
+  entry: QuizEntryAdmin;
+  breakdown: ReturnType<typeof getScoreBreakdown>;
+  merit: number;
+  overallRank: number;
+  eligible: boolean;
+};
+
+function getSingleSearchParam(searchParams: SearchParams, key: string): string {
+  const value = searchParams[key];
+  return typeof value === 'string' ? value : '';
 }
 
-function formatYesNo(value: boolean) {
-  return value ? 'Yes' : 'No';
+function getSearchParamValues(searchParams: SearchParams, key: string): string[] {
+  const value = searchParams[key];
+  if (typeof value === 'string') return value ? value.split(',').filter(Boolean) : [];
+  if (Array.isArray(value)) return value.flatMap((part) => part.split(',')).filter(Boolean);
+  return [];
+}
+
+function buildAnswers(searchParams: SearchParams): QuizAnswers {
+  const params = new URLSearchParams(DEFAULT_QUERY);
+  for (const key of ANSWER_PARAM_KEYS) {
+    const values = getSearchParamValues(searchParams, key);
+    if (values.length > 0) params.set(key, values.join(','));
+  }
+  const answers = parseAnswers(params);
+  if (!answers) {
+    const fallback = parseAnswers(new URLSearchParams(DEFAULT_QUERY));
+    if (!fallback) throw new Error('Default quiz admin answers are invalid.');
+    return fallback;
+  }
+  return answers;
+}
+
+function buildFilterState(searchParams: SearchParams): FilterState {
+  const q = getSingleSearchParam(searchParams, 'q').trim();
+  const brand = getSingleSearchParam(searchParams, 'brand');
+  const quizSpring = getSingleSearchParam(searchParams, 'quizSpring');
+  const surfaced = getSingleSearchParam(searchParams, 'surfaced');
+  const eligibility = getSingleSearchParam(searchParams, 'eligibility');
+  const sort = getSingleSearchParam(searchParams, 'sort');
+
+  return {
+    q,
+    brand,
+    quizSpring: quizSpring === 'springless' || quizSpring === 'traditional' ? quizSpring : 'all',
+    surfaced: surfaced === 'surfaced' || surfaced === 'hidden' ? surfaced : 'all',
+    eligibility:
+      eligibility === 'eligible' || eligibility === 'hard-excluded' || eligibility === 'non-positive'
+        ? eligibility
+        : 'all',
+    sort:
+      sort === 'total' ||
+      sort === 'merit' ||
+      sort === 'price' ||
+      sort === 'bounce' ||
+      sort === 'durability'
+        ? sort
+        : 'rank',
+    onlyAdvancedSafety: getSingleSearchParam(searchParams, 'onlyAdvancedSafety') === '1',
+    onlyJoey: getSingleSearchParam(searchParams, 'onlyJoey') === '1',
+  };
+}
+
+function buildHref(params: Record<string, string>) {
+  return `/admin/?${new URLSearchParams(params).toString()}`;
+}
+
+function buildAnswerQuery(searchParams: SearchParams) {
+  const params: Record<string, string> = { ...DEFAULT_QUERY };
+  for (const key of ANSWER_PARAM_KEYS) {
+    const values = getSearchParamValues(searchParams, key);
+    if (values.length > 0) params[key] = values.join(',');
+  }
+  return params;
+}
+
+function buildFilterQuery(filters: FilterState) {
+  const params: Record<string, string> = {};
+  if (filters.q) params.q = filters.q;
+  if (filters.brand) params.brand = filters.brand;
+  if (filters.quizSpring !== 'all') params.quizSpring = filters.quizSpring;
+  if (filters.surfaced !== 'all') params.surfaced = filters.surfaced;
+  if (filters.eligibility !== 'all') params.eligibility = filters.eligibility;
+  if (filters.sort !== 'rank') params.sort = filters.sort;
+  if (filters.onlyAdvancedSafety) params.onlyAdvancedSafety = '1';
+  if (filters.onlyJoey) params.onlyJoey = '1';
+  return params;
+}
+
+function formatFeet(inches: number | null) {
+  if (inches === null) return '—';
+  return `${Math.round((inches / 12) * 10) / 10}ft`;
 }
 
 function formatBudgetSelection(budgets: BudgetId[]) {
@@ -85,31 +208,123 @@ function formatBudgetSelection(budgets: BudgetId[]) {
 function formatStandards(value: boolean | null) {
   if (value === true) return 'yes';
   if (value === false) return 'no';
-  return 'unknown';
+  return '—';
 }
 
-function buildAnswers(searchParams: Record<string, string | string[] | undefined>): QuizAnswers {
-  const params = new URLSearchParams(DEFAULT_QUERY);
-  for (const [key, value] of Object.entries(searchParams)) {
-    if (typeof value === 'string') params.set(key, value);
+function formatPrice(entry: QuizEntryAdmin) {
+  if (entry.priceFrom === null) return '—';
+  if (entry.priceTo !== null && entry.priceTo !== entry.priceFrom) {
+    return `${formatUsd(entry.priceFrom)}–${formatUsd(entry.priceTo)}`;
   }
-  const answers = parseAnswers(params);
-  if (!answers) {
-    const fallback = parseAnswers(new URLSearchParams(DEFAULT_QUERY));
-    if (!fallback) throw new Error('Default quiz admin answers are invalid.');
-    return fallback;
-  }
-  return answers;
+  return formatUsd(entry.priceFrom);
 }
 
-function presetHref(params: Record<string, string>) {
-  return `/admin/?${new URLSearchParams(params).toString()}`;
+function formatSizeRange(entry: QuizEntryAdmin) {
+  return `${formatFeet(entry.minSizeIn)}-${formatFeet(entry.maxSizeIn)}`;
+}
+
+function formatYardFit(entry: QuizEntryAdmin) {
+  return [
+    entry.fitsYard.small ? 'S' : '·',
+    entry.fitsYard.medium ? 'M' : '·',
+    entry.fitsYard.large ? 'L' : '·',
+    entry.fitsYard.longNarrow ? 'N' : '·',
+  ].join('');
+}
+
+function scoreToneClass(value: number) {
+  if (value >= 25) return 'bg-emerald-50 text-emerald-700';
+  if (value >= 10) return 'bg-teal-50 text-teal-700';
+  if (value > 0) return 'bg-sky-50 text-sky-700';
+  if (value === 0) return 'bg-black/[0.04] text-black/45';
+  if (value <= -100) return 'bg-red-100 text-red-800';
+  return 'bg-rose-50 text-rose-700';
+}
+
+function metricToneClass(value: number) {
+  if (value >= 9) return 'bg-emerald-50 text-emerald-700';
+  if (value >= 7) return 'bg-teal-50 text-teal-700';
+  if (value >= 5) return 'bg-amber-50 text-amber-700';
+  return 'bg-rose-50 text-rose-700';
+}
+
+function pillClass(active: boolean, tone: 'neutral' | 'good' | 'warn' = 'neutral') {
+  if (!active) return 'bg-black/[0.04] text-black/45';
+  if (tone === 'good') return 'bg-emerald-50 text-emerald-700';
+  if (tone === 'warn') return 'bg-amber-50 text-amber-700';
+  return 'bg-sky-50 text-sky-700';
+}
+
+function badgeClass(kind: 'eligible' | 'hard-excluded' | 'non-positive') {
+  if (kind === 'eligible') return 'bg-emerald-50 text-emerald-700';
+  if (kind === 'hard-excluded') return 'bg-red-100 text-red-800';
+  return 'bg-amber-50 text-amber-800';
+}
+
+function scoreCell(value: number, mode: 'metric' | 'breakdown' = 'breakdown') {
+  const className = mode === 'metric' ? metricToneClass(value) : scoreToneClass(value);
+  return (
+    <span
+      className={`inline-flex min-w-10 justify-center rounded-md px-2 py-1 text-[11px] font-semibold tabular-nums ${className}`}
+    >
+      {value}
+    </span>
+  );
+}
+
+function sortRows(rows: RowData[], sort: FilterState['sort']) {
+  const next = [...rows];
+  next.sort((a, b) => {
+    if (sort === 'total') {
+      return b.breakdown.total - a.breakdown.total || a.overallRank - b.overallRank;
+    }
+    if (sort === 'merit') {
+      return b.merit - a.merit || a.overallRank - b.overallRank;
+    }
+    if (sort === 'price') {
+      return (a.entry.priceFrom ?? Number.MAX_SAFE_INTEGER) - (b.entry.priceFrom ?? Number.MAX_SAFE_INTEGER) || a.overallRank - b.overallRank;
+    }
+    if (sort === 'bounce') {
+      return b.entry.metricScores.bounce - a.entry.metricScores.bounce || a.overallRank - b.overallRank;
+    }
+    if (sort === 'durability') {
+      return b.entry.metricScores.durability - a.entry.metricScores.durability || a.overallRank - b.overallRank;
+    }
+    return a.overallRank - b.overallRank;
+  });
+  return next;
+}
+
+function filterRows(rows: RowData[], filters: FilterState) {
+  const query = filters.q.toLowerCase();
+  return rows.filter(({ entry, breakdown, eligible }) => {
+    if (query) {
+      const haystack = [entry.brand, entry.model, entry.rawSpringSystem, entry.groundType, entry.springType]
+        .join(' ')
+        .toLowerCase();
+      if (!haystack.includes(query)) return false;
+    }
+    if (filters.brand && entry.brand !== filters.brand) return false;
+    if (filters.quizSpring !== 'all' && entry.springType !== filters.quizSpring) return false;
+    if (filters.surfaced === 'surfaced' && !entry.surfaced) return false;
+    if (filters.surfaced === 'hidden' && entry.surfaced) return false;
+    if (filters.eligibility === 'eligible' && !eligible) return false;
+    if (filters.eligibility === 'hard-excluded' && !breakdown.hardExcluded) return false;
+    if (filters.eligibility === 'non-positive' && (breakdown.hardExcluded || breakdown.total > 0)) return false;
+    if (filters.onlyAdvancedSafety && !entry.advancedSafety) return false;
+    if (filters.onlyJoey && !entry.joeyRating) return false;
+    return true;
+  });
+}
+
+function hiddenInputs(params: Record<string, string>) {
+  return Object.entries(params).map(([key, value]) => <input key={key} type="hidden" name={key} value={value} />);
 }
 
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  searchParams: Promise<SearchParams>;
 }) {
   if (process.env.NODE_ENV === 'production') {
     notFound();
@@ -117,9 +332,12 @@ export default async function AdminPage({
 
   const resolvedSearchParams = await searchParams;
   const answers = buildAnswers(resolvedSearchParams);
+  const filters = buildFilterState(resolvedSearchParams);
+  const answerQuery = buildAnswerQuery(resolvedSearchParams);
+  const filterQuery = buildFilterQuery(filters);
   const entries = getQuizEntriesForAdmin();
 
-  const rows = entries
+  const rankedRows = entries
     .map((entry) => {
       const breakdown = getScoreBreakdown(entry, answers);
       return {
@@ -131,45 +349,79 @@ export default async function AdminPage({
     .sort((a, b) => {
       if (a.entry.surfaced !== b.entry.surfaced) return a.entry.surfaced ? -1 : 1;
       if (a.breakdown.hardExcluded !== b.breakdown.hardExcluded) return a.breakdown.hardExcluded ? 1 : -1;
-      return b.breakdown.total - a.breakdown.total || b.merit - a.merit || a.entry.brand.localeCompare(b.entry.brand);
-    });
+      return (
+        b.breakdown.total - a.breakdown.total ||
+        b.merit - a.merit ||
+        a.entry.brand.localeCompare(b.entry.brand) ||
+        a.entry.model.localeCompare(b.entry.model)
+      );
+    })
+    .map((row, index) => ({
+      ...row,
+      overallRank: index + 1,
+      eligible: !row.breakdown.hardExcluded && row.breakdown.total > 0,
+    }));
 
-  const surfacedCount = rows.filter((row) => row.entry.surfaced).length;
-  const springlessCount = rows.filter((row) => row.entry.springType === 'springless').length;
-  const joeyRatedCount = rows.filter((row) => row.entry.joeyRating).length;
-  const vulyRows = rows.filter((row) => row.entry.brand === 'Vuly');
+  const rows = sortRows(filterRows(rankedRows, filters), filters.sort);
+  const brands = Array.from(new Set(entries.map((entry) => entry.brand))).sort((a, b) => a.localeCompare(b));
+  const surfacedCount = rankedRows.filter((row) => row.entry.surfaced).length;
+  const springlessCount = rankedRows.filter((row) => row.entry.springType === 'springless').length;
+  const joeyRatedCount = rankedRows.filter((row) => row.entry.joeyRating).length;
+  const eligibleCount = rankedRows.filter((row) => row.eligible).length;
+  const filteredEligibleCount = rows.filter((row) => row.eligible).length;
+  const filteredHardExcludedCount = rows.filter((row) => row.breakdown.hardExcluded).length;
+  const livePreviewRows = getRecommendations(
+    entries.filter((entry) => entry.surfaced),
+    answers,
+  ).map((entry, index) => ({
+    ...entry,
+    previewRank: index + 1,
+  }));
+  const filterResetHref = buildHref(answerQuery);
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8">
+    <div className="mx-auto max-w-[1700px] px-5 py-10 sm:px-8">
       <nav className="mb-6 text-sm text-black/40">
-        <Link href="/" className="transition-colors hover:text-black">Home</Link>
+        <Link href="/" className="transition-colors hover:text-black">
+          Home
+        </Link>
         <span className="mx-2">/</span>
         <span className="text-black">Admin</span>
       </nav>
 
-      <h1 className="mb-2 text-3xl font-bold text-black">Quiz Admin</h1>
-      <p className="mb-8 max-w-3xl text-black/60">
-        Local-only visibility into how every model is being treated by the quiz pipeline, including
-        excluded models, derived flags, and live score breakdowns for the current answer preset.
-      </p>
-
-      <div className="mb-8 flex flex-wrap gap-3">
-        {PRESETS.map((preset) => (
-          <Link
-            key={preset.label}
-            href={presetHref(preset.params)}
-            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
-          >
-            {preset.label}
-          </Link>
-        ))}
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="mb-2 text-3xl font-bold text-black">Quiz Admin</h1>
+          <p className="max-w-4xl text-black/60">
+            Dense scoring view for every quiz model. Filters are server-side, rows are compact, and each metric
+            or breakdown component gets its own column so ranking deltas are easier to inspect.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          {PRESETS.map((preset) => (
+            <Link
+              key={preset.label}
+              href={buildHref({ ...preset.params, ...filterQuery })}
+              className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+            >
+              {preset.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
         <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Coverage</p>
-          <p className="mt-2 text-2xl font-bold text-black">{surfacedCount} / {rows.length}</p>
-          <p className="mt-1 text-sm text-black/50">Models currently surfaced by the quiz</p>
+          <p className="mt-2 text-2xl font-bold text-black">
+            {surfacedCount} / {rankedRows.length}
+          </p>
+          <p className="mt-1 text-sm text-black/50">Surfaced quiz models</p>
+        </div>
+        <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Eligible Now</p>
+          <p className="mt-2 text-2xl font-bold text-black">{eligibleCount}</p>
+          <p className="mt-1 text-sm text-black/50">Rows with positive total and no hard exclusion</p>
         </div>
         <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Springless</p>
@@ -177,148 +429,462 @@ export default async function AdminPage({
           <p className="mt-1 text-sm text-black/50">Models treated as springless in quiz logic</p>
         </div>
         <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Current Budget</p>
-          <p className="mt-2 text-2xl font-bold text-black">
-            {formatBudgetSelection(answers.budget)}
-          </p>
-          <p className="mt-1 text-sm text-black/50">Score preview uses this answer set</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Budget</p>
+          <p className="mt-2 text-2xl font-bold text-black">{formatBudgetSelection(answers.budget)}</p>
+          <p className="mt-1 text-sm text-black/50">Current answer-set budget window</p>
         </div>
         <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Joey Rated</p>
           <p className="mt-2 text-2xl font-bold text-black">{joeyRatedCount}</p>
-          <p className="mt-1 text-sm text-black/50">Models receiving the backend Joey bonus</p>
+          <p className="mt-1 text-sm text-black/50">Models getting the Joey bonus</p>
         </div>
       </div>
 
-      <section className="mb-10 rounded-2xl border border-black/[0.08] bg-white p-6">
-        <h2 className="mb-4 text-xl font-bold text-black">Current Answer Set</h2>
-        <div className="grid gap-3 text-sm text-black/70 sm:grid-cols-2 lg:grid-cols-3">
-          <p><strong className="text-black">Backyard:</strong> {answers.backyardSize}</p>
-          <p><strong className="text-black">Ground type:</strong> {answers.groundTypePreference}</p>
-          <p><strong className="text-black">Shape:</strong> {answers.shapePreference}</p>
-          <p><strong className="text-black">Budget:</strong> {formatBudgetSelection(answers.budget)}</p>
-          <p><strong className="text-black">Spring type:</strong> {answers.springType}</p>
-          <p><strong className="text-black">Standards:</strong> {answers.standards}</p>
-          <p><strong className="text-black">Safety:</strong> {answers.safetyFeatures}</p>
-          <p><strong className="text-black">Priorities:</strong> {answers.priorities.join(', ') || 'none'}</p>
-        </div>
-      </section>
+      <div className="mb-8 grid gap-6 xl:grid-cols-[1.3fr_0.9fr]">
+        <section className="rounded-2xl border border-black/[0.08] bg-white p-6">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-bold text-black">Scoring Inputs</h2>
+              <p className="text-sm text-black/55">
+                Edit the quiz selections here and rescore every model against that scenario.
+              </p>
+            </div>
+            <p className="text-xs uppercase tracking-[0.18em] text-black/35">Drives the score preview</p>
+          </div>
 
-      <section className="mb-10 rounded-2xl border border-black/[0.08] bg-white p-6">
-        <h2 className="mb-4 text-xl font-bold text-black">Vuly Snapshot</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr className="border-b border-black/[0.08] text-left text-black/45">
-                <th className="px-3 py-2 font-semibold">Model</th>
-                <th className="px-3 py-2 font-semibold">Ground type</th>
-                <th className="px-3 py-2 font-semibold">Raw spring system</th>
-                <th className="px-3 py-2 font-semibold">Quiz spring type</th>
-                <th className="px-3 py-2 font-semibold">Advanced safety</th>
-                <th className="px-3 py-2 font-semibold">Joey rating</th>
-                <th className="px-3 py-2 font-semibold">Price from</th>
-                <th className="px-3 py-2 font-semibold">Total score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vulyRows.map(({ entry, breakdown }) => (
-                <tr key={entry.id} className="border-b border-black/[0.05]">
-                  <td className="px-3 py-2 font-medium text-black">{entry.model}</td>
-                  <td className="px-3 py-2 text-black/70">{entry.groundType}</td>
-                  <td className="px-3 py-2 text-black/70">{entry.rawSpringSystem || '—'}</td>
-                  <td className="px-3 py-2 text-black/70">{entry.springType}</td>
-                  <td className="px-3 py-2 text-black/70">{entry.advancedSafety ? 'yes' : 'no'}</td>
-                  <td className="px-3 py-2 text-black/70">{entry.joeyRating ? 'yes' : 'no'}</td>
-                  <td className="px-3 py-2 text-black/70">{entry.priceFrom !== null ? formatUsd(entry.priceFrom) : '—'}</td>
-                  <td className="px-3 py-2 text-black/70">{breakdown.total}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <form action="/admin" method="get" className="space-y-5">
+            {hiddenInputs(filterQuery)}
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <label className="block">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Backyard</span>
+                <select
+                  name="backyardSize"
+                  defaultValue={answers.backyardSize}
+                  className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+                >
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="long-narrow">Long and narrow</option>
+                  <option value="not-sure">Not sure</option>
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Ground type</span>
+                <select
+                  name="groundTypePreference"
+                  defaultValue={answers.groundTypePreference}
+                  className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+                >
+                  <option value="above-ground">Above-ground</option>
+                  <option value="in-ground">In-ground</option>
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Shape</span>
+                <select
+                  name="shapePreference"
+                  defaultValue={answers.shapePreference}
+                  className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+                >
+                  <option value="round">Round</option>
+                  <option value="rectangle">Rectangular-style</option>
+                  <option value="not-sure">No preference</option>
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Spring type</span>
+                <select
+                  name="springType"
+                  defaultValue={answers.springType}
+                  className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+                >
+                  <option value="traditional">Traditional</option>
+                  <option value="springless">Springless</option>
+                  <option value="not-sure">Not sure</option>
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Safety features</span>
+                <select
+                  name="safetyFeatures"
+                  defaultValue={answers.safetyFeatures}
+                  className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+                >
+                  <option value="essential">Essential</option>
+                  <option value="nice-to-have">Nice to have</option>
+                  <option value="not-important">Not important</option>
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">ASTM</span>
+                <select
+                  name="standards"
+                  defaultValue={answers.standards}
+                  className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+                >
+                  <option value="yes">Important</option>
+                  <option value="no">Not required</option>
+                </select>
+              </label>
+            </div>
+
+            <div className="grid gap-5 xl:grid-cols-3">
+              <fieldset className="rounded-2xl bg-[#f6f8f7] p-4">
+                <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-black/40">Who is jumping?</legend>
+                <div className="mt-3 grid gap-2">
+                  {[
+                    ['under-6', 'Under 6'],
+                    ['6-12', '6 to 12'],
+                    ['13-17', 'Teens'],
+                    ['18plus', 'Adults'],
+                  ].map(([value, label]) => (
+                    <label key={value} className="flex items-center gap-2 text-sm text-black/70">
+                      <input
+                        type="checkbox"
+                        name="jumperAges"
+                        value={value}
+                        defaultChecked={answers.jumperAges.includes(value as QuizAnswers['jumperAges'][number])}
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <fieldset className="rounded-2xl bg-[#f6f8f7] p-4">
+                <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-black/40">Budget</legend>
+                <p className="mt-2 text-xs text-black/45">Choose up to two ranges. Flexible overrides hard budget filtering.</p>
+                <div className="mt-3 grid gap-2">
+                  {[
+                    ['under-500', 'Under $500'],
+                    ['500-1000', '$500-$1,000'],
+                    ['1000-1500', '$1,000-$1,500'],
+                    ['1500-2500', '$1,500-$2,500'],
+                    ['2500-plus', '$2,500+'],
+                    ['flexible', 'Flexible'],
+                  ].map(([value, label]) => (
+                    <label key={value} className="flex items-center gap-2 text-sm text-black/70">
+                      <input
+                        type="checkbox"
+                        name="budget"
+                        value={value}
+                        defaultChecked={answers.budget.includes(value as BudgetId)}
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <fieldset className="rounded-2xl bg-[#f6f8f7] p-4">
+                <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-black/40">Priorities</legend>
+                <p className="mt-2 text-xs text-black/45">Choose up to two. These drive the priority score column.</p>
+                <div className="mt-3 grid gap-2">
+                  {[
+                    ['bounce', 'Bounce quality'],
+                    ['durability', 'Durability'],
+                    ['value', 'Value'],
+                    ['assembly', 'Assembly'],
+                    ['warranty', 'Warranty'],
+                  ].map(([value, label]) => (
+                    <label key={value} className="flex items-center gap-2 text-sm text-black/70">
+                      <input
+                        type="checkbox"
+                        name="priorities"
+                        value={value}
+                        defaultChecked={answers.priorities.includes(value as QuizAnswers['priorities'][number])}
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/[0.06] pt-4">
+              <p className="text-sm text-black/50">
+                Active summary: {formatBudgetSelection(answers.budget)} budget, {answers.priorities.join(', ') || 'no priorities'}, {answers.springType} spring preference.
+              </p>
+              <button
+                type="submit"
+                className="rounded-xl bg-[#38b1ab] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2f9893]"
+              >
+                Apply scoring inputs
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section className="rounded-2xl border border-black/[0.08] bg-white p-6">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <h2 className="text-xl font-bold text-black">Live Results Preview</h2>
+            <p className="text-xs uppercase tracking-[0.18em] text-black/35">Matches /results brand dedupe</p>
+          </div>
+          <div className="space-y-3">
+            {livePreviewRows.map((row) => (
+              <div key={row.id} className="grid grid-cols-[44px_minmax(0,1fr)_64px_64px] items-center gap-3 rounded-xl bg-[#f6f8f7] px-3 py-3">
+                <div className="text-center text-xs font-semibold text-black/45">#{row.previewRank}</div>
+                <div className="min-w-0">
+                  <div className="truncate font-medium text-black">
+                    {row.brand} <span className="text-black/55">{row.model}</span>
+                  </div>
+                  <div className="truncate text-xs text-black/45">
+                    {row.springType} · {row.priceFrom !== null ? formatUsd(row.priceFrom) : '—'}
+                  </div>
+                </div>
+                <div className="text-right text-xs text-black/45">score {row.score}</div>
+                <div className="text-right text-sm font-semibold text-black">{row.matchReasonsList.length}</div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-black/45">Rightmost value is match-reason count for the preview card.</p>
+        </section>
+      </div>
+
+      <section className="mb-8 rounded-2xl border border-black/[0.08] bg-white p-6">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-bold text-black">Filters</h2>
+            <p className="text-sm text-black/55">Refine the table without changing the active answer set.</p>
+          </div>
+          <Link
+            href={filterResetHref}
+            className="rounded-lg border border-black/[0.08] px-3 py-2 text-sm text-black/65 transition-colors hover:border-black/20 hover:text-black"
+          >
+            Reset filters
+          </Link>
         </div>
+
+        <form action="/admin" method="get" className="space-y-4">
+          {hiddenInputs(answerQuery)}
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Search</span>
+              <input
+                type="text"
+                name="q"
+                defaultValue={filters.q}
+                placeholder="Brand, model, spring system"
+                className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors placeholder:text-black/30 focus:border-[#38b1ab]"
+              />
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Brand</span>
+              <select
+                name="brand"
+                defaultValue={filters.brand}
+                className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+              >
+                <option value="">All brands</option>
+                {brands.map((brand) => (
+                  <option key={brand} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Quiz Spring</span>
+              <select
+                name="quizSpring"
+                defaultValue={filters.quizSpring}
+                className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+              >
+                <option value="all">All spring types</option>
+                <option value="traditional">Traditional</option>
+                <option value="springless">Springless</option>
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Surfaced</span>
+              <select
+                name="surfaced"
+                defaultValue={filters.surfaced}
+                className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+              >
+                <option value="all">All rows</option>
+                <option value="surfaced">Surfaced only</option>
+                <option value="hidden">Excluded only</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_auto_auto_auto]">
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Eligibility</span>
+              <select
+                name="eligibility"
+                defaultValue={filters.eligibility}
+                className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+              >
+                <option value="all">All score states</option>
+                <option value="eligible">Eligible only</option>
+                <option value="hard-excluded">Hard excluded only</option>
+                <option value="non-positive">Non-positive total only</option>
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Sort</span>
+              <select
+                name="sort"
+                defaultValue={filters.sort}
+                className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+              >
+                <option value="rank">Ranking</option>
+                <option value="total">Total score</option>
+                <option value="merit">Base merit</option>
+                <option value="bounce">Bounce metric</option>
+                <option value="durability">Durability metric</option>
+                <option value="price">Lowest price</option>
+              </select>
+            </label>
+
+            <label className="flex items-center gap-2 rounded-xl border border-black/[0.08] px-3 py-2.5 text-sm text-black/70">
+              <input type="checkbox" name="onlyAdvancedSafety" value="1" defaultChecked={filters.onlyAdvancedSafety} />
+              Advanced safety only
+            </label>
+
+            <label className="flex items-center gap-2 rounded-xl border border-black/[0.08] px-3 py-2.5 text-sm text-black/70">
+              <input type="checkbox" name="onlyJoey" value="1" defaultChecked={filters.onlyJoey} />
+              Joey only
+            </label>
+
+            <button
+              type="submit"
+              className="rounded-xl bg-[#38b1ab] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2f9893]"
+            >
+              Apply
+            </button>
+          </div>
+        </form>
       </section>
 
       <section className="rounded-2xl border border-black/[0.08] bg-white p-6">
-        <h2 className="mb-4 text-xl font-bold text-black">All Quiz Models</h2>
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-bold text-black">Score Matrix</h2>
+            <p className="text-sm text-black/55">
+              Showing {rows.length} rows. Eligible: {filteredEligibleCount}. Hard excluded: {filteredHardExcludedCount}.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs font-medium">
+            <span className={`rounded-full px-2.5 py-1 ${badgeClass('eligible')}`}>eligible</span>
+            <span className={`rounded-full px-2.5 py-1 ${badgeClass('non-positive')}`}>non-positive</span>
+            <span className={`rounded-full px-2.5 py-1 ${badgeClass('hard-excluded')}`}>hard excluded</span>
+          </div>
+        </div>
+
         <div className="overflow-x-auto">
-          <table className="min-w-[1900px] text-sm">
+          <table className="min-w-[2200px] border-separate border-spacing-0 text-xs">
             <thead>
-              <tr className="border-b border-black/[0.08] text-left text-black/45">
-                <th className="sticky left-0 z-30 min-w-[150px] bg-white px-3 py-2 font-semibold">Brand</th>
-                <th className="sticky left-[150px] z-30 min-w-[240px] bg-white px-3 py-2 font-semibold">Model</th>
-                <th className="px-3 py-2 font-semibold">Surfaced</th>
-                <th className="px-3 py-2 font-semibold">Exclusion</th>
-                <th className="px-3 py-2 font-semibold">Raw spring</th>
-                <th className="px-3 py-2 font-semibold">Ground type</th>
-                <th className="px-3 py-2 font-semibold">Quiz spring</th>
-                <th className="px-3 py-2 font-semibold">Adv safety</th>
-                <th className="px-3 py-2 font-semibold">Joey</th>
-                <th className="px-3 py-2 font-semibold">ASTM</th>
-                <th className="px-3 py-2 font-semibold">Price</th>
-                <th className="px-3 py-2 font-semibold">Sizes</th>
-                <th className="px-3 py-2 font-semibold">Fits yard</th>
-                <th className="px-3 py-2 font-semibold">Scores</th>
-                <th className="px-3 py-2 font-semibold">Breakdown</th>
-                <th className="px-3 py-2 font-semibold">Total</th>
+              <tr className="text-left text-black/45">
+                <th className="sticky left-0 z-30 bg-white px-2 py-2 font-semibold">#</th>
+                <th className="sticky left-[44px] z-30 min-w-[110px] bg-white px-2 py-2 font-semibold">Brand</th>
+                <th className="sticky left-[154px] z-30 min-w-[250px] bg-white px-2 py-2 font-semibold">Model</th>
+                <th className="px-2 py-2 font-semibold">Status</th>
+                <th className="px-2 py-2 font-semibold">Surf</th>
+                <th className="px-2 py-2 font-semibold">Spring</th>
+                <th className="px-2 py-2 font-semibold">Safe</th>
+                <th className="px-2 py-2 font-semibold">Joey</th>
+                <th className="px-2 py-2 font-semibold">ASTM</th>
+                <th className="px-2 py-2 font-semibold">Price</th>
+                <th className="px-2 py-2 font-semibold">Size</th>
+                <th className="px-2 py-2 font-semibold">Fit</th>
+                <th className="px-2 py-2 font-semibold">Bnc</th>
+                <th className="px-2 py-2 font-semibold">Dur</th>
+                <th className="px-2 py-2 font-semibold">Val</th>
+                <th className="px-2 py-2 font-semibold">Asm</th>
+                <th className="px-2 py-2 font-semibold">War</th>
+                <th className="px-2 py-2 font-semibold">Merit</th>
+                <th className="px-2 py-2 font-semibold">Size</th>
+                <th className="px-2 py-2 font-semibold">Gnd</th>
+                <th className="px-2 py-2 font-semibold">Shp</th>
+                <th className="px-2 py-2 font-semibold">Age</th>
+                <th className="px-2 py-2 font-semibold">Std</th>
+                <th className="px-2 py-2 font-semibold">Saf</th>
+                <th className="px-2 py-2 font-semibold">Spr</th>
+                <th className="px-2 py-2 font-semibold">Bgt</th>
+                <th className="px-2 py-2 font-semibold">Pri</th>
+                <th className="px-2 py-2 font-semibold">J</th>
+                <th className="px-2 py-2 font-semibold">Total</th>
+                <th className="px-2 py-2 font-semibold">Raw spring system</th>
+                <th className="px-2 py-2 font-semibold">Exclusion</th>
               </tr>
             </thead>
             <tbody>
-              {rows.map(({ entry, breakdown, merit }) => (
-                <tr key={entry.id} className="border-b border-black/[0.05] align-top">
-                  <td className="sticky left-0 z-20 min-w-[150px] bg-white px-3 py-3 font-medium text-black shadow-[1px_0_0_rgba(0,0,0,0.06)]">{entry.brand}</td>
-                  <td className="sticky left-[150px] z-20 min-w-[240px] bg-white px-3 py-3 text-black/75 shadow-[1px_0_0_rgba(0,0,0,0.06)]">{entry.model}</td>
-                  <td className="px-3 py-3 text-black/75">{entry.surfaced ? 'yes' : 'no'}</td>
-                  <td className="px-3 py-3 text-black/55">{entry.exclusionReasons.join(', ') || '—'}</td>
-                  <td className="px-3 py-3 text-black/75">{entry.rawSpringSystem || '—'}</td>
-                  <td className="px-3 py-3 text-black/75">{entry.groundType}</td>
-                  <td className="px-3 py-3 text-black/75">{entry.springType}</td>
-                  <td className="px-3 py-3 text-black/75">{entry.advancedSafety ? 'yes' : 'no'}</td>
-                  <td className="px-3 py-3 text-black/75">{entry.joeyRating ? 'yes' : 'no'}</td>
-                  <td className="px-3 py-3 text-black/75">{formatStandards(entry.meetsUSStandards)}</td>
-                  <td className="px-3 py-3 text-black/75">
-                    {entry.priceFrom !== null ? formatUsd(entry.priceFrom) : '—'}
-                    {entry.priceTo !== null && entry.priceTo !== entry.priceFrom ? `–${formatUsd(entry.priceTo)}` : ''}
-                  </td>
-                  <td className="px-3 py-3 text-black/75">
-                    {formatFeet(entry.minSizeIn)} to {formatFeet(entry.maxSizeIn)}
-                  </td>
-                  <td className="px-3 py-3 text-black/75">
-                    <div className="space-y-1 text-xs leading-5">
-                      <div>Small: {formatYesNo(entry.fitsYard.small)}</div>
-                      <div>Medium: {formatYesNo(entry.fitsYard.medium)}</div>
-                      <div>Large: {formatYesNo(entry.fitsYard.large)}</div>
-                      <div>Long/narrow: {formatYesNo(entry.fitsYard.longNarrow)}</div>
-                    </div>
-                  </td>
-                  <td className="px-3 py-3 text-black/75">
-                    <div className="space-y-1 text-xs leading-5">
-                      <div>Bounce: {entry.metricScores.bounce}</div>
-                      <div>Durability: {entry.metricScores.durability}</div>
-                      <div>Value: {entry.metricScores.value}</div>
-                      <div>Assembly: {entry.metricScores.assembly}</div>
-                      <div>Warranty: {entry.metricScores.warranty}</div>
-                    </div>
-                    <div className="mt-2 text-xs text-black/45">Base merit: {merit}</div>
-                  </td>
-                  <td className="px-3 py-3 text-black/75">
-                    <div className="space-y-1 text-xs leading-5">
-                      <div>Size: {breakdown.size}</div>
-                      <div>Ground type: {breakdown.groundType}</div>
-                      <div>Shape: {breakdown.shape}</div>
-                      <div>Standards: {breakdown.standards}</div>
-                      <div>Safety: {breakdown.safety}</div>
-                      <div>Spring type: {breakdown.springType}</div>
-                      <div>Budget: {breakdown.budget}</div>
-                      <div>Priorities: {breakdown.priorities}</div>
-                      <div>Joey: {breakdown.joey}</div>
-                    </div>
-                    <div className="mt-2 text-xs text-black/45">
-                      {breakdown.hardExcluded ? 'Hard excluded from ranking' : 'Eligible for ranking'}
-                    </div>
-                  </td>
-                  <td className="px-3 py-3 font-semibold text-black">{breakdown.total}</td>
-                </tr>
-              ))}
+              {rows.map((row) => {
+                const { entry, breakdown, merit, overallRank, eligible } = row;
+                const status = breakdown.hardExcluded ? 'hard-excluded' : eligible ? 'eligible' : 'non-positive';
+
+                return (
+                  <tr key={entry.id} className="border-t border-black/[0.05] align-middle">
+                    <td className="sticky left-0 z-20 bg-white px-2 py-2 text-black/45 shadow-[1px_0_0_rgba(0,0,0,0.06)]">
+                      {overallRank}
+                    </td>
+                    <td className="sticky left-[44px] z-20 bg-white px-2 py-2 font-medium text-black shadow-[1px_0_0_rgba(0,0,0,0.06)]">
+                      {entry.brand}
+                    </td>
+                    <td className="sticky left-[154px] z-20 bg-white px-2 py-2 text-black/75 shadow-[1px_0_0_rgba(0,0,0,0.06)]">
+                      <div className="line-clamp-2 min-w-[250px]">{entry.model}</div>
+                    </td>
+                    <td className="px-2 py-2">
+                      <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${badgeClass(status)}`}>
+                        {status}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2">
+                      <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${pillClass(entry.surfaced, 'good')}`}>
+                        {entry.surfaced ? 'yes' : 'no'}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2 text-black/70">{entry.springType}</td>
+                    <td className="px-2 py-2">
+                      <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${pillClass(entry.advancedSafety, 'good')}`}>
+                        {entry.advancedSafety ? 'yes' : 'no'}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2">
+                      <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${pillClass(entry.joeyRating, 'warn')}`}>
+                        {entry.joeyRating ? 'yes' : 'no'}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2 text-black/70">{formatStandards(entry.meetsUSStandards)}</td>
+                    <td className="px-2 py-2 text-black/70">{formatPrice(entry)}</td>
+                    <td className="px-2 py-2 text-black/70">{formatSizeRange(entry)}</td>
+                    <td className="px-2 py-2 font-mono text-[11px] text-black/55">{formatYardFit(entry)}</td>
+                    <td className="px-2 py-2">{scoreCell(entry.metricScores.bounce, 'metric')}</td>
+                    <td className="px-2 py-2">{scoreCell(entry.metricScores.durability, 'metric')}</td>
+                    <td className="px-2 py-2">{scoreCell(entry.metricScores.value, 'metric')}</td>
+                    <td className="px-2 py-2">{scoreCell(entry.metricScores.assembly, 'metric')}</td>
+                    <td className="px-2 py-2">{scoreCell(entry.metricScores.warranty, 'metric')}</td>
+                    <td className="px-2 py-2">{scoreCell(merit, 'metric')}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.size)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.groundType)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.shape)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.ages)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.standards)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.safety)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.springType)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.budget)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.priorities)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.joey)}</td>
+                    <td className="px-2 py-2">{scoreCell(breakdown.total)}</td>
+                    <td className="px-2 py-2 text-black/55">{entry.rawSpringSystem || '—'}</td>
+                    <td className="px-2 py-2 text-black/45">{entry.exclusionReasons.join(', ') || '—'}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

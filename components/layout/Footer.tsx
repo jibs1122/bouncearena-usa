@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 text-center sm:grid-cols-2 sm:text-left">
+          <div className="grid grid-cols-1 gap-8 text-center sm:w-fit sm:grid-cols-2 sm:gap-x-20 sm:text-left">
             <nav className="flex flex-col gap-3">
               {PRIMARY_LINKS.map((l) => (
                 <Link
