@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Product } from "@/lib/types";
 import { getAllBrands, getBrand } from "@/lib/products";
 import { getApprovedComparisons } from "@/lib/comparisons";
 import { BRAND_INTROS } from "@/lib/brandIntros";
@@ -8,13 +9,62 @@ import ComparisonTable from "@/components/ui/ComparisonTable";
 import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
+import ModelImage from "@/components/ui/ModelImage";
 import { formatUsd } from "@/lib/price";
-import { getPreferredBrandUrl } from "@/lib/productLinks";
+import { getPreferredBrandUrl, getPreferredModelUrl } from "@/lib/productLinks";
+import { hasModelImage } from "@/lib/modelImages";
 import { isVulyBrand } from "@/lib/vuly";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+type FeaturedModel = {
+  brand: string;
+  model: string;
+  priceFrom: number | null;
+  priceTo: number | null;
+  sizes: string[];
+  springSystem: string;
+  sourceUrl: string | null;
+};
+
+function buildFeaturedModels(products: Product[]): FeaturedModel[] {
+  const grouped = new Map<string, Product[]>();
+
+  for (const product of products) {
+    const key = `${product.brand}|||${product.model}`;
+    if (!grouped.has(key)) {
+      grouped.set(key, []);
+    }
+    grouped.get(key)!.push(product);
+  }
+
+  return Array.from(grouped.entries())
+    .map(([key, variants]) => {
+      const [brand, model] = key.split("|||");
+      const prices = variants
+        .map((variant) => variant.exactSizePriceUsd ?? variant.modelFromPriceUsd)
+        .filter((price): price is number => price !== null);
+
+      return {
+        brand,
+        model,
+        priceFrom: prices.length > 0 ? Math.min(...prices) : null,
+        priceTo: prices.length > 0 ? Math.max(...prices) : null,
+        sizes: Array.from(new Set(variants.map((variant) => variant.size).filter(Boolean))),
+        springSystem: variants[0]?.springSystem ?? "",
+        sourceUrl: getPreferredModelUrl(brand, variants),
+      };
+    })
+    .filter((model) => hasModelImage(model.brand, model.model))
+    .sort((a, b) => {
+      const aPrice = a.priceFrom ?? Number.POSITIVE_INFINITY;
+      const bPrice = b.priceFrom ?? Number.POSITIVE_INFINITY;
+      return aPrice - bPrice;
+    })
+    .slice(0, 4);
+}
 
 export async function generateStaticParams() {
   return getAllBrands().map((b) => ({ slug: b.slug }));
@@ -91,6 +141,7 @@ export default async function BrandPage({ params }: Props) {
   const showAffiliateDisclosure = hasAffiliate && isVulyBrand(brand.name);
   const astmCount = brand.products.filter((p) => p.meetsUsStandard === true).length;
   const minPrice = brand.fromPriceUsd;
+  const featuredModels = buildFeaturedModels(brand.products);
 
   // Comparisons that feature this brand
   const relatedComparisons = getApprovedComparisons().filter(
@@ -179,6 +230,88 @@ export default async function BrandPage({ params }: Props) {
                 </p>
               ))}
             </div>
+          )}
+
+          {featuredModels.length > 0 && (
+            <section className="mb-10">
+              <div className="mb-4 flex items-end justify-between gap-4">
+                <h2 className="text-xl font-bold text-black">Featured Models</h2>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {featuredModels.map((model, index) => {
+                  const cardContent = (
+                    <>
+                      <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,177,171,0.14),_transparent_62%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <ModelImage
+                          brand={model.brand}
+                          model={model.model}
+                          alt={`${model.brand} ${model.model}`}
+                          sizes="(min-width: 1280px) 22vw, (min-width: 640px) 46vw, 100vw"
+                          priority={index === 0}
+                          className="p-4 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                        />
+                      </div>
+
+                      <div className="space-y-3 p-4">
+                        <div>
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-[#38b1ab]">
+                            {model.brand}
+                          </p>
+                          <h3 className="mt-1 text-sm font-semibold leading-snug text-black">
+                            {model.model}
+                          </h3>
+                        </div>
+
+                        <p className="text-xs leading-6 text-black/50">
+                          {model.springSystem || "Spring system not listed"}
+                          {model.sizes.length > 0 && ` · ${model.sizes.join(", ")}`}
+                        </p>
+
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="text-sm font-semibold text-black">
+                            {model.priceFrom !== null
+                              ? model.priceTo !== null && model.priceTo !== model.priceFrom
+                                ? `${formatUsd(model.priceFrom)}–${formatUsd(model.priceTo)}`
+                                : `From ${formatUsd(model.priceFrom)}`
+                              : "Price varies"}
+                          </div>
+                          {model.sourceUrl && (
+                            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#38b1ab] transition-all duration-200 group-hover:gap-1.5 group-hover:text-[#2e9a94]">
+                              View
+                              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                                →
+                              </span>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </>
+                  );
+
+                  return model.sourceUrl ? (
+                    <a
+                      key={`${model.brand}-${model.model}`}
+                      href={model.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow sponsored"
+                      aria-label={`Open ${model.brand} ${model.model} in a new tab`}
+                      className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <article
+                      key={`${model.brand}-${model.model}`}
+                      className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm"
+                    >
+                      {cardContent}
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
           )}
 
           {/* Spec table */}

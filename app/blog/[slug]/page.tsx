@@ -6,11 +6,26 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import JsonLd from "@/components/seo/JsonLd";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog";
+import { resolveBlogModelImage } from "@/lib/blogModelImages";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
+};
+
+const BLOG_MODEL_IMAGE_EXCLUSIONS: Record<string, Set<string>> = {
+  "best-in-ground-trampoline": new Set([
+    "2. Avyna Pro-Line 14ft Round In-Ground",
+    "5. Avyna Pro-Line 10x17 Rectangle In-Ground",
+    "6. Capital Play 11x8ft In-Ground Trampoline",
+    "9. Avyna Pro-Line 12ft Round In-Ground",
+  ]),
+  "best-trampoline-for-gymnastics": new Set([
+    "2. Akrobat XCITYX 17x12",
+    "8. Avyna Pro-Line 10x17 Rectangle Above-Ground",
+    "10. Texas Trampolines 7.3x12.3 Kids Delight Rectangular",
+  ]),
 };
 
 export async function generateStaticParams() {
@@ -54,6 +69,27 @@ function injectQuizCta(markdown: string): string {
   return lines.join("\n");
 }
 
+function injectModelImages(markdown: string, slug: string): string {
+  const lines = markdown.split("\n");
+  const exclusions = BLOG_MODEL_IMAGE_EXCLUSIONS[slug] ?? new Set<string>();
+
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const match = lines[i].match(/^##\s+(\d+\.\s+.+)$/);
+    if (!match) continue;
+    if (exclusions.has(match[1])) continue;
+
+    const title = match[1].replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+
+    lines.splice(i + 1, 0, "", `<BlogModelImage title="${title}" />`, "");
+  }
+
+  return lines.join("\n");
+}
+
+function enrichBlogMarkdown(markdown: string, slug: string): string {
+  return injectQuizCta(injectModelImages(markdown, slug));
+}
+
 function QuizCta() {
   return (
     <section className="my-10 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
@@ -69,6 +105,26 @@ function QuizCta() {
         Take the quiz →
       </Link>
     </section>
+  );
+}
+
+function BlogModelImage({ title }: { title?: string }) {
+  if (!title) return null;
+  const image = resolveBlogModelImage(title);
+  if (!image) return null;
+
+  return (
+    <figure className="mb-7 overflow-hidden rounded-2xl border border-black/[0.08] bg-[#f7fbfa]">
+      <div className="relative aspect-[16/9]">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          className="object-contain p-5"
+          sizes="(min-width: 1024px) 768px, 100vw"
+        />
+      </div>
+    </figure>
   );
 }
 
@@ -96,6 +152,7 @@ const components = {
     <strong className="font-semibold text-black" {...props} />
   ),
   QuizCta,
+  BlogModelImage,
 };
 
 export default async function BlogPostPage({ params }: PageProps) {
@@ -159,7 +216,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
           ) : null}
           <MDXRemote
-            source={injectQuizCta(post.content)}
+            source={enrichBlogMarkdown(post.content, post.slug)}
             components={components}
             options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
           />

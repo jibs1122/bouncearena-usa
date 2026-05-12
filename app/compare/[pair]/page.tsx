@@ -1,15 +1,31 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Product } from "@/lib/types";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
+import ModelImage from "@/components/ui/ModelImage";
 import {
   getApprovedComparison,
   getApprovedComparisons,
 } from "@/lib/comparisons";
+import { formatUsd } from "@/lib/price";
+import { getPreferredProductUrl } from "@/lib/productLinks";
+import { hasModelImage } from "@/lib/modelImages";
 
 type Props = { params: Promise<{ pair: string }> };
+
+type FeaturedModel = {
+  brand: string;
+  model: string;
+  priceFrom: number | null;
+  priceTo: number | null;
+  sizes: string[];
+  springSystem: string;
+  sourceUrl: string | null;
+  hasImage: boolean;
+};
 
 function splitIntroIntoParagraphs(intro: string): string[] {
   const sentences = intro.match(/[^.!?]+[.!?]+(?:["')\]]+)?|[^.!?]+$/g);
@@ -26,6 +42,58 @@ function splitIntroIntoParagraphs(intro: string): string[] {
   }
 
   return paragraphs;
+}
+
+function buildFeaturedModel(products: Product[]): FeaturedModel | null {
+  const grouped = new Map<string, Product[]>();
+
+  for (const product of products) {
+    const key = `${product.brand}|||${product.model}`;
+    if (!grouped.has(key)) {
+      grouped.set(key, []);
+    }
+    grouped.get(key)!.push(product);
+  }
+
+  const candidates = Array.from(grouped.entries()).map(([key, variants]) => {
+    const [brand, model] = key.split("|||");
+    const pricedVariants = [...variants]
+      .filter((variant) => (variant.exactSizePriceUsd ?? variant.modelFromPriceUsd) !== null)
+      .sort((a, b) => {
+        const aPrice = a.exactSizePriceUsd ?? a.modelFromPriceUsd ?? Number.NEGATIVE_INFINITY;
+        const bPrice = b.exactSizePriceUsd ?? b.modelFromPriceUsd ?? Number.NEGATIVE_INFINITY;
+        return bPrice - aPrice;
+      });
+    const representativeVariant = pricedVariants[0] ?? variants[0];
+    const prices = variants
+      .map((variant) => variant.exactSizePriceUsd ?? variant.modelFromPriceUsd)
+      .filter((price): price is number => price !== null);
+
+    return {
+      brand,
+      model,
+      priceFrom: prices.length > 0 ? Math.min(...prices) : null,
+      priceTo: prices.length > 0 ? Math.max(...prices) : null,
+      sizes: Array.from(new Set(variants.map((variant) => variant.size).filter(Boolean))),
+      springSystem: variants[0]?.springSystem ?? "",
+      sourceUrl: representativeVariant ? getPreferredProductUrl(representativeVariant) : null,
+      hasImage: hasModelImage(brand, model),
+      rankingPrice: representativeVariant?.exactSizePriceUsd
+        ?? representativeVariant?.modelFromPriceUsd
+        ?? Number.NEGATIVE_INFINITY,
+    };
+  });
+
+  const bestWithImage = [...candidates]
+    .filter((candidate) => candidate.hasImage)
+    .sort((a, b) => b.rankingPrice - a.rankingPrice)[0];
+
+  if (bestWithImage) {
+    return bestWithImage;
+  }
+
+  const bestCandidate = [...candidates].sort((a, b) => b.rankingPrice - a.rankingPrice)[0];
+  return bestCandidate ?? null;
 }
 
 export async function generateStaticParams() {
@@ -57,6 +125,8 @@ export default async function ComparePairPage({ params }: Props) {
 
   const { brandA, brandB } = comparison;
   const introParagraphs = splitIntroIntoParagraphs(comparison.intro);
+  const featuredModelA = buildFeaturedModel(brandA.products);
+  const featuredModelB = buildFeaturedModel(brandB.products);
   const allProducts = [...brandA.products, ...brandB.products];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
@@ -105,7 +175,7 @@ export default async function ComparePairPage({ params }: Props) {
           <div className="mb-6 flex flex-wrap items-center gap-4 sm:gap-6">
             <Link
               href={`/brands/${brandA.slug}/`}
-              className="group flex h-28 w-28 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-32 sm:w-32"
+              className="group flex h-[10.5rem] w-[10.5rem] items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48"
             >
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
                 <BrandLogoAvatar name={brandA.name} size={104} fillContainer />
@@ -113,7 +183,7 @@ export default async function ComparePairPage({ params }: Props) {
             </Link>
             <Link
               href={`/brands/${brandB.slug}/`}
-              className="group flex h-28 w-28 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-32 sm:w-32"
+              className="group flex h-[10.5rem] w-[10.5rem] items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48"
             >
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
                 <BrandLogoAvatar name={brandB.name} size={104} fillContainer />
@@ -127,7 +197,95 @@ export default async function ComparePairPage({ params }: Props) {
               </p>
             ))}
           </div>
-          <div className="mb-8" />
+
+          {featuredModelA && featuredModelB && (
+            <section className="mb-8">
+              <h2 className="mb-4 text-xl font-bold text-black">Featured Models</h2>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                {[featuredModelA, featuredModelB].map((model, index) => {
+                  const cardContent = (
+                    <>
+                      <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,177,171,0.14),_transparent_62%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        {model.hasImage ? (
+                          <ModelImage
+                            brand={model.brand}
+                            model={model.model}
+                            alt={`${model.brand} ${model.model}`}
+                            sizes="(min-width: 1024px) 44vw, 100vw"
+                            priority={index === 0}
+                            className="p-5 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center p-6">
+                            <div className="flex h-full w-full items-center justify-center rounded-2xl border border-white/60 bg-white/80 p-5">
+                              <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-4">
+                                <BrandLogoAvatar name={model.brand} size={132} fillContainer />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-3 p-5">
+                        <div>
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-[#38b1ab]">
+                            {model.brand}
+                          </p>
+                          <h3 className="mt-1 text-lg font-semibold leading-snug text-black">
+                            {model.model}
+                          </h3>
+                        </div>
+
+                        <p className="text-sm leading-6 text-black/50">
+                          {model.springSystem || "Spring system not listed"}
+                          {model.sizes.length > 0 && ` · ${model.sizes.join(", ")}`}
+                        </p>
+
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="text-sm font-semibold text-black">
+                            {model.priceFrom !== null
+                              ? model.priceTo !== null && model.priceTo !== model.priceFrom
+                                ? `${formatUsd(model.priceFrom)}–${formatUsd(model.priceTo)}`
+                                : `From ${formatUsd(model.priceFrom)}`
+                              : "Price varies"}
+                          </div>
+                          {model.sourceUrl && (
+                            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#38b1ab] transition-all duration-200 group-hover:gap-1.5 group-hover:text-[#2e9a94]">
+                              View
+                              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                                →
+                              </span>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </>
+                  );
+
+                  return model.sourceUrl ? (
+                    <a
+                      key={`${comparison.slug}-${model.brand}-${model.model}`}
+                      href={model.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow sponsored"
+                      aria-label={`Open ${model.brand} ${model.model} in a new tab`}
+                      className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <article
+                      key={`${comparison.slug}-${model.brand}-${model.model}`}
+                      className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm"
+                    >
+                      {cardContent}
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          )}
 
           <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
             <h2 className="text-lg font-bold text-black mb-2">Not sure which brand fits best?</h2>

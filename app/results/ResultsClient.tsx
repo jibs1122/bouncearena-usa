@@ -4,6 +4,7 @@ import { Suspense, useMemo } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import BrandLogoAvatar from '@/components/ui/BrandLogoAvatar';
+import ModelImage from '@/components/ui/ModelImage';
 import {
   buildSummaryText,
   getBudgetBounds,
@@ -16,6 +17,7 @@ import {
 import type { QuizEntry } from '@/lib/quizTrampolines';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import { formatUsd } from '@/lib/price';
+import { hasModelImage } from '@/lib/modelImages';
 import { isVulyBrand } from '@/lib/vuly';
 
 // ─── Result card ──────────────────────────────────────────────────────────────
@@ -42,6 +44,7 @@ function ResultCard({
   const reasons = rec.matchReasonsList;
   const href = rec.sourceUrl;
   const note = budgetNote(rec.priceFrom, answers.budget);
+  const showModelImage = hasModelImage(rec.brand, rec.model);
 
   return (
     <article
@@ -57,21 +60,35 @@ function ResultCard({
       }}
     >
       <div className="flex flex-col sm:flex-row">
-        {/* Brand logo */}
+        {/* Media */}
         <div
           className={`flex flex-shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br from-[#38b1ab]/10 to-[#38b1ab]/20 p-4 ${
             isTop ? 'h-40 sm:h-auto sm:w-52' : 'h-32 sm:h-auto sm:w-44'
           }`}
         >
-          <div className="flex aspect-square w-full max-w-[148px] items-center justify-center rounded-2xl border border-white/60 bg-white/80 p-4">
-            <div className="flex aspect-square h-full w-full items-center justify-center rounded-xl bg-white p-3">
-              <BrandLogoAvatar
-                name={rec.brand}
-                size={isTop ? 120 : 96}
-                fillContainer
-              />
+          {showModelImage ? (
+            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/60 bg-white/80 p-3">
+              <div className="relative h-full w-full">
+                <ModelImage
+                  brand={rec.brand}
+                  model={rec.model}
+                  alt={`${rec.brand} ${rec.model}`}
+                  sizes={isTop ? '(min-width: 640px) 208px, 100vw' : '(min-width: 640px) 176px, 100vw'}
+                  priority={isTop}
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex aspect-square w-full max-w-[148px] items-center justify-center rounded-2xl border border-white/60 bg-white/80 p-4">
+              <div className="flex aspect-square h-full w-full items-center justify-center rounded-xl bg-white p-3">
+                <BrandLogoAvatar
+                  name={rec.brand}
+                  size={isTop ? 120 : 96}
+                  fillContainer
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Content */}

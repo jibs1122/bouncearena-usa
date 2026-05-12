@@ -34,8 +34,8 @@ export const BRAND_INTROS: Record<string, string[]> = {
 
   JUMPZYLLA: [
     "Jumpzylla is a US-based e-commerce brand founded in 2019 by Michael Bennett, with its first prototype released around 2020.",
-    "The brand sells round outdoor trampolines from 8ft up to 16ft, with weight capacities listed at 375 lb on smaller sizes and 450 lb on 14ft, 15ft, and 16ft models.",
-    "Pricing typically falls in the $250 to $500 range on Amazon and the company's own site, with a standard 2-year warranty (extendable to 3 years for an extra fee).",
+    "The brand sells round outdoor trampolines from 8ft up to 16ft, with listed weight capacities of 265 lb on the 8ft, 330 lb on the 10ft, 400 lb on the 12ft, and 450 lb on the 14ft, 15ft, and 16ft sizes.",
+    "Pricing typically runs around $199.95 to $699.95 depending on size, color, and stock, with a standard 1-year warranty plus optional extended and storm-warranty add-ons.",
     "The trampolines feature curved enclosure poles, galvanized steel frames, and customizable spring pad colors. Jumpzylla sells direct through its own site, Amazon, and Walmart.",
   ],
 
@@ -54,9 +54,9 @@ export const BRAND_INTROS: Record<string, string[]> = {
   ],
 
   BCAN: [
-    "BCAN is a fitness-focused trampoline brand best known for indoor mini rebounders and small outdoor trampolines for older kids.",
-    "The lineup centers on foldable mini trampolines with handlebars, designed for home cardio workouts, plus a smaller selection of outdoor recreational trampolines. The brand recently became part of FED Fitness.",
-    "Pricing for mini fitness trampolines generally falls in the $80 to $200 range, with outdoor models priced higher.",
+    "BCAN is a fitness-focused trampoline brand best known for indoor mini rebounders.",
+    "This page focuses on BCAN mini fitness trampolines and rebounders, especially the foldable handlebar models designed for home cardio workouts. The brand recently became part of FED Fitness.",
+    "Pricing for mini fitness trampolines generally falls in the $80 to $200 range.",
     "BCAN sells primarily through Amazon and its own site, with an emphasis on the rebounder fitness category rather than the full backyard trampoline market.",
   ],
 
@@ -91,7 +91,7 @@ export const BRAND_INTROS: Record<string, string[]> = {
   Vuly: [
     "Vuly Play is an Australian trampoline brand founded in 2007 by Joe Andon (originally as Trampolines Australia) and headquartered in Brisbane.",
     "The brand expanded internationally in 2014 through a Toys\"R\"Us distribution deal and a 2015 licensing agreement with Spin Master.",
-    "The current lineup includes the Flare, Lift 2, Ultra 2, Thunder 2, and Thunder Pro, with the Thunder series using Vuly's proprietary Leaf Spring system instead of traditional coil springs.",
+    "The current US lineup includes the Ultra 2, Ultra 2 Pro, Thunder 2, and Thunder 2 Pro, with the Thunder series using Vuly's proprietary Leaf Spring system instead of traditional coil springs.",
     "Pricing typically runs from around $550 on smaller spring-based models up to $2,400 and beyond for the Thunder series. Vuly also produces basketball hoop systems, modular swing sets (360 Pro), and kids bikes.",
   ],
 
@@ -118,8 +118,8 @@ export const BRAND_INTROS: Record<string, string[]> = {
 
   Akrobat: [
     "Slovenian-engineered trampolines marketed on bounce performance, with Akrobat claiming up to 30% more rebound than standard backyard models.",
-    "The Primus line covers above-ground, flat-to-ground, and in-ground formats from 8ft round through to 17x12ft, with the newer XCITYX range aimed at sport and professional users.",
-    "Premium pricing in the US, strong in-ground and Euro-design pedigree, and an established Australian dealer network.",
+    "This page focuses on selected rectangular Akrobat models rather than the full Akrobat range. The Primus line covers above-ground, flat-to-ground, and in-ground formats, while the newer XCITYX range is aimed at sport and professional users.",
+    "Premium pricing in the US, with strong in-ground and Euro-design pedigree.",
   ],
 
   Beast: [
@@ -142,9 +142,9 @@ export const BRAND_INTROS: Record<string, string[]> = {
 
   'Capital Play': [
     "Capital Play is a UK-based brand (Capital Play Worldwide Ltd) specializing in in-ground trampoline kits, with US distribution through Capital Play USA.",
-    "The lineup includes round in-ground trampolines from 8ft to 14ft and rectangular in-ground models from 8x11ft up to 10x17ft, all built around a bowl-shaped retaining wall design that reduces excavation depth.",
+    "Capital Play should be understood here as an in-ground trampoline specialist. The table on this page currently covers one Capital-branded model rather than the full wider Capital Play store range.",
     "Models feature TDU vented frame pads, a triple weave vented jump mat, and commercial-grade springs, with a 10-year warranty on the frame and retaining wall, 5 years on the mat and springs, and 2 years on the padding.",
-    "Pricing typically runs $1,500 to $3,000+ depending on size. Capital Play also distributes the North in-ground trampoline range in partnership with North Trampolines.",
+    "Pricing typically runs $1,500 to $3,000+ depending on size. The wider Capital Play store also sells North In Ground Trampolines through a collaboration with North, but that should not be read as meaning this table covers the full store catalog.",
   ],
 
   North: [
@@ -155,7 +155,7 @@ export const BRAND_INTROS: Record<string, string[]> = {
   ],
 
   'Jump Yeti': [
-    "Jump Yeti is a US trampoline brand sold primarily through Trampolines.com and Amazon, focused on a small lineup of round above-ground trampolines in 12ft, 14ft, and 15ft sizes, with weight capacities listed up to 400 lb.",
+    "Jump Yeti is a US trampoline brand sold primarily through Trampolines.com and Amazon, focused on a small lineup of round above-ground trampolines in 12ft, 14ft, and 16ft sizes, with weight capacities listed up to 400 lb.",
     "Models feature powder-coated galvanized steel frames, UV-resistant jump mats, foam-padded enclosure poles, and ASTM-certified safety construction.",
     "Pricing is positioned at the budget-to-mid end of the market, typically under $500 for the 12ft and 14ft models, with free shipping and a 1-year warranty included.",
     "The brand is newer with lower overall recognition compared to legacy mass-market trampoline names.",
