@@ -59,9 +59,9 @@ function buildFeaturedModels(products: Product[]): FeaturedModel[] {
     })
     .filter((model) => hasModelImage(model.brand, model.model))
     .sort((a, b) => {
-      const aPrice = a.priceFrom ?? Number.POSITIVE_INFINITY;
-      const bPrice = b.priceFrom ?? Number.POSITIVE_INFINITY;
-      return aPrice - bPrice;
+      const aPrice = a.priceTo ?? a.priceFrom ?? Number.NEGATIVE_INFINITY;
+      const bPrice = b.priceTo ?? b.priceFrom ?? Number.NEGATIVE_INFINITY;
+      return bPrice - aPrice;
     })
     .slice(0, 4);
 }

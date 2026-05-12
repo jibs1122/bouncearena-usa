@@ -12,6 +12,18 @@ export interface ReviewCard {
 
 export const REVIEW_CARDS: ReviewCard[] = [
   {
+    href: "/reviews/springfree-medium-round/",
+    brand: "Springfree",
+    model: "Medium Round Trampoline",
+    author: "Anthea",
+    owned: "18 months",
+    excerpt:
+      "Anthea reviews the Springfree Medium Round after 18 months in a Melbourne backyard with two young boys. Covers sizing, safety, accessories, durability, assembly, and whether she would buy it again.",
+    tags: ["Springfree", "Small yard", "Young kids"],
+    videoUrl: "https://www.youtube.com/watch?v=ADUR7OSCDNc",
+    videoThumbnailUrl: "https://i.ytimg.com/vi/ADUR7OSCDNc/hqdefault.jpg",
+  },
+  {
     href: "/reviews/vuly-ultra-2-pro-xl/",
     brand: "Vuly",
     model: "Ultra 2 Pro Trampoline",
