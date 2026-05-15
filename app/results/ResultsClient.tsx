@@ -62,12 +62,12 @@ function ResultCard({
       <div className="flex flex-col sm:flex-row">
         {/* Media */}
         <div
-          className={`flex flex-shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br from-[#38b1ab]/10 to-[#38b1ab]/20 p-4 ${
-            isTop ? 'h-40 sm:h-auto sm:w-52' : 'h-32 sm:h-auto sm:w-44'
+          className={`flex w-full flex-shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br from-[#38b1ab]/10 to-[#38b1ab]/20 p-3 sm:p-4 ${
+            isTop ? 'sm:w-52' : 'sm:w-44'
           }`}
         >
           {showModelImage ? (
-            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/60 bg-white/80 p-3">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/60 bg-white/80 p-3 sm:aspect-auto sm:h-full">
               <div className="relative h-full w-full">
                 <ModelImage
                   brand={rec.brand}
