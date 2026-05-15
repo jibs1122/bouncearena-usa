@@ -55,23 +55,49 @@ function shopCtaLabel(url: string | null, brand: string) {
 
 // ─── brand colours ───────────────────────────────────────────────────────────
 
-const BRAND_COLOURS: Record<string, { bg: string; text: string }> = {
-  Springfree:               { bg: '#00563b', text: '#fff' },
-  ACON:                     { bg: '#0055a5', text: '#fff' },
-  Vuly:                     { bg: '#e31837', text: '#fff' },
-  Skywalker:                { bg: '#1d3f73', text: '#fff' },
-  'Upper Bounce':           { bg: '#ff6b00', text: '#fff' },
-  Zupapa:                   { bg: '#5b2d8e', text: '#fff' },
-  JumpKing:                 { bg: '#c8102e', text: '#fff' },
-  Jumpflex:                 { bg: '#ff6600', text: '#fff' },
-  'Little Tikes':           { bg: '#ffc72c', text: '#000' },
-  ORCC:                     { bg: '#2e7d32', text: '#fff' },
-  JUMPZYLLA:                { bg: '#1565c0', text: '#fff' },
-  BCAN:                     { bg: '#00838f', text: '#fff' },
+type BrandColour = { bg: string; text: string; chipText?: string };
+
+const BRAND_COLOURS: Record<string, BrandColour> = {
+  ACON:                     { bg: '#1d9ed8', text: '#fff' },
+  AGame:                    { bg: '#d62828', text: '#fff' },
+  Akrobat:                  { bg: '#99e047', text: '#17310d', chipText: '#4f7f16' },
+  AlleyOOP:                 { bg: '#54575a', text: '#fff' },
+  Avyna:                    { bg: '#f58220', text: '#1f1305', chipText: '#b95409' },
+  BCAN:                     { bg: '#c8102e', text: '#fff' },
+  Beast:                    { bg: '#262626', text: '#fff' },
+  'Capital Play':           { bg: '#00a7a7', text: '#fff', chipText: '#007575' },
+  'Crazy Ape':              { bg: '#00a8e2', text: '#fff', chipText: '#0078a1' },
+  JUMPZYLLA:                { bg: '#f08a00', text: '#211000', chipText: '#a95d00' },
+  'Jump Yeti':              { bg: '#0077c8', text: '#fff' },
+  JumpKing:                 { bg: '#f5c400', text: '#221a00', chipText: '#8a6b00' },
+  Jumpflex:                 { bg: '#6f8f2f', text: '#fff', chipText: '#557020' },
+  'Little Tikes':           { bg: '#ed1c24', text: '#fff' },
+  MaxAir:                   { bg: '#d7192a', text: '#fff' },
+  North:                    { bg: '#68727c', text: '#fff' },
+  ORCC:                     { bg: '#4ca000', text: '#fff', chipText: '#367600' },
+  Skywalker:                { bg: '#2b78bd', text: '#fff' },
+  Sportspower:              { bg: '#c90000', text: '#fff' },
+  'Sportspower / Bounce Pro': { bg: '#c90000', text: '#fff' },
+  Springfree:               { bg: '#008bd2', text: '#fff' },
+  'Texas Trampolines':      { bg: '#162a8c', text: '#fff' },
+  'Upper Bounce':           { bg: '#5ec3ff', text: '#04283a', chipText: '#187cad' },
+  Vuly:                     { bg: '#e65f1e', text: '#fff' },
+  'West Coast Jump':        { bg: '#0076ff', text: '#fff' },
+  'Zero Gravity':           { bg: '#5f6368', text: '#fff' },
+  Zupapa:                   { bg: '#f7b500', text: '#221900', chipText: '#8d6600' },
 };
 
-function brandBadge(name: string) {
+function brandBadge(name: string): BrandColour {
   return BRAND_COLOURS[name] ?? { bg: '#38b1ab', text: '#fff' };
+}
+
+function selectedBrandFilterChipStyle(name: string) {
+  const badge = brandBadge(name);
+  return {
+    backgroundColor: badge.bg,
+    borderColor: badge.bg,
+    color: badge.text,
+  };
 }
 
 // ─── types ───────────────────────────────────────────────────────────────────
@@ -394,8 +420,8 @@ export default function CompareClient({ products }: { products: Product[] }) {
             <div className="flex flex-wrap gap-1.5">
               {allBrands.map(b => (
                 <button key={b} onClick={() => toggleBrand(b)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${selectedBrands.has(b) ? 'text-white border-transparent' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}
-                  style={selectedBrands.has(b) ? { backgroundColor: brandBadge(b).bg, borderColor: brandBadge(b).bg, color: brandBadge(b).text } : {}}>
+                  className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${selectedBrands.has(b) ? 'border-transparent hover:brightness-95' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}
+                  style={selectedBrands.has(b) ? selectedBrandFilterChipStyle(b) : {}}>
                   {b}
                 </button>
               ))}

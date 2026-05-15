@@ -52,6 +52,8 @@ const HOST_LABELS: Record<string, string> = {
   "www.costco.com": "Costco",
   "trampolines.com": "Trampolines.com",
   "www.trampolines.com": "Trampolines.com",
+  "sportspowerltd.net": "Sports Power",
+  "www.sportspowerltd.net": "Sports Power",
 };
 
 function titleCaseHostLabel(hostname: string): string {
