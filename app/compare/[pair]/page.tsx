@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import ComparisonTable from "@/components/ui/ComparisonTable";
+import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import ModelImage from "@/components/ui/ModelImage";
@@ -13,6 +14,7 @@ import {
 import { formatUsd } from "@/lib/price";
 import { getPreferredProductUrl } from "@/lib/productLinks";
 import { hasModelImage } from "@/lib/modelImages";
+import { isAffiliateBrand } from "@/lib/vuly";
 
 type Props = { params: Promise<{ pair: string }> };
 
@@ -127,6 +129,9 @@ export default async function ComparePairPage({ params }: Props) {
   const introParagraphs = splitIntroIntoParagraphs(comparison.intro);
   const featuredModelA = buildFeaturedModel(brandA.products);
   const featuredModelB = buildFeaturedModel(brandB.products);
+  const showAffiliateDisclosure = [featuredModelA, featuredModelB].some(
+    (model) => model?.sourceUrl && isAffiliateBrand(model.brand),
+  );
   const allProducts = [...brandA.products, ...brandB.products];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
@@ -172,10 +177,10 @@ export default async function ComparePairPage({ params }: Props) {
           <h1 className="text-3xl sm:text-4xl font-bold text-black mb-3">
             {comparison.title}
           </h1>
-          <div className="mb-6 flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="mb-6 flex items-center gap-4 sm:flex-wrap sm:gap-6">
             <Link
               href={`/brands/${brandA.slug}/`}
-              className="group flex h-[10.5rem] w-[10.5rem] items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48"
+              className="group flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48 sm:flex-none"
             >
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
                 <BrandLogoAvatar name={brandA.name} size={104} fillContainer />
@@ -183,7 +188,7 @@ export default async function ComparePairPage({ params }: Props) {
             </Link>
             <Link
               href={`/brands/${brandB.slug}/`}
-              className="group flex h-[10.5rem] w-[10.5rem] items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48"
+              className="group flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48 sm:flex-none"
             >
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
                 <BrandLogoAvatar name={brandB.name} size={104} fillContainer />
@@ -197,6 +202,7 @@ export default async function ComparePairPage({ params }: Props) {
               </p>
             ))}
           </div>
+          {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
 
           {featuredModelA && featuredModelB && (
             <section className="mb-8">

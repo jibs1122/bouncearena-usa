@@ -33,7 +33,7 @@ export default function BrandCard({ brand }: { brand: Brand }) {
       </div>
 
       <div>
-        {hasLogo ? <span className="sr-only">{brand.name}</span> : null}
+        <p className="text-base font-semibold leading-tight text-black">{brand.name}</p>
         <p className="text-sm text-black/40 mt-0.5">
           {brand.products.length} model{brand.products.length !== 1 ? 's' : ''}
         </p>

@@ -1,5 +1,8 @@
 import { BRAND_SHOP_URLS } from "@/lib/brandLogos";
 
+const ACON_AFFILIATE_PARAM = "sca_ref";
+const ACON_AFFILIATE_REF = "11261719.jjbGKHHa7yLAnuwn";
+
 type ProductLinkLike = {
   brand: string;
   sourceUrls: string[];
@@ -7,16 +10,35 @@ type ProductLinkLike = {
   modelFromPriceUsd?: number | null;
 };
 
+function isAconUrl(url: URL): boolean {
+  const hostname = url.hostname.toLowerCase();
+  return hostname === "acon24.com" || hostname.endsWith(".acon24.com");
+}
+
+export function withAffiliateTracking(url: string | null): string | null {
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+    if (isAconUrl(parsed)) {
+      parsed.searchParams.set(ACON_AFFILIATE_PARAM, ACON_AFFILIATE_REF);
+    }
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+}
+
 export function getBrandFallbackUrl(brandName: string): string | null {
-  return BRAND_SHOP_URLS[brandName] ?? null;
+  return withAffiliateTracking(BRAND_SHOP_URLS[brandName] ?? null);
 }
 
 export function getPreferredBrandUrl(brandName: string, csvFallback: string | null): string | null {
-  return csvFallback ?? getBrandFallbackUrl(brandName);
+  return withAffiliateTracking(csvFallback ?? getBrandFallbackUrl(brandName));
 }
 
 export function getPreferredProductUrl(product: ProductLinkLike): string | null {
-  return product.sourceUrls[0] ?? getBrandFallbackUrl(product.brand);
+  return withAffiliateTracking(product.sourceUrls[0] ?? getBrandFallbackUrl(product.brand));
 }
 
 export function getPreferredModelUrl(
@@ -31,13 +53,17 @@ export function getPreferredModelUrl(
       return aPrice - bPrice;
     })[0];
 
-  if (bestLinkedProduct?.sourceUrls[0]) return bestLinkedProduct.sourceUrls[0];
+  if (bestLinkedProduct?.sourceUrls[0]) {
+    return withAffiliateTracking(bestLinkedProduct.sourceUrls[0]);
+  }
 
   const firstSourceUrl = products.flatMap((product) => product.sourceUrls)[0] ?? null;
-  return firstSourceUrl ?? getBrandFallbackUrl(brandName);
+  return withAffiliateTracking(firstSourceUrl ?? getBrandFallbackUrl(brandName));
 }
 
 const HOST_LABELS: Record<string, string> = {
+  "acon24.com": "ACON",
+  "us.acon24.com": "ACON",
   "machrus.com": "Machrus",
   "www.machrus.com": "Machrus",
   "jumpking.com": "JumpKing",

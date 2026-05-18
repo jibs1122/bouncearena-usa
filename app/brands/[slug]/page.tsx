@@ -11,9 +11,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import ModelImage from "@/components/ui/ModelImage";
 import { formatUsd } from "@/lib/price";
-import { getPreferredBrandUrl, getPreferredModelUrl } from "@/lib/productLinks";
+import { getPreferredBrandUrl, getPreferredModelUrl, withAffiliateTracking } from "@/lib/productLinks";
 import { hasModelImage } from "@/lib/modelImages";
-import { isVulyBrand } from "@/lib/vuly";
+import { isAffiliateBrand } from "@/lib/vuly";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -130,7 +130,7 @@ export default async function BrandPage({ params }: Props) {
         priceCurrency: "USD",
         price: p.exactSizePriceUsd ?? p.modelFromPriceUsd,
         availability: "https://schema.org/InStock",
-        url: p.sourceUrls[0] ?? undefined,
+        url: withAffiliateTracking(p.sourceUrls[0] ?? null) ?? undefined,
       },
       ...(p.meetsUsStandard
         ? { additionalProperty: [{ "@type": "PropertyValue", name: "ASTM Certified", value: "Yes" }] }
@@ -138,7 +138,7 @@ export default async function BrandPage({ params }: Props) {
     }));
 
   const hasAffiliate = brand.products.some((p) => p.sourceUrls.length > 0);
-  const showAffiliateDisclosure = hasAffiliate && isVulyBrand(brand.name);
+  const showAffiliateDisclosure = hasAffiliate && isAffiliateBrand(brand.name);
   const astmCount = brand.products.filter((p) => p.meetsUsStandard === true).length;
   const minPrice = brand.fromPriceUsd;
   const featuredModels = buildFeaturedModels(brand.products);

@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation';
 import BrandLogoAvatar from '@/components/ui/BrandLogoAvatar';
 import ModelImage from '@/components/ui/ModelImage';
 import {
-  buildSummaryText,
   getBudgetBounds,
   getRecommendations,
   parseAnswers,
@@ -18,7 +17,119 @@ import type { QuizEntry } from '@/lib/quizTrampolines';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import { formatUsd } from '@/lib/price';
 import { hasModelImage } from '@/lib/modelImages';
-import { isVulyBrand } from '@/lib/vuly';
+import { isAffiliateBrand } from '@/lib/vuly';
+
+type RecapItem = {
+  label: string;
+  value: string;
+};
+
+const backyardSizeLabels: Record<QuizAnswers['backyardSize'], string> = {
+  small: 'Small',
+  medium: 'Medium',
+  large: 'Large',
+  'long-narrow': 'Long and narrow',
+  'not-sure': 'Not sure',
+};
+
+const groundTypeLabels: Record<QuizAnswers['groundTypePreference'], string> = {
+  'above-ground': 'Above-ground',
+  'in-ground': 'In-ground',
+};
+
+const shapeLabels: Record<QuizAnswers['shapePreference'], string> = {
+  round: 'Round / circle',
+  rectangle: 'Rectangle',
+  'not-sure': 'No preference',
+};
+
+const jumperAgeLabels: Record<QuizAnswers['jumperAges'][number], string> = {
+  'under-6': 'Under 6',
+  '6-12': '6 to 12',
+  '13-17': 'Teens',
+  '18plus': 'Adults',
+};
+
+const budgetLabels: Record<BudgetId, string> = {
+  'under-500': 'Under $500',
+  '500-1000': '$500-$1,000',
+  '1000-1500': '$1,000-$1,500',
+  '1500-2500': '$1,500-$2,500',
+  '2500-plus': '$2,500+',
+  flexible: 'Flexible / not sure',
+};
+
+const springTypeLabels: Record<QuizAnswers['springType'], string> = {
+  traditional: 'Traditional springs',
+  springless: 'Springless',
+  'not-sure': 'Not sure',
+};
+
+const safetyFeatureLabels: Record<QuizAnswers['safetyFeatures'], string> = {
+  essential: 'Essential',
+  'nice-to-have': 'Nice to have',
+  'not-important': 'Not important',
+};
+
+const standardsLabels: Record<QuizAnswers['standards'], string> = {
+  yes: 'Yes',
+  no: 'No',
+};
+
+const priorityLabels: Record<QuizAnswers['priorities'][number], string> = {
+  bounce: 'Best bounce quality',
+  durability: 'Durability / longevity',
+  value: 'Value for money',
+  assembly: 'Easy assembly',
+  warranty: 'Warranty & support',
+};
+
+function formatList(values: string[], fallback = 'Not specified'): string {
+  return values.length > 0 ? values.join(', ') : fallback;
+}
+
+function buildAnswerRecap(answers: QuizAnswers): RecapItem[] {
+  return [
+    { label: 'Backyard size', value: backyardSizeLabels[answers.backyardSize] },
+    {
+      label: 'Jumpers',
+      value: formatList(answers.jumperAges.map((age) => jumperAgeLabels[age])),
+    },
+    { label: 'Installation', value: groundTypeLabels[answers.groundTypePreference] },
+    { label: 'Shape', value: shapeLabels[answers.shapePreference] },
+    {
+      label: 'Budget',
+      value: formatList(answers.budget.map((budget) => budgetLabels[budget])),
+    },
+    { label: 'Spring system', value: springTypeLabels[answers.springType] },
+    { label: 'Safety features', value: safetyFeatureLabels[answers.safetyFeatures] },
+    { label: 'ASTM certification', value: standardsLabels[answers.standards] },
+    {
+      label: 'Priorities',
+      value: formatList(answers.priorities.map((priority) => priorityLabels[priority]), 'No strong preference'),
+    },
+  ];
+}
+
+function AnswerRecap({ answers }: { answers: QuizAnswers }) {
+  const recapItems = buildAnswerRecap(answers);
+
+  return (
+    <div className="mt-5 rounded-2xl border border-black/[0.08] bg-black/[0.015] p-4">
+      <ul className="grid grid-cols-1 gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+        {recapItems.map((item) => (
+          <li key={item.label} className="flex items-start gap-2 text-black/60">
+            <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38b1ab]" />
+            <span>
+              <span className="font-semibold text-black/70">{item.label}:</span>{' '}
+              {item.value}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 // ─── Result card ──────────────────────────────────────────────────────────────
 
@@ -166,7 +277,7 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
     () => (answers ? getRecommendations(entries, answers) : []),
     [entries, answers],
   );
-  const showAffiliateDisclosure = recommendations.some((rec) => isVulyBrand(rec.brand));
+  const showAffiliateDisclosure = recommendations.some((rec) => isAffiliateBrand(rec.brand) && rec.sourceUrl);
 
   if (!answers) {
     return (
@@ -197,9 +308,12 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
           {recommendations.length === 1 ? 'Your Trampoline Match' : 'Your Trampoline Matches'}
         </h1>
         {recommendations.length > 0 && (
-          <p className="mt-3 text-base leading-7 text-black/50 max-w-xl">
-            {buildSummaryText(answers)}
-          </p>
+          <>
+            <p className="mt-3 max-w-xl text-base leading-7 text-black/50">
+              Based on your preferences listed below, these are the strongest matches for your family.
+            </p>
+            <AnswerRecap answers={answers} />
+          </>
         )}
       </div>
 

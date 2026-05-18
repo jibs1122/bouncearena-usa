@@ -35,7 +35,7 @@ export default function Header({ searchItems = [] }: { searchItems?: SearchItem[
 
           {/* Nav + mobile toggle */}
           <div className="flex items-center gap-1 ml-auto lg:ml-0 lg:justify-self-end">
-            <nav className="hidden items-center gap-0.5 text-sm font-medium sm:flex">
+            <nav className="hidden items-center gap-0.5 text-sm font-medium lg:flex">
               {NAV_LINKS.map(({ href, label }) => (
                 <Link key={href} href={href} className="rounded-lg px-3 py-2 text-black/60 hover:text-black transition-colors">
                   {label}
@@ -48,7 +48,7 @@ export default function Header({ searchItems = [] }: { searchItems?: SearchItem[
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((o) => !o)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-black/65 transition-colors hover:bg-black/5 hover:text-black sm:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-black/65 transition-colors hover:bg-black/5 hover:text-black lg:hidden"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 {mobileOpen ? (
@@ -63,7 +63,7 @@ export default function Header({ searchItems = [] }: { searchItems?: SearchItem[
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <nav className="mt-3 rounded-2xl border border-black/8 bg-white p-2 shadow-[0_18px_36px_-28px_rgba(0,0,0,0.35)] sm:hidden">
+          <nav className="mt-3 rounded-2xl border border-black/8 bg-white p-2 shadow-[0_18px_36px_-28px_rgba(0,0,0,0.35)] lg:hidden">
             <div className="px-2 pb-2">
               <SearchBox items={searchItems} mobile />
             </div>

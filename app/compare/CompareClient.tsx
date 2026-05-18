@@ -10,7 +10,7 @@ import {
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
-import { isVulyBrand } from '@/lib/vuly';
+import { isAffiliateBrand } from '@/lib/vuly';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -264,6 +264,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
   const [sortKey, setSortKey] = useState<SortKey>('price');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(new Set());
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const toggleBrand = useCallback((b: string) =>
     setSelectedBrands(prev => { const n = new Set(prev); n.has(b) ? n.delete(b) : n.add(b); return n; }), []);
@@ -315,8 +316,15 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
   const matchingSizes = useMemo(() =>
     filtered.reduce((sum, r) => sum + r.variants.length, 0), [filtered]);
+  const activeFilterCount =
+    selectedBrands.size +
+    selectedShapes.size +
+    (springlessOnly ? 1 : 0) +
+    (astmOnly ? 1 : 0) +
+    (minPrice > 0 || maxPrice < globalMaxPrice ? 1 : 0) +
+    (minSize > 4 || maxSize < globalMaxSize ? 1 : 0);
   const showAffiliateDisclosure = useMemo(
-    () => filtered.some((row) => isVulyBrand(row.brand) && row.shopUrl !== null),
+    () => filtered.some((row) => isAffiliateBrand(row.brand) && row.shopUrl !== null),
     [filtered],
   );
 
@@ -335,7 +343,30 @@ export default function CompareClient({ products }: { products: Product[] }) {
     <div className="mx-auto max-w-6xl px-5 sm:px-8 pb-16">
 
       {/* ── filter panel ─────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-black/[0.08] bg-white p-5 mb-6 grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
+      <button
+        type="button"
+        onClick={() => setFiltersOpen((open) => !open)}
+        className="mb-3 flex w-full items-center justify-between rounded-2xl border border-black/[0.08] bg-white px-4 py-3 text-left text-sm font-semibold text-black shadow-sm lg:hidden"
+        aria-expanded={filtersOpen}
+      >
+        <span>
+          Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''}
+        </span>
+        <svg
+          aria-hidden="true"
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          className={`text-black/35 transition-transform ${filtersOpen ? 'rotate-180' : ''}`}
+        >
+          <path d="M4.5 7 9 11.5 13.5 7" />
+        </svg>
+      </button>
+      <div className={`${filtersOpen ? 'grid' : 'hidden'} rounded-2xl border border-black/[0.08] bg-white p-5 mb-6 grid-cols-1 gap-6 lg:grid lg:grid-cols-[1fr_280px]`}>
         {/* left: chips */}
         <div className="space-y-4">
           {/* brands */}
@@ -407,7 +438,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
       {/* ── table ────────────────────────────────────────────────────────── */}
       <div className="rounded-2xl border border-black/[0.08] overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="min-w-[980px] w-full">
             <thead className="bg-black/[0.03] border-b border-black/[0.08]">
               <tr>
                 <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 min-w-[220px]">Model</th>
