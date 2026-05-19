@@ -7,7 +7,7 @@ import BrowseClient from "./BrowseClient";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Browse All Trampoline Models — Filter by Price, Size & Brand | Bounce Arena",
+  title: "Browse All Trampoline Models — Filter by Price, Size & Brand",
   description:
     "Browse and filter every trampoline model available in the US. Narrow by price, size, brand, ASTM certification, and spring type to find your match.",
   alternates: { canonical: `${SITE_URL}/models/` },

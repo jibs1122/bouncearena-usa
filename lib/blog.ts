@@ -12,6 +12,19 @@ export type BlogPost = {
   filename: string;
   featuredImage: string | null;
   featuredImageAlt: string | null;
+  publishedAt: string;  // ISO 8601 date string
+};
+
+const BLOG_PUBLISHED_DATES: Record<string, string> = {
+  "best-trampoline-for-kids":          "2026-03-10",
+  "best-trampoline-for-adults":        "2026-03-12",
+  "best-trampoline-for-toddlers":      "2026-03-15",
+  "best-trampoline-for-heavy-adults":  "2026-03-18",
+  "best-trampoline-for-exercise":      "2026-03-20",
+  "best-trampoline-for-small-backyard":"2026-03-25",
+  "best-trampoline-for-gymnastics":    "2026-04-01",
+  "best-trampoline-for-teenagers":     "2026-04-05",
+  "best-in-ground-trampoline":         "2026-04-10",
 };
 
 const BLOG_IMAGE_META: Record<
@@ -113,6 +126,7 @@ export function getAllBlogPosts(): BlogPost[] {
       filename,
       featuredImage: imageMeta?.src ?? null,
       featuredImageAlt: imageMeta?.alt ?? null,
+      publishedAt: BLOG_PUBLISHED_DATES[slug] ?? "2026-03-01",
     };
   });
 }

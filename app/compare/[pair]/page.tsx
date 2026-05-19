@@ -162,9 +162,20 @@ export default async function ComparePairPage({ params }: Props) {
     ],
   };
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${comparison.title} — Trampoline Comparison`,
+    description: comparison.intro,
+    url: `${siteUrl}${comparison.href}`,
+    author: { "@type": "Organization", name: "Bounce Arena", url: siteUrl },
+    publisher: { "@type": "Organization", name: "Bounce Arena", url: siteUrl },
+  };
+
   return (
     <>
       <JsonLd data={breadcrumb} />
+      <JsonLd data={articleSchema} />
 
       <div className="py-10">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">

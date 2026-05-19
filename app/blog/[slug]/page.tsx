@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return {};
 
   return {
-    title: `${post.title} | Bounce Arena`,
+    title: post.title,
     description: post.excerpt,
     alternates: { canonical: `${SITE_URL}${post.href}` },
     openGraph: {
@@ -177,10 +177,18 @@ export default async function BlogPostPage({ params }: PageProps) {
     headline: post.title,
     description: post.excerpt,
     url: `${SITE_URL}${post.href}`,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
     image: post.featuredImage ? `${SITE_URL}${post.featuredImage}` : undefined,
+    author: {
+      "@type": "Organization",
+      name: "Bounce Arena",
+      url: SITE_URL,
+    },
     publisher: {
       "@type": "Organization",
       name: "Bounce Arena",
+      url: SITE_URL,
     },
   };
 

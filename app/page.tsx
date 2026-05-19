@@ -8,7 +8,7 @@ import { formatUsd } from "@/lib/price";
 import { REVIEW_CARDS } from "@/lib/reviews";
 
 export const metadata: Metadata = {
-  title: "Best Trampolines 2026 — Reviews & Comparisons | Bounce Arena",
+  title: { absolute: "Best Trampolines 2026 — Reviews & Comparisons | Bounce Arena" },
   description:
     "Compare the top trampoline brands — Springfree, Acon, Vuly, Skywalker, and more. Independent reviews covering safety certifications, sizes, and pricing.",
   openGraph: {

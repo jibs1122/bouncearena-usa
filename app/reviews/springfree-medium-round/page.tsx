@@ -5,10 +5,18 @@ import JsonLd from "@/components/seo/JsonLd";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Springfree Medium Round Review — Anthea | Bounce Arena",
+  title: "Springfree Medium Round Review — Anthea",
   description:
     "Anthea reviews the Springfree Medium Round after 18 months with two young boys. Covers sizing, safety, accessories, daily use, durability, assembly, and whether she would buy it again.",
   alternates: { canonical: `${siteUrl}/reviews/springfree-medium-round/` },
+  openGraph: {
+    title: "Springfree Medium Round Trampoline — Owner Review",
+    description:
+      "Anthea reviews the Springfree Medium Round after 18 months with two young boys. Covers sizing, safety, accessories, daily use, durability, assembly, and whether she would buy it again.",
+    url: `${siteUrl}/reviews/springfree-medium-round/`,
+    type: "article",
+    images: [{ url: "https://i.ytimg.com/vi/ADUR7OSCDNc/hqdefault.jpg", width: 480, height: 360 }],
+  },
 };
 
 export default function SpringfreeMediumRoundReview() {
@@ -25,6 +33,7 @@ export default function SpringfreeMediumRoundReview() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Review",
+    datePublished: "2026-03-01",
     name: "Springfree Medium Round — Owner Review",
     author: { "@type": "Person", name: "Anthea" },
     itemReviewed: {

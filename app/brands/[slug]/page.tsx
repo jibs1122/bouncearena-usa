@@ -118,6 +118,8 @@ export default async function BrandPage({ params }: Props) {
     ],
   };
 
+  const priceValidUntil = `${new Date().getFullYear()}-12-31`;
+
   const productJsonLds = brand.products
     .filter((p) => p.exactSizePriceUsd || p.modelFromPriceUsd)
     .map((p) => ({
@@ -129,6 +131,7 @@ export default async function BrandPage({ params }: Props) {
         "@type": "Offer",
         priceCurrency: "USD",
         price: p.exactSizePriceUsd ?? p.modelFromPriceUsd,
+        priceValidUntil,
         availability: "https://schema.org/InStock",
         url: withAffiliateTracking(p.sourceUrls[0] ?? null) ?? undefined,
       },

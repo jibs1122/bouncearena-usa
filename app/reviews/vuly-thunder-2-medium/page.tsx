@@ -5,10 +5,18 @@ import JsonLd from "@/components/seo/JsonLd";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Vuly Thunder 2 Medium Review — Jess | Bounce Arena",
+  title: "Vuly Thunder 2 Medium Review — Jess",
   description:
     "Jess reviews the Vuly Thunder 2 Medium after four months of near-daily use. Covers the leaf-spring bounce, assembly tips, accessories, and durability through Brisbane storms.",
   alternates: { canonical: `${siteUrl}/reviews/vuly-thunder-2-medium/` },
+  openGraph: {
+    title: "Vuly Thunder 2 Medium Trampoline — Owner Review",
+    description:
+      "Jess reviews the Vuly Thunder 2 Medium after four months of near-daily use. Covers the leaf-spring bounce, assembly tips, accessories, and durability through Brisbane storms.",
+    url: `${siteUrl}/reviews/vuly-thunder-2-medium/`,
+    type: "article",
+    images: [{ url: `${siteUrl}/vuly-thunder-2-review-preview.png`, width: 1280, height: 720 }],
+  },
 };
 
 export default function VulyThunder2MediumReview() {
@@ -25,6 +33,7 @@ export default function VulyThunder2MediumReview() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Review",
+    datePublished: "2026-04-15",
     name: "Vuly Thunder 2 Medium — Owner Review",
     author: { "@type": "Person", name: "Jess" },
     itemReviewed: {

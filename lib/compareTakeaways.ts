@@ -71,7 +71,7 @@ function productFootprintDetails(product: Product): FootprintDetails | null {
   if (max === null) return null;
   const shape = product.shape?.trim().toLowerCase() ?? "round";
   let secondDimIn: number | null = null;
-  if (shape === "rectangle") {
+  if (shape === "rectangle" || shape === "oval") {
     const dims = [product.overallLengthIn, product.overallWidthIn].filter(
       (d): d is number => d !== null,
     );
@@ -285,6 +285,10 @@ function describeLargestModel(s: BrandTakeawaySummary): string {
     return `${formatFeet(s.maxFootprintSecondDimIn)}×${formatFeet(max)} rectangle`;
   }
   if (s.maxFootprintShape === "square") return `${formatFeet(max)} square`;
+  if (s.maxFootprintShape === "oval" && s.maxFootprintSecondDimIn !== null) {
+    return `${formatFeet(s.maxFootprintSecondDimIn)}×${formatFeet(max)} oval`;
+  }
+  if (s.maxFootprintShape === "oval") return `${formatFeet(max)} oval`;
   return formatFeet(max);
 }
 

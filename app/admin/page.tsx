@@ -14,7 +14,7 @@ import {
 import { getQuizEntriesForAdmin, type QuizEntryAdmin } from '@/lib/quizTrampolines';
 
 export const metadata: Metadata = {
-  title: 'Quiz Admin | Bounce Arena',
+  title: 'Quiz Admin',
   robots: { index: false, follow: false },
 };
 

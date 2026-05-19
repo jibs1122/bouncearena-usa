@@ -6,7 +6,7 @@ import JsonLd from "@/components/seo/JsonLd";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Trampoline Head-to-Head Comparisons 2026 | Bounce Arena",
+  title: "Trampoline Head-to-Head Comparisons 2026",
   description:
     "Side-by-side trampoline comparisons — Springfree vs ACON, Vuly vs Skywalker, and more. Independent specs and analysis for major brand matchups.",
   alternates: { canonical: `${SITE_URL}/compare/` },

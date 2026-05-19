@@ -5,7 +5,7 @@ import EmailContact from '@/components/ui/EmailContact';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.bouncearenareviews.com';
 
 export const metadata: Metadata = {
-  title: 'Contact Bounce Arena',
+  title: 'Contact',
   description: 'Get in touch with Bounce Arena about trampoline reviews, comparisons, and site questions.',
   alternates: { canonical: `${SITE_URL}/contact/` },
 };

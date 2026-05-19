@@ -5,10 +5,18 @@ import JsonLd from "@/components/seo/JsonLd";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Vuly Ultra 2 Pro XL Review — Imogen | Bounce Arena",
+  title: "Vuly Ultra 2 Pro XL Review — Imogen",
   description:
     "Imogen has owned the Vuly Ultra 2 Pro XL for three months. Her full review covers safety, build quality, assembly, accessories, and the one mistake to avoid.",
   alternates: { canonical: `${siteUrl}/reviews/vuly-ultra-2-pro-xl/` },
+  openGraph: {
+    title: "Vuly Ultra 2 Pro XL Trampoline — Owner Review",
+    description:
+      "Imogen has owned the Vuly Ultra 2 Pro XL for three months. Her full review covers safety, build quality, assembly, accessories, and the one mistake to avoid.",
+    url: `${siteUrl}/reviews/vuly-ultra-2-pro-xl/`,
+    type: "article",
+    images: [{ url: "https://i.ytimg.com/vi/V6cas8XFsXQ/hqdefault.jpg", width: 480, height: 360 }],
+  },
 };
 
 export default function VulyUltra2ProXLReview() {
@@ -25,6 +33,7 @@ export default function VulyUltra2ProXLReview() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Review",
+    datePublished: "2026-04-01",
     name: "Vuly Ultra 2 Pro XL — Owner Review",
     author: { "@type": "Person", name: "Imogen" },
     itemReviewed: {

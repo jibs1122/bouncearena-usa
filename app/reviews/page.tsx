@@ -7,7 +7,7 @@ import { REVIEW_CARDS } from "@/lib/reviews";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Trampoline Reviews — Real Owner Experiences | Bounce Arena",
+  title: "Trampoline Reviews — Real Owner Experiences",
   description:
     "In-depth trampoline reviews from real owners. Honest assessments of safety, build quality, bounce performance, and long-term durability.",
   alternates: { canonical: `${SITE_URL}/reviews/` },

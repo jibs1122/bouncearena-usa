@@ -4,7 +4,7 @@ import Link from "next/link";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "About Bounce Arena",
+  title: "About",
   description: "About Bounce Arena — independent trampoline reviews and comparisons.",
   alternates: { canonical: `${SITE_URL}/about/` },
 };

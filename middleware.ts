@@ -1,19 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function proxy(request: NextRequest) {
+// Constant-time string comparison — prevents timing oracle attacks on Basic Auth.
+function timingSafeEqual(a: string, b: string): boolean {
+  let mismatch = a.length === b.length ? 0 : 1;
+  const len = Math.max(a.length, b.length);
+  for (let i = 0; i < len; i++) {
+    mismatch |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
+  }
+  return mismatch === 0;
+}
+
+export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
-  // Set geo-cookie from Vercel's IP country header
+  // Strictly necessary geo-cookie for routing — no PII, no consent required
+  // under ePrivacy Directive Article 5(3) strictly-necessary exemption.
   const country = request.headers.get("x-vercel-ip-country");
   if (country) {
     response.cookies.set("ba_country", country, {
       path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 60 * 24 * 30,
       sameSite: "lax",
+      httpOnly: true,
+      secure: true,
     });
   }
 
-  // HTTP Basic Auth for /admin routes
+  // HTTP Basic Auth for /admin routes (production only)
   if (request.nextUrl.pathname.startsWith("/admin")) {
     if (process.env.NODE_ENV !== "production") {
       return response;
@@ -23,7 +36,7 @@ export function proxy(request: NextRequest) {
     const adminPass = process.env.ADMIN_PASSWORD;
 
     if (!adminUser || !adminPass) {
-      return response;
+      return new NextResponse("Service unavailable", { status: 503 });
     }
 
     const authHeader = request.headers.get("authorization");
@@ -35,8 +48,11 @@ export function proxy(request: NextRequest) {
     }
 
     const credentials = Buffer.from(authHeader.slice(6), "base64").toString();
-    const [user, pass] = credentials.split(":");
-    if (user !== adminUser || pass !== adminPass) {
+    const colonIdx = credentials.indexOf(":");
+    const user = colonIdx === -1 ? credentials : credentials.slice(0, colonIdx);
+    const pass = colonIdx === -1 ? "" : credentials.slice(colonIdx + 1);
+
+    if (!timingSafeEqual(user, adminUser) || !timingSafeEqual(pass, adminPass)) {
       return new NextResponse("Unauthorized", {
         status: 401,
         headers: { "WWW-Authenticate": 'Basic realm="Bounce Arena Admin"' },

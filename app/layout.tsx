@@ -5,6 +5,7 @@ import HeaderWrapper from "@/components/layout/HeaderWrapper";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
 
+
 function getSiteUrl() {
   const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com").trim();
   if (!raw) return "https://www.bouncearenareviews.com";
@@ -41,6 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@bouncearena",
   },
   robots: {
     index: true,
@@ -71,15 +73,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-US" style={{ background: "#ffffff" }}>
       <head>
+        {/* Consent Mode v2 defaults — analytics storage denied; GA runs in anonymous/modelable mode */}
+        <Script id="consent-defaults" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+              ad_storage: 'denied',
+              wait_for_update: 500
+            });
+          `}
+        </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
           `}
@@ -90,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HeaderWrapper />
         <main className="flex-1">{children}</main>
         <Footer />
+
       </body>
     </html>
   );

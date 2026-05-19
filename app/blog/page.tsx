@@ -7,7 +7,7 @@ import { getAllBlogPosts } from "@/lib/blog";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
-  title: "Blog — Trampoline Buying Guides | Bounce Arena",
+  title: "Blog — Trampoline Buying Guides",
   description:
     "Trampoline buying guides, rankings, and long-form advice to help you choose the right model for your family and yard.",
   alternates: { canonical: `${SITE_URL}/blog/` },

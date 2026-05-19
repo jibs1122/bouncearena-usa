@@ -4,10 +4,13 @@ import PromoCard from "@/components/ui/PromoCard";
 import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
+
 export const metadata: Metadata = {
   title: "Trampoline Promo Codes & Discount Codes 2026",
   description:
     "Find the latest trampoline promo codes and discount codes — Springfree, Acon, Vuly, Skywalker, and more. Click to copy and save on your purchase.",
+  alternates: { canonical: `${SITE_URL}/promo-codes/` },
 };
 
 const PROMOS: { brand: string; code: string; description: string; expires?: string; affiliateUrl?: string }[] = [
