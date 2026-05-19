@@ -139,7 +139,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'ACON',
     dataBrandA: 'Skywalker',
     dataBrandB: 'ACON',
-    intro: `Skywalker is a volume leader in mass-market retail at $400 to $900. ACON is a Finnish premium brand priced from roughly $1,500 upward. The price gap is real, and so are the differences across spring count, mat material, frame gauge, and warranty length. If you're cross-shopping these two, you're deciding between a known mid-tier option and a step up that costs three to four times as much.`,
+    intro: `Skywalker is a volume leader in mass-market retail at $400 to $900. ACON is a Finnish premium brand priced from roughly $1,500 upward. The price gap is real, and so are the differences across mat material, frame gauge, and warranty length. If you're cross-shopping these two, you're deciding between a known mid-tier option and a step up that costs three to four times as much.`,
   },
   {
     slug: 'skywalker-vs-vuly',
@@ -155,7 +155,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Jumpflex',
     dataBrandA: 'Zupapa',
     dataBrandB: 'Jumpflex',
-    intro: `Zupapa and Jumpflex are both online-led brands that compete on strong spec sheets, but they target different price points. Zupapa sits in the $400 to $900 range with 10-year warranties on most parts and high listed spring counts. Jumpflex prices from roughly $700 to $1,500+, with a heavier DualRing frame, a 550 lb total weight rating, and a 10-year frame warranty with a lifetime upgrade available on HERO and MEGA models. Most parents land on this comparison when deciding whether to stretch the budget for the Jumpflex build, or stay with Zupapa's lower entry point and competitive warranty terms.`,
+    intro: `Zupapa and Jumpflex are both online-led brands that compete on strong spec sheets, but they target different price points. Zupapa sits in the $400 to $900 range with 10-year warranties on most parts. Jumpflex prices from roughly $700 to $1,500+, with a heavier DualRing frame, a 550 lb total weight rating, and a 10-year frame warranty with a lifetime upgrade available on HERO and MEGA models. Most parents land on this comparison when deciding whether to stretch the budget for the Jumpflex build, or stay with Zupapa's lower entry point and competitive warranty terms.`,
   },
   {
     slug: 'skywalker-vs-jumpflex',
@@ -187,7 +187,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Vuly',
     dataBrandA: 'Zupapa',
     dataBrandB: 'Vuly',
-    intro: `Zupapa and Vuly sit in different price tiers, but parents do cross-shop them when weighing the upgrade math. Zupapa is an Amazon-led mid-tier brand priced $400 to $700, with 10-year warranties on most parts and high listed spring counts. Vuly competes in the premium tier with a range that spans both traditional coil-spring trampolines and its springless Thunder line (which uses Leaf Springs), typically at two to three times Zupapa's price. The decision usually comes down to whether you want strong specs at value pricing, or proprietary engineering with a wider accessory ecosystem at premium pricing.`,
+    intro: `Zupapa and Vuly sit in different price tiers, but parents do cross-shop them when weighing the upgrade math. Zupapa is an Amazon-led mid-tier brand priced $400 to $700, with 10-year warranties on most parts. Vuly competes in the premium tier with a range that spans both traditional coil-spring trampolines and its springless Thunder line (which uses Leaf Springs), typically at two to three times Zupapa's price. The decision usually comes down to whether you want strong specs at value pricing, or proprietary engineering with a wider accessory ecosystem at premium pricing.`,
   },
   {
     slug: 'zupapa-vs-alleyoop',
@@ -195,7 +195,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'AlleyOOP',
     dataBrandA: 'Zupapa',
     dataBrandB: 'AlleyOOP',
-    intro: `Zupapa and AlleyOOP target different buyers but the comparison comes up when parents are weighing whether the upgrade is worth it. Zupapa is an Amazon-direct mid-tier brand priced $400 to $700, competing on long warranties and high spring counts. AlleyOOP is a US premium brand by JumpSport priced from around $1,500, with a lifetime frame warranty, patented DoubleBounce two-mat option, and over 50 safety patents accumulated over 25+ years in the category. If you're cross-shopping these, the question is whether the extra $1,000+ for AlleyOOP's safety engineering and longer expected lifespan is justified for your situation.`,
+    intro: `Zupapa and AlleyOOP target different buyers but the comparison comes up when parents are weighing whether the upgrade is worth it. Zupapa is an Amazon-direct mid-tier brand priced $400 to $700, competing on long warranties and high listed weight ratings. AlleyOOP is a US premium brand by JumpSport priced from around $1,500, with a lifetime frame warranty, patented DoubleBounce two-mat option, and over 50 safety patents accumulated over 25+ years in the category. If you're cross-shopping these, the question is whether the extra $1,000+ for AlleyOOP's safety engineering and longer expected lifespan is justified for your situation.`,
   },
   {
     slug: 'skywalker-vs-alleyoop',
@@ -211,7 +211,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Zupapa',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Zupapa',
-    intro: `If you're shopping Amazon or Walmart in the $400 to $900 range, this is the comparison you're probably already making. Skywalker has broader retail distribution and stronger brand recognition. Zupapa typically lists longer warranties, higher weight ratings, and more springs at similar price points. The two are the most cross-shopped pair in the mid-tier.`,
+    intro: `If you're shopping Amazon or Walmart in the $400 to $900 range, this is the comparison you're probably already making. Skywalker has broader retail distribution and stronger brand recognition. Zupapa typically lists longer warranties and higher weight ratings at similar price points. The two are the most cross-shopped pair in the mid-tier.`,
   },
   {
     slug: 'skywalker-vs-jumpking',
@@ -227,7 +227,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'JumpKing',
     dataBrandA: 'Zupapa',
     dataBrandB: 'JumpKing',
-    intro: `Both Zupapa and JumpKing compete in the mid-tier, but they reach different buyers. Zupapa skews Amazon-direct with longer listed warranty terms and higher spring counts. JumpKing has broader traditional retail presence and stronger brand recognition. The choice often comes down to whether you trust the Amazon-direct brand with more generous specs or the established name with shorter warranty terms.`,
+    intro: `Both Zupapa and JumpKing compete in the mid-tier, but they reach different buyers. Zupapa skews Amazon-direct with longer listed warranty terms and higher listed weight ratings. JumpKing has broader traditional retail presence and stronger brand recognition. The choice often comes down to whether you trust the Amazon-direct brand with more generous specs or the established name with shorter warranty terms.`,
   },
   {
     slug: 'orcc-vs-zupapa',
@@ -235,7 +235,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Zupapa',
     dataBrandA: 'ORCC',
     dataBrandB: 'Zupapa',
-    intro: `Both ORCC and Zupapa are Amazon-led brands, but they sit at different price points. ORCC competes in the $200 to $400 budget tier. Zupapa typically prices $400 to $700 with longer warranty terms and higher listed spring counts. Most parents arrive here weighing whether the extra $150 to $200 is worth it.`,
+    intro: `Both ORCC and Zupapa are Amazon-led brands, but they sit at different price points. ORCC competes in the $200 to $400 budget tier. Zupapa typically prices $400 to $700 with longer warranty terms and higher listed weight ratings. Most parents arrive here weighing whether the extra $150 to $200 is worth it.`,
   },
   {
     slug: 'orcc-vs-jumpzylla',
@@ -283,7 +283,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Zupapa',
     dataBrandA: 'Upper Bounce',
     dataBrandB: 'Zupapa',
-    intro: `Upper Bounce and Zupapa are both Amazon-led brands, but they sit at different points within the mid-tier. Upper Bounce is best known for its replacement parts business and its budget complete units, typically priced lower with shorter warranty terms. Zupapa competes on long warranties — 10 years on most parts — and high listed spring counts at slightly higher prices. If you're shopping the lower end of Amazon's trampoline category, you're choosing between Upper Bounce's lower entry price and parts availability, or Zupapa's longer warranty coverage and higher listed specs.`,
+    intro: `Upper Bounce and Zupapa are both Amazon-led brands, but they sit at different points within the mid-tier. Upper Bounce is best known for its replacement parts business and its budget complete units, typically priced lower with shorter warranty terms. Zupapa competes on long warranties — 10 years on most parts — and higher listed weight ratings at slightly higher prices. If you're shopping the lower end of Amazon's trampoline category, you're choosing between Upper Bounce's lower entry price and parts availability, or Zupapa's longer warranty coverage and higher listed specs.`,
   },
   {
     slug: 'upper-bounce-vs-jumpzylla',
@@ -331,7 +331,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Sportspower',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Sportspower / Bounce Pro',
-    intro: `Skywalker and Sportspower (sold under the Bounce Pro label) are both US mass-market brands sold heavily through Walmart and Costco. Sportspower typically prices at or slightly below Skywalker with lower listed spring counts and shorter warranty terms. Both are sized and priced to be the first trampoline most families buy.`,
+    intro: `Skywalker and Sportspower (sold under the Bounce Pro label) are both US mass-market brands sold heavily through Walmart and Costco. Sportspower typically prices at or slightly below Skywalker with shorter warranty terms. Both are sized and priced to be the first trampoline most families buy.`,
   },
   {
     slug: 'skywalker-vs-bounce-pro',
@@ -339,7 +339,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Bounce Pro',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Sportspower / Bounce Pro',
-    intro: `Bounce Pro (Sportspower's brand label at Walmart) and Skywalker are direct mass-market competitors at the same retailers. Bounce Pro typically prices lower. Skywalker typically lists higher spring counts and longer warranty terms. If you're shopping at Walmart or Costco, you're probably choosing between these two.`,
+    intro: `Bounce Pro (Sportspower's brand label at Walmart) and Skywalker are direct mass-market competitors at the same retailers. Bounce Pro typically prices lower. Skywalker typically lists longer warranty terms. If you're shopping at Walmart or Costco, you're probably choosing between these two.`,
   },
   {
     slug: 'jumpking-vs-bounce-pro',
@@ -347,7 +347,7 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'Bounce Pro',
     dataBrandA: 'JumpKing',
     dataBrandB: 'Sportspower / Bounce Pro',
-    intro: `JumpKing is a mid-tier legacy brand. Bounce Pro sits one tier below in the budget mass-market segment. Pricing, listed spring counts, and warranty terms differ accordingly. The choice usually comes down to whether you want the entry-level option or the step up.`,
+    intro: `JumpKing is a mid-tier legacy brand. Bounce Pro sits one tier below in the budget mass-market segment. Pricing and warranty terms differ accordingly. The choice usually comes down to whether you want the entry-level option or the step up.`,
   },
   {
     slug: 'bcan-vs-orcc',

@@ -12,6 +12,7 @@ import {
   getApprovedComparisons,
 } from "@/lib/comparisons";
 import { formatUsd } from "@/lib/price";
+import { buildCompareTakeaways } from "@/lib/compareTakeaways";
 import { getPreferredProductUrl } from "@/lib/productLinks";
 import { hasModelImage } from "@/lib/modelImages";
 import { isAffiliateBrand } from "@/lib/vuly";
@@ -133,6 +134,7 @@ export default async function ComparePairPage({ params }: Props) {
     (model) => model?.sourceUrl && isAffiliateBrand(model.brand),
   );
   const allProducts = [...brandA.products, ...brandB.products];
+  const keyTakeaways = buildCompareTakeaways(brandA, brandB);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
     .filter((item) => item.slug !== comparison.slug)
@@ -309,6 +311,21 @@ export default async function ComparePairPage({ params }: Props) {
 
           <section className="mb-10">
             <h2 className="text-xl font-bold text-black mb-4">Full Spec Comparison</h2>
+            {keyTakeaways.length > 0 && (
+              <div className="mb-5 rounded-2xl border border-black/[0.08] bg-black/[0.015] p-5">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-black/40">
+                  Key takeaways
+                </p>
+                <ul className="space-y-2 text-sm leading-6 text-black/65">
+                  {keyTakeaways.map((takeaway) => (
+                    <li key={takeaway} className="flex gap-2">
+                      <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38b1ab]" />
+                      <span>{takeaway}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <ComparisonTable products={allProducts} />
           </section>
 
