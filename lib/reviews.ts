@@ -8,6 +8,7 @@ export interface ReviewCard {
   tags: string[];
   videoUrl: string;
   videoThumbnailUrl: string;
+  publishedAt: string;
 }
 
 export const REVIEW_CARDS: ReviewCard[] = [
@@ -22,6 +23,7 @@ export const REVIEW_CARDS: ReviewCard[] = [
     tags: ["Springfree", "Small yard", "Young kids"],
     videoUrl: "https://www.youtube.com/watch?v=ADUR7OSCDNc",
     videoThumbnailUrl: "https://i.ytimg.com/vi/ADUR7OSCDNc/hqdefault.jpg",
+    publishedAt: "2026-03-01",
   },
   {
     href: "/reviews/vuly-ultra-2-pro-xl/",
@@ -34,6 +36,7 @@ export const REVIEW_CARDS: ReviewCard[] = [
     tags: ["Springless", "Large backyard", "Family use"],
     videoUrl: "https://www.youtube.com/watch?v=V6cas8XFsXQ&t",
     videoThumbnailUrl: "https://i.ytimg.com/vi/V6cas8XFsXQ/hqdefault.jpg",
+    publishedAt: "2026-04-01",
   },
   {
     href: "/reviews/vuly-thunder-2-medium/",
@@ -46,5 +49,6 @@ export const REVIEW_CARDS: ReviewCard[] = [
     tags: ["Leaf spring", "Young kids", "Brisbane"],
     videoUrl: "https://www.youtube.com/watch?v=erGgwAxLSIA&t",
     videoThumbnailUrl: "/reviews/vuly-thunder-2-5s.jpg",
+    publishedAt: "2026-04-15",
   },
 ];

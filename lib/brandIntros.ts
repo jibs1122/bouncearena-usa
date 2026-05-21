@@ -148,10 +148,10 @@ export const BRAND_INTROS: Record<string, string[]> = {
   ],
 
   North: [
-    "North Trampolines is a Swedish trampoline brand focused on performance and in-ground designs, with a Scandinavian aesthetic and engineering origin.",
-    "Models include round, oval, and rectangular trampolines such as the Performer Revolution series, with a Horizontal Protection System connecting the mat to the padding and springs that stretch up to twice the length of standard trampoline springs.",
-    "In the US, North in-ground trampolines are distributed in collaboration with Capital Play, with current models including 12x8ft, 14ft round, 15x10ft, and 17x12ft in-ground kits. Pricing sits in the premium tier (typically $2,500 and up).",
-    "North trampolines are sold through specialty backyard play system retailers rather than mass-market channels.",
+    "North Trampolines is a Swedish brand focused on performance and in-ground designs, with ASTM and CE certification across its US lineup.",
+    "The range covers three lines: the North In Ground Trampoline (12x8ft, 14ft round, 15x10ft, 17x12ft flush-mount kits); the Legend above-ground series (14ft round, 16x11ft oval, 15x10ft and 17.5x12ft rectangles) featuring coil springs with Spring Extenders and a ripstop safety net; and the Athlete, an 18x11ft performance rectangle aimed at serious bouncers at $7,490.",
+    "Pricing starts around $2,050 for the Legend 14ft round and runs to $3,249 for the largest in-ground kit, with the Athlete sitting at the top end of the market.",
+    "North trampolines are sold direct through the North US site and through specialty backyard play retailers rather than mass-market channels.",
   ],
 
   'Jump Yeti': [
