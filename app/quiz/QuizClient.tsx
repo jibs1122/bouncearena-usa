@@ -10,7 +10,7 @@ import { encodeAnswers, type QuizAnswers } from '@/lib/quizScoring';
 type PartialQuizAnswers = Partial<QuizAnswers>;
 
 const SKIP_DEFAULTS: Record<string, string | string[]> = {
-  safetyFeatures: 'nice-to-have',
+  safetyNetPreference: 'no-preference',
   springType: 'not-sure',
   backyardSize: 'not-sure',
   groundTypePreference: 'above-ground',
@@ -28,7 +28,7 @@ function isCompleteAnswers(answers: PartialQuizAnswers): answers is QuizAnswers 
       answers.shapePreference &&
       Array.isArray(answers.jumperAges) &&
       answers.standards &&
-      answers.safetyFeatures &&
+      answers.safetyNetPreference &&
       answers.springType &&
       Array.isArray(answers.budget) &&
       answers.budget.length > 0 &&
@@ -143,8 +143,8 @@ export default function QuizClient() {
             Trampoline quiz — find the right option for your family
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-7 text-black/55">
-            Answer 9 quick questions and we&apos;ll match you with the best trampoline for your
-            family — based on your safety priorities, ground type, spring preference, backyard size, shape preference, and budget.
+            Answer 8 quick questions and we&apos;ll match you with the best trampoline for your
+            family — based on yard size, installation type, spring preference, safety-net preference, shape, and budget.
           </p>
         </div>
       )}

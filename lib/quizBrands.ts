@@ -1,15 +1,8 @@
 export interface QuizBrandData {
-  slug: string;              // matches brandSlug() output
-  springType: 'traditional' | 'springless';
-  advancedSafety: boolean;   // curved poles, springs outside jumping area, etc.
-  fitsYard: {
-    small: boolean;      // has models ≤ 10ft
-    medium: boolean;     // has models ~12ft
-    large: boolean;      // has models 14ft+
-    longNarrow: boolean; // has oval/rectangular models
-  };
+  slug: string;
+  springType: 'traditional' | 'springless' | 'mixed';
   metricScores: {
-    bounce: number;      // 0–10
+    bounce: number;
     durability: number;
     value: number;
     assembly: number;
@@ -22,8 +15,6 @@ export interface QuizBrandData {
     mediumYard?: string;
     largeYard?: string;
     longNarrowYard?: string;
-    safetyEssential?: string;
-    safetyNiceToHave?: string;
     meetsStandards?: string;
     bounce?: string;
     durability?: string;
@@ -40,112 +31,284 @@ export interface QuizBrandData {
 
 export const QUIZ_BRAND_DATA: QuizBrandData[] = [
   {
-    slug: 'springfree',
-    springType: 'springless',
-    advancedSafety: true,
-    fitsYard: { small: true, medium: true, large: true, longNarrow: true },
-    metricScores: { bounce: 9, durability: 10, value: 5, assembly: 5, warranty: 10 },
+    slug: 'acon',
+    springType: 'traditional',
+    metricScores: { bounce: 9, durability: 9, value: 7, assembly: 6, warranty: 8 },
     matchReasons: {
-      springless:
-        'Uses fiberglass rods with no exposed metal springs — eliminates the most common pinch points',
-      safetyEssential:
-        'No exposed springs or frame contact zone — Springfree is widely considered the safest consumer trampoline on the market',
-      meetsStandards: 'ASTM certified',
-      durability:
-        '10-year warranty on frame, mat, and net — among the longest in the industry',
-      warranty:
-        'Industry-leading warranty covers frame, mat, and enclosure for 10 years',
+      valueForMoney: 'Premium pricing but durable build justifies the spend',
+      warranty: '10-year frame and 5-year mat with shorter spring terms',
+      bounce: 'HD and X models deliver strong responsive bounce',
+      durability: 'Galvanized powder-coated steel and UV-treated mats',
     },
   },
   {
-    slug: 'acon',
+    slug: 'agame',
     springType: 'traditional',
-    advancedSafety: false,
-    fitsYard: { small: true, medium: true, large: true, longNarrow: true },
-    metricScores: { bounce: 8, durability: 8, value: 8, assembly: 8, warranty: 8 },
+    metricScores: { bounce: 5, durability: 5, value: 6, assembly: 6, warranty: 4 },
     matchReasons: {
-      traditional: 'Heavy-duty galvanized springs with padded cover',
-      smallYard: '8ft and 10ft round models for smaller yards',
-      mediumYard: '12ft round is a popular family-size pick',
-      largeYard: '14ft and 16ft models for large properties',
-      meetsStandards: 'ASTM certified',
-      valueForMoney: 'Strong specs at a competitive price point',
-      assembly: 'Ships with clear instructions and all hardware included',
+      valueForMoney: 'Cheap for Academy shoppers but warranty is short',
+      warranty: '1 to 3 years on frame depending on the model',
+      durability: 'Galvanized steel frame at mass-market build spec',
+    },
+  },
+  {
+    slug: 'akrobat',
+    springType: 'traditional',
+    metricScores: { bounce: 9, durability: 9, value: 6, assembly: 6, warranty: 9 },
+    matchReasons: {
+      valueForMoney: 'Premium performance brand backed by lifetime frame warranty',
+      warranty: 'Lifetime frame and 10 years on springs',
+      bounce: 'Claims 30 percent more rebound than standard',
+      durability: 'Slovenian heavy-gauge steel and inground options',
+    },
+  },
+  {
+    slug: 'alleyoop',
+    springType: 'traditional',
+    metricScores: { bounce: 9, durability: 9, value: 6, assembly: 6, warranty: 9 },
+    matchReasons: {
+      valueForMoney: 'Premium price but lifetime frame and DoubleBounce add value',
+      warranty: 'Lifetime frame and 10 years on mat and springs',
+      bounce: 'Patented DoubleBounce softens the impact stage',
+      durability: '2mm steel walls and UV-resistant Permatron mat',
+    },
+  },
+  {
+    slug: 'avyna',
+    springType: 'traditional',
+    metricScores: { bounce: 8, durability: 9, value: 6, assembly: 5, warranty: 9 },
+    matchReasons: {
+      valueForMoney: 'Premium Dutch build with lifetime frame easing the cost',
+      warranty: 'Lifetime frame and 10 years on springs but 3 on mat',
+      bounce: 'Strong above-ground bounce with high weight capacity',
+      durability: '11-gauge steel and 1100lb-plus tested capacity',
+    },
+  },
+  {
+    slug: 'bcan',
+    springType: 'mixed',
+    metricScores: { bounce: 6, durability: 6, value: 7, assembly: 7, warranty: 5 },
+    matchReasons: {
+      valueForMoney: 'Affordable indoor rebounders for home cardio',
+      bounce: 'Bungee and spring models aimed at fitness use',
+      durability: 'Foldable alloy steel frame for indoor wear only',
+    },
+  },
+  {
+    slug: 'beast',
+    springType: 'traditional',
+    metricScores: { bounce: 9, durability: 8, value: 7, assembly: 6, warranty: 6 },
+    matchReasons: {
+      valueForMoney: 'K9 reasonably priced for performance rectangle category',
+      warranty: '5 years overall but part-by-part split unclear',
+      bounce: '9.5-inch piano wire springs deliver strong rebound',
+      durability: 'Heavy galvanized steel frame on flagship K9 rectangle',
+    },
+  },
+  {
+    slug: 'capital-play',
+    springType: 'traditional',
+    metricScores: { bounce: 8, durability: 9, value: 6, assembly: 4, warranty: 8 },
+    matchReasons: {
+      valueForMoney: 'Premium in-ground kit but installation is significant',
+      warranty: '10-year frame and 5 years on mat and springs',
+      bounce: 'Commercial-grade springs and vented jump mat',
+      durability: 'Heavy galvanized steel and bowl retaining wall',
+    },
+  },
+  {
+    slug: 'crazy-ape',
+    springType: 'mixed',
+    metricScores: { bounce: 10, durability: 10, value: 4, assembly: 5, warranty: 8 },
+    matchReasons: {
+      valueForMoney: 'Luxury custom Canadian builds expensive even at entry',
+      warranty: '10 years on springs and 5 on frame mat and net',
+      bounce: 'Commercial-grade Canadian build with serious rebound',
+      durability: 'Made-to-order Canadian construction with full customization',
+    },
+  },
+  {
+    slug: 'jump-yeti',
+    springType: 'traditional',
+    metricScores: { bounce: 6, durability: 6, value: 6, assembly: 6, warranty: 4 },
+    matchReasons: {
+      valueForMoney: 'Budget pricing but minimal warranty support',
+      warranty: '1 year on all parts including frame',
+      durability: 'Galvanized steel frame in lightweight construction',
     },
   },
   {
     slug: 'jumpflex',
     springType: 'traditional',
-    advancedSafety: false,
-    fitsYard: { small: true, medium: true, large: true, longNarrow: false },
-    metricScores: { bounce: 8, durability: 8, value: 7, assembly: 8, warranty: 8 },
+    metricScores: { bounce: 8, durability: 8, value: 8, assembly: 7, warranty: 8 },
     matchReasons: {
-      traditional: 'Extension or piano-wire springs with padded cover',
-      smallYard: '8ft Flex model for compact spaces',
-      mediumYard: '12ft models in both Flex and Hero ranges',
-      largeYard: '14ft and 15ft Hero models for bigger yards',
-      meetsStandards: 'ASTM certified',
-      warranty: '10-year frame warranty on Hero and Mega models',
+      valueForMoney: 'Strong value at the mid-premium price point',
+      warranty: 'HERO 10-year frame and 5 years on mat and springs',
+      bounce: '7.1-inch springs deliver solid family bounce',
+      durability: 'High-tensile steel frame and 550lb total capacity',
     },
   },
   {
-    slug: 'vuly',
-    springType: 'traditional',
-    advancedSafety: true,
-    fitsYard: { small: false, medium: true, large: true, longNarrow: false },
-    metricScores: { bounce: 9, durability: 9, value: 6, assembly: 7, warranty: 9 },
+    slug: 'jumpking',
+    springType: 'mixed',
+    metricScores: { bounce: 5, durability: 5, value: 5, assembly: 6, warranty: 3 },
     matchReasons: {
-      traditional: "High-tensile helical springs with padded cover",
-      mediumYard: 'Available in multiple sizes from 12ft up',
-      largeYard: '14ft and larger sizes available',
-      bounce: "Vuly's spring design is tuned for a responsive, controlled bounce",
-      durability: 'Powder-coated galvanized steel with multi-year warranties',
+      valueForMoney: 'Decent prices undermined by very short warranty',
+      warranty: '1-year frame and only 90 days on springs and net',
+      bounce: 'Standard short springs offer basic family bounce',
+      durability: 'Galvanized steel but warranty signals shorter lifespan',
+    },
+  },
+  {
+    slug: 'jumpzylla',
+    springType: 'traditional',
+    metricScores: { bounce: 6, durability: 6, value: 7, assembly: 6, warranty: 5 },
+    matchReasons: {
+      valueForMoney: 'Budget Amazon brand with above-average warranty terms',
+      warranty: '2 years on frame mat springs and net',
+      durability: 'Galvanized steel frame and weight capacity to 450lb',
+    },
+  },
+  {
+    slug: 'little-tikes',
+    springType: 'traditional',
+    metricScores: { bounce: 5, durability: 5, value: 6, assembly: 7, warranty: 4 },
+    matchReasons: {
+      valueForMoney: 'Cheap toddler trampolines with familiar brand recognition',
+      warranty: '1 year frame and 3 months on mat springs and net',
+      bounce: 'Built for toddlers not real bounce performance',
+      durability: 'Lightweight build aimed at light toddler users only',
+    },
+  },
+  {
+    slug: 'maxair',
+    springType: 'traditional',
+    metricScores: { bounce: 10, durability: 9, value: 3, assembly: 4, warranty: 5 },
+    matchReasons: {
+      valueForMoney: 'Aimed at pros and parks not residential budgets',
+      warranty: '5-year frame but only 1 year on the trampoline bed',
+      bounce: 'Two-String Fly Bed used by Olympic athletes',
+      durability: 'USA-made steel frame and in-ground or pro builds',
+    },
+  },
+  {
+    slug: 'north',
+    springType: 'traditional',
+    metricScores: { bounce: 9, durability: 9, value: 6, assembly: 5, warranty: 8 },
+    matchReasons: {
+      valueForMoney: 'Premium in-ground build distributed via Capital Play USA',
+      warranty: '10-year frame and 5 years on mat and springs',
+      bounce: 'Long stretch springs deliver deep low-impact bounce',
+      durability: 'Swedish engineering with heavy galvanized steel frame',
+    },
+  },
+  {
+    slug: 'orcc',
+    springType: 'traditional',
+    metricScores: { bounce: 6, durability: 6, value: 7, assembly: 6, warranty: 4 },
+    matchReasons: {
+      valueForMoney: 'Cheap Amazon brand with weak warranty support',
+      warranty: '2-year frame and 1 year on mat and springs',
+      durability: 'Hot-dip galvanized frame with W-shaped wind-stake legs',
     },
   },
   {
     slug: 'skywalker',
-    springType: 'traditional',
-    advancedSafety: false,
-    fitsYard: { small: true, medium: true, large: true, longNarrow: false },
-    metricScores: { bounce: 6, durability: 6, value: 9, assembly: 8, warranty: 6 },
+    springType: 'mixed',
+    metricScores: { bounce: 6, durability: 6, value: 8, assembly: 7, warranty: 6 },
     matchReasons: {
-      traditional: 'Standard galvanized coil springs with foam-padded cover',
-      smallYard: 'Compact sizes from 8ft up for smaller backyards',
-      mediumYard: '12ft round available at an entry-level price',
-      largeYard: 'Models up to 17ft for large yards',
-      valueForMoney: 'One of the most affordable ASTM-certified outdoor trampolines',
-      meetsStandards: 'ASTM certified',
-      budget_under_500: 'Models available well under $500',
+      valueForMoney: 'Strong mass-market value and very widely available',
+      warranty: 'Standard 3-year frame with longer terms on Premium and Epic',
+      bounce: 'Mid-range bounce varies by Classic Signature or Epic series',
+      durability: 'Quality varies meaningfully across the four series tiers',
+    },
+  },
+  {
+    slug: 'sportspower-bounce-pro',
+    springType: 'traditional',
+    metricScores: { bounce: 6, durability: 6, value: 7, assembly: 6, warranty: 6 },
+    matchReasons: {
+      valueForMoney: 'Mass-market pricing through Walmart and Costco',
+      warranty: '7-year frame and 3 years on mat and 1 on net',
+      durability: 'Steelflex Pro galvanized frame at mid-tier build quality',
+    },
+  },
+  {
+    slug: 'springfree',
+    springType: 'springless',
+    metricScores: { bounce: 7, durability: 9, value: 6, assembly: 5, warranty: 10 },
+    matchReasons: {
+      springless: 'Springless rod design eliminates spring and frame impact zones',
+      valueForMoney: 'Premium pricing offset by industry-leading 10-year coverage',
+      warranty: '10 years on every component since September 2017',
+      bounce: 'Rod-based bounce feels firmer than premium coil brands',
+      durability: 'Composite rods and SoftEdge mat built to last',
+    },
+  },
+  {
+    slug: 'texas-trampolines',
+    springType: 'traditional',
+    metricScores: { bounce: 7, durability: 8, value: 5, assembly: 7, warranty: 8 },
+    matchReasons: {
+      valueForMoney: 'Heavy USA build but enclosure and accessories cost extra',
+      warranty: 'Lifetime frame but other parts less clearly covered',
+      bounce: 'Old-school heavy-frame design with traditional bounce',
+      durability: 'Heavy galvanized pipe made in Texas since 1986',
     },
   },
   {
     slug: 'upper-bounce',
     springType: 'traditional',
-    advancedSafety: false,
-    fitsYard: { small: false, medium: true, large: true, longNarrow: false },
-    metricScores: { bounce: 7, durability: 7, value: 8, assembly: 7, warranty: 7 },
+    metricScores: { bounce: 5, durability: 5, value: 5, assembly: 6, warranty: 2 },
     matchReasons: {
-      traditional: 'Heavy-duty springs with foam padded cover',
-      mediumYard: '10ft–12ft models in a solid mid-range price bracket',
-      largeYard: '14ft–17ft models for larger yards',
-      meetsStandards: 'ASTM certified',
-      valueForMoney: 'Good feature set relative to price in the mid-range category',
-      budget_500_1000: 'Well-priced options in the $300–$700 range',
+      valueForMoney: 'Cheap upfront but warranty windows are extremely short',
+      warranty: 'Only 6 months on the complete trampoline set',
+      durability: 'Budget galvanized steel and replacement parts widely available',
+    },
+  },
+  {
+    slug: 'vuly',
+    springType: 'mixed',
+    metricScores: { bounce: 9, durability: 9, value: 7, assembly: 7, warranty: 7 },
+    matchReasons: {
+      springless: 'Leaf Spring on Thunder removes the coil spring impact zone',
+      valueForMoney: 'Premium Australian build with strong feature-for-price ratio',
+      warranty: 'Thunder 10-year frame and 5-year mat but Leaf Springs 1 year',
+      bounce: 'Leaf Spring delivers a unique deep bounce on Thunder',
+      durability: 'Galvanized frame and UV-treated mats with strong owner reviews',
+    },
+  },
+  {
+    slug: 'west-coast-jump',
+    springType: 'traditional',
+    metricScores: { bounce: 8, durability: 8, value: 6, assembly: 6, warranty: 7 },
+    matchReasons: {
+      valueForMoney: 'Premium for USA-made and a net costs extra',
+      warranty: '5 years on every part - simple and clear',
+      bounce: '8.5-inch springs and 500lb capacity for big bounce',
+      durability: '13-gauge USA steel handcrafted in Arizona',
+    },
+  },
+  {
+    slug: 'zero-gravity',
+    springType: 'traditional',
+    metricScores: { bounce: 7, durability: 7, value: 4, assembly: 6, warranty: 3 },
+    matchReasons: {
+      valueForMoney: 'Premium pricing undermined by unusually weak warranty',
+      warranty: '1 year on frame and springs and zero on mat and net',
+      bounce: 'USA TenCate Permatron mat and 8.5-inch springs',
+      durability: 'Double hot-dipped galvanized steel frame construction',
     },
   },
   {
     slug: 'zupapa',
     springType: 'traditional',
-    advancedSafety: false,
-    fitsYard: { small: true, medium: true, large: true, longNarrow: false },
-    metricScores: { bounce: 6, durability: 7, value: 8, assembly: 7, warranty: 6 },
+    metricScores: { bounce: 7, durability: 7, value: 8, assembly: 7, warranty: 6 },
     matchReasons: {
-      traditional: 'Galvanized springs with padded surround',
-      smallYard: '8ft and 10ft models for tighter spaces',
-      mediumYard: '12ft round available',
-      largeYard: 'Up to 23ft for very large yards',
-      valueForMoney: 'Competitive pricing across the size range',
-      budget_under_500: 'Multiple models available under $400',
+      valueForMoney: 'Strong value with high listed weight capacities',
+      warranty: '10 years on frame but only 2 on other parts',
+      bounce: 'Heavy-frame rounds with high total weight ratings',
+      durability: 'Galvanized steel frame and weight ratings to 1800lb',
     },
   },
 ];

@@ -11,6 +11,7 @@ export type BudgetId =
 export type JumperAgeId = 'under-6' | '6-12' | '13-17' | '18plus';
 export type ShapePreferenceId = 'round' | 'rectangle' | 'not-sure';
 export type GroundTypePreferenceId = 'above-ground' | 'in-ground';
+export type SafetyNetPreferenceId = 'yes' | 'no' | 'no-preference';
 
 export interface QuizAnswers {
   backyardSize: 'small' | 'medium' | 'large' | 'long-narrow' | 'not-sure';
@@ -18,7 +19,7 @@ export interface QuizAnswers {
   shapePreference: ShapePreferenceId;
   jumperAges: JumperAgeId[];
   standards: 'yes' | 'no';
-  safetyFeatures: 'essential' | 'nice-to-have' | 'not-important';
+  safetyNetPreference: SafetyNetPreferenceId;
   springType: 'traditional' | 'springless' | 'not-sure';
   budget: BudgetId[];
   priorities: Array<'bounce' | 'durability' | 'value' | 'assembly' | 'warranty'>;
@@ -33,6 +34,7 @@ type PriorityId = 'bounce' | 'durability' | 'value' | 'assembly' | 'warranty';
 const JOEY_RATING_SCORE_BONUS = 10;
 const JOEY_RATING_MERIT_BONUS = 2;
 const SPRINGLESS_BOUNCE_PRIORITY_PENALTY = 10;
+const TIE_BREAK_BRAND_SLUGS = new Set(['vuly', 'acon']);
 
 export interface ScoreBreakdown {
   size: number;
@@ -86,6 +88,14 @@ function mentionsOtherModelFamily(reason: string, model: string): boolean {
   );
 
   return mentionedFamilies.some((token) => !new RegExp(`\\b${token}\\b`, 'i').test(modelLower));
+}
+
+function brandSlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+export function tieBreakBrandScore(entry: QuizEntry): number {
+  return TIE_BREAK_BRAND_SLUGS.has(brandSlug(entry.brand)) ? 1 : 0;
 }
 
 // ─── Individual scoring functions ──────────────────────────────────────────────
@@ -143,15 +153,25 @@ function scoreStandards(entry: QuizEntry, standards: QuizAnswers['standards']): 
   return 0;
 }
 
-function scoreSafety(entry: QuizEntry, safetyFeatures: QuizAnswers['safetyFeatures']): number {
-  if (safetyFeatures === 'essential') return entry.advancedSafety ? 30 : -30;
-  if (safetyFeatures === 'nice-to-have') return entry.advancedSafety ? 10 : 0;
-  return 0;
+function safetyNetMatches(entry: QuizEntry, preference: SafetyNetPreferenceId): boolean {
+  if (preference === 'no-preference') return true;
+  if (entry.safetyNet === 'optional') return true;
+  return entry.safetyNet === preference;
+}
+
+function scoreSafetyNet(entry: QuizEntry, preference: SafetyNetPreferenceId): number {
+  if (preference === 'no-preference') return 0;
+  if (entry.safetyNet === 'unknown') return 0;
+  return safetyNetMatches(entry, preference) ? 20 : -100;
 }
 
 function scoreSpringType(entry: QuizEntry, springType: QuizAnswers['springType']): number {
   if (springType === 'not-sure') return 0;
   return entry.springType === springType ? 40 : -100;
+}
+
+function scoreSafety(entry: QuizEntry, preference: SafetyNetPreferenceId): number {
+  return scoreSafetyNet(entry, preference);
 }
 
 export function getBudgetBounds(budgets: BudgetId[]): [number, number] | null {
@@ -190,6 +210,7 @@ function scorePriorities(entry: QuizEntry, priorities: PriorityId[]): number {
 function isHardExcluded(entry: QuizEntry, answers: QuizAnswers): boolean {
   if (scoreSize(entry, answers.backyardSize) <= -100) return true;
   if (scoreGroundType(entry, answers.groundTypePreference) <= -100) return true;
+  if (scoreSafetyNet(entry, answers.safetyNetPreference) <= -100) return true;
   if (scoreSpringType(entry, answers.springType) <= -100) return true;
   if (scoreBudget(entry, answers.budget) <= -100) return true;
   return false;
@@ -201,7 +222,7 @@ function countSignals(answers: QuizAnswers): number {
   if (answers.shapePreference !== 'not-sure') signals++;
   if (answers.jumperAges.length > 0) signals++;
   if (answers.standards === 'yes') signals++;
-  if (answers.safetyFeatures === 'essential') signals++;
+  if (answers.safetyNetPreference !== 'no-preference') signals++;
   if (answers.springType !== 'not-sure') signals++;
   if (!(answers.budget.length === 1 && answers.budget[0] === 'flexible')) signals++;
   if (answers.priorities.length > 0) signals++;
@@ -215,7 +236,6 @@ export function baseMeritScore(entry: QuizEntry): number {
     entry.metricScores.value +
     entry.metricScores.assembly +
     entry.metricScores.warranty +
-    (entry.advancedSafety ? 3 : 0) +
     (entry.joeyRating ? JOEY_RATING_MERIT_BONUS : 0)
   );
 }
@@ -226,7 +246,7 @@ export function getScoreBreakdown(entry: QuizEntry, answers: QuizAnswers): Score
   const shape = scoreShape(entry, answers.shapePreference);
   const ages = scoreJumperAges(entry, answers.jumperAges);
   const standards = scoreStandards(entry, answers.standards);
-  const safety = scoreSafety(entry, answers.safetyFeatures);
+  const safety = scoreSafety(entry, answers.safetyNetPreference);
   const springType = scoreSpringType(entry, answers.springType);
   const budget = scoreBudget(entry, answers.budget);
   const priorities = scorePriorities(entry, answers.priorities as PriorityId[]);
@@ -252,7 +272,12 @@ function getDiverseRecommendations(entries: QuizEntry[], answers: QuizAnswers): 
     .filter((e) => !isHardExcluded(e, answers))
     .filter((e) => scoreBudget(e, answers.budget) >= 0)
     .filter((e) => scoreStandards(e, answers.standards) > -50)
-    .sort((a, b) => baseMeritScore(b) - baseMeritScore(a) || (a.priceFrom ?? 0) - (b.priceFrom ?? 0));
+    .sort(
+      (a, b) =>
+        baseMeritScore(b) - baseMeritScore(a) ||
+        tieBreakBrandScore(b) - tieBreakBrandScore(a) ||
+        (a.priceFrom ?? 0) - (b.priceFrom ?? 0),
+    );
 
   const picks: QuizEntry[] = [];
   const seenIds = new Set<string>();
@@ -298,7 +323,12 @@ export function getRecommendations(entries: QuizEntry[], answers: QuizAnswers): 
       return { ...e, score: breakdown.total, matchReasonsList: [] as string[] };
     })
     .filter((e) => e.score > 0)
-    .sort((a, b) => b.score - a.score || (a.priceFrom ?? 0) - (b.priceFrom ?? 0));
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        tieBreakBrandScore(b) - tieBreakBrandScore(a) ||
+        (a.priceFrom ?? 0) - (b.priceFrom ?? 0),
+    );
 
   const deduped: typeof passing = [];
   const seenBrands = new Set<string>();
@@ -353,10 +383,18 @@ export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): stri
     reasons.push('Matches your preference for a rectangular-style trampoline shape');
   }
 
-  if (answers.safetyFeatures === 'essential' && mr.safetyEssential) {
-    reasons.push(mr.safetyEssential);
-  } else if (answers.safetyFeatures === 'nice-to-have' && mr.safetyNiceToHave) {
-    reasons.push(mr.safetyNiceToHave);
+  if (answers.safetyNetPreference === 'yes' && safetyNetMatches(entry, 'yes')) {
+    reasons.push(
+      entry.safetyNet === 'optional'
+        ? 'Safety net is available as an option'
+        : 'Includes a safety net to match your preference',
+    );
+  } else if (answers.safetyNetPreference === 'no' && safetyNetMatches(entry, 'no')) {
+    reasons.push(
+      entry.safetyNet === 'optional'
+        ? 'Can be configured without a safety net'
+        : 'Matches your preference for no safety net',
+    );
   }
 
   if (answers.standards === 'yes' && entry.meetsUSStandards && mr.meetsStandards) {
@@ -514,7 +552,7 @@ export function encodeAnswers(answers: QuizAnswers): string {
   params.set('shapePreference', answers.shapePreference);
   params.set('jumperAges', answers.jumperAges.join(','));
   params.set('standards', answers.standards);
-  params.set('safetyFeatures', answers.safetyFeatures);
+  params.set('safetyNetPreference', answers.safetyNetPreference);
   params.set('springType', answers.springType);
   params.set('budget', answers.budget.join(','));
   params.set('priorities', answers.priorities.join(','));
@@ -527,7 +565,7 @@ export function parseAnswers(searchParams: URLSearchParams): QuizAnswers | null 
     (searchParams.get('groundTypePreference') as GroundTypePreferenceId | null) ?? 'above-ground';
   const shapePreference = searchParams.get('shapePreference') ?? 'not-sure';
   const standards = searchParams.get('standards');
-  const safetyFeatures = searchParams.get('safetyFeatures');
+  const safetyNetPreference = searchParams.get('safetyNetPreference') ?? 'no-preference';
   const springType = searchParams.get('springType');
   const jumperAges = (searchParams.get('jumperAges') ?? '')
     .split(',')
@@ -557,9 +595,9 @@ export function parseAnswers(searchParams: URLSearchParams): QuizAnswers | null 
       shapePreference !== 'rectangle' &&
       shapePreference !== 'not-sure') ||
     (standards !== 'yes' && standards !== 'no') ||
-    (safetyFeatures !== 'essential' &&
-      safetyFeatures !== 'nice-to-have' &&
-      safetyFeatures !== 'not-important') ||
+    (safetyNetPreference !== 'yes' &&
+      safetyNetPreference !== 'no' &&
+      safetyNetPreference !== 'no-preference') ||
     (springType !== 'traditional' &&
       springType !== 'springless' &&
       springType !== 'not-sure') ||
@@ -574,7 +612,7 @@ export function parseAnswers(searchParams: URLSearchParams): QuizAnswers | null 
     shapePreference,
     jumperAges,
     standards,
-    safetyFeatures,
+    safetyNetPreference,
     springType,
     budget,
     priorities,

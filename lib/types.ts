@@ -1,4 +1,5 @@
 export type GroundType = 'above-ground' | 'in-ground' | 'both';
+export type SafetyNetAvailability = 'yes' | 'no' | 'optional' | 'unknown';
 
 export interface Product {
   brand: string;
@@ -6,6 +7,7 @@ export interface Product {
   size: string;
   shape: string;
   groundType: GroundType;
+  safetyNet: SafetyNetAvailability;
   maxDiameterIn: number | null;
   overallLengthIn: number | null;
   overallWidthIn: number | null;

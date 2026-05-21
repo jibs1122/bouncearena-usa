@@ -2,7 +2,7 @@ import { getAllProducts, getProductsDataVersion } from '@/lib/products';
 import { QUIZ_BRAND_DATA, type QuizBrandData } from '@/lib/quizBrands';
 import { getPreferredModelUrl } from '@/lib/productLinks';
 import { QUIZ_MODEL_DATA } from '@/lib/quizModelData';
-import type { GroundType } from '@/lib/types';
+import type { GroundType, SafetyNetAvailability } from '@/lib/types';
 
 export interface QuizEntry {
   id: string;           // brand-slug + model-slug
@@ -10,8 +10,8 @@ export interface QuizEntry {
   model: string;
   joeyRating: boolean;
   groundType: GroundType;
+  safetyNet: SafetyNetAvailability;
   springType: 'traditional' | 'springless';
-  advancedSafety: boolean;
   meetsUSStandards: boolean | null;
   priceFrom: number | null;
   priceTo: number | null;
@@ -57,6 +57,15 @@ export function modelSlug(s: string) {
 function isSpringless(springSystem: string): boolean {
   const s = springSystem.toLowerCase();
   return s.includes('springless') || s.includes('rod') || s.includes('bungee') || s.includes('leaf');
+}
+
+function deriveSafetyNetAvailability(products: ReturnType<typeof getAllProducts>): SafetyNetAvailability {
+  const values = new Set(products.map((p) => p.safetyNet));
+  if (values.has('optional')) return 'optional';
+  if (values.has('yes') && values.has('no')) return 'optional';
+  if (values.has('yes')) return 'yes';
+  if (values.has('no')) return 'no';
+  return 'unknown';
 }
 
 type QuizCache = {
@@ -119,6 +128,7 @@ function buildQuizEntries(): QuizEntryAdmin[] {
         : groundTypes.has('in-ground')
           ? 'in-ground'
           : 'above-ground';
+    const safetyNet = deriveSafetyNetAvailability(ps);
     const isLongNarrow = shape === 'Rectangle' || shape === 'Oval';
 
     // Derive yard fit from actual model sizes (in inches; 1ft = 12in)
@@ -138,17 +148,8 @@ function buildQuizEntries(): QuizEntryAdmin[] {
     const hasPositiveStandard = ps.some((p) => p.meetsUsStandard === true);
     const hasNegativeStandard = ps.some((p) => p.meetsUsStandard === false);
     const meetsUSStandards = hasPositiveStandard ? true : hasNegativeStandard ? false : null;
-    const advancedSafety =
-      model_?.advancedSafety ??
-      (derivedSpringless ? true : static_?.advancedSafety ?? false);
-    const metricScores = {
-      ...(static_?.metricScores ?? DEFAULT_METRICS),
-      ...(model_?.metricScores ?? {}),
-    };
-    const matchReasons = {
-      ...(static_?.matchReasons ?? {}),
-      ...(model_?.matchReasons ?? {}),
-    };
+    const metricScores = static_?.metricScores ?? DEFAULT_METRICS;
+    const matchReasons = static_?.matchReasons ?? {};
 
     const sourceUrl = getPreferredModelUrl(brand, ps);
 
@@ -164,8 +165,8 @@ function buildQuizEntries(): QuizEntryAdmin[] {
       model,
       joeyRating,
       groundType,
+      safetyNet,
       springType,
-      advancedSafety,
       meetsUSStandards,
       priceFrom,
       priceTo,

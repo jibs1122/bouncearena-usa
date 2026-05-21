@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import Papa from "papaparse";
-import type { Product, Brand, GroundType } from "./types";
+import type { Product, Brand, GroundType, SafetyNetAvailability } from "./types";
 import { parseWarrantyYears } from "./warranty";
 
 // Keep the CSV path statically scoped so Next/Vercel can trace it into production.
@@ -44,6 +44,17 @@ function parseGroundType(val: string): GroundType {
   if (normalized.includes("inground")) return "in-ground";
   if (normalized.includes("aboveground")) return "above-ground";
   return "above-ground";
+}
+
+function parseSafetyNetAvailability(val: string): SafetyNetAvailability {
+  const normalized = (val ?? "").trim().toLowerCase();
+  if (!normalized) return "unknown";
+  if (normalized === "yes" || normalized === "true" || normalized === "included") return "yes";
+  if (normalized === "no" || normalized === "false" || normalized === "none") return "no";
+  if (normalized === "optional" || normalized === "either" || normalized.includes("optional")) {
+    return "optional";
+  }
+  return "unknown";
 }
 
 function parsePriceFields(row: Record<string, string>) {
@@ -98,6 +109,7 @@ function rowToProduct(row: Record<string, string>): Product {
     size: (row["size"] ?? row["Size"] ?? "").trim(),
     shape: (row["shape"] ?? row["Shape"] ?? "").trim(),
     groundType: parseGroundType(row["ground_type"] ?? ""),
+    safetyNet: parseSafetyNetAvailability(row["safety_net"] ?? ""),
     maxDiameterIn: parseNum(row["max_diameter_in"]),
     overallLengthIn: parseNum(row["overall_length_in"]),
     overallWidthIn: parseNum(row["overall_width_in"]),

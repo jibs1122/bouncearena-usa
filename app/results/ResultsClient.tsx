@@ -65,10 +65,10 @@ const springTypeLabels: Record<QuizAnswers['springType'], string> = {
   'not-sure': 'Not sure',
 };
 
-const safetyFeatureLabels: Record<QuizAnswers['safetyFeatures'], string> = {
-  essential: 'Essential',
-  'nice-to-have': 'Nice to have',
-  'not-important': 'Not important',
+const safetyNetPreferenceLabels: Record<QuizAnswers['safetyNetPreference'], string> = {
+  yes: 'Yes',
+  no: 'No',
+  'no-preference': 'No preference',
 };
 
 const standardsLabels: Record<QuizAnswers['standards'], string> = {
@@ -102,7 +102,7 @@ function buildAnswerRecap(answers: QuizAnswers): RecapItem[] {
       value: formatList(answers.budget.map((budget) => budgetLabels[budget])),
     },
     { label: 'Spring system', value: springTypeLabels[answers.springType] },
-    { label: 'Safety features', value: safetyFeatureLabels[answers.safetyFeatures] },
+    { label: 'Safety net', value: safetyNetPreferenceLabels[answers.safetyNetPreference] },
     { label: 'ASTM certification', value: standardsLabels[answers.standards] },
     {
       label: 'Priorities',

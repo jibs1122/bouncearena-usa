@@ -140,28 +140,28 @@ export function buildQuestions(): Question[] {
       ],
     },
 
-    // Q6 — Safety features
+    // Q6 — Safety net
     {
-      id: 'safetyFeatures',
-      title: 'How important are advanced safety features to you?',
+      id: 'safetyNetPreference',
+      title: 'Do you want a safety net?',
       subtitle:
-        'Advanced features include curved safety poles that angle away from jumpers, springs positioned outside the enclosure, and a frame zone that keeps the jumping area clear of hard edges.',
+        'Some performance and in-ground models offer the net as an optional add-on. Optional nets can match either preference.',
       type: 'single',
       options: [
         {
-          id: 'essential',
-          label: 'Essential',
-          description: 'I want the safest option available',
+          id: 'yes',
+          label: 'Yes',
+          description: 'Only show models with an included or optional safety net',
         },
         {
-          id: 'nice-to-have',
-          label: 'Nice to have',
-          description: 'Helpful, but not a dealbreaker',
+          id: 'no',
+          label: 'No',
+          description: 'Only show models sold without a net or with the net optional',
         },
         {
-          id: 'not-important',
-          label: 'Not important',
-          description: "I'm more focused on value",
+          id: 'no-preference',
+          label: 'No preference',
+          description: "I'm open to either setup",
         },
       ],
     },

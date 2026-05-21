@@ -8,6 +8,7 @@ import {
   getRecommendations,
   getScoreBreakdown,
   parseAnswers,
+  tieBreakBrandScore,
   type BudgetId,
   type QuizAnswers,
 } from '@/lib/quizScoring';
@@ -23,7 +24,7 @@ const DEFAULT_QUERY: Record<string, string> = {
   groundTypePreference: 'above-ground',
   shapePreference: 'not-sure',
   standards: 'no',
-  safetyFeatures: 'not-important',
+  safetyNetPreference: 'no-preference',
   springType: 'not-sure',
   budget: 'flexible',
   priorities: 'bounce,durability',
@@ -35,7 +36,7 @@ const ANSWER_PARAM_KEYS = [
   'shapePreference',
   'jumperAges',
   'standards',
-  'safetyFeatures',
+  'safetyNetPreference',
   'springType',
   'budget',
   'priorities',
@@ -48,7 +49,6 @@ const FILTER_PARAM_KEYS = [
   'surfaced',
   'eligibility',
   'sort',
-  'onlyAdvancedSafety',
   'onlyJoey',
 ] as const;
 
@@ -64,7 +64,7 @@ const PRESETS = [
       groundTypePreference: 'above-ground',
       shapePreference: 'round',
       standards: 'no',
-      safetyFeatures: 'essential',
+      safetyNetPreference: 'yes',
       springType: 'springless',
       budget: '1500-2500',
       priorities: 'durability,warranty',
@@ -77,7 +77,7 @@ const PRESETS = [
       groundTypePreference: 'in-ground',
       shapePreference: 'rectangle',
       standards: 'no',
-      safetyFeatures: 'not-important',
+      safetyNetPreference: 'no-preference',
       springType: 'traditional',
       budget: '500-1000',
       priorities: 'value,assembly',
@@ -93,7 +93,6 @@ type FilterState = {
   surfaced: 'all' | 'surfaced' | 'hidden';
   eligibility: 'all' | 'eligible' | 'hard-excluded' | 'non-positive';
   sort: 'rank' | 'total' | 'merit' | 'price' | 'bounce' | 'durability';
-  onlyAdvancedSafety: boolean;
   onlyJoey: boolean;
 };
 
@@ -101,6 +100,7 @@ type RowData = {
   entry: QuizEntryAdmin;
   breakdown: ReturnType<typeof getScoreBreakdown>;
   merit: number;
+  tieBreak: number;
   overallRank: number;
   eligible: boolean;
 };
@@ -157,7 +157,6 @@ function buildFilterState(searchParams: SearchParams): FilterState {
       sort === 'durability'
         ? sort
         : 'rank',
-    onlyAdvancedSafety: getSingleSearchParam(searchParams, 'onlyAdvancedSafety') === '1',
     onlyJoey: getSingleSearchParam(searchParams, 'onlyJoey') === '1',
   };
 }
@@ -183,7 +182,6 @@ function buildFilterQuery(filters: FilterState) {
   if (filters.surfaced !== 'all') params.surfaced = filters.surfaced;
   if (filters.eligibility !== 'all') params.eligibility = filters.eligibility;
   if (filters.sort !== 'rank') params.sort = filters.sort;
-  if (filters.onlyAdvancedSafety) params.onlyAdvancedSafety = '1';
   if (filters.onlyJoey) params.onlyJoey = '1';
   return params;
 }
@@ -276,10 +274,10 @@ function sortRows(rows: RowData[], sort: FilterState['sort']) {
   const next = [...rows];
   next.sort((a, b) => {
     if (sort === 'total') {
-      return b.breakdown.total - a.breakdown.total || a.overallRank - b.overallRank;
+      return b.breakdown.total - a.breakdown.total || b.tieBreak - a.tieBreak || a.overallRank - b.overallRank;
     }
     if (sort === 'merit') {
-      return b.merit - a.merit || a.overallRank - b.overallRank;
+      return b.merit - a.merit || b.tieBreak - a.tieBreak || a.overallRank - b.overallRank;
     }
     if (sort === 'price') {
       return (a.entry.priceFrom ?? Number.MAX_SAFE_INTEGER) - (b.entry.priceFrom ?? Number.MAX_SAFE_INTEGER) || a.overallRank - b.overallRank;
@@ -299,7 +297,7 @@ function filterRows(rows: RowData[], filters: FilterState) {
   const query = filters.q.toLowerCase();
   return rows.filter(({ entry, breakdown, eligible }) => {
     if (query) {
-      const haystack = [entry.brand, entry.model, entry.rawSpringSystem, entry.groundType, entry.springType]
+      const haystack = [entry.brand, entry.model, entry.rawSpringSystem, entry.groundType, entry.springType, entry.safetyNet]
         .join(' ')
         .toLowerCase();
       if (!haystack.includes(query)) return false;
@@ -311,7 +309,6 @@ function filterRows(rows: RowData[], filters: FilterState) {
     if (filters.eligibility === 'eligible' && !eligible) return false;
     if (filters.eligibility === 'hard-excluded' && !breakdown.hardExcluded) return false;
     if (filters.eligibility === 'non-positive' && (breakdown.hardExcluded || breakdown.total > 0)) return false;
-    if (filters.onlyAdvancedSafety && !entry.advancedSafety) return false;
     if (filters.onlyJoey && !entry.joeyRating) return false;
     return true;
   });
@@ -344,6 +341,7 @@ export default async function AdminPage({
         entry,
         breakdown,
         merit: baseMeritScore(entry),
+        tieBreak: tieBreakBrandScore(entry),
       };
     })
     .sort((a, b) => {
@@ -351,6 +349,8 @@ export default async function AdminPage({
       if (a.breakdown.hardExcluded !== b.breakdown.hardExcluded) return a.breakdown.hardExcluded ? 1 : -1;
       return (
         b.breakdown.total - a.breakdown.total ||
+        b.tieBreak - a.tieBreak ||
+        (a.entry.priceFrom ?? Number.MAX_SAFE_INTEGER) - (b.entry.priceFrom ?? Number.MAX_SAFE_INTEGER) ||
         b.merit - a.merit ||
         a.entry.brand.localeCompare(b.entry.brand) ||
         a.entry.model.localeCompare(b.entry.model)
@@ -367,6 +367,7 @@ export default async function AdminPage({
   const surfacedCount = rankedRows.filter((row) => row.entry.surfaced).length;
   const springlessCount = rankedRows.filter((row) => row.entry.springType === 'springless').length;
   const joeyRatedCount = rankedRows.filter((row) => row.entry.joeyRating).length;
+  const tieBreakCount = rankedRows.filter((row) => row.tieBreak > 0).length;
   const eligibleCount = rankedRows.filter((row) => row.eligible).length;
   const filteredEligibleCount = rows.filter((row) => row.eligible).length;
   const filteredHardExcludedCount = rows.filter((row) => row.breakdown.hardExcluded).length;
@@ -393,8 +394,9 @@ export default async function AdminPage({
         <div>
           <h1 className="mb-2 text-3xl font-bold text-black">Quiz Admin</h1>
           <p className="max-w-4xl text-black/60">
-            Dense scoring view for every quiz model. Filters are server-side, rows are compact, and each metric
-            or breakdown component gets its own column so ranking deltas are easier to inspect.
+            Dense scoring view for every quiz model. Brand metrics come from the all-brand framework,
+            safety net preference is scored from the sheet, Joey bonus is still applied, and Vuly/ACON
+            only win as a final tie-break.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -410,7 +412,29 @@ export default async function AdminPage({
         </div>
       </div>
 
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <section className="mb-8 rounded-2xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.04] p-5">
+        <h2 className="text-lg font-bold text-black">Current Scoring Rules</h2>
+        <div className="mt-3 grid gap-3 text-sm leading-6 text-black/60 md:grid-cols-2 xl:grid-cols-4">
+          <p>
+            <strong className="text-black/75">Brand metrics:</strong> Bounce, durability, value,
+            assembly, and warranty are 1-10 brand-level scores.
+          </p>
+          <p>
+            <strong className="text-black/75">Merit:</strong> Metric total plus Joey bonus.
+            Advanced-safety scoring is no longer used.
+          </p>
+          <p>
+            <strong className="text-black/75">Safety net:</strong> Yes/no/no preference is scored from{' '}
+            <code className="rounded bg-white px-1 py-0.5">safety_net</code>; optional matches yes or no.
+          </p>
+          <p>
+            <strong className="text-black/75">Tie-break:</strong> Vuly and ACON get a final tie-break
+            only after matching score ties.
+          </p>
+        </div>
+      </section>
+
+      <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
         <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Coverage</p>
           <p className="mt-2 text-2xl font-bold text-black">
@@ -437,6 +461,11 @@ export default async function AdminPage({
           <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Joey Rated</p>
           <p className="mt-2 text-2xl font-bold text-black">{joeyRatedCount}</p>
           <p className="mt-1 text-sm text-black/50">Models getting the Joey bonus</p>
+        </div>
+        <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Tie-Break</p>
+          <p className="mt-2 text-2xl font-bold text-black">{tieBreakCount}</p>
+          <p className="mt-1 text-sm text-black/50">Vuly/ACON models preferred only on ties</p>
         </div>
       </div>
 
@@ -510,15 +539,15 @@ export default async function AdminPage({
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Safety features</span>
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Safety net</span>
                 <select
-                  name="safetyFeatures"
-                  defaultValue={answers.safetyFeatures}
+                  name="safetyNetPreference"
+                  defaultValue={answers.safetyNetPreference}
                   className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
                 >
-                  <option value="essential">Essential</option>
-                  <option value="nice-to-have">Nice to have</option>
-                  <option value="not-important">Not important</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="no-preference">No preference</option>
                 </select>
               </label>
 
@@ -610,7 +639,7 @@ export default async function AdminPage({
 
             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/[0.06] pt-4">
               <p className="text-sm text-black/50">
-                Active summary: {formatBudgetSelection(answers.budget)} budget, {answers.priorities.join(', ') || 'no priorities'}, {answers.springType} spring preference.
+                Active summary: {formatBudgetSelection(answers.budget)} budget, {answers.priorities.join(', ') || 'no priorities'}, {answers.springType} spring preference, {answers.safetyNetPreference} net preference.
               </p>
               <button
                 type="submit"
@@ -719,7 +748,7 @@ export default async function AdminPage({
             </label>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_auto_auto_auto]">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_auto_auto]">
             <label className="block">
               <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Eligibility</span>
               <select
@@ -751,11 +780,6 @@ export default async function AdminPage({
             </label>
 
             <label className="flex items-center gap-2 rounded-xl border border-black/[0.08] px-3 py-2.5 text-sm text-black/70">
-              <input type="checkbox" name="onlyAdvancedSafety" value="1" defaultChecked={filters.onlyAdvancedSafety} />
-              Advanced safety only
-            </label>
-
-            <label className="flex items-center gap-2 rounded-xl border border-black/[0.08] px-3 py-2.5 text-sm text-black/70">
               <input type="checkbox" name="onlyJoey" value="1" defaultChecked={filters.onlyJoey} />
               Joey only
             </label>
@@ -776,6 +800,7 @@ export default async function AdminPage({
             <h2 className="text-xl font-bold text-black">Score Matrix</h2>
             <p className="text-sm text-black/55">
               Showing {rows.length} rows. Eligible: {filteredEligibleCount}. Hard excluded: {filteredHardExcludedCount}.
+              Merit includes Joey bonus; TB marks the Vuly/ACON tie-break.
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-xs font-medium">
@@ -786,7 +811,7 @@ export default async function AdminPage({
         </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-[2200px] border-separate border-spacing-0 text-xs">
+          <table className="min-w-[2280px] border-separate border-spacing-0 text-xs">
             <thead>
               <tr className="text-left text-black/45">
                 <th className="sticky left-0 z-30 bg-white px-2 py-2 font-semibold">#</th>
@@ -795,8 +820,9 @@ export default async function AdminPage({
                 <th className="px-2 py-2 font-semibold">Status</th>
                 <th className="px-2 py-2 font-semibold">Surf</th>
                 <th className="px-2 py-2 font-semibold">Spring</th>
-                <th className="px-2 py-2 font-semibold">Safe</th>
+                <th className="px-2 py-2 font-semibold">Net</th>
                 <th className="px-2 py-2 font-semibold">Joey</th>
+                <th className="px-2 py-2 font-semibold">TB</th>
                 <th className="px-2 py-2 font-semibold">ASTM</th>
                 <th className="px-2 py-2 font-semibold">Price</th>
                 <th className="px-2 py-2 font-semibold">Size</th>
@@ -812,7 +838,7 @@ export default async function AdminPage({
                 <th className="px-2 py-2 font-semibold">Shp</th>
                 <th className="px-2 py-2 font-semibold">Age</th>
                 <th className="px-2 py-2 font-semibold">Std</th>
-                <th className="px-2 py-2 font-semibold">Saf</th>
+                <th className="px-2 py-2 font-semibold">Net</th>
                 <th className="px-2 py-2 font-semibold">Spr</th>
                 <th className="px-2 py-2 font-semibold">Bgt</th>
                 <th className="px-2 py-2 font-semibold">Pri</th>
@@ -849,14 +875,15 @@ export default async function AdminPage({
                       </span>
                     </td>
                     <td className="px-2 py-2 text-black/70">{entry.springType}</td>
-                    <td className="px-2 py-2">
-                      <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${pillClass(entry.advancedSafety, 'good')}`}>
-                        {entry.advancedSafety ? 'yes' : 'no'}
-                      </span>
-                    </td>
+                    <td className="px-2 py-2 text-black/70">{entry.safetyNet}</td>
                     <td className="px-2 py-2">
                       <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${pillClass(entry.joeyRating, 'warn')}`}>
                         {entry.joeyRating ? 'yes' : 'no'}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2">
+                      <span className={`inline-flex rounded-md px-2 py-1 font-semibold ${pillClass(row.tieBreak > 0, 'warn')}`}>
+                        {row.tieBreak > 0 ? 'yes' : 'no'}
                       </span>
                     </td>
                     <td className="px-2 py-2 text-black/70">{formatStandards(entry.meetsUSStandards)}</td>
