@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo, useCallback, Fragment, useRef, type ReactNode } from 'react';
-import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import type { GroundType, Product } from '@/lib/types';
 import {
   getPreferredModelUrl,
@@ -10,7 +9,6 @@ import {
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
-import { isAffiliateBrand } from '@/lib/vuly';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -388,11 +386,6 @@ export default function CompareClient({ products }: { products: Product[] }) {
     (astmOnly ? 1 : 0) +
     (minPrice > 0 || maxPrice < globalMaxPrice ? 1 : 0) +
     (minSize > 4 || maxSize < globalMaxSize ? 1 : 0);
-  const showAffiliateDisclosure = useMemo(
-    () => filtered.some((row) => isAffiliateBrand(row.brand) && row.shopUrl !== null),
-    [filtered],
-  );
-
   const SortTh = ({
     col,
     label,
@@ -708,8 +701,6 @@ export default function CompareClient({ products }: { products: Product[] }) {
       <p className="mt-4 text-center text-xs text-black/30">
         We&apos;ve done our best to source these specifications accurately, but details can change and may be incomplete or incorrect. Always verify key specs, pricing, and warranty terms directly with the manufacturer or retailer before buying.
       </p>
-
-      {showAffiliateDisclosure ? <AffiliateDisclosure className="mt-3 text-center" /> : null}
     </div>
   );
 }

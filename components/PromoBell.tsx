@@ -93,6 +93,9 @@ export default function PromoBell() {
                   ))}
                 </div>
                 <p className="mt-2 text-xs text-black/45">Click a code to copy.</p>
+                <p className="mt-2 text-[11px] leading-4 text-black/35">
+                  We may earn a commission on purchases.
+                </p>
               </div>
             </div>
             <button
@@ -132,13 +135,6 @@ export default function PromoBell() {
                   <div className="flex items-center justify-between gap-1.5">
                     <span className="truncate text-xs font-semibold text-black/55">{promo.brand}</span>
                     <CopyCodeButton brand={promo.brand} code={promo.code} />
-                  </div>
-                  <div className="mt-2">
-                    <ShopButton
-                      brand={promo.brand}
-                      href={promo.href}
-                      location={`promo_pill_mobile_${promo.brand.toLowerCase()}`}
-                    />
                   </div>
                 </div>
               ))}
