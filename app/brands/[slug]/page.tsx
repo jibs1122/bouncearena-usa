@@ -13,7 +13,7 @@ import ModelImage from "@/components/ui/ModelImage";
 import { formatUsd } from "@/lib/price";
 import { getPreferredBrandUrl, getPreferredModelUrl, withAffiliateTracking } from "@/lib/productLinks";
 import { hasModelImage } from "@/lib/modelImages";
-import { isAffiliateBrand } from "@/lib/vuly";
+import { isAconBrand, isAffiliateBrand, isVulyBrand } from "@/lib/vuly";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -28,6 +28,25 @@ type FeaturedModel = {
   springSystem: string;
   sourceUrl: string | null;
 };
+
+const VULY_PROMO_AFFILIATE_URL = "https://www.vulyplay.com/aff/100/";
+const ACON_PROMO_AFFILIATE_URL = "https://us.acon24.com?sca_ref=11261719.jjbGKHHa7yLAnuwn";
+
+const ACON_DISCOUNT_TIERS = [
+  { threshold: "Spend $200 or more", discount: "$15 off" },
+  { threshold: "Spend $400 or more", discount: "$25 off" },
+  { threshold: "Spend $1,000 or more", discount: "$50 off" },
+  { threshold: "Spend $2,000 or more", discount: "$90 off" },
+  { threshold: "Spend $3,000 or more", discount: "$120 off" },
+  { threshold: "Spend $4,000 or more", discount: "$150 off" },
+];
+
+function getCurrentMonthYear() {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+}
 
 function buildFeaturedModels(products: Product[]): FeaturedModel[] {
   const grouped = new Map<string, Product[]>();
@@ -64,6 +83,153 @@ function buildFeaturedModels(products: Product[]): FeaturedModel[] {
       return bPrice - aPrice;
     })
     .slice(0, 4);
+}
+
+function BrandPromoSection({
+  brandName,
+  affiliateUrl,
+}: {
+  brandName: string;
+  affiliateUrl: string | null;
+}) {
+  const lastVerified = getCurrentMonthYear();
+
+  if (isVulyBrand(brandName)) {
+    return (
+      <section className="mb-10 max-w-4xl rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-black">Vuly Promo Codes</h2>
+        <p className="mt-3 text-sm leading-6 text-black/70">
+          We partner with Vuly directly, so the codes below are arrangements we hold and verify,
+          not guesses pulled from a coupon site. Both are live as of the date shown.
+        </p>
+        <p className="mt-4 text-sm font-semibold text-black">
+          Last verified: {lastVerified}
+        </p>
+
+        <div className="mt-5 space-y-4">
+          <div>
+            <p className="font-semibold text-black">
+              <code className="rounded bg-white px-1.5 py-0.5 text-[#2e9a94]">BOUNCE15</code>{" "}
+              — discount on any purchase.
+            </p>
+            <p className="mt-1 text-sm leading-6 text-black/65">
+              Applies to trampolines, accessories, and play equipment, with no category restriction.
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold text-black">
+              <code className="rounded bg-white px-1.5 py-0.5 text-[#2e9a94]">BOUNCESURGE</code>{" "}
+              — free Bluetooth speaker with your order.
+            </p>
+            <p className="mt-1 text-sm leading-6 text-black/65">
+              Minimum spend and speaker model are still being confirmed, so check the order summary
+              before paying.
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-5 text-sm leading-6 text-black/70">
+          You can only use one code per order, so pick the one worth more to you. BOUNCE15 is a
+          flat $15 off whatever the cart size, so on most orders the free speaker is the better deal
+          unless you value the speaker at less than $15.
+        </p>
+        <p className="mt-3 text-sm leading-6 text-black/70">
+          <strong className="text-black">To apply:</strong> add your trampoline to the cart, enter
+          the code in the promo field at checkout, and confirm the discount or speaker shows in your
+          order summary before paying.
+        </p>
+
+        {affiliateUrl && (
+          <a
+            href={affiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer nofollow sponsored"
+            className="mt-5 inline-flex items-center rounded-xl bg-[#38b1ab] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+          >
+            Shop Vuly with these codes →
+          </a>
+        )}
+        <p className="mt-4 text-xs italic leading-5 text-black/50">
+          We may earn a commission when you use a code or buy through our links, at no extra cost to you.
+        </p>
+      </section>
+    );
+  }
+
+  if (isAconBrand(brandName)) {
+    return (
+      <section className="mb-10 max-w-4xl rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-black">Acon Promo Code</h2>
+        <p className="mt-3 text-sm leading-6 text-black/70">
+          We partner with Acon directly, so the code below is one we hold and verify, not one scraped
+          from an aggregator. It is live as of the date shown.
+        </p>
+        <p className="mt-4 text-sm font-semibold text-black">
+          Last verified: {lastVerified}
+        </p>
+
+        <div className="mt-5">
+          <p className="font-semibold text-black">
+            <code className="rounded bg-white px-1.5 py-0.5 text-[#2e9a94]">BOUNCE</code>{" "}
+            — $15 to $150 off, scaled to your order.
+          </p>
+          <p className="mt-1 text-sm leading-6 text-black/65">
+            The discount grows with how much you spend:
+          </p>
+        </div>
+
+        <div className="mt-4 overflow-hidden rounded-xl border border-black/[0.08] bg-white">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-black/[0.03] text-black">
+              <tr>
+                <th className="px-4 py-3 font-semibold">Order total</th>
+                <th className="px-4 py-3 font-semibold">
+                  Discount with <code>BOUNCE</code>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-black/[0.06] text-black/70">
+              {ACON_DISCOUNT_TIERS.map((tier) => (
+                <tr key={tier.threshold}>
+                  <td className="px-4 py-3">{tier.threshold}</td>
+                  <td className="px-4 py-3 font-medium text-black">{tier.discount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mt-5 text-sm leading-6 text-black/70">
+          <strong className="text-black">To apply:</strong> add your Acon trampoline to the cart,
+          enter <code className="rounded bg-white px-1 py-0.5 text-[#2e9a94]">BOUNCE</code> in the
+          promo field at checkout, and confirm the discount matching your order total shows before
+          you pay.
+        </p>
+
+        {affiliateUrl && (
+          <a
+            href={affiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer nofollow sponsored"
+            className="mt-5 inline-flex items-center rounded-xl bg-[#38b1ab] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+          >
+            Shop Acon with BOUNCE →
+          </a>
+        )}
+        <p className="mt-4 text-xs italic leading-5 text-black/50">
+          We may earn a commission when you use a code or buy through our links, at no extra cost to you.
+        </p>
+      </section>
+    );
+  }
+
+  return null;
+}
+
+function getPromoAffiliateUrl(brandName: string): string | null {
+  if (isVulyBrand(brandName)) return VULY_PROMO_AFFILIATE_URL;
+  if (isAconBrand(brandName)) return ACON_PROMO_AFFILIATE_URL;
+  return null;
 }
 
 export async function generateStaticParams() {
@@ -142,6 +308,8 @@ export default async function BrandPage({ params }: Props) {
 
   const hasAffiliate = brand.products.some((p) => p.sourceUrls.length > 0);
   const showAffiliateDisclosure = hasAffiliate && isAffiliateBrand(brand.name);
+  const brandAffiliateUrl = getPreferredBrandUrl(brand.name, brand.sourceUrl);
+  const promoAffiliateUrl = getPromoAffiliateUrl(brand.name);
   const astmCount = brand.products.filter((p) => p.meetsUsStandard === true).length;
   const minPrice = brand.fromPriceUsd;
   const featuredModels = buildFeaturedModels(brand.products);
@@ -210,9 +378,9 @@ export default async function BrandPage({ params }: Props) {
               </div>
             </div>
 
-            {getPreferredBrandUrl(brand.name, brand.sourceUrl) && (
+            {brandAffiliateUrl && (
               <a
-                href={getPreferredBrandUrl(brand.name, brand.sourceUrl)!}
+                href={brandAffiliateUrl}
                 target="_blank"
                 rel="noopener noreferrer nofollow sponsored"
                 className="flex-shrink-0 inline-flex items-center px-5 py-2.5 rounded-xl bg-[#38b1ab] text-white font-semibold hover:bg-[#2e9a94] transition-colors text-sm"
@@ -234,6 +402,8 @@ export default async function BrandPage({ params }: Props) {
               ))}
             </div>
           )}
+
+          <BrandPromoSection brandName={brand.name} affiliateUrl={promoAffiliateUrl} />
 
           {featuredModels.length > 0 && (
             <section className="mb-10">

@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import HeaderWrapper from "@/components/layout/HeaderWrapper";
 import Footer from "@/components/layout/Footer";
+import PromoBell from "@/components/PromoBell";
 import JsonLd from "@/components/seo/JsonLd";
 
 
@@ -102,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HeaderWrapper />
         <main className="flex-1">{children}</main>
         <Footer />
-
+        <PromoBell />
       </body>
     </html>
   );
