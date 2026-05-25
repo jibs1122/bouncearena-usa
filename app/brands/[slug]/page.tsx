@@ -161,8 +161,8 @@ function BrandPromoSection({
       <section className="mb-10 max-w-4xl rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6 shadow-sm">
         <h2 className="text-xl font-bold text-black">Acon Promo Code</h2>
         <p className="mt-3 text-sm leading-6 text-black/70">
-          We partner with Acon directly, so the code below is one we hold and verify, not one scraped
-          from an aggregator. It is live as of the date shown.
+          We partner with Acon directly, so the code below is one we hold and verify. It is live as
+          of the date shown.
         </p>
         <p className="mt-4 text-sm font-semibold text-black">
           Last verified: {lastVerified}
@@ -403,8 +403,6 @@ export default async function BrandPage({ params }: Props) {
             </div>
           )}
 
-          <BrandPromoSection brandName={brand.name} affiliateUrl={promoAffiliateUrl} />
-
           {featuredModels.length > 0 && (
             <section className="mb-10">
               <div className="mb-4 flex items-end justify-between gap-4">
@@ -492,6 +490,8 @@ export default async function BrandPage({ params }: Props) {
             <h2 className="text-xl font-bold text-black mb-4">Full Specifications</h2>
             <ComparisonTable products={brand.products} />
           </section>
+
+          <BrandPromoSection brandName={brand.name} affiliateUrl={promoAffiliateUrl} />
 
           {/* Related comparisons */}
           {relatedComparisons.length > 0 && (
