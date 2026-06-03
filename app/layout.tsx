@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import HeaderWrapper from "@/components/layout/HeaderWrapper";
 import Footer from "@/components/layout/Footer";
@@ -74,29 +73,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-US" style={{ background: "#ffffff" }}>
       <head>
-        {/* Consent Mode v2 defaults — analytics storage denied; GA runs in anonymous/modelable mode */}
-        <Script id="consent-defaults" strategy="beforeInteractive">
-          {`
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
-            gtag('consent', 'default', {
-              analytics_storage: 'denied',
-              ad_storage: 'denied',
-              wait_for_update: 500
-            });
-          `}
-        </Script>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
-          `}
-        </Script>
+          `,
+          }}
+        />
       </head>
       <body suppressHydrationWarning className="flex flex-col min-h-screen bg-white">
         <JsonLd data={organizationSchema} />
