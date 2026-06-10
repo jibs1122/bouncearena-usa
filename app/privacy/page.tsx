@@ -104,7 +104,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-bold text-black mb-2">4. Affiliate Links &amp; Third Parties</h2>
           <p>
-            Some links are affiliate links to retailers (e.g. Springfree, Acon, Vuly). When you
+            Some links are affiliate links to retailers (e.g. Springfree, Acon, Vuly, Zupapa). When you
             click one, the retailer may set their own cookies per their privacy policy. We receive
             only aggregated commission reports — no personal data. All affiliate links carry{" "}
             <code>rel=&quot;nofollow sponsored&quot;</code> and a visible disclosure banner,

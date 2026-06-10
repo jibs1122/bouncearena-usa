@@ -44,11 +44,11 @@ export const BRAND_SHOP_URLS: Record<string, string> = {
   'Vuly':                     'https://www.vulyplay.com/aff/100/',
   'Skywalker':                'https://www.skywalkertrampolines.com/collections/trampolines',
   'Upper Bounce':             'https://machrus.com/collections/upper-bounce-trampolines',
-  'Zupapa':                   'https://www.zupapa.us/',
+  'Zupapa':                   'https://www.zupapa.us/?ref=bltzjtnf',
   'JumpKing':                 'https://www.jumpking.com/trampolines',
   'Sportspower / Bounce Pro': 'https://www.sportspowerltd.net/trampolines',
   'Little Tikes':             'https://www.littletikes.com/collections/trampolines',
-  'ORCC':                     'https://www.zupapa.us/collections/trampolines',
+  'ORCC':                     'https://www.zupapa.us/collections/trampolines?ref=bltzjtnf',
 };
 
 export function getBrandLogoUrl(brandName: string): string | null {

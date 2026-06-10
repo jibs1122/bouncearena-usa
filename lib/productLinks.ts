@@ -2,6 +2,8 @@ import { BRAND_SHOP_URLS } from "@/lib/brandLogos";
 
 const ACON_AFFILIATE_PARAM = "sca_ref";
 const ACON_AFFILIATE_REF = "11261719.jjbGKHHa7yLAnuwn";
+const ZUPAPA_AFFILIATE_PARAM = "ref";
+const ZUPAPA_AFFILIATE_REF = "bltzjtnf";
 
 type ProductLinkLike = {
   brand: string;
@@ -15,6 +17,10 @@ function isAconUrl(url: URL): boolean {
   return hostname === "acon24.com" || hostname.endsWith(".acon24.com");
 }
 
+function isZupapaUrl(url: URL): boolean {
+  return url.hostname.toLowerCase() === "www.zupapa.us";
+}
+
 export function withAffiliateTracking(url: string | null): string | null {
   if (!url) return null;
 
@@ -22,6 +28,9 @@ export function withAffiliateTracking(url: string | null): string | null {
     const parsed = new URL(url);
     if (isAconUrl(parsed)) {
       parsed.searchParams.set(ACON_AFFILIATE_PARAM, ACON_AFFILIATE_REF);
+    }
+    if (isZupapaUrl(parsed)) {
+      parsed.searchParams.set(ZUPAPA_AFFILIATE_PARAM, ZUPAPA_AFFILIATE_REF);
     }
     return parsed.toString();
   } catch {
