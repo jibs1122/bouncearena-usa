@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getApprovedComparisons } from "@/lib/comparisons";
+import { getApprovedModelComparisons } from "@/lib/modelComparisons";
 import JsonLd from "@/components/seo/JsonLd";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
@@ -85,6 +86,42 @@ const COMPARISON_GROUPS = [
     ],
   },
   {
+    label: "New Specialist Comparisons",
+    description: "Additional head-to-head pages for premium, specialist, and retail trampoline brands.",
+    slugs: [
+      "acon-vs-beast",
+      "acon-vs-berg",
+      "acon-vs-jumpsport",
+      "acon-vs-maxair",
+      "acon-vs-north",
+      "acon-vs-texas-trampolines",
+      "akrobat-vs-berg",
+      "akrobat-vs-capital-play",
+      "avyna-vs-berg",
+      "avyna-vs-capital-play",
+      "berg-vs-capital-play",
+      "jumpflex-vs-avyna",
+      "jumpflex-vs-berg",
+      "jumpflex-vs-jumpzylla",
+      "jumpflex-vs-north",
+      "jumpsport-vs-alleyoop",
+      "jumpzylla-vs-acon",
+      "north-vs-akrobat",
+      "north-vs-avyna",
+      "north-vs-berg",
+      "skybound-vs-acon",
+      "skybound-vs-skywalker",
+      "skybound-vs-springfree",
+      "springfree-vs-berg",
+      "springfree-vs-jumpking",
+      "springfree-vs-jumpsport",
+      "springfree-vs-north",
+      "upper-bounce-vs-jumpking",
+      "vuly-vs-akrobat",
+      "vuly-vs-berg",
+    ],
+  },
+  {
     label: "Kids & Mini",
     description: "Smaller trampolines for younger kids and indoor use.",
     slugs: [
@@ -98,6 +135,7 @@ const COMPARISON_GROUPS = [
 
 export default function CompareHubPage() {
   const allComparisons = getApprovedComparisons();
+  const modelComparisons = getApprovedModelComparisons();
   const bySlug = new Map(allComparisons.map((c) => [c.slug, c]));
 
   const breadcrumb = {
@@ -182,6 +220,36 @@ export default function CompareHubPage() {
               </section>
             );
           })}
+
+          {modelComparisons.length > 0 && (
+            <section>
+              <div className="mb-5">
+                <h2 className="text-xl font-bold text-black">Model Comparisons</h2>
+                <p className="text-sm text-black/50 mt-1">
+                  Side-by-side model and size comparisons for shoppers narrowing down exact trampolines.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {modelComparisons.map((comparison) => (
+                  <Link
+                    key={comparison.slug}
+                    href={`/compare/${comparison.slug}/`}
+                    className="group flex flex-col gap-3 p-5 rounded-xl bg-white border border-black/[0.08] hover:border-[#38b1ab]/40 hover:shadow-sm transition-all"
+                  >
+                    <div className="font-semibold text-black text-sm">
+                      {comparison.title}
+                    </div>
+                    <p className="text-xs text-black/50 leading-relaxed line-clamp-2">
+                      {comparison.metaDescription}
+                    </p>
+                    <span className="text-xs font-medium text-[#38b1ab] group-hover:underline mt-auto">
+                      Read comparison →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </>

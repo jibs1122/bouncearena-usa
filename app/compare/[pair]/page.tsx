@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import type { Product } from "@/lib/types";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
+import type { Brand, Product } from "@/lib/types";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
+import ComparePromoCta, { type ComparePromo } from "@/components/ui/ComparePromoCta";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import ModelImage from "@/components/ui/ModelImage";
@@ -11,13 +14,22 @@ import {
   getApprovedComparison,
   getApprovedComparisons,
 } from "@/lib/comparisons";
+import {
+  getApprovedModelComparison,
+  getApprovedModelComparisons,
+  type ModelComparisonArticle,
+} from "@/lib/modelComparisons";
+import { getAllProducts } from "@/lib/products";
 import { formatUsd } from "@/lib/price";
 import { buildCompareTakeaways } from "@/lib/compareTakeaways";
 import { getPreferredProductUrl } from "@/lib/productLinks";
 import { hasModelImage } from "@/lib/modelImages";
-import { isAffiliateBrand } from "@/lib/vuly";
+import { isAconBrand, isAffiliateBrand, isVulyBrand } from "@/lib/vuly";
 
 type Props = { params: Promise<{ pair: string }> };
+
+const VULY_PROMO_AFFILIATE_URL = "https://www.vulyplay.com/aff/100/";
+const ACON_PROMO_AFFILIATE_URL = "https://us.acon24.com?sca_ref=11261719.jjbGKHHa7yLAnuwn";
 
 type FeaturedModel = {
   brand: string;
@@ -28,6 +40,12 @@ type FeaturedModel = {
   springSystem: string;
   sourceUrl: string | null;
   hasImage: boolean;
+};
+
+type ModelComparisonCard = {
+  label: string;
+  product: Product;
+  sourceUrl: string;
 };
 
 function splitIntroIntoParagraphs(intro: string): string[] {
@@ -99,42 +117,381 @@ function buildFeaturedModel(products: Product[]): FeaturedModel | null {
   return bestCandidate ?? null;
 }
 
+function buildPromoCtas(brandA: Brand, brandB: Brand): ComparePromo[] {
+  const promos: ComparePromo[] = [];
+
+  for (const brand of [brandA, brandB]) {
+    if (isVulyBrand(brand.name)) {
+      promos.push({
+        brand: "Vuly",
+        code: "BOUNCE15",
+        description: "Use code BOUNCE15 for a discount on any Vuly trampoline.",
+        href: VULY_PROMO_AFFILIATE_URL,
+      });
+      promos.push({
+        brand: "Vuly",
+        code: "BOUNCESURGE",
+        description: "Use code BOUNCESURGE for a free gift.",
+        href: VULY_PROMO_AFFILIATE_URL,
+      });
+    }
+
+    if (isAconBrand(brand.name)) {
+      promos.push({
+        brand: "ACON",
+        code: "BOUNCE",
+        description: "Use code BOUNCE for tiered savings on ACON orders.",
+        href: ACON_PROMO_AFFILIATE_URL,
+      });
+    }
+  }
+
+  return promos;
+}
+
+function buildPromoCtasFromLabels(labels: string[]): ComparePromo[] {
+  const promos: ComparePromo[] = [];
+  const normalized = labels.join(" ").toLowerCase();
+
+  if (normalized.includes("vuly")) {
+    promos.push({
+      brand: "Vuly",
+      code: "BOUNCE15",
+      description: "Use code BOUNCE15 for a discount on any Vuly trampoline.",
+      href: VULY_PROMO_AFFILIATE_URL,
+    });
+    promos.push({
+      brand: "Vuly",
+      code: "BOUNCESURGE",
+      description: "Use code BOUNCESURGE for a free gift.",
+      href: VULY_PROMO_AFFILIATE_URL,
+    });
+  }
+
+  if (normalized.includes("acon")) {
+    promos.push({
+      brand: "ACON",
+      code: "BOUNCE",
+      description: "Use code BOUNCE for tiered savings on ACON orders.",
+      href: ACON_PROMO_AFFILIATE_URL,
+    });
+  }
+
+  return promos;
+}
+
+function buildModelComparisonCards(article: ModelComparisonArticle): ModelComparisonCard[] {
+  if (article.sides.length < 2) return [];
+
+  const productsBySourceRow = new Map(
+    getAllProducts().map((product) => [product.sourceRowIndex, product]),
+  );
+
+  const cards = article.sides.map((side) => {
+    const candidates = side.rowIndices
+      .map((rowIndex) => productsBySourceRow.get(rowIndex))
+      .filter((product): product is Product => Boolean(product))
+      .filter((product) => product.sourceUrls.length > 0)
+      .filter((product) => hasModelImage(product.brand, product.model))
+      .sort((a, b) => {
+        const aPrice = a.exactSizePriceUsd ?? a.modelFromPriceUsd ?? Number.NEGATIVE_INFINITY;
+        const bPrice = b.exactSizePriceUsd ?? b.modelFromPriceUsd ?? Number.NEGATIVE_INFINITY;
+        return bPrice - aPrice;
+      });
+    const product = candidates[0];
+    const sourceUrl = product ? getPreferredProductUrl(product) : null;
+
+    return product && sourceUrl ? { label: side.label, product, sourceUrl } : null;
+  });
+
+  if (cards.some((card) => card === null)) return [];
+
+  return cards.filter((card): card is ModelComparisonCard => card !== null);
+}
+
+function stripManagedModelSections(markdown: string): string {
+  return markdown
+    .replace(/\n+## Data notes[\s\S]*?(?=\n+## |$)/g, "")
+    .replace(/\n+## Related reading[\s\S]*?(?=\n+## |$)/gi, "")
+    .replace(/\n+\*\*Affiliate disclosure:\*\*.*(?:\n|$)/gi, "\n")
+    .replace(/\n+## Not sure which trampoline fits best\?[\s\S]*?(?=\n+## |$)/gi, "");
+}
+
+function prepareModelComparisonContent(markdown: string, hasPromos: boolean): string {
+  const cleaned = stripManagedModelSections(markdown).trim();
+  const sharedBlocks = [
+    "<AffiliateDisclosureSlot />",
+    hasPromos ? "<ComparePromoCtaSlot />" : null,
+    "<ModelCardsSlot />",
+    "<QuizCtaSlot />",
+  ].filter(Boolean).join("\n\n");
+  const withIntroBlocks = cleaned.includes("\n## Quick verdict")
+    ? cleaned.replace(/\n+## Quick verdict/, `\n\n${sharedBlocks}\n\n## Quick verdict`)
+    : `${cleaned}\n\n${sharedBlocks}`;
+
+  return `${withIntroBlocks.trim()}\n\n<RelatedReadingSlot />`;
+}
+
 export async function generateStaticParams() {
-  return getApprovedComparisons().map((comparison) => ({ pair: comparison.slug }));
+  return [
+    ...getApprovedComparisons().map((comparison) => ({ pair: comparison.slug })),
+    ...getApprovedModelComparisons().map((comparison) => ({ pair: comparison.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pair } = await params;
   const comparison = getApprovedComparison(pair);
-  if (!comparison) return {};
+  if (!comparison) {
+    const modelComparison = getApprovedModelComparison(pair);
+    if (!modelComparison) return {};
+
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
+    return {
+      title: modelComparison.metaTitle,
+      description: modelComparison.metaDescription,
+      alternates: { canonical: `${siteUrl}/compare/${modelComparison.slug}/` },
+      openGraph: {
+        title: modelComparison.title,
+        description: modelComparison.metaDescription,
+        url: `${siteUrl}/compare/${modelComparison.slug}/`,
+      },
+    };
+  }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
+  const description = comparison.metaDescription ?? comparison.intro;
   return {
     title: `${comparison.title} — Trampoline Comparison 2026`,
-    description: comparison.intro,
+    description,
     alternates: { canonical: `${siteUrl}${comparison.href}` },
     openGraph: {
       title: `${comparison.title} Trampolines`,
-      description: comparison.intro,
+      description,
       url: `${siteUrl}${comparison.href}`,
     },
   };
 }
 
+function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
+  const promoCtas = buildPromoCtasFromLabels(article.labels);
+  const modelCards = buildModelComparisonCards(article);
+  const content = prepareModelComparisonContent(article.content, promoCtas.length > 0);
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Compare", item: `${siteUrl}/compare/` },
+      { "@type": "ListItem", position: 3, name: article.title, item: `${siteUrl}/compare/${article.slug}/` },
+    ],
+  };
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.metaDescription,
+    url: `${siteUrl}/compare/${article.slug}/`,
+    author: { "@type": "Organization", name: "Bounce Arena", url: siteUrl },
+    publisher: { "@type": "Organization", name: "Bounce Arena", url: siteUrl },
+  };
+
+  const components = {
+    h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h1 className="mb-6 text-3xl font-bold leading-tight text-black sm:text-4xl" {...props} />
+    ),
+    h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h2 className="mb-4 mt-10 text-2xl font-bold text-black" {...props} />
+    ),
+    h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h3 className="mb-3 mt-7 text-lg font-bold text-black" {...props} />
+    ),
+    p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
+      <p className="mb-5 text-[17px] leading-8 text-black/75" {...props} />
+    ),
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
+      <ul className="mb-6 list-disc space-y-2 pl-6 text-[17px] leading-8 text-black/75" {...props} />
+    ),
+    li: (props: React.HTMLAttributes<HTMLLIElement>) => <li {...props} />,
+    a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+      <a className="text-[#38b1ab] underline decoration-[#38b1ab]/40 underline-offset-4" {...props} />
+    ),
+    strong: (props: React.HTMLAttributes<HTMLElement>) => (
+      <strong className="font-semibold text-black" {...props} />
+    ),
+    table: (props: React.TableHTMLAttributes<HTMLTableElement>) => (
+      <div className="mb-8 overflow-x-auto rounded-xl border border-black/[0.08] shadow-sm">
+        <table className="min-w-max border-separate border-spacing-0 text-sm" {...props} />
+      </div>
+    ),
+    thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+      <thead className="bg-[#38b1ab] text-white" {...props} />
+    ),
+    th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
+      <th className="border-b border-black/[0.08] px-4 py-3 text-left font-semibold" {...props} />
+    ),
+    td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
+      <td className="border-b border-black/[0.05] px-4 py-2.5 align-top text-black/80" {...props} />
+    ),
+    AffiliateDisclosureSlot: () => <AffiliateDisclosure className="mb-8" />,
+    ComparePromoCtaSlot: () => <ComparePromoCta promos={promoCtas} />,
+    ModelCardsSlot: () => {
+      if (modelCards.length < 2) return null;
+
+      return (
+        <section className="mb-8">
+          <h2 className="mb-4 text-xl font-bold text-black">Featured Models</h2>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {modelCards.map(({ label, product, sourceUrl }, index) => (
+              <a
+                key={`${article.slug}-${product.sourceRowIndex}`}
+                href={sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow sponsored"
+                aria-label={`Open ${label} in a new tab`}
+                className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,177,171,0.14),_transparent_62%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <ModelImage
+                    brand={product.brand}
+                    model={product.model}
+                    alt={`${product.brand} ${product.model}`}
+                    sizes="(min-width: 1024px) 44vw, 100vw"
+                    priority={index === 0}
+                    className="p-5 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                  />
+                </div>
+
+                <div className="space-y-3 p-5">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-[#38b1ab]">
+                      {product.brand}
+                    </p>
+                    <h3 className="mt-1 text-lg font-semibold leading-snug text-black">
+                      {label}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm leading-6 text-black/50">
+                    {[product.shape, product.size, product.springSystem].filter(Boolean).join(" · ")}
+                  </p>
+
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-[#38b1ab] transition-all duration-200 group-hover:gap-1.5 group-hover:text-[#2e9a94]">
+                    View model
+                    <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                      →
+                    </span>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      );
+    },
+    QuizCtaSlot: () => (
+      <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+        <h2 className="mb-2 text-lg font-bold text-black">Not sure which trampoline fits best?</h2>
+        <p className="mb-4 max-w-2xl text-sm leading-6 text-black/60">
+          Take the quiz and get a tailored trampoline recommendation based on yard size,
+          budget, safety priorities, and who will be using it.
+        </p>
+        <Link
+          href="/quiz/"
+          className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+        >
+          Take the quiz →
+        </Link>
+      </section>
+    ),
+    RelatedReadingSlot: () => (
+      <section className="mt-12 rounded-xl border border-black/[0.08] bg-black/[0.02] p-6">
+        <h2 className="mb-4 text-lg font-bold text-black">Related Reading</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/quiz/"
+            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+          >
+            Trampoline quiz
+          </Link>
+          <Link
+            href="/compare/"
+            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+          >
+            All comparisons
+          </Link>
+          <Link
+            href="/models/"
+            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+          >
+            Trampoline models
+          </Link>
+        </div>
+      </section>
+    ),
+  };
+
+  return (
+    <>
+      <JsonLd data={breadcrumb} />
+      <JsonLd data={articleSchema} />
+
+      <article className="mx-auto max-w-4xl px-5 py-10 sm:px-8">
+        <nav className="mb-6 text-sm text-black/40">
+          <Link href="/" className="transition-colors hover:text-black">Home</Link>
+          <span className="mx-2">/</span>
+          <Link href="/compare/" className="transition-colors hover:text-black">Compare</Link>
+          <span className="mx-2">/</span>
+          <span className="text-black">{article.title}</span>
+        </nav>
+
+        <div className="max-w-3xl">
+          <MDXRemote
+            source={content}
+            components={components}
+            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          />
+        </div>
+      </article>
+    </>
+  );
+}
+
 export default async function ComparePairPage({ params }: Props) {
   const { pair } = await params;
   const comparison = getApprovedComparison(pair);
-  if (!comparison) notFound();
+  if (!comparison) {
+    const modelComparison = getApprovedModelComparison(pair);
+    if (!modelComparison) notFound();
+    return <ModelComparisonPage article={modelComparison} />;
+  }
 
   const { brandA, brandB } = comparison;
-  const introParagraphs = splitIntroIntoParagraphs(comparison.intro);
+  const introParagraphs =
+    comparison.introParagraphs && comparison.introParagraphs.length > 0
+      ? comparison.introParagraphs
+      : splitIntroIntoParagraphs(comparison.intro);
   const featuredModelA = buildFeaturedModel(brandA.products);
   const featuredModelB = buildFeaturedModel(brandB.products);
-  const showAffiliateDisclosure = [featuredModelA, featuredModelB].some(
+  const featuredModels = [featuredModelA, featuredModelB].filter(
+    (model): model is FeaturedModel => model !== null,
+  );
+  const promoCtas = buildPromoCtas(brandA, brandB);
+  const showAffiliateDisclosure = comparison.forceAffiliateDisclosure || [featuredModelA, featuredModelB].some(
     (model) => model?.sourceUrl && isAffiliateBrand(model.brand),
   );
   const allProducts = [...brandA.products, ...brandB.products];
-  const keyTakeaways = buildCompareTakeaways(brandA, brandB);
+  const hasFullSpecData = comparison.brandAHasData && comparison.brandBHasData;
+  const keyTakeaways =
+    comparison.keyTakeaways && comparison.keyTakeaways.length > 0
+      ? comparison.keyTakeaways
+      : hasFullSpecData
+        ? buildCompareTakeaways(brandA, brandB)
+        : [];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
     .filter((item) => item.slug !== comparison.slug)
@@ -191,22 +548,38 @@ export default async function ComparePairPage({ params }: Props) {
             {comparison.title}
           </h1>
           <div className="mb-6 flex items-center gap-4 sm:flex-wrap sm:gap-6">
-            <Link
-              href={`/brands/${brandA.slug}/`}
-              className="group flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48 sm:flex-none"
-            >
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
-                <BrandLogoAvatar name={brandA.name} size={104} fillContainer />
+            {comparison.brandAHasData ? (
+              <Link
+                href={`/brands/${brandA.slug}/`}
+                className="group flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48 sm:flex-none"
+              >
+                <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
+                  <BrandLogoAvatar name={brandA.name} size={104} fillContainer />
+                </div>
+              </Link>
+            ) : (
+              <div className="flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 sm:h-48 sm:w-48 sm:flex-none">
+                <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
+                  <BrandLogoAvatar name={brandA.name} size={104} fillContainer />
+                </div>
               </div>
-            </Link>
-            <Link
-              href={`/brands/${brandB.slug}/`}
-              className="group flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48 sm:flex-none"
-            >
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
-                <BrandLogoAvatar name={brandB.name} size={104} fillContainer />
+            )}
+            {comparison.brandBHasData ? (
+              <Link
+                href={`/brands/${brandB.slug}/`}
+                className="group flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 transition-all hover:border-[#38b1ab]/40 hover:shadow-sm sm:h-48 sm:w-48 sm:flex-none"
+              >
+                <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
+                  <BrandLogoAvatar name={brandB.name} size={104} fillContainer />
+                </div>
+              </Link>
+            ) : (
+              <div className="flex aspect-square min-w-0 flex-1 items-center justify-center rounded-2xl border border-black/[0.08] bg-[#f7fbfa] p-3 sm:h-48 sm:w-48 sm:flex-none">
+                <div className="flex h-full w-full items-center justify-center rounded-xl bg-white p-3 sm:p-4">
+                  <BrandLogoAvatar name={brandB.name} size={104} fillContainer />
+                </div>
               </div>
-            </Link>
+            )}
           </div>
           <div className="mb-4 max-w-3xl space-y-4 text-black/60">
             {introParagraphs.map((paragraph, index) => (
@@ -217,11 +590,13 @@ export default async function ComparePairPage({ params }: Props) {
           </div>
           {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
 
-          {featuredModelA && featuredModelB && (
+          <ComparePromoCta promos={promoCtas} />
+
+          {featuredModels.length > 0 && (
             <section className="mb-8">
               <h2 className="mb-4 text-xl font-bold text-black">Featured Models</h2>
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                {[featuredModelA, featuredModelB].map((model, index) => {
+                {featuredModels.map((model, index) => {
                   const cardContent = (
                     <>
                       <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
@@ -302,8 +677,8 @@ export default async function ComparePairPage({ params }: Props) {
                     </article>
                   );
                 })}
-              </div>
-            </section>
+            </div>
+          </section>
           )}
 
           <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
@@ -337,24 +712,43 @@ export default async function ComparePairPage({ params }: Props) {
                 </ul>
               </div>
             )}
-            <ComparisonTable products={allProducts} />
+            {hasFullSpecData ? <ComparisonTable products={allProducts} /> : null}
+            {!hasFullSpecData && comparison.sharedSpecs && comparison.sharedSpecs.length > 0 && (
+              <div className="mt-3 rounded-xl border border-black/[0.08] bg-[#f7f8f8] px-4 py-4">
+                <p className="mb-3 text-sm font-medium text-black/50">Shared across all models</p>
+                <dl className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 lg:grid-cols-4">
+                  {comparison.sharedSpecs.map((spec) => (
+                    <div key={`${spec.label}-${spec.value}`}>
+                      <dt className="text-[11px] font-semibold uppercase tracking-wide text-black/40">
+                        {spec.label}
+                      </dt>
+                      <dd className="mt-0.5 text-sm text-black/80">{spec.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
           </section>
 
           <section className="rounded-xl border border-black/[0.08] bg-black/[0.02] p-6">
             <h2 className="text-lg font-bold text-black mb-4">Related Reading</h2>
             <div className="flex flex-wrap gap-3 mb-4">
-              <Link
-                href={`/brands/${brandA.slug}/`}
-                className="text-sm px-3 py-2 rounded-lg bg-white border border-black/[0.08] text-black/70 hover:border-[#38b1ab]/40 hover:text-black transition-colors"
-              >
-                {brandA.name} brand page
-              </Link>
-              <Link
-                href={`/brands/${brandB.slug}/`}
-                className="text-sm px-3 py-2 rounded-lg bg-white border border-black/[0.08] text-black/70 hover:border-[#38b1ab]/40 hover:text-black transition-colors"
-              >
-                {brandB.name} brand page
-              </Link>
+              {comparison.brandAHasData && (
+                <Link
+                  href={`/brands/${brandA.slug}/`}
+                  className="text-sm px-3 py-2 rounded-lg bg-white border border-black/[0.08] text-black/70 hover:border-[#38b1ab]/40 hover:text-black transition-colors"
+                >
+                  {brandA.name} brand page
+                </Link>
+              )}
+              {comparison.brandBHasData && (
+                <Link
+                  href={`/brands/${brandB.slug}/`}
+                  className="text-sm px-3 py-2 rounded-lg bg-white border border-black/[0.08] text-black/70 hover:border-[#38b1ab]/40 hover:text-black transition-colors"
+                >
+                  {brandB.name} brand page
+                </Link>
+              )}
             </div>
             {relatedComparisons.length > 0 && (
               <div className="flex flex-wrap gap-3">

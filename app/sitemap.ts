@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllBrands } from "@/lib/products";
 import { getApprovedComparisons } from "@/lib/comparisons";
+import { getApprovedModelComparisons } from "@/lib/modelComparisons";
 import { REVIEW_CARDS } from "@/lib/reviews";
 import { getAllBlogPosts } from "@/lib/blog";
 
@@ -12,6 +13,7 @@ const DATA_UPDATED = new Date("2026-04-01");
 export default function sitemap(): MetadataRoute.Sitemap {
   const brands = getAllBrands();
   const comparisons = getApprovedComparisons();
+  const modelComparisons = getApprovedModelComparisons();
   const blogPosts = getAllBlogPosts();
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -43,6 +45,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const modelComparePages: MetadataRoute.Sitemap = modelComparisons.map((comparison) => ({
+    url: `${SITE_URL}/compare/${comparison.slug}/`,
+    lastModified: DATA_UPDATED,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   const reviewPages: MetadataRoute.Sitemap = REVIEW_CARDS.map((review) => ({
     url: `${SITE_URL}${review.href}`,
     lastModified: new Date(review.publishedAt),
@@ -57,5 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...brandPages, ...comparePages, ...reviewPages, ...blogPages];
+  return [
+    ...staticPages,
+    ...brandPages,
+    ...comparePages,
+    ...modelComparePages,
+    ...reviewPages,
+    ...blogPages,
+  ];
 }

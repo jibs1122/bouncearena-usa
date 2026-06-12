@@ -100,10 +100,11 @@ function productSlug(brand: string, model: string, size: string): string {
   return `${brandSlug(brand)}-${brandSlug(model)}-${brandSlug(size)}`;
 }
 
-function rowToProduct(row: Record<string, string>): Product {
+function rowToProduct(row: Record<string, string>, sourceRowIndex: number): Product {
   const priceFields = parsePriceFields(row);
 
   return {
+    sourceRowIndex,
     brand: (row["Brand"] ?? "").trim(),
     model: (row["model"] ?? row["Model"] ?? "").trim(),
     size: (row["size"] ?? row["Size"] ?? "").trim(),
@@ -184,7 +185,7 @@ export function getAllProducts(): Product[] {
 
   const products = data
     .filter((row) => row["Brand"]?.trim())
-    .map(rowToProduct);
+    .map((row, sourceRowIndex) => rowToProduct(row, sourceRowIndex));
 
   // Silently drop rows missing required fields
   const validProducts = products.filter(

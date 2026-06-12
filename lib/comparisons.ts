@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { getAllBrands, brandSlug } from '@/lib/products';
 import type { Brand } from '@/lib/types';
 
@@ -11,6 +13,12 @@ type ComparisonDefinition = {
   dataBrandA: string;
   dataBrandB: string;
   intro: string;
+  introParagraphs?: string[];
+  keyTakeaways?: string[];
+  sharedSpecs?: Array<{ label: string; value: string }>;
+  metaDescription?: string;
+  forceAffiliateDisclosure?: boolean;
+  source?: 'manual' | 'draft';
 };
 
 export type ApprovedComparison = ComparisonDefinition & {
@@ -18,9 +26,17 @@ export type ApprovedComparison = ComparisonDefinition & {
   href: string;
   brandA: Brand;
   brandB: Brand;
+  brandAHasData: boolean;
+  brandBHasData: boolean;
 };
 
-const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
+const DRAFT_COMPARISON_DIR = path.join(
+  process.cwd(),
+  'blog articles',
+  'new comparison articles',
+);
+
+const BASE_COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
   {
     slug: 'springfree-vs-acon',
     labelA: 'Springfree',
@@ -383,14 +399,157 @@ const COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
   },
 ];
 
+function parseFrontmatter(markdown: string): {
+  frontmatter: Record<string, string>;
+  body: string;
+} {
+  const match = markdown.match(/^---\n([\s\S]*?)\n---\n?/);
+  if (!match) return { frontmatter: {}, body: markdown };
+
+  const frontmatter: Record<string, string> = {};
+  for (const line of match[1].split('\n')) {
+    const keyValue = line.match(/^([^:]+):\s*(.*)$/);
+    if (!keyValue) continue;
+    frontmatter[keyValue[1].trim()] = keyValue[2].trim();
+  }
+
+  return {
+    frontmatter,
+    body: markdown.slice(match[0].length),
+  };
+}
+
+function collectIntroParagraphs(lines: string[], startIndex: number, endIndex: number): string[] {
+  const paragraphs: string[] = [];
+  let current: string[] = [];
+
+  for (let i = startIndex; i < endIndex; i += 1) {
+    const line = lines[i].trim();
+    if (line.startsWith('**Affiliate disclosure:**')) break;
+    if (!line) {
+      if (current.length > 0) {
+        paragraphs.push(current.join(' '));
+        current = [];
+      }
+      continue;
+    }
+    current.push(line);
+  }
+
+  if (current.length > 0) paragraphs.push(current.join(' '));
+  return paragraphs;
+}
+
+function collectDraftTakeaways(lines: string[], keyTakeawaysIndex: number): string[] {
+  if (keyTakeawaysIndex < 0) return [];
+
+  const takeaways: string[] = [];
+  for (let i = keyTakeawaysIndex + 1; i < lines.length; i += 1) {
+    const line = lines[i].trim();
+    if (line === 'Shared across all models') break;
+    if (!line) continue;
+    if (!line.startsWith('- ')) {
+      if (takeaways.length > 0) break;
+      continue;
+    }
+    takeaways.push(line.slice(2).trim());
+  }
+  return takeaways;
+}
+
+function collectDraftSharedSpecs(lines: string[], sharedIndex: number): Array<{ label: string; value: string }> {
+  if (sharedIndex < 0) return [];
+
+  const values = lines
+    .slice(sharedIndex + 1)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => !line.startsWith('#'));
+
+  const specs: Array<{ label: string; value: string }> = [];
+  for (let i = 0; i < values.length - 1; i += 2) {
+    specs.push({ label: values[i], value: values[i + 1] });
+  }
+  return specs;
+}
+
+function parseDraftComparison(slug: string, markdown: string): ComparisonDefinition | null {
+  const { frontmatter, body } = parseFrontmatter(markdown);
+  const lines = body.split('\n');
+  const h1Index = lines.findIndex((line) => line.startsWith('# '));
+  if (h1Index < 0) return null;
+
+  const h1 = lines[h1Index].replace(/^#\s+/, '').trim();
+  const titleParts = h1.split(/\s+vs\s+/i);
+  if (titleParts.length !== 2) return null;
+
+  const fullSpecIndex = lines.findIndex((line) => /^##\s+Full Spec Comparison\s*$/i.test(line.trim()));
+  const introParagraphs = collectIntroParagraphs(
+    lines,
+    h1Index + 1,
+    fullSpecIndex >= 0 ? fullSpecIndex : lines.length,
+  );
+  const keyTakeawaysIndex = lines.findIndex((line) => line.trim().toLowerCase() === 'key takeaways');
+  const sharedIndex = lines.findIndex((line) => line.trim() === 'Shared across all models');
+
+  return {
+    slug,
+    labelA: titleParts[0].trim(),
+    labelB: titleParts[1].trim(),
+    dataBrandA: titleParts[0].trim(),
+    dataBrandB: titleParts[1].trim(),
+    intro: introParagraphs.join(' '),
+    introParagraphs,
+    keyTakeaways: collectDraftTakeaways(lines, keyTakeawaysIndex),
+    sharedSpecs: collectDraftSharedSpecs(lines, sharedIndex),
+    metaDescription: frontmatter['meta-description'],
+    forceAffiliateDisclosure: true,
+    source: 'draft',
+  };
+}
+
+function getDraftComparisonDefinitions(): ComparisonDefinition[] {
+  if (!fs.existsSync(DRAFT_COMPARISON_DIR)) return [];
+
+  return fs
+    .readdirSync(DRAFT_COMPARISON_DIR)
+    .filter((file) => file.endsWith('.md'))
+    .filter((file) => file !== 'comparison-article-production-plan.md')
+    .sort()
+    .map((file) => {
+      const slug = file.replace(/\.md$/i, '');
+      const markdown = fs.readFileSync(path.join(DRAFT_COMPARISON_DIR, file), 'utf8');
+      return parseDraftComparison(slug, markdown);
+    })
+    .filter((definition): definition is ComparisonDefinition => definition !== null);
+}
+
+function getComparisonDefinitions(): ComparisonDefinition[] {
+  const seen = new Set(BASE_COMPARISON_DEFINITIONS.map((definition) => definition.slug));
+  const drafts = getDraftComparisonDefinitions().filter((definition) => !seen.has(definition.slug));
+  return [...BASE_COMPARISON_DEFINITIONS, ...drafts];
+}
+
 function hydrateComparison(
   definition: ComparisonDefinition,
   brandsBySlug: Map<string, Brand>,
 ): ApprovedComparison | null {
-  const brandA = brandsBySlug.get(brandSlug(definition.dataBrandA));
-  const brandB = brandsBySlug.get(brandSlug(definition.dataBrandB));
+  const brandA = brandsBySlug.get(brandSlug(definition.dataBrandA)) ?? {
+    name: definition.labelA,
+    slug: brandSlug(definition.labelA),
+    products: [],
+    fromPriceUsd: null,
+    sourceUrl: null,
+  };
+  const brandB = brandsBySlug.get(brandSlug(definition.dataBrandB)) ?? {
+    name: definition.labelB,
+    slug: brandSlug(definition.labelB),
+    products: [],
+    fromPriceUsd: null,
+    sourceUrl: null,
+  };
 
-  if (!brandA || !brandB) {
+  if (!brandA.name || !brandB.name) {
     return null;
   }
 
@@ -400,12 +559,14 @@ function hydrateComparison(
     href: `/compare/${definition.slug}/`,
     brandA,
     brandB,
+    brandAHasData: brandA.products.length > 0,
+    brandBHasData: brandB.products.length > 0,
   };
 }
 
 export function getApprovedComparisons(limit?: number): ApprovedComparison[] {
   const brandsBySlug = new Map(getAllBrands().map((brand) => [brand.slug, brand]));
-  const comparisons = COMPARISON_DEFINITIONS
+  const comparisons = getComparisonDefinitions()
     .map((definition) => hydrateComparison(definition, brandsBySlug))
     .filter((comparison): comparison is ApprovedComparison => comparison !== null);
 

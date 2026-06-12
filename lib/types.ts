@@ -2,6 +2,7 @@ export type GroundType = 'above-ground' | 'in-ground' | 'both';
 export type SafetyNetAvailability = 'yes' | 'no' | 'optional' | 'unknown';
 
 export interface Product {
+  sourceRowIndex: number;
   brand: string;
   model: string;
   size: string;

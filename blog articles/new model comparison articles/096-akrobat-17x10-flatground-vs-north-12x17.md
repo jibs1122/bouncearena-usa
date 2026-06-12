@@ -1,0 +1,55 @@
+---
+comparison_id: 96
+title: Akrobat 17x10 FlatGround vs North 12x17
+slug: akrobat-17x10-flatground-vs-north-12x17
+comparison_type: model
+publish_status: needs_review
+seo:
+  meta_title: Akrobat 17x10 FlatGround vs North 12x17 — Trampoline Comparison 2026
+  meta_description: "Both are premium in-ground rectangles, so the split is warranty and size. The Akrobat 17x10 Flat is rated to 331 lb single-user at about $3,299, with a"
+data_issues: []
+assumptions:
+- 'North 12x17: Normalised North 12x17 to the 17ft x 12ft North In Ground row.'
+sides:
+- label: Akrobat 17x10 FlatGround
+  row_indices:
+  - 29
+  matched_models:
+  - Akrobat Primus Flat 17x10 (17x10ft)
+- label: North 12x17
+  row_indices:
+  - 136
+  matched_models:
+  - North 17ft x 12ft North In Ground Trampoline (17x12ft)
+---
+# Akrobat 17x10 FlatGround vs North 12x17
+
+Both are premium in-ground rectangles, so the split is warranty and size. The Akrobat 17x10 Flat is rated to 331 lb single-user at about $3,299, with a lifetime frame, 12 years on springs and 5 years on the mat and pads.
+
+## Quick verdict
+
+Akrobat carries the longer warranty; North gives a slightly wider rectangle at a similar price.
+
+## Full spec comparison
+
+| Specification | Akrobat 17x10 FlatGround | North 12x17 |
+|---|---|---|
+| Brand | Akrobat | North |
+| Model / line | Akrobat Primus Flat 17x10 (17x10ft) | North 17ft x 12ft North In Ground Trampoline (17x12ft) |
+| Size | 17x10ft | 17x12ft |
+| Shape | Rectangular | Rectangle |
+| Install type | inground | inground |
+| Safety net | yes | optional |
+| Overall footprint | 10ft × 17ft | 12ft × 17ft |
+| Spring system | AkroSPRING Pro System | Coil springs |
+| Spring count | 110 | — |
+| Spring length | 8.5" | — |
+| Max single-user weight | 331 lb | 243 lb |
+| Mat material | AkroVENT Sport | — |
+| US standard | Unknown | Yes (ASTM) |
+| Warranty | Frame Lifetime; mat 5 yr; springs 12 yr; net 5 yr | Frame 10 yr; mat 5 yr; springs 5 yr; net 2 yr |
+| Price | $3,299 | $3,249 |
+
+## What matters most
+
+The Akrobat 17x10 Flat is rated to 331 lb single-user at about $3,299, with a lifetime frame, 12 years on springs and 5 years on the mat and pads. The North 17x12 In-Ground is rated to 243 lb single-user at about $3,249, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
