@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Vuly Thunder 2 Pro vs ACON 16 HD — Trampoline Comparison 2026
-  meta_description: "The split is round leaf-spring versus rectangular coil. The Thunder 2 Pro is a 163-inch round at about $1,649, rated to 330 lb single-user, with a 10-year"
+  meta_description: "Vuly Thunder 2 Pro vs ACON 16 HD: a round leaf-spring trampoline against a performance coil rectangle. Family bouncing vs a more even bounce for flips and tricks."
 data_issues: []
 assumptions:
 - 'Vuly Thunder 2 Pro: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -25,11 +25,11 @@ sides:
 ---
 # Vuly Thunder 2 Pro vs ACON 16 HD
 
-The split is round leaf-spring versus rectangular coil. The Thunder 2 Pro is a 163-inch round at about $1,649, rated to 330 lb single-user, with a 10-year frame and 5 years on the mat.
+This pairs a round leaf-spring trampoline with a performance coil rectangle. The Thunder 2 Pro keeps a spring bounce out of the jumping path; the ACON 16 HD is built around a rectangular shape and a firmer, more even rebound.
 
 ## Quick verdict
 
-Thunder 2 Pro suits family bouncing with springs out of the path; the 16 HD suits older kids and tricks wanting a rectangular bounce.
+Choose the Thunder 2 Pro for general family bouncing with the springs moved out of reach. Choose the ACON 16 HD if older kids are doing flips or tricks and want the even bounce a rectangle gives.
 
 ## Full spec comparison
 
@@ -46,7 +46,7 @@ Thunder 2 Pro suits family bouncing with springs out of the path; the 16 HD suit
 | Spring system | Leaf springs | Coil springs (Performance Springs) |
 | Spring count | — | 140 |
 | Spring length | — | 10" |
-| Max single-user weight | 330 lb | No published single-user limit; ACON recommends 300 lb |
+| Max single-user weight | 330 lb | No published single-user limit; ACON recommends about 300 lb |
 | Frame material | — | Galvanized and powder-coated steel |
 | Mat material | — | UV-treated cross-sewn polypropylene |
 | US standard | Unknown | Yes (ASTM) |
@@ -55,4 +55,4 @@ Thunder 2 Pro suits family bouncing with springs out of the path; the 16 HD suit
 
 ## What matters most
 
-The Thunder 2 Pro is a 163-inch round at about $1,649, rated to 330 lb single-user, with a 10-year frame and 5 years on the mat. The ACON 16 HD is a rectangle at about $2,499, recommends up to 330 lb per single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+Shape drives the difference in use. The Thunder 2 Pro is a 163-inch round at about $1,649 that gently centers jumpers, which suits casual family use. The ACON 16 HD is a rectangle at about $2,499 that spreads the bounce evenly across the mat, which is what kids working on flips and tricks want. The Thunder 2 Pro is rated to 330 lb per jumper; ACON publishes no fixed single-user limit but recommends about 300 lb, and backs the frame for 10 years with 5 years on the mat and springs and 2 on the pads. The Thunder 2 Pro matches the frame and mat terms but covers its leaf springs for 1 year.

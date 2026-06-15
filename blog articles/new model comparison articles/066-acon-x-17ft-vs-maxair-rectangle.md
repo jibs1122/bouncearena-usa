@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: ACON X 17ft vs MaxAir Rectangle — Trampoline Comparison 2026
-  meta_description: "Both are large rectangles, but they sit far apart on build standard and purpose. The ACON X 17ft is above-ground, recommends up to 330 lb per single-user"
+  meta_description: "ACON X 17ft vs MaxAir Rectangle: a premium consumer rectangle against a custom pro-style build that costs roughly twice as much and is aimed at gym-grade use."
 data_issues: []
 assumptions:
 - 'MaxAir Rectangle: Used MaxAir 10ft x 20ft Super Tramp as the representative large
@@ -25,11 +25,11 @@ sides:
 ---
 # ACON X 17ft vs MaxAir Rectangle
 
-Both are large rectangles, but they sit far apart on build standard and purpose. The ACON X 17ft is above-ground, recommends up to 330 lb per single-user, at about $3,999, with a 10-year frame and 5 years on the mat and springs.
+These sit far apart on purpose and price. The ACON X 17ft is a premium consumer rectangle for serious family use; MaxAir's rectangles are custom, pro-style builds aimed at gymnastics-grade installs.
 
 ## Quick verdict
 
-The ACON X is the premium consumer rectangle for serious family use; MaxAir is a specialist pro-style build for gymnastics-grade installs.
+For backyard use, even demanding use, the ACON X 17ft is the realistic choice. MaxAir belongs in the conversation only if you are after a gym-grade training setup and the cost is secondary.
 
 ## Full spec comparison
 
@@ -46,7 +46,7 @@ The ACON X is the premium consumer rectangle for serious family use; MaxAir is a
 | Spring system | Coil springs (Performance Springs) | Coil springs |
 | Spring count | — | 120 side + 16 corner |
 | Spring length | — | 11.75 in side / 13.65 in corner |
-| Max single-user weight | No published single-user limit; ACON recommends 300 lb | 250 lb |
+| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | 250 lb |
 | Frame material | Galvanized and powder-coated steel | steel frame |
 | Mat material | UV-treated cross-sewn polypropylene | Two-String Fly Bed; 100% multifilament polyester |
 | US standard | Yes (ASTM) | Unknown |
@@ -55,4 +55,4 @@ The ACON X is the premium consumer rectangle for serious family use; MaxAir is a
 
 ## What matters most
 
-The ACON X 17ft is above-ground, recommends up to 330 lb per single-user, at about $3,999, with a 10-year frame and 5 years on the mat and springs. MaxAir's rectangles are custom, pro-style builds from about $8,500 up, rated to 250 lb single-user, with a 5-year frame and 1 year on the mat.
+The price gap reflects two different products. The ACON X 17ft is about $3,999, above-ground, with a 10-year frame and 5 years on the mat and springs, and ACON recommends about 300 lb per jumper. MaxAir's rectangles start around $8,500 and are custom builds rated to 250 lb, with a 5-year frame and 1 year on the mat, reflecting a specialist rather than a long-warranty consumer product. So unless you specifically need a pro-style training rig, the ACON X covers serious family use at less than half the cost and with longer component cover.

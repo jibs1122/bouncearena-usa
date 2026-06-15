@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Vuly Ultra 2 Pro vs Thunder 2 Pro — Trampoline Comparison 2026
-  meta_description: "Both are round Vuly Pro models with a 330 lb single-user limit, a 10-year frame, and 5 years on the mat. The real split is coil versus leaf spring: Ultra"
+  meta_description: "Vuly Ultra 2 Pro vs Thunder 2 Pro: both round Vuly Pro models with a 330 lb limit. The difference is coil springs vs the leaf-spring system, plus a big size and price gap."
 data_issues: []
 assumptions:
 - 'Vuly Ultra 2 Pro: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -25,11 +25,11 @@ sides:
 ---
 # Vuly Ultra 2 Pro vs Thunder 2 Pro
 
-Both are round Vuly Pro models with a 330 lb single-user limit, a 10-year frame, and 5 years on the mat. The real split is coil versus leaf spring: Ultra 2 Pro uses coil springs with 5 years of spring cover, while Thunder 2 Pro uses Vuly's leaf-spring system with 1 year on the leaf springs.
+Both are round Vuly Pro models with a 330 lb limit and a 10-year frame. The Ultra 2 Pro uses coil springs; the Thunder 2 Pro uses Vuly's leaf-spring system in a much larger, pricier build.
 
 ## Quick verdict
 
-Ultra 2 Pro is the better-value Pro model; Thunder 2 Pro is the larger premium leaf-spring option.
+Pick the Ultra 2 Pro for a firmer coil bounce at a far lower price. Pick the Thunder 2 Pro if you want the springless-style leaf edge and the bigger jumping area, and the budget allows it.
 
 ## Full spec comparison
 
@@ -51,4 +51,4 @@ Ultra 2 Pro is the better-value Pro model; Thunder 2 Pro is the larger premium l
 
 ## What matters most
 
-The real split is coil versus leaf spring: Ultra 2 Pro uses coil springs with 5 years of spring cover, while Thunder 2 Pro uses Vuly's leaf-spring system with 1 year on the leaf springs. The Large Ultra 2 Pro is about $639; the Large Thunder 2 Pro is about $1,649.
+These land far apart on price because they are not the same size. The Ultra 2 Pro is about $639; the Thunder 2 Pro is about $1,649 in its larger 163-inch round. The leaf-spring system on the Thunder moves the springs to the frame base, away from where kids land, which is the main safety reason to pay more. Warranty favors the coil model on springs (5 years vs 1 year on the leaf springs), while both match on frame and mat. Decide on bounce feel and budget first; the size difference follows from which one you choose.

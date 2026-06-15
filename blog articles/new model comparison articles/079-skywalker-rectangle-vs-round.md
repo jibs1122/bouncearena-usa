@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Skywalker Rectangle vs Round — Trampoline Comparison 2026
-  meta_description: "Same brand, so the split is shape and weight limit. Skywalker's Classic rounds run from about $182 to $799, rated to 175 to 400 lb single-user, with a"
+  meta_description: "Skywalker Rectangle vs Round: shape tracks use here. Rounds are the entry-tier family shape; the 17x10 Premium Rectangle suits flips and tricks with the highest limit."
 data_issues: []
 assumptions:
 - 'Skywalker Rectangle: Used the 17ft x 10ft Premium Rectangle as the representative
@@ -41,11 +41,11 @@ sides:
 ---
 # Skywalker Rectangle vs Round
 
-Same brand, so the split is shape and weight limit. Skywalker's Classic rounds run from about $182 to $799, rated to 175 to 400 lb single-user, with a 3-year frame and 1 year on the mat and springs.
+Shape is the real choice, and with Skywalker it also tracks build tier. The rounds are the entry-tier family shape; the Premium rectangle is the highest-capacity model and suits kids doing flips or tricks.
 
 ## Quick verdict
 
-The rounds are the entry-tier family shape; the Premium rectangle suits tricks with the highest weight limit.
+Choose a round for general family use and tighter yards, where the lower price wins. Choose the 17x10 Premium Rectangle if anyone is working on flips or tricks and you want Skywalker's sturdiest build.
 
 ## Full spec comparison
 
@@ -69,4 +69,4 @@ The rounds are the entry-tier family shape; the Premium rectangle suits tricks w
 
 ## What matters most
 
-Skywalker's Classic rounds run from about $182 to $799, rated to 175 to 400 lb single-user, with a 3-year frame and 1 year on the mat and springs. The 17x10 Premium Rectangle is rated to 625 lb single-user at about $1,599, with a 10-year frame, 10 years on springs and 2 years on the mat and pads.
+A round's springs pull a jumper back toward the middle, which keeps casual bouncing contained and works well for one younger child. A rectangle spreads the bounce evenly, so you can use the full mat for consistent lift, which suits flips and tricks, though it does not self-center and rewards closer supervision. Build also splits along shape here: most Skywalker Classic rounds ($182 to $799) carry a 3-year frame and lower limits, while the 17x10 Premium Rectangle is rated to 625 lb with a 10-year frame at about $1,599. So with Skywalker, choosing the rectangle usually means choosing a heavier-built, higher-priced model, not only a different shape.

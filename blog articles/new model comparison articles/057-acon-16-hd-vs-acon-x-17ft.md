@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: ACON 16 HD vs ACON X 17ft — Trampoline Comparison 2026
-  meta_description: "Both are premium ACON rectangles, so the delta is size and footprint. The 16 HD is rated to 330 lb single-user at about $2,499."
+  meta_description: "ACON 16 HD vs ACON X 17ft: two premium ACON rectangles with the same warranty. The 16 HD suits most yards; the ACON X is the larger flagship."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -24,11 +24,11 @@ sides:
 ---
 # ACON 16 HD vs ACON X 17ft
 
-Both are premium ACON rectangles, so the delta is size and footprint. The 16 HD is rated to 330 lb single-user at about $2,499.
+Both are premium ACON rectangles with the same warranty and bounce character, so the decision is size and footprint. The 16 HD fits most family yards; the ACON X 17ft is the larger flagship.
 
 ## Quick verdict
 
-The 16 HD is the standard performance rectangle for most family yards; the ACON X is the larger flagship for buyers wanting the biggest jumping area.
+Choose the 16 HD for a performance rectangle that fits a normal backyard. Step up to the ACON X 17ft if you want the biggest jumping area and have both the space and the budget.
 
 ## Full spec comparison
 
@@ -44,7 +44,7 @@ The 16 HD is the standard performance rectangle for most family yards; the ACON 
 | Spring system | Coil springs (Performance Springs) | Coil springs (Performance Springs) |
 | Spring count | 140 | — |
 | Spring length | 10" | — |
-| Max single-user weight | No published single-user limit; ACON recommends 300 lb | No published single-user limit; ACON recommends 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |
@@ -53,6 +53,4 @@ The 16 HD is the standard performance rectangle for most family yards; the ACON 
 
 ## What matters most
 
-The 16 HD is rated to 330 lb single-user at about $2,499. The ACON X 17ft is rated to 300 lb single-user at about $3,999.
-
-Both carry a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+These share a 10-year frame, 5 years on the mat and springs, and 2 on the pads, so build is not the question. The 16 HD is about $2,499; the ACON X 17ft is about $3,999, a $1,500 jump for the larger size. ACON publishes no fixed single-user limit on either but recommends about 300 lb. The ACON X needs more clear yard space and is aimed at buyers who specifically want maximum jumping area; for most families the 16 HD delivers the same performance feel in a more practical footprint.

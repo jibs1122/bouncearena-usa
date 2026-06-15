@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Springfree Oval vs Square — Trampoline Comparison 2026
-  meta_description: "Same springless system, so the delta is shape and size. Springfree's ovals run $999 to $3,999; the squares are the 11x11ft Large at about $1,999 and the"
+  meta_description: "Springfree Oval vs Square: same springless system, different shapes. Ovals suit a longer narrow yard; squares give more even corner-to-corner room."
 data_issues: []
 assumptions: []
 sides:
@@ -31,11 +31,11 @@ sides:
 ---
 # Springfree Oval vs Square
 
-Same springless system, so the delta is shape and size. Springfree's ovals run $999 to $3,999; the squares are the 11x11ft Large at about $1,999 and the 13x13ft Jumbo at about $2,499.
+Same springless build, so this is a shape decision. Ovals suit a longer, narrower yard; squares give more even space across the whole surface.
 
 ## Quick verdict
 
-Ovals suit a longer, narrower yard; squares give more even corner-to-corner space.
+Choose an oval if your space is longer than it is wide, or you want a longer jumping run. Choose a square if you want even room in all directions for several jumpers.
 
 ## Full spec comparison
 
@@ -60,4 +60,4 @@ Ovals suit a longer, narrower yard; squares give more even corner-to-corner spac
 
 ## What matters most
 
-Springfree's ovals run $999 to $3,999; the squares are the 11x11ft Large at about $1,999 and the 13x13ft Jumbo at about $2,499. Both use flexible rods below a hidden frame, with 10 years on the frame, mat and rods.
+Both use flexible rods below a hidden frame with 10 years on the frame, mat, and rods. The ovals span $999 to $3,999 across several sizes, giving a long, narrow jumping area. The squares are the 11x11ft Large at about $1,999 and the 13x13ft Jumbo at about $2,499, which use the corners for more even, all-round space. Your yard shape should lead: a long, narrow spot favors an oval, while an open square area gets more usable room from a square.

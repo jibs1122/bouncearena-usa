@@ -7,7 +7,7 @@ publish_status: needs_review
 seo:
   meta_title: Zupapa Double Frame vs Standard / No-Gap models — Trampoline Comparison
     2026
-  meta_description: "Same brand, so the delta is frame build and weight limit. The Standard 1500LBS rounds are rated to 375 to 425 lb single-user at about $460 to $630."
+  meta_description: "Zupapa Double Frame vs Standard/No-Gap models: same brand, different frame build. Standard suits typical use; Double Frame adds strength and a higher weight limit."
 data_issues: []
 assumptions:
 - 'Zupapa Standard / No-Gap models: Resolved Standard / No-Gap to the 1500LBS Upgraded
@@ -40,11 +40,11 @@ sides:
 ---
 # Zupapa Double Frame vs Standard / No-Gap models
 
-Same brand, so the delta is frame build and weight limit. The Standard 1500LBS rounds are rated to 375 to 425 lb single-user at about $460 to $630.
+Same brand and warranty, so the difference is frame build and capacity. The Standard models suit typical family use; the Double Frame adds structural strength and a higher weight limit.
 
 ## Quick verdict
 
-Standard suits typical family use; Double Frame adds frame strength and a higher weight limit for heavier use.
+Choose a Standard model for normal family use at the lower price. Choose the Double Frame if you want extra frame strength and a higher per-jumper limit for heavier use.
 
 ## Full spec comparison
 
@@ -66,6 +66,4 @@ Standard suits typical family use; Double Frame adds frame strength and a higher
 
 ## What matters most
 
-The Standard 1500LBS rounds are rated to 375 to 425 lb single-user at about $460 to $630. The 1800LBS Double Frame rounds are rated to 550 lb single-user at about $550 to $820.
-
-Both carry a 10-year frame and 2 years on the mat, springs and pads.
+The Standard 1500LBS rounds are rated to 375 to 425 lb per jumper at about $460 to $630; the 1800LBS Double Frame rounds are rated to 550 lb per jumper at about $550 to $820. Both carry a 10-year frame and 2 years on the mat, springs, and pads. The Double Frame's second support ring makes it sturdier and lifts the weight limit, which suits heavier kids or several jumping together. If your use is lighter, the Standard build delivers the same warranty for less.

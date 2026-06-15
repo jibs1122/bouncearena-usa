@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Akrobat 17x10 FlatGround vs ACON 16 HD — Trampoline Comparison 2026
-  meta_description: "Both are premium performance rectangles, so the split is warranty and price. The Akrobat 17x10 Flat is built as a dedicated flat/in-ground rectangle"
+  meta_description: "Akrobat 17x10 FlatGround vs ACON 16 HD: a dedicated in-ground rectangle against an above-ground one that can be sunk. Akrobat has longer cover; the 16 HD costs less."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -24,11 +24,11 @@ sides:
 ---
 # Akrobat 17x10 FlatGround vs ACON 16 HD
 
-Both are premium performance rectangles, so the split is warranty and price. The Akrobat 17x10 Flat is built as a dedicated flat/in-ground rectangle, rated to 331 lb single-user at about $3,299, with a lifetime frame, 12 years on springs and 5 years on the mat and pads.
+Both are premium performance rectangles, but built for different installs. The Akrobat 17x10 is a dedicated flat in-ground rectangle; the ACON 16 HD ships above-ground and can also be sunk in-ground at a lower price.
 
 ## Quick verdict
 
-Akrobat carries the longer cover; the 16 HD is the lower-priced rectangle with a 10-year frame and 5 years on the mat and springs.
+Choose the Akrobat if you are committing to an in-ground install and want the longest warranty cover. Choose the ACON 16 HD for a flexible install and several hundred dollars in savings.
 
 ## Full spec comparison
 
@@ -44,7 +44,7 @@ Akrobat carries the longer cover; the 16 HD is the lower-priced rectangle with a
 | Spring system | AkroSPRING Pro System | Coil springs (Performance Springs) |
 | Spring count | 110 | 140 |
 | Spring length | 8.5" | 10" |
-| Max single-user weight | 331 lb | No published single-user limit; ACON recommends 300 lb |
+| Max single-user weight | 331 lb | No published single-user limit; ACON recommends about 300 lb |
 | Frame material | — | Galvanized and powder-coated steel |
 | Mat material | AkroVENT Sport | UV-treated cross-sewn polypropylene |
 | US standard | Unknown | Yes (ASTM) |
@@ -53,4 +53,4 @@ Akrobat carries the longer cover; the 16 HD is the lower-priced rectangle with a
 
 ## What matters most
 
-The Akrobat 17x10 Flat is built as a dedicated flat/in-ground rectangle, rated to 331 lb single-user at about $3,299, with a lifetime frame, 12 years on springs and 5 years on the mat and pads. The ACON 16 HD ships as an above-ground setup that can also be sunk in-ground, at about $2,499, recommends up to 330 lb per single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+Install flexibility and warranty are the dividers. The Akrobat 17x10 Flat is about $3,299, built specifically for a flush in-ground fit, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. The ACON 16 HD is about $2,499, works above-ground or sunk in-ground, and carries a 10-year frame, 5 years on the mat and springs, and 2 on the pads; ACON recommends about 300 lb per jumper. So the Akrobat costs more but protects the frame and springs far longer and is purpose-built for in-ground; the ACON is cheaper and more flexible on how you install it.

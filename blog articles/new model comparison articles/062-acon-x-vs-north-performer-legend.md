@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: ACON X vs North Performer / Legend — Trampoline Comparison 2026
-  meta_description: "The split is an above-ground rectangle versus North's above-ground Legend range. The ACON X 17ft recommends up to 330 lb per single-user at about $3,999"
+  meta_description: "ACON X vs North Performer/Legend: a single large flagship rectangle against North's Legend range of rounds, ovals, and rectangles with more shape choice."
 data_issues: []
 assumptions:
 - 'ACON X: Resolved ACON X to the ACON X 17ft row.'
@@ -26,11 +26,11 @@ sides:
 ---
 # ACON X vs North Performer / Legend
 
-The split is an above-ground rectangle versus North's above-ground Legend range. The ACON X 17ft recommends up to 330 lb per single-user at about $3,999, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+The ACON X is one large flagship rectangle; North's Legend range spans rounds, ovals, and rectangles. So this is a focused performance model against a more flexible lineup, both above-ground.
 
 ## Quick verdict
 
-The ACON X is the single large flagship rectangle; the Legend range gives more shape and size choice across round, oval and rectangle.
+Choose the ACON X 17ft if you specifically want a large premium rectangle and nothing else will do. Choose the North Legend range if you want to pick a shape and size that fit your yard, often at a lower price.
 
 ## Full spec comparison
 
@@ -46,7 +46,7 @@ The ACON X is the single large flagship rectangle; the Legend range gives more s
 | Spring system | Coil springs (Performance Springs) | Coil springs |
 | Spring count | — | 124 |
 | Spring length | — | 8.9" |
-| Max single-user weight | No published single-user limit; ACON recommends 300 lb | 243 lb |
+| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | 243 lb |
 | Frame material | Galvanized and powder-coated steel | Heavy-duty galvanised steel frame; galvanised black powder-coated legs |
 | Mat material | UV-treated cross-sewn polypropylene | Performance jump mat |
 | Net material | — | Heavy-duty UV-protected ripstop safety net |
@@ -56,4 +56,4 @@ The ACON X is the single large flagship rectangle; the Legend range gives more s
 
 ## What matters most
 
-The ACON X 17ft recommends up to 330 lb per single-user at about $3,999, with a 10-year frame, 5 years on the mat and springs and 2 years on pads. North's Legend models span round, oval and rectangle from about $2,050 to $3,150, with the same 10-year frame, 5 years on the mat and springs and 2 years on pads.
+Both share the same warranty backbone: a 10-year frame, 5 years on the mat and springs, and 2 on the pads. The ACON X 17ft is about $3,999 and comes only as a large rectangle, with ACON recommending about 300 lb per jumper. North's Legend models run about $2,050 to $3,150 and let you choose round, oval, or rectangle, which is the main advantage if your yard or use case is not a fit for a single big rectangle. Decide whether you need that exact flagship rectangle or want the shape flexibility North offers.

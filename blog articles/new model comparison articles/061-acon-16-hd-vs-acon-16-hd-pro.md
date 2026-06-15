@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: ACON 16 HD vs ACON 16 HD Pro — Trampoline Comparison 2026
-  meta_description: "Same 16 HD rectangle, so the only delta is the Performance spring package on the Pro. The standard 16 HD is about $2,499; the 16 HD Pro is about $2,999"
+  meta_description: "ACON 16 HD vs 16 HD Pro: the same rectangle. The only difference is the Pro's Performance spring package, which gives a stronger, more even bounce for about $500 more."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -24,11 +24,11 @@ sides:
 ---
 # ACON 16 HD vs ACON 16 HD Pro
 
-Same 16 HD rectangle, so the only delta is the Performance spring package on the Pro. The standard 16 HD is about $2,499; the 16 HD Pro is about $2,999, stepping up to the Performance spring package.
+This is the same 16 HD rectangle with one upgrade: the Pro version swaps in ACON's Performance spring package. Frame, size, and warranty are otherwise identical.
 
 ## Quick verdict
 
-The standard runs the regular spring set; the Pro upgrades to the Performance spring package for a stronger, more even bounce.
+The standard 16 HD is right for most families. Choose the 16 HD Pro if a stronger, more even bounce genuinely matters for serious or competitive jumping.
 
 ## Full spec comparison
 
@@ -44,7 +44,7 @@ The standard runs the regular spring set; the Pro upgrades to the Performance sp
 | Spring system | Coil springs (Performance Springs) | Coil springs (Performance Springs) |
 | Spring count | 140 | 140 |
 | Spring length | 10" | 10" |
-| Max single-user weight | No published single-user limit; ACON recommends 300 lb | No published single-user limit; ACON recommends 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |
@@ -53,4 +53,4 @@ The standard runs the regular spring set; the Pro upgrades to the Performance sp
 
 ## What matters most
 
-The standard 16 HD is about $2,499; the 16 HD Pro is about $2,999, stepping up to the Performance spring package. Both are rated to 330 lb single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+The only change is the springs. The standard 16 HD is about $2,499; the Pro is about $2,999, and that roughly $500 buys the Performance spring set, which gives a firmer, more even rebound. Everything else matches: a 10-year frame, 5 years on the mat and springs, 2 on the pads, and ACON's recommended 300 lb per jumper. For casual backyard use the difference is hard to justify; for kids training on flips and tricks who will notice the bounce quality, the Pro upgrade is the reason to spend more.

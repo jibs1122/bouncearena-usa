@@ -7,7 +7,7 @@ publish_status: needs_review
 seo:
   meta_title: Vuly Thunder 2 Pro vs Springfree Jumbo Square — Trampoline Comparison
     2026
-  meta_description: "Both move away from an exposed coil edge, but differently. The Thunder 2 Pro uses Vuly's leaf-spring system in a 163-inch round at about $1,649, with a"
+  meta_description: "Vuly Thunder 2 Pro vs Springfree Jumbo Square: leaf-spring round against springless square. Similar safety goal, different shapes, weight limits, and price."
 data_issues: []
 assumptions:
 - 'Vuly Thunder 2 Pro: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -25,11 +25,11 @@ sides:
 ---
 # Vuly Thunder 2 Pro vs Springfree Jumbo Square
 
-Both move away from an exposed coil edge, but differently. The Thunder 2 Pro uses Vuly's leaf-spring system in a 163-inch round at about $1,649, with a 10-year frame, 5 years on the mat and 1 year on the leaf springs.
+Both keep hard springs away from the landing area, but they do it differently. The Thunder 2 Pro uses Vuly's leaf-spring system in a 163-inch round; the Springfree Jumbo Square removes springs entirely with flexible rods below a hidden frame, in a 13x13ft square.
 
 ## Quick verdict
 
-Thunder 2 Pro is the round leaf-spring option for families wanting a spring-style bounce; the Jumbo Square is the larger springless square with longer component cover.
+Pick the Thunder 2 Pro for a round shape, a 330 lb weight limit, and the lower price. Pick the Springfree Jumbo Square for the fully springless build and even corner-to-corner space, if you are under 220 lb per jumper.
 
 ## Full spec comparison
 
@@ -55,4 +55,4 @@ Thunder 2 Pro is the round leaf-spring option for families wanting a spring-styl
 
 ## What matters most
 
-The Thunder 2 Pro uses Vuly's leaf-spring system in a 163-inch round at about $1,649, with a 10-year frame, 5 years on the mat and 1 year on the leaf springs. The Springfree Jumbo Square removes springs entirely with flexible rods below a hidden frame, in a 13x13ft square at about $2,499, with 10 years on the frame, mat and rods.
+The Thunder 2 Pro is about $1,649; the Springfree Jumbo Square is about $2,499, so the springless square costs noticeably more. Weight is the deciding spec for many families: the Thunder 2 Pro allows 330 lb for a single jumper against 220 lb on the Springfree. Shape matters too, since the square gives more usable room in the corners while the round centers jumpers naturally. Springfree backs the frame, mat, and rods for 10 years; the Thunder 2 Pro covers the frame for 10 and the mat for 5, with 1 year on the leaf springs.

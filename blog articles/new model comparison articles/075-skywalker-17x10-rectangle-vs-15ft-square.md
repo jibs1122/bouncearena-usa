@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Skywalker 17x10 Rectangle vs 15ft Square — Trampoline Comparison 2026
-  meta_description: "Both are larger Skywalker models, so the split is shape and weight limit. The 17x10 Premium Rectangle is rated to 625 lb single-user at about $1,599, with"
+  meta_description: "Skywalker 17x10 Rectangle vs 15ft Square: two large Premium models with the same warranty. The rectangle suits tricks and a longer yard; the square gives even space."
 data_issues: []
 assumptions:
 - 'Skywalker 15ft Square: Used the Premium 15ft Square row because the supplied comparison
@@ -26,11 +26,11 @@ sides:
 ---
 # Skywalker 17x10 Rectangle vs 15ft Square
 
-Both are larger Skywalker models, so the split is shape and weight limit. The 17x10 Premium Rectangle is rated to 625 lb single-user at about $1,599, with a 10-year frame, 10 years on springs and 2 years on the mat and pads.
+Both are large Skywalker Premium models with the same warranty and high weight limits, so shape and footprint decide it. The 17x10 is a rectangle; the 15ft is a square.
 
 ## Quick verdict
 
-The 17x10 rectangle suits a longer yard and tricks with a 625 lb single-user limit; the 15ft square gives more even space with a 600 lb single-user limit.
+Choose the 17x10 rectangle for a longer yard and for kids doing flips or tricks, with the highest weight limit. Choose the 15ft square for even space in a more compact, squarer area.
 
 ## Full spec comparison
 
@@ -53,4 +53,4 @@ The 17x10 rectangle suits a longer yard and tricks with a 625 lb single-user lim
 
 ## What matters most
 
-The 17x10 Premium Rectangle is rated to 625 lb single-user at about $1,599, with a 10-year frame, 10 years on springs and 2 years on the mat and pads. The 15ft Premium Square is rated to 600 lb single-user at about $2,400, with a 10-year frame, 10 years on springs and 2 years on the mat and pads.
+Both carry a 10-year frame, 10 years on springs, and 2 years on the mat and pads, so build quality matches. The 17x10 Premium Rectangle is rated to 625 lb at about $1,599 and gives a long, even bounce that suits tricks. The 15ft Premium Square is rated to 600 lb at about $2,400 and spreads room evenly across a squarer footprint. The rectangle is both cheaper and higher-rated here, so the square mainly wins if your yard is squarer than it is long and the even all-round space matters more than price.

@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Vuly Thunder 2 vs Jumpflex HERO — Trampoline Comparison 2026
-  meta_description: "The split is leaf springs versus coil. The Thunder 2 moves its leaf springs out of the jumping path, in a 145-inch round at about $879, rated to 330 lb"
+  meta_description: "Vuly Thunder 2 vs Jumpflex HERO: Vuly's leaf-spring system against traditional coil springs. The Thunder 2 keeps springs out of reach; HERO offers more sizes."
 data_issues: []
 assumptions:
 - 'Vuly Thunder 2: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -30,11 +30,11 @@ sides:
 ---
 # Vuly Thunder 2 vs Jumpflex HERO
 
-The split is leaf springs versus coil. The Thunder 2 moves its leaf springs out of the jumping path, in a 145-inch round at about $879, rated to 330 lb single-user, with a 10-year frame, 5 years on the mat and 1 year on the leaf springs.
+The Thunder 2 uses Vuly's leaf-spring system, which sits out of the jumping path, while the Jumpflex HERO uses traditional coil springs. Both are rated around 330 to 350 lb and carry a 10-year frame.
 
 ## Quick verdict
 
-Thunder 2 is the softer leaf-spring option; HERO is the coil option with longer spring cover and more sizes.
+Choose the Thunder 2 if keeping springs away from the landing area is your priority. Choose the HERO for a standard coil bounce, more size choices, and a lower entry price.
 
 ## Full spec comparison
 
@@ -60,4 +60,4 @@ Thunder 2 is the softer leaf-spring option; HERO is the coil option with longer 
 
 ## What matters most
 
-The Thunder 2 moves its leaf springs out of the jumping path, in a 145-inch round at about $879, rated to 330 lb single-user, with a 10-year frame, 5 years on the mat and 1 year on the leaf springs. The Jumpflex HERO uses coil springs, in sizes from 10 to 15ft at $749 to $999, rated to 350 lb single-user, with a 10-year frame and 5 years on the mat and springs.
+The leaf-spring design is the Thunder 2's main draw, moving the springs to the frame base instead of across the mat edge; it is a 145-inch round at about $879. The HERO uses coils in sizes from 10 to 15ft at $749 to $999, so it is easier to fit to a specific yard and starts cheaper. The HERO is rated to 350 lb against 330 lb on the Thunder 2, and carries 5 years on its springs versus 1 year on the Thunder 2's leaf springs. So the trade is the safer-feeling edge against more sizes and longer spring cover.

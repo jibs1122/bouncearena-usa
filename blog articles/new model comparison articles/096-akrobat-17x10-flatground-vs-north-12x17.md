@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Akrobat 17x10 FlatGround vs North 12x17 — Trampoline Comparison 2026
-  meta_description: "Both are premium in-ground rectangles, so the split is warranty and size. The Akrobat 17x10 Flat is rated to 331 lb single-user at about $3,299, with a"
+  meta_description: "Akrobat 17x10 FlatGround vs North 12x17: two premium in-ground rectangles at a similar price. Akrobat has a lifetime frame; North gives a slightly wider rectangle."
 data_issues: []
 assumptions:
 - 'North 12x17: Normalised North 12x17 to the 17ft x 12ft North In Ground row.'
@@ -24,11 +24,11 @@ sides:
 ---
 # Akrobat 17x10 FlatGround vs North 12x17
 
-Both are premium in-ground rectangles, so the split is warranty and size. The Akrobat 17x10 Flat is rated to 331 lb single-user at about $3,299, with a lifetime frame, 12 years on springs and 5 years on the mat and pads.
+Both are premium in-ground rectangles priced close together, so warranty and dimensions decide it. Akrobat carries longer cover; North gives a slightly wider footprint.
 
 ## Quick verdict
 
-Akrobat carries the longer warranty; North gives a slightly wider rectangle at a similar price.
+Choose the Akrobat 17x10 for the lifetime frame and longer spring warranty. Choose the North 12x17 if you prefer the slightly wider rectangle at a similar price.
 
 ## Full spec comparison
 
@@ -52,4 +52,4 @@ Akrobat carries the longer warranty; North gives a slightly wider rectangle at a
 
 ## What matters most
 
-The Akrobat 17x10 Flat is rated to 331 lb single-user at about $3,299, with a lifetime frame, 12 years on springs and 5 years on the mat and pads. The North 17x12 In-Ground is rated to 243 lb single-user at about $3,249, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+These are close on price: the Akrobat 17x10 Flat is about $3,299, the North 17x12 about $3,249. The Akrobat carries a lifetime frame, 12 years on springs, and 5 years on the mat and pads. The North carries a 10-year frame, 5 years on the mat and springs, and 2 on the pads, but gives a slightly wider 12-foot rectangle. So for almost the same money, Akrobat protects the frame and springs much longer, while North offers a bit more width. If long-term warranty matters most, lean Akrobat; if the wider jumping area suits your kids better, lean North.

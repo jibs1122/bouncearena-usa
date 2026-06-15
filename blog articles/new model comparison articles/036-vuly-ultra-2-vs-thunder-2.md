@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Vuly Ultra 2 vs Thunder 2 — Trampoline Comparison 2026
-  meta_description: "The split is coil versus leaf spring. Ultra 2 uses coil springs; Thunder 2 uses Vuly's leaf-spring system."
+  meta_description: "Vuly Ultra 2 vs Thunder 2: coil springs against Vuly's leaf-spring system. The Ultra 2 is the cheaper coil pick; the Thunder 2 moves springs out of reach."
 data_issues: []
 assumptions:
 - 'Vuly Ultra 2: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -25,11 +25,11 @@ sides:
 ---
 # Vuly Ultra 2 vs Thunder 2
 
-The split is coil versus leaf spring. Ultra 2 uses coil springs; Thunder 2 uses Vuly's leaf-spring system.
+Both are round Vuly trampolines rated to 330 lb, so the choice is the spring system. The Ultra 2 uses coil springs at a lower price; the Thunder 2 uses Vuly's leaf-spring system, which keeps the springs out of the jumping path.
 
 ## Quick verdict
 
-Ultra 2 is the value coil model; Thunder 2 is the longer-frame-warranty leaf-spring upgrade.
+Go with the Ultra 2 for the lowest price and a standard coil bounce. Step up to the Thunder 2 if you want springs away from the landing area and a longer 10-year frame warranty.
 
 ## Full spec comparison
 
@@ -51,6 +51,4 @@ Ultra 2 is the value coil model; Thunder 2 is the longer-frame-warranty leaf-spr
 
 ## What matters most
 
-Ultra 2 uses coil springs; Thunder 2 uses Vuly's leaf-spring system. Both share a 330 lb weight limit and 5 years on the mat, but Ultra 2 has a 5-year frame and 5 years on its coil springs, while Thunder 2 has a 10-year frame and 1 year on its leaf springs.
-
-The Large Ultra 2 is about $449; the Large Thunder 2 about $879.
+The price gap is real: the Large Ultra 2 is about $449, the Large Thunder 2 about $879, roughly double. For that you get the leaf-spring edge design and a 10-year frame instead of the Ultra 2's 5-year frame. The trade runs the other way on the springs themselves, where the coil Ultra 2 carries 5 years against 1 year on the Thunder 2's leaf springs. Both share the same 330 lb limit and 5 years on the mat, so the decision is whether the safer edge and longer frame cover are worth the extra spend.

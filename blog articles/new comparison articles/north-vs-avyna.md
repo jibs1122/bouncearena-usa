@@ -1,12 +1,12 @@
 ---
 canonical: https://www.bouncearenareviews.com/compare/north-vs-avyna/
-meta-description: North and Avyna both make sense for premium buyers who are considering in-ground or more integrated backyard setups. North has a broad premium lineup across above-ground and in-ground formats. Avyna's strongest case is heavy-duty Dutch engineering, high-capacity models, and a long warranty story.
-meta-og:description: North and Avyna both make sense for premium buyers who are considering in-ground or more integrated backyard setups. North has a broad premium lineup across above-ground and in-ground formats. Avyna's strongest case is heavy-duty Dutch engineering, high-capacity models, and a long warranty story.
+meta-description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame; North is the focused in-ground option.
+meta-og:description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame; North is the focused in-ground option.
 meta-og:title: North vs Avyna Trampolines
 meta-og:url: https://www.bouncearenareviews.com/compare/north-vs-avyna/
 meta-robots: index, follow
 meta-twitter:card: summary_large_image
-meta-twitter:description: North and Avyna both make sense for premium buyers who are considering in-ground or more integrated backyard setups. North has a broad premium lineup across above-ground and in-ground formats. Avyna's strongest case is heavy-duty Dutch engineering, high-capacity models, and a long warranty story.
+meta-twitter:description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame; North is the focused in-ground option.
 meta-twitter:site: @bouncearena
 meta-twitter:title: North vs Avyna Trampolines
 meta-viewport: width=device-width, initial-scale=1
@@ -15,11 +15,11 @@ title: North vs Avyna — Trampoline Comparison 2026 | Bounce Arena
 
 # North vs Avyna
 
-North and Avyna both make sense for premium buyers who are considering in-ground or more integrated backyard setups.
+Both are serious in-ground choices, so capacity and warranty decide it.
 
-North has a broad premium lineup across above-ground and in-ground formats. Avyna's strongest case is heavy-duty Dutch engineering, high-capacity models, and a long warranty story.
+Avyna carries the higher single-jumper limit and a lifetime frame with long spring cover. North is the more focused in-ground build, with a 10-year frame and an installation engineered to sit flush.
 
-The right shortlist depends on whether you want North's format flexibility or Avyna's more capacity-driven, specialist feel.
+Choose Avyna if you want the higher weight limit and a lifetime frame. Choose North if you want a focused in-ground build and its coverage suits your needs.
 
 **Affiliate disclosure:** This page contains affiliate links and we may earn a commission on purchases.
 

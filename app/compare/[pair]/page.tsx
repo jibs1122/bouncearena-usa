@@ -19,7 +19,7 @@ import {
   getApprovedModelComparisons,
   type ModelComparisonArticle,
 } from "@/lib/modelComparisons";
-import { getAllProducts } from "@/lib/products";
+import { brandSlug, getAllProducts } from "@/lib/products";
 import { formatUsd } from "@/lib/price";
 import { buildCompareTakeaways } from "@/lib/compareTakeaways";
 import { getPreferredProductUrl } from "@/lib/productLinks";
@@ -46,6 +46,16 @@ type ModelComparisonCard = {
   label: string;
   product: Product;
   sourceUrl: string;
+};
+
+type ModelComparisonBrand = {
+  name: string;
+  slug: string;
+};
+
+type RelatedReadingLink = {
+  href: string;
+  label: string;
 };
 
 function splitIntroIntoParagraphs(intro: string): string[] {
@@ -140,7 +150,7 @@ function buildPromoCtas(brandA: Brand, brandB: Brand): ComparePromo[] {
       promos.push({
         brand: "ACON",
         code: "BOUNCE",
-        description: "Use code BOUNCE for tiered savings on ACON orders.",
+        description: "Use code BOUNCE for up to $150 off at ACON.",
         href: ACON_PROMO_AFFILIATE_URL,
       });
     }
@@ -172,7 +182,7 @@ function buildPromoCtasFromLabels(labels: string[]): ComparePromo[] {
     promos.push({
       brand: "ACON",
       code: "BOUNCE",
-      description: "Use code BOUNCE for tiered savings on ACON orders.",
+      description: "Use code BOUNCE for up to $150 off at ACON.",
       href: ACON_PROMO_AFFILIATE_URL,
     });
   }
@@ -207,6 +217,87 @@ function buildModelComparisonCards(article: ModelComparisonArticle): ModelCompar
   if (cards.some((card) => card === null)) return [];
 
   return cards.filter((card): card is ModelComparisonCard => card !== null);
+}
+
+function getProductsBySourceRow(): Map<number, Product> {
+  return new Map(getAllProducts().map((product) => [product.sourceRowIndex, product]));
+}
+
+function getModelComparisonProducts(
+  article: ModelComparisonArticle,
+  productsBySourceRow = getProductsBySourceRow(),
+): Product[] {
+  const products = new Map<number, Product>();
+
+  for (const side of article.sides) {
+    for (const rowIndex of side.rowIndices) {
+      const product = productsBySourceRow.get(rowIndex);
+      if (product) {
+        products.set(product.sourceRowIndex, product);
+      }
+    }
+  }
+
+  return Array.from(products.values());
+}
+
+function getModelComparisonBrands(
+  article: ModelComparisonArticle,
+  productsBySourceRow = getProductsBySourceRow(),
+): ModelComparisonBrand[] {
+  const brands = new Map<string, ModelComparisonBrand>();
+
+  for (const product of getModelComparisonProducts(article, productsBySourceRow)) {
+    const slug = brandSlug(product.brand);
+    if (!brands.has(slug)) {
+      brands.set(slug, { name: product.brand, slug });
+    }
+  }
+
+  return Array.from(brands.values());
+}
+
+function buildModelComparisonRelatedLinks(article: ModelComparisonArticle): RelatedReadingLink[] {
+  const productsBySourceRow = getProductsBySourceRow();
+  const articleBrands = getModelComparisonBrands(article, productsBySourceRow);
+  const articleBrandSlugs = new Set(articleBrands.map((brand) => brand.slug));
+  const links: RelatedReadingLink[] = [];
+  const seenHrefs = new Set<string>();
+  const addLink = (href: string, label: string) => {
+    if (seenHrefs.has(href)) return;
+    seenHrefs.add(href);
+    links.push({ href, label });
+  };
+
+  for (const brand of articleBrands) {
+    addLink(`/brands/${brand.slug}/`, `${brand.name} brand page`);
+  }
+
+  getApprovedComparisons()
+    .filter(
+      (comparison) =>
+        articleBrandSlugs.has(comparison.brandA.slug) ||
+        articleBrandSlugs.has(comparison.brandB.slug),
+    )
+    .slice(0, 4)
+    .forEach((comparison) => addLink(comparison.href, comparison.title));
+
+  getApprovedModelComparisons()
+    .filter((comparison) => comparison.slug !== article.slug)
+    .filter((comparison) =>
+      getModelComparisonBrands(comparison, productsBySourceRow).some((brand) =>
+        articleBrandSlugs.has(brand.slug),
+      ),
+    )
+    .slice(0, 4)
+    .forEach((comparison) => addLink(`/compare/${comparison.slug}/`, comparison.title));
+
+  if (links.length === 0) {
+    addLink("/compare/", "All comparisons");
+    addLink("/models/", "Trampoline models");
+  }
+
+  return links;
 }
 
 function stripManagedModelSections(markdown: string): string {
@@ -277,6 +368,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const promoCtas = buildPromoCtasFromLabels(article.labels);
   const modelCards = buildModelComparisonCards(article);
+  const relatedReadingLinks = buildModelComparisonRelatedLinks(article);
   const content = prepareModelComparisonContent(article.content, promoCtas.length > 0);
 
   const breadcrumb = {
@@ -412,24 +504,15 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
       <section className="mt-12 rounded-xl border border-black/[0.08] bg-black/[0.02] p-6">
         <h2 className="mb-4 text-lg font-bold text-black">Related Reading</h2>
         <div className="flex flex-wrap gap-3">
-          <Link
-            href="/quiz/"
-            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
-          >
-            Trampoline quiz
-          </Link>
-          <Link
-            href="/compare/"
-            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
-          >
-            All comparisons
-          </Link>
-          <Link
-            href="/models/"
-            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
-          >
-            Trampoline models
-          </Link>
+          {relatedReadingLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </section>
     ),

@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: ACON 16 HD vs ACON 13 HD — Trampoline Comparison 2026
-  meta_description: "Same HD rectangle line with identical warranty and weight specs, so the only real delta is jumping area. The 13 HD is about $1,899; the 16 HD is about"
+  meta_description: "ACON 16 HD vs ACON 13 HD: the same HD rectangle in two sizes. Identical warranty and weight specs; the only difference is jumping area and about $600."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -25,11 +25,11 @@ sides:
 ---
 # ACON 16 HD vs ACON 13 HD
 
-Same HD rectangle line with identical warranty and weight specs, so the only real delta is jumping area. The 13 HD is about $1,899; the 16 HD is about $2,499.
+Same HD rectangle line, same warranty, same weight guidance. The only real difference is jumping area: the 13 HD is the smaller of the two.
 
 ## Quick verdict
 
-The 13 HD suits a smaller yard; the 16 HD gives more jumping room.
+Choose the 13 HD for a tighter yard or a smaller budget. Choose the 16 HD if you have the space and want more room for bigger or multiple jumpers.
 
 ## Full spec comparison
 
@@ -45,7 +45,7 @@ The 13 HD suits a smaller yard; the 16 HD gives more jumping room.
 | Spring system | Coil springs (Performance Springs) | Coil springs (Performance Springs) |
 | Spring count | 140 | 108 |
 | Spring length | 10" | 10" |
-| Max single-user weight | No published single-user limit; ACON recommends 300 lb | No published single-user limit; ACON recommends 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |
@@ -54,4 +54,4 @@ The 13 HD suits a smaller yard; the 16 HD gives more jumping room.
 
 ## What matters most
 
-The 13 HD is about $1,899; the 16 HD is about $2,499. Both are rated to 330 lb single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+With the specs identical, this is a size-and-space call. The 13 HD is about $1,899; the 16 HD is about $2,499, so the larger model costs roughly $600 more. Both carry a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON recommends about 300 lb per jumper with no fixed published limit on either. The 16 HD gives more usable length for tricks and for more than one jumper, but it also needs more clear yard space, so measure before committing to the bigger frame.

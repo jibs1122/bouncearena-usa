@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Springfree Jumbo Square vs ACON 16 HD — Trampoline Comparison 2026
-  meta_description: "The split is no springs versus coil springs, both premium. The Springfree Jumbo Square uses flexible rods below a hidden frame, in a 13x13ft square at"
+  meta_description: "Springfree Jumbo Square vs ACON 16 HD: no springs against coil springs at the same price. The square is the springless pick; the 16 HD allows more weight."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -24,11 +24,11 @@ sides:
 ---
 # Springfree Jumbo Square vs ACON 16 HD
 
-The split is no springs versus coil springs, both premium. The Springfree Jumbo Square uses flexible rods below a hidden frame, in a 13x13ft square at about $2,499, rated to 220 lb single-user, with 10 years on the frame, mat and rods.
+Both are premium and priced about the same, so the real choice is springless against coil. The Springfree Jumbo Square removes springs with flexible rods; the ACON 16 HD is a performance coil rectangle.
 
 ## Quick verdict
 
-The Jumbo Square is the springless safety choice; the 16 HD is the higher-weight performance rectangle at the same price.
+Choose the Springfree Jumbo Square for a fully springless build and even square space, if you are under 220 lb per jumper. Choose the ACON 16 HD for a livelier bounce and a higher weight allowance.
 
 ## Full spec comparison
 
@@ -44,7 +44,7 @@ The Jumbo Square is the springless safety choice; the 16 HD is the higher-weight
 | Spring system | Flexible composite rods (no springs) | Coil springs (Performance Springs) |
 | Spring count | 0 | 140 |
 | Spring length | — | 10" |
-| Max single-user weight | 220 lb | No published single-user limit; ACON recommends 300 lb |
+| Max single-user weight | 220 lb | No published single-user limit; ACON recommends about 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-stabilized polypropylene (SoftEdge) | UV-treated cross-sewn polypropylene |
 | Net material | UV-stabilized FlexiNet | — |
@@ -54,4 +54,4 @@ The Jumbo Square is the springless safety choice; the 16 HD is the higher-weight
 
 ## What matters most
 
-The Springfree Jumbo Square uses flexible rods below a hidden frame, in a 13x13ft square at about $2,499, rated to 220 lb single-user, with 10 years on the frame, mat and rods. The ACON 16 HD is a coil rectangle at about $2,499, recommends up to 330 lb per single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+With both around $2,499, price is not the divider; design and weight are. The Springfree uses flexible rods below a hidden frame in a 13x13ft square, rated to 220 lb, with 10 years on the frame, mat, and rods. The ACON 16 HD is a coil rectangle; ACON recommends about 300 lb per jumper, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. So the Springfree offers the no-springs safety design and even square space, while the ACON offers a firmer bounce and more weight headroom for older or heavier kids.

@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Vuly Thunder 2 vs Springfree Large Oval — Trampoline Comparison 2026
-  meta_description: "The split is leaf springs versus no springs. The Thunder 2 keeps a spring-style bounce but moves its leaf springs out of the jumping path, in a 145-inch"
+  meta_description: "Vuly Thunder 2 vs Springfree Large Oval: leaf springs against no springs. The Thunder 2 keeps a spring bounce out of reach; Springfree removes springs entirely."
 data_issues: []
 assumptions:
 - 'Vuly Thunder 2: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -24,11 +24,11 @@ sides:
 ---
 # Vuly Thunder 2 vs Springfree Large Oval
 
-The split is leaf springs versus no springs. The Thunder 2 keeps a spring-style bounce but moves its leaf springs out of the jumping path, in a 145-inch round at about $879, with a 10-year frame, 5 years on the mat and 1 year on the leaf springs.
+This is a leaf-spring trampoline against a fully springless one. The Thunder 2 keeps a spring-style bounce but moves its leaf springs out of the jumping path; the Springfree Large Oval uses flexible rods below a hidden frame and has no springs at all.
 
 ## Quick verdict
 
-Thunder 2 keeps a spring-style bounce with the leaf springs moved out of the jumping path; the Large Oval is the fully springless one with longer cover across the mat and rods.
+Choose the Thunder 2 for a livelier spring bounce, a higher weight tolerance, and roughly half the price. Choose the Springfree if a completely springless design is the point and everyone using it is under 220 lb.
 
 ## Full spec comparison
 
@@ -54,4 +54,4 @@ Thunder 2 keeps a spring-style bounce with the leaf springs moved out of the jum
 
 ## What matters most
 
-The Thunder 2 keeps a spring-style bounce but moves its leaf springs out of the jumping path, in a 145-inch round at about $879, with a 10-year frame, 5 years on the mat and 1 year on the leaf springs. The Springfree Large Oval removes springs entirely, using flexible rods below a hidden frame, in an 8x13ft oval at about $1,849, with 10 years on the frame, mat and rods.
+Both designs aim to keep hard springs away from where kids land, but they get there differently and at very different prices: the Thunder 2 is about $879, the Springfree Large Oval about $1,849. Weight tolerance is the practical divider, since the Thunder 2 is rated to 330 lb for a single jumper while the Springfree Large Oval tops out at 220 lb. The Springfree's appeal is the no-springs build and its 10-year cover on the frame, mat, and rods; the Thunder 2's is the spring-style feel at a much lower cost.

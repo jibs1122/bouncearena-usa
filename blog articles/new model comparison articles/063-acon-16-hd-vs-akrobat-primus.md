@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: ACON 16 HD vs Akrobat Primus — Trampoline Comparison 2026
-  meta_description: "Both are premium above-ground rectangles, so the split is warranty and price. The ACON 16 HD is about $2,499, recommends up to 330 lb per single-user"
+  meta_description: "ACON 16 HD vs Akrobat Primus: two premium above-ground rectangles. The 16 HD is the lower-priced pick; the Primus carries a lifetime frame and longer cover."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -26,11 +26,11 @@ sides:
 ---
 # ACON 16 HD vs Akrobat Primus
 
-Both are premium above-ground rectangles, so the split is warranty and price. The ACON 16 HD is about $2,499, recommends up to 330 lb per single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+Both are premium above-ground rectangles with a similar performance feel, so warranty and price separate them. The 16 HD is the lower-priced option; the Akrobat Primus carries longer cover.
 
 ## Quick verdict
 
-The 16 HD is the lower-priced performance rectangle with a 10-year frame; the Primus carries longer warranty cover with a lifetime frame and 12 years on springs.
+Choose the ACON 16 HD to save several hundred dollars on a comparable rectangle. Choose the Akrobat Primus if the lifetime frame and longer spring warranty matter for a long-term install.
 
 ## Full spec comparison
 
@@ -46,7 +46,7 @@ The 16 HD is the lower-priced performance rectangle with a 10-year frame; the Pr
 | Spring system | Coil springs (Performance Springs) | AkroSPRING Pro System |
 | Spring count | 140 | 104 |
 | Spring length | 10" | 8.5" |
-| Max single-user weight | No published single-user limit; ACON recommends 300 lb | 331 lb |
+| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | 331 lb |
 | Frame material | Galvanized and powder-coated steel | — |
 | Mat material | UV-treated cross-sewn polypropylene | AkroVENT Sport |
 | US standard | Yes (ASTM) | Unknown |
@@ -55,4 +55,4 @@ The 16 HD is the lower-priced performance rectangle with a 10-year frame; the Pr
 
 ## What matters most
 
-The ACON 16 HD is about $2,499, recommends up to 330 lb per single-user, with a 10-year frame, 5 years on the mat and springs and 2 years on pads. The Akrobat Primus Challenger is $3,099 to $3,899, rated to 287 to 331 lb single-user, with a lifetime frame, 12 years on springs and 5 years on the mat and pads.
+The build quality is close; the warranty is where they diverge. The 16 HD is about $2,499 with a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON recommends about 300 lb per jumper. The Primus Challenger runs $3,099 to $3,899 and is rated to 287 to 331 lb, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. So the Primus costs more upfront but protects the frame and springs for far longer. If you plan to keep it for many years, that cover can be worth the premium; if not, the 16 HD delivers similar performance for less.

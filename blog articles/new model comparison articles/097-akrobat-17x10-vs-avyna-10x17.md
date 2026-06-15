@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Akrobat 17x10 vs Avyna 10x17 — Trampoline Comparison 2026
-  meta_description: "Both are premium rectangles near the same size, so the split is install and warranty. The Akrobat Primus 17x10 is above-ground at about $3,899, rated to"
+  meta_description: "Akrobat 17x10 vs Avyna 10x17: two premium above-ground rectangles near the same size. Akrobat has longer mat and pad cover; Avyna allows more weight."
 data_issues: []
 assumptions:
 - 'Akrobat 17x10: Used Akrobat Primus Challenger 17x10 above-ground as the baseline
@@ -27,11 +27,11 @@ sides:
 ---
 # Akrobat 17x10 vs Avyna 10x17
 
-Both are premium rectangles near the same size, so the split is install and warranty. The Akrobat Primus 17x10 is above-ground at about $3,899, rated to 287 lb single-user, with a lifetime frame, 12 years on springs and 5 years on the mat and pads.
+Both are premium above-ground rectangles of a similar size, so warranty and weight limit separate them. Akrobat offers longer mat and pad cover; Avyna allows more weight per jumper.
 
 ## Quick verdict
 
-Akrobat carries longer mat and pad cover; Avyna brings a higher weight limit.
+Choose the Akrobat Primus 17x10 for longer mat and pad warranty. Choose the Avyna 10x17 for a higher weight limit at a slightly lower price.
 
 ## Full spec comparison
 
@@ -57,4 +57,4 @@ Akrobat carries longer mat and pad cover; Avyna brings a higher weight limit.
 
 ## What matters most
 
-The Akrobat Primus 17x10 is above-ground at about $3,899, rated to 287 lb single-user, with a lifetime frame, 12 years on springs and 5 years on the mat and pads. The Avyna 10x17 is above-ground at about $3,745, rated to 352 lb single-user, with a lifetime frame, 10 years on springs and 3 years on the mat and pads.
+These are close in price and both carry a lifetime frame. The Akrobat Primus 17x10 is about $3,899, rated to 287 lb, with 12 years on springs and 5 years on the mat and pads. The Avyna 10x17 is about $3,745, rated to 352 lb, with 10 years on springs and 3 years on the mat and pads. So Avyna allows meaningfully more weight and costs a little less, while Akrobat protects the springs and the wearing parts for longer. Decide whether the higher capacity or the longer component cover matters more for your household.

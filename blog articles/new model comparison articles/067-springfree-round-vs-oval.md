@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Springfree Round vs Oval — Trampoline Comparison 2026
-  meta_description: "Same springless system, so the delta is shape and size. Springfree's rounds run from a 6ft mini at about $849 to a 13ft jumbo at about $2,199; the ovals"
+  meta_description: "Springfree Round vs Oval: same springless system, different shapes and sizes. Rounds suit smaller or central yards; ovals give a longer jumping area."
 data_issues: []
 assumptions: []
 sides:
@@ -35,11 +35,11 @@ sides:
 ---
 # Springfree Round vs Oval
 
-Same springless system, so the delta is shape and size. Springfree's rounds run from a 6ft mini at about $849 to a 13ft jumbo at about $2,199; the ovals run from a 6x9ft compact at about $999 to a 12x19ft jumbo at about $3,999.
+Same springless system across both, so the choice is shape and size. Springfree's rounds suit smaller or central yards; its ovals give a longer jumping area.
 
 ## Quick verdict
 
-Rounds suit smaller or central yards; ovals give a longer jumping area for older kids.
+Choose a round for a compact or centrally placed spot, or for younger kids. Choose an oval if you want more jumping length, especially for older kids or two jumpers.
 
 ## Full spec comparison
 
@@ -64,4 +64,4 @@ Rounds suit smaller or central yards; ovals give a longer jumping area for older
 
 ## What matters most
 
-Springfree's rounds run from a 6ft mini at about $849 to a 13ft jumbo at about $2,199; the ovals run from a 6x9ft compact at about $999 to a 12x19ft jumbo at about $3,999. Both use flexible rods below a hidden frame, with 10 years on the frame, mat and rods.
+Both use flexible rods below a hidden frame and carry 10 years on the frame, mat, and rods, so quality and warranty match. The difference is footprint and price. Rounds run from a 6ft mini at about $849 to a 13ft jumbo at about $2,199. Ovals run from a 6x9ft compact at about $999 to a 12x19ft jumbo at about $3,999. A round centers jumpers and fits tighter or square yards; an oval gives a longer run that suits older kids and narrower spaces. Match the shape to your yard and the ages using it.

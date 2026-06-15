@@ -7,7 +7,7 @@ publish_status: needs_review
 seo:
   meta_title: North 15x10 Explorer vs Akrobat Primus 14x10 — Trampoline Comparison
     2026
-  meta_description: "Both are premium in-ground rectangles, so the split is warranty depth and weight limit. The North 15x10 In-Ground is rated to 243 lb single-user at about"
+  meta_description: "North 15x10 Explorer vs Akrobat Primus 14x10: two premium in-ground rectangles. North has a 10-year frame; Akrobat carries a lifetime frame and longer cover."
 data_issues: []
 assumptions:
 - 'North 15x10 Explorer: No Explorer label appears in the supplied table; used North
@@ -28,11 +28,11 @@ sides:
 ---
 # North 15x10 Explorer vs Akrobat Primus 14x10
 
-Both are premium in-ground rectangles, so the split is warranty depth and weight limit. The North 15x10 In-Ground is rated to 243 lb single-user at about $2,849, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+Both are premium in-ground rectangles, so warranty depth and weight limit separate them. North offers a focused in-ground rectangle with a 10-year frame; Akrobat carries longer cover across the board.
 
 ## Quick verdict
 
-North suits buyers wanting a focused in-ground rectangle with a 10-year frame; Akrobat carries longer cover across the frame, springs and pads.
+Choose the North 15x10 if you want a focused in-ground rectangle at the lower price. Choose the Akrobat Primus 14x10 for a lifetime frame, longer spring cover, and a higher weight limit.
 
 ## Full spec comparison
 
@@ -58,4 +58,4 @@ North suits buyers wanting a focused in-ground rectangle with a 10-year frame; A
 
 ## What matters most
 
-The North 15x10 In-Ground is rated to 243 lb single-user at about $2,849, with a 10-year frame, 5 years on the mat and springs and 2 years on pads. The Akrobat Primus Challenger 14x10 is rated to 331 lb single-user at about $3,099, with a lifetime frame, 12 years on springs and 5 years on the mat and pads.
+Warranty and capacity favor the Akrobat. The North 15x10 In-Ground is rated to 243 lb at about $2,849, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. The Akrobat Primus Challenger 14x10 is rated to 331 lb at about $3,099, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. So the Akrobat costs about $250 more but allows more weight and protects the frame and springs for far longer. For a long-term in-ground install, that cover can justify the premium; if budget leads, North delivers a solid in-ground rectangle for less.

@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: ready
 seo:
   meta_title: Springfree Compact Oval vs Medium Oval — Trampoline Comparison 2026
-  meta_description: "Same model line, so the only real delta is size and weight limit. The Compact Oval is a 6x9ft rated to 175 lb single-user at about $999; the Medium Oval"
+  meta_description: "Springfree Compact Oval vs Medium Oval: same line, two sizes. The Compact is 6x9ft and 175 lb for tight yards; the Medium is 8x11ft and 220 lb for a wider age range."
 data_issues: []
 assumptions: []
 sides:
@@ -23,11 +23,11 @@ sides:
 ---
 # Springfree Compact Oval vs Medium Oval
 
-Same model line, so the only real delta is size and weight limit. The Compact Oval is a 6x9ft rated to 175 lb single-user at about $999; the Medium Oval is an 8x11ft rated to 220 lb single-user at about $1,649.
+Same oval line, two sizes with different weight limits. The Compact Oval is the smaller, lower-capacity option; the Medium Oval steps up in size and allowed weight.
 
 ## Quick verdict
 
-The Compact suits younger kids and tight yards; the Medium suits a wider age range.
+Choose the Compact Oval for younger kids and a tight yard. Choose the Medium Oval if you want it to suit a wider age range or expect heavier jumpers.
 
 ## Full spec comparison
 
@@ -52,4 +52,4 @@ The Compact suits younger kids and tight yards; the Medium suits a wider age ran
 
 ## What matters most
 
-The Compact Oval is a 6x9ft rated to 175 lb single-user at about $999; the Medium Oval is an 8x11ft rated to 220 lb single-user at about $1,649. Both use flexible rods below a hidden frame, with 10 years on the frame, mat and rods.
+The capacity difference is the practical one. The Compact Oval is a 6x9ft rated to 175 lb at about $999; the Medium Oval is an 8x11ft rated to 220 lb at about $1,649. Both use flexible rods below a hidden frame with 10 years on the frame, mat, and rods. The 175 lb limit on the Compact means it is best for younger children, while the Medium's 220 lb covers older kids and a longer useful life. If kids are still growing, the Medium avoids outgrowing the trampoline; for toddlers and a small space, the Compact is enough.

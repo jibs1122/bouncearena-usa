@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Capital Play In-ground vs Avyna In-ground — Trampoline Comparison 2026
-  meta_description: "Both are in-ground systems, so the split is weight limit and warranty. The Capital Play 11x8 In-Ground is rated to 220 lb single-user at about $2,135"
+  meta_description: "Capital Play In-ground vs Avyna In-ground: two in-ground systems. Capital Play is a single 11x8 with a 10-year frame; Avyna offers more sizes and a lifetime frame."
 data_issues: []
 assumptions: []
 sides:
@@ -35,11 +35,11 @@ sides:
 ---
 # Capital Play In-ground vs Avyna In-ground
 
-Both are in-ground systems, so the split is weight limit and warranty. The Capital Play 11x8 In-Ground is rated to 220 lb single-user at about $2,135, with a 10-year frame, 5 years on the mat and springs and 2 years on pads.
+Both are in-ground systems, so weight limit, range, and warranty separate them. Capital Play is a single 11x8 option; Avyna offers more sizes, a higher weight limit, and a lifetime frame.
 
 ## Quick verdict
 
-Capital Play is the single 11x8 in-ground option with a 10-year frame; Avyna brings more sizes, a higher weight limit and a lifetime frame.
+Choose Capital Play if the 11x8 size fits and you want the lower price. Choose Avyna for more size choice, a higher weight limit, and a lifetime frame.
 
 ## Full spec comparison
 
@@ -55,7 +55,7 @@ Capital Play is the single 11x8 in-ground option with a 10-year frame; Avyna bri
 | Spring system | Coil springs | Coil springs |
 | Spring count | 80 | 96 |
 | Spring length | 8.5 in | 8.5 in |
-| Max single-user weight | 330 lb | 350 lb–352 lb |
+| Max single-user weight | 220 lb | 350 lb–352 lb |
 | Frame material | heavy duty galvanised steel frame; 50 mm diameter, 2 mm thick | Heavy 11 Gauge Steel |
 | Mat material | commercial grade jump mat | polypropylene homopolymer |
 | Net material | — | optional enclosure |
@@ -65,4 +65,4 @@ Capital Play is the single 11x8 in-ground option with a 10-year frame; Avyna bri
 
 ## What matters most
 
-The Capital Play 11x8 In-Ground is rated to 220 lb single-user at about $2,135, with a 10-year frame, 5 years on the mat and springs and 2 years on pads. Avyna's in-ground rounds and rectangles run about $2,745 to $4,195, rated to 350 lb single-user, with a lifetime frame, 10 years on springs and 3 years on the mat and pads.
+The Capital Play 11x8 In-Ground is rated to 220 lb at about $2,135, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. Avyna's in-ground rounds and rectangles run about $2,745 to $4,195, rated to 350 lb, with a lifetime frame, 10 years on springs, and 3 years on the mat and pads. So Avyna costs more but allows more weight, offers a range of sizes and shapes, and protects the frame for life. Capital Play is the single-size, lower-cost in-ground option. The decision is whether you need Avyna's capacity and choice, or the 11x8 fits and the lower price wins.

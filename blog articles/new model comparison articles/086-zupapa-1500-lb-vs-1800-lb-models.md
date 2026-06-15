@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Zupapa 1500 lb vs 1800 lb models — Trampoline Comparison 2026
-  meta_description: "Same brand, two frame grades. The 1500LBS Upgraded rounds are rated to 375 to 425 lb single-user at about $460 to $630."
+  meta_description: "Zupapa 1500 lb vs 1800 lb models: two frame grades. The 1500 line suits typical family use; the 1800 Double Frame adds strength and a higher single-user limit."
 data_issues: []
 assumptions: []
 sides:
@@ -37,11 +37,11 @@ sides:
 ---
 # Zupapa 1500 lb vs 1800 lb models
 
-Same brand, two frame grades. The 1500LBS Upgraded rounds are rated to 375 to 425 lb single-user at about $460 to $630.
+These are two frame grades within Zupapa's range. The 1500LBS line suits typical family use; the 1800LBS Double Frame steps up the frame strength and the allowed weight.
 
 ## Quick verdict
 
-The 1500LBS line suits typical family use; the 1800LBS Double Frame steps up the weight limit for heavier or multi-child use.
+Choose a 1500LBS model for normal family use, where it is the better value. Choose an 1800LBS Double Frame if you expect heavier jumpers, several kids at once, or want the strongest build.
 
 ## Full spec comparison
 
@@ -63,6 +63,4 @@ The 1500LBS line suits typical family use; the 1800LBS Double Frame steps up the
 
 ## What matters most
 
-The 1500LBS Upgraded rounds are rated to 375 to 425 lb single-user at about $460 to $630. The 1800LBS Double Frame rounds are rated to 550 lb single-user at about $550 to $820.
-
-Both carry a 10-year frame and 2 years on the mat, springs and pads.
+The numbers refer to the frame's structural rating, not a single jumper's limit. The 1500LBS Upgraded rounds are rated to 375 to 425 lb per jumper at about $460 to $630; the 1800LBS Double Frame rounds are rated to 550 lb per jumper at about $550 to $820. Both carry a 10-year frame and 2 years on the mat, springs, and pads. The Double Frame adds a second support ring for a sturdier feel and the higher per-jumper limit, which is worth it for heavier or multi-child use; for one or two lighter kids, the 1500LBS line covers it for less.
