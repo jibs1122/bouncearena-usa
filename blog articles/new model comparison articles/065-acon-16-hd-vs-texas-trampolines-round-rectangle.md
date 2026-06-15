@@ -55,7 +55,7 @@ Choose Texas Trampolines for the higher 400 lb limit and a lifetime frame. Choos
 | Spring system | Coil springs (Performance Springs) | Coil springs |
 | Spring count | 140 | — |
 | Spring length | 10" | — |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | 400 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | 400 lb |
 | Frame material | Galvanized and powder-coated steel | Heavy galvanized pipe |
 | Mat material | UV-treated cross-sewn polypropylene | — |
 | US standard | Yes (ASTM) | Unknown, Yes (ASTM) |
@@ -64,4 +64,4 @@ Choose Texas Trampolines for the higher 400 lb limit and a lifetime frame. Choos
 
 ## What matters most
 
-Capacity favors Texas: its round and rectangle models ($1,362 to $2,449) are rated to 400 lb for a single jumper, with a lifetime frame. The 16 HD is about $2,499; ACON recommends about 300 lb per jumper and backs the frame for 10 years, the mat and springs for 5, and the pads for 2, which is more spelled-out than Texas on the wearing parts. So the decision is whether you value the higher headline capacity and lifetime frame, or the clearer cover on the parts that actually wear out over time.
+Capacity favors Texas: its round and rectangle models ($1,362 to $2,449) are rated to 400 lb for a single jumper, with a lifetime frame. The 16 HD is about $2,499; ACON recommends a limit of 300 lb and backs the frame for 10 years, the mat and springs for 5, and the pads for 2, which is more spelled-out than Texas on the wearing parts. So the decision is whether you value the higher headline capacity and lifetime frame, or the clearer cover on the parts that actually wear out over time.

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import BrandLogoAvatar from '@/components/ui/BrandLogoAvatar';
 
 export type HubBrandRef = {
@@ -54,13 +54,28 @@ function matchesSearch(text: string, query: string): boolean {
   return terms.every((term) => haystack.includes(term));
 }
 
-function includesBrand(brands: HubBrandRef[], selectedBrand: string | null): boolean {
-  if (!selectedBrand) return true;
-  return brands.some((brand) => brand.slug === selectedBrand);
+function matchesSelectedBrands(brands: HubBrandRef[], selectedBrandSlugs: string[]): boolean {
+  if (selectedBrandSlugs.length === 0) return true;
+
+  const comparisonSlugs = Array.from(new Set(brands.map((brand) => brand.slug)));
+  if (selectedBrandSlugs.length === 1) return comparisonSlugs.includes(selectedBrandSlugs[0]);
+
+  const selectedSet = new Set(selectedBrandSlugs);
+  const matchingSelectedCount = comparisonSlugs.filter((slug) => selectedSet.has(slug)).length;
+  const hasOnlySelectedBrands = comparisonSlugs.every((slug) => selectedSet.has(slug));
+
+  return hasOnlySelectedBrands && matchingSelectedCount >= 2;
 }
 
 function brandNames(brands: HubBrandRef[]): string {
   return brands.map((brand) => brand.name).join(' ');
+}
+
+function formatBrandList(names: string[]): string {
+  if (names.length === 0) return '';
+  if (names.length === 1) return names[0];
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
 }
 
 function BrandTile({
@@ -76,6 +91,7 @@ function BrandTile({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={`group flex min-h-[8.5rem] flex-col justify-between rounded-xl border p-4 text-left transition-all ${
         active
           ? 'border-[#38b1ab] bg-[#38b1ab]/[0.08] shadow-sm'
@@ -87,7 +103,7 @@ function BrandTile({
           <BrandLogoAvatar name={brand.name} size={52} fillContainer />
         </span>
         <span className={`rounded-full px-2 py-1 text-[11px] font-semibold ${active ? 'bg-[#38b1ab] text-white' : 'bg-black/[0.04] text-black/45'}`}>
-          {brand.totalCount}
+          {active ? 'Selected' : brand.totalCount}
         </span>
       </span>
       <span>
@@ -174,37 +190,62 @@ export default function ComparisonHubClient({
   brandComparisons,
   modelComparisons,
 }: ComparisonHubClientProps) {
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [query, setQuery] = useState('');
   const [showAllBrandComparisons, setShowAllBrandComparisons] = useState(false);
   const [showAllModelComparisons, setShowAllModelComparisons] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const activeBrand = selectedBrand ? brands.find((brand) => brand.slug === selectedBrand) ?? null : null;
-  const hasActiveFilter = Boolean(selectedBrand || query.trim());
+  const activeBrands = selectedBrands
+    .map((slug) => brands.find((brand) => brand.slug === slug))
+    .filter((brand): brand is HubBrand => Boolean(brand));
+  const selectedBrandLabel = formatBrandList(activeBrands.map((brand) => brand.name));
+  const hasActiveFilter = Boolean(selectedBrands.length > 0 || query.trim());
 
   const filteredBrandComparisons = useMemo(
     () =>
       brandComparisons.filter((comparison) => {
-        if (!includesBrand(comparison.brands, selectedBrand)) return false;
+        if (!matchesSelectedBrands(comparison.brands, selectedBrands)) return false;
         return matchesSearch(
           `${comparison.title} ${comparison.labelA} ${comparison.labelB} ${comparison.intro} ${brandNames(comparison.brands)}`,
           query,
         );
       }),
-    [brandComparisons, query, selectedBrand],
+    [brandComparisons, query, selectedBrands],
   );
 
   const filteredModelComparisons = useMemo(
     () =>
       modelComparisons.filter((comparison) => {
-        if (!includesBrand(comparison.brands, selectedBrand)) return false;
+        if (!matchesSelectedBrands(comparison.brands, selectedBrands)) return false;
         return matchesSearch(
           `${comparison.title} ${comparison.description} ${comparison.labels.join(' ')} ${brandNames(comparison.brands)}`,
           query,
         );
       }),
-    [modelComparisons, query, selectedBrand],
+    [modelComparisons, query, selectedBrands],
   );
+
+  const searchResults = useMemo(() => {
+    if (!query.trim()) return [];
+
+    return [
+      ...filteredBrandComparisons.map((comparison) => ({
+        href: comparison.href,
+        title: comparison.title,
+        type: 'Brand comparison',
+        description: `${comparison.labelA} vs ${comparison.labelB}`,
+      })),
+      ...filteredModelComparisons.map((comparison) => ({
+        href: comparison.href,
+        title: comparison.title,
+        type: 'Model comparison',
+        description: comparison.description,
+      })),
+    ].slice(0, 6);
+  }, [filteredBrandComparisons, filteredModelComparisons, query]);
+
+  const totalFilteredComparisons = filteredBrandComparisons.length + filteredModelComparisons.length;
 
   const visibleBrandComparisons =
     hasActiveFilter || showAllBrandComparisons
@@ -216,11 +257,60 @@ export default function ComparisonHubClient({
       : filteredModelComparisons.slice(0, DEFAULT_MODEL_COMPARISON_LIMIT);
 
   const resetFilters = () => {
-    setSelectedBrand(null);
+    setSelectedBrands([]);
     setQuery('');
     setShowAllBrandComparisons(false);
     setShowAllModelComparisons(false);
   };
+
+  const toggleBrand = (brandSlug: string) => {
+    setSelectedBrands((current) =>
+      current.includes(brandSlug)
+        ? current.filter((slug) => slug !== brandSlug)
+        : [...current, brandSlug],
+    );
+    setShowAllBrandComparisons(false);
+    setShowAllModelComparisons(false);
+  };
+
+  const clearBrandFilters = () => {
+    setSelectedBrands([]);
+    setShowAllBrandComparisons(false);
+    setShowAllModelComparisons(false);
+  };
+
+  const onSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!query.trim()) {
+      searchInputRef.current?.focus();
+      return;
+    }
+    document.getElementById('comparison-search-results')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
+  };
+
+  const brandFilterText =
+    activeBrands.length === 1
+      ? ` for ${selectedBrandLabel}`
+      : activeBrands.length > 1
+        ? ` between ${selectedBrandLabel}`
+        : '';
+
+  const brandComparisonHeading =
+    activeBrands.length === 1
+      ? `${selectedBrandLabel} brand comparisons`
+      : activeBrands.length > 1
+        ? 'Selected brand matchups'
+        : 'Popular brand comparisons';
+
+  const modelComparisonHeading =
+    activeBrands.length === 1
+      ? `${selectedBrandLabel} model comparisons`
+      : activeBrands.length > 1
+        ? 'Selected model matchups'
+        : 'Model comparisons';
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
@@ -243,16 +333,94 @@ export default function ComparisonHubClient({
           </p>
         </div>
 
-        <div className="mt-7 rounded-2xl border border-black/[0.08] bg-white p-3 shadow-sm">
-          <label className="sr-only" htmlFor="comparison-search">Search comparisons</label>
-          <input
-            id="comparison-search"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search ACON, Vuly, Springfree, 16 HD, HERO..."
-            className="h-14 w-full rounded-xl border border-transparent bg-black/[0.025] px-4 text-base text-black outline-none transition-colors placeholder:text-black/35 focus:border-[#38b1ab]/35 focus:bg-white"
-          />
+        <div className="mt-7 rounded-2xl border border-black/[0.08] bg-white p-4 shadow-sm">
+          <form role="search" aria-label="Search comparison pages" onSubmit={onSearchSubmit}>
+            <label className="mb-2 block text-sm font-semibold text-black" htmlFor="comparison-search">
+              Search comparisons
+            </label>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="relative flex-1">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-black/35"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M20 20l-3.5-3.5" />
+                </svg>
+                <input
+                  ref={searchInputRef}
+                  id="comparison-search"
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Type a brand or model, e.g. ACON, Berg, 16 HD, HERO"
+                  className="h-14 w-full rounded-xl border border-black/[0.08] bg-black/[0.025] px-4 pl-11 text-base text-black outline-none transition-colors placeholder:text-black/35 focus:border-[#38b1ab]/45 focus:bg-white"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="submit"
+                  className="inline-flex h-14 flex-1 items-center justify-center rounded-xl bg-[#38b1ab] px-6 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94] sm:flex-none"
+                >
+                  Search
+                </button>
+                {query.trim() ? (
+                  <button
+                    type="button"
+                    onClick={() => setQuery('')}
+                    className="inline-flex h-14 flex-1 items-center justify-center rounded-xl border border-black/[0.08] bg-white px-5 text-sm font-semibold text-black/55 transition-colors hover:border-[#38b1ab]/35 hover:text-black sm:flex-none"
+                  >
+                    Clear
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          </form>
+
+          {query.trim() ? (
+            <div id="comparison-search-results" className="mt-4 rounded-xl border border-[#38b1ab]/25 bg-[#38b1ab]/[0.06] p-4">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <p className="text-sm font-semibold text-black">
+                  {totalFilteredComparisons} result{totalFilteredComparisons === 1 ? '' : 's'} for &ldquo;{query.trim()}&rdquo;
+                </p>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#2e9a94]">
+                  {filteredBrandComparisons.length} brand / {filteredModelComparisons.length} model
+                </p>
+              </div>
+
+              {searchResults.length > 0 ? (
+                <div className="mt-4 grid gap-2 md:grid-cols-2">
+                  {searchResults.map((result) => (
+                    <Link
+                      key={result.href}
+                      href={result.href}
+                      className="rounded-lg border border-black/[0.06] bg-white px-4 py-3 transition-colors hover:border-[#38b1ab]/35"
+                    >
+                      <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#38b1ab]">
+                        {result.type}
+                      </span>
+                      <span className="mt-1 block text-sm font-semibold leading-snug text-black">
+                        {result.title}
+                      </span>
+                      <span className="mt-1 line-clamp-2 block text-xs leading-5 text-black/45">
+                        {result.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="mt-4 rounded-lg border border-black/[0.06] bg-white px-4 py-3 text-sm text-black/50">
+                  No matching comparison pages found.
+                </div>
+              )}
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -261,7 +429,7 @@ export default function ComparisonHubClient({
           <div>
             <h2 className="text-xl font-bold text-black">Choose a brand</h2>
             <p className="mt-1 text-sm leading-6 text-black/50">
-              Tap a brand to show only comparisons that include it.
+              One brand shows related pages. Multiple brands show matchups inside the selected set.
             </p>
           </div>
           {hasActiveFilter ? (
@@ -278,12 +446,13 @@ export default function ComparisonHubClient({
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           <button
             type="button"
-            onClick={() => setSelectedBrand(null)}
+            onClick={clearBrandFilters}
             className={`flex min-h-[8.5rem] flex-col justify-between rounded-xl border p-4 text-left transition-all ${
-              selectedBrand === null
+              selectedBrands.length === 0
                 ? 'border-[#38b1ab] bg-[#38b1ab]/[0.08] shadow-sm'
                 : 'border-black/[0.08] bg-white hover:-translate-y-0.5 hover:border-[#38b1ab]/35 hover:shadow-sm'
             }`}
+            aria-pressed={selectedBrands.length === 0}
           >
             <span className="flex h-14 w-14 items-center justify-center rounded-xl border border-black/[0.06] bg-[#f7fbfa] text-lg font-bold text-[#38b1ab]">
               All
@@ -300,11 +469,31 @@ export default function ComparisonHubClient({
             <BrandTile
               key={brand.slug}
               brand={brand}
-              active={selectedBrand === brand.slug}
-              onClick={() => setSelectedBrand((current) => (current === brand.slug ? null : brand.slug))}
+              active={selectedBrands.includes(brand.slug)}
+              onClick={() => toggleBrand(brand.slug)}
             />
           ))}
         </div>
+
+        {activeBrands.length > 0 ? (
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-black/40">
+              Selected
+            </span>
+            {activeBrands.map((brand) => (
+              <button
+                key={brand.slug}
+                type="button"
+                onClick={() => toggleBrand(brand.slug)}
+                className="inline-flex items-center gap-2 rounded-full border border-[#38b1ab]/25 bg-[#38b1ab]/[0.08] px-3 py-1.5 text-sm font-semibold text-[#2e9a94] transition-colors hover:border-[#38b1ab]/45 hover:bg-[#38b1ab]/[0.12]"
+                aria-label={`Remove ${brand.name} filter`}
+              >
+                <span>{brand.name}</span>
+                <span aria-hidden="true">x</span>
+              </button>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <div className="mb-5 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3 text-sm text-black/55">
@@ -313,7 +502,7 @@ export default function ComparisonHubClient({
         {' '}brand comparison{filteredBrandComparisons.length === 1 ? '' : 's'} and{' '}
         <span className="font-semibold text-black">{filteredModelComparisons.length}</span>
         {' '}model comparison{filteredModelComparisons.length === 1 ? '' : 's'}
-        {activeBrand ? ` for ${activeBrand.name}` : ''}
+        {brandFilterText}
         {query.trim() ? ` matching "${query.trim()}"` : ''}.
       </div>
 
@@ -321,7 +510,7 @@ export default function ComparisonHubClient({
         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-black">
-              {activeBrand ? `${activeBrand.name} brand comparisons` : 'Popular brand comparisons'}
+              {brandComparisonHeading}
             </h2>
             <p className="mt-1 text-sm leading-6 text-black/50">
               Side-by-side brand matchups for the trampolines shoppers cross-shop most.
@@ -372,7 +561,7 @@ export default function ComparisonHubClient({
         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-black">
-              {activeBrand ? `${activeBrand.name} model comparisons` : 'Model comparisons'}
+              {modelComparisonHeading}
             </h2>
             <p className="mt-1 text-sm leading-6 text-black/50">
               Exact model and size matchups for shoppers choosing between specific trampolines.

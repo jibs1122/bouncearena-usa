@@ -44,7 +44,7 @@ Choose the 16 HD for a performance rectangle that fits a normal backyard. Step u
 | Spring system | Coil springs (Performance Springs) | Coil springs (Performance Springs) |
 | Spring count | 140 | — |
 | Spring length | 10" | — |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |
@@ -53,4 +53,4 @@ Choose the 16 HD for a performance rectangle that fits a normal backyard. Step u
 
 ## What matters most
 
-These share a 10-year frame, 5 years on the mat and springs, and 2 on the pads, so build is not the question. The 16 HD is about $2,499; the ACON X 17ft is about $3,999, a $1,500 jump for the larger size. ACON publishes no fixed single-user limit on either but recommends about 300 lb. The ACON X needs more clear yard space and is aimed at buyers who specifically want maximum jumping area; for most families the 16 HD delivers the same performance feel in a more practical footprint.
+These share a 10-year frame, 5 years on the mat and springs, and 2 on the pads, so build is not the question. The 16 HD is about $2,499; the ACON X 17ft is about $3,999, a $1,500 jump for the larger size. ACON publishes no single-user limit on either model, but recommends a limit of 300 lb. The ACON X needs more clear yard space and is aimed at buyers who specifically want maximum jumping area; for most families the 16 HD delivers the same performance feel in a more practical footprint.

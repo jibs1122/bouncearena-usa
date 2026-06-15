@@ -44,7 +44,7 @@ The standard 16 HD is right for most families. Choose the 16 HD Pro if a stronge
 | Spring system | Coil springs (Performance Springs) | Coil springs (Performance Springs) |
 | Spring count | 140 | 140 |
 | Spring length | 10" | 10" |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |

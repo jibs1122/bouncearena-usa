@@ -17,7 +17,7 @@ title: ACON vs Texas Trampolines — Trampoline Comparison 2026 | Bounce Arena
 
 Both are heavy-duty coil brands, but Texas Trampolines is the more specialized one.
 
-Texas leans on raw capacity and a lifetime frame, with a 400 lb single-jumper rating that suits bigger users, though its cover on the wearing parts is less spelled out. ACON publishes no fixed single-user limit, recommends about 300 lb, and documents its mat, spring, and pad warranties more clearly.
+Texas leans on raw capacity and a lifetime frame, with a 400 lb single-jumper rating that suits bigger users, though its cover on the wearing parts is less spelled out. ACON publishes no single-user limit, but recommends a limit of 300 lb, and documents its mat, spring, and pad warranties more clearly.
 
 Choose Texas Trampolines for the higher weight limit and lifetime frame. Choose ACON if you want a more polished all-round trampoline with clearer coverage on the parts that wear.
 
@@ -27,7 +27,7 @@ Choose Texas Trampolines for the higher weight limit and lifetime frame. Choose 
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models); Texas Trampolines (400 lb).
+- Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); Texas Trampolines (400 lb).
 - ACON offers round, rectangle; Texas Trampolines covers square, rectangle.
 - If you want a very large trampoline, ACON goes up to 10×17 ft rectangle; Texas Trampolines tops out at 15×15 ft square.
 - Texas Trampolines leads on warranty (frame lifetime).

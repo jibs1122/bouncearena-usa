@@ -46,7 +46,7 @@ Choose the 14ft for a more compact fit in a tighter yard. Choose the 15ft if you
 | Spring system | Coil springs (Air Series) | Coil springs (Air Series) |
 | Spring count | 96 | 110 |
 | Spring length | 8.5" | 8.5" |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |
@@ -55,4 +55,4 @@ Choose the 14ft for a more compact fit in a tighter yard. Choose the 15ft if you
 
 ## What matters most
 
-Because the specs match, this is purely about size and space. The 14ft runs $1,249 to $1,399; the 15ft runs $1,399 to $1,599, so the difference is modest. Both carry a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON recommends about 300 lb per jumper with no fixed published limit. The extra foot on the 15ft helps when more than one child jumps, but it needs more clear space around it. Measure your yard, then pick the size that fits.
+Because the specs match, this is purely about size and space. The 14ft runs $1,249 to $1,399; the 15ft runs $1,399 to $1,599, so the difference is modest. Both carry a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON publishes no single-user limit, but recommends a limit of 300 lb. The extra foot on the 15ft helps when more than one child jumps, but it needs more clear space around it. Measure your yard, then pick the size that fits.

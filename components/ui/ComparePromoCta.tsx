@@ -43,7 +43,7 @@ export default function ComparePromoCta({ promos }: { promos: ComparePromo[] }) 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-[#c2410c]">
-            Promo code available
+            {promos.length === 1 ? "Promo code available" : "Promo codes available"}
           </p>
           <h2 className="mt-1 text-xl font-bold text-black">
             Save on {brandNames.join(" and ")}

@@ -48,7 +48,7 @@ Choose the HERO 14ft for the higher weight limit and a lower price. Choose the A
 | Spring system | Coil springs | Coil springs (Air Series) |
 | Spring count | 88 | 96–110 |
 | Spring length | 7.1" | 8.5" |
-| Max single-user weight | 350 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | 350 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | High-tensile steel | Galvanized and powder-coated steel |
 | Mat material | — | UV-treated cross-sewn polypropylene |
 | Net material | 100% high-strength polyester | — |
@@ -58,4 +58,4 @@ Choose the HERO 14ft for the higher weight limit and a lower price. Choose the A
 
 ## What matters most
 
-The HERO 14ft is about $899 and rated to 350 lb. ACON's 14 and 15ft Air rounds run $1,249 to $1,499; ACON publishes no fixed single-user limit but recommends about 300 lb. So the HERO actually allows more weight and costs several hundred dollars less. What ACON offers in return is a more polished, performance-leaning build with a firmer bounce and 2 years on the pads. Both carry a 10-year frame and 5 years on the mat and springs, so the decision is whether ACON's feel and finish justify the premium over the higher-rated, cheaper HERO.
+The HERO 14ft is about $899 and rated to 350 lb. ACON's 14 and 15ft Air rounds run $1,249 to $1,499; ACON publishes no single-user limit, but recommends a limit of 300 lb. So the HERO actually allows more weight and costs several hundred dollars less. What ACON offers in return is a more polished, performance-leaning build with a firmer bounce and 2 years on the pads. Both carry a 10-year frame and 5 years on the mat and springs, so the decision is whether ACON's feel and finish justify the premium over the higher-rated, cheaper HERO.

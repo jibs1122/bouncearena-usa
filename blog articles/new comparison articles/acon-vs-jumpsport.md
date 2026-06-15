@@ -27,7 +27,7 @@ Choose ACON if you want a clear performance trampoline you can buy on its specs.
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models); JumpSport (model-dependent).
+- Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); JumpSport (model-dependent).
 - ACON publishes round, rectangle models; JumpSport's line-up varies by range and is best checked per model.
 - JumpSport warranty is set by product line — Varies by JumpSport line; AlleyOOP frame warranty is commonly lifetime; compare against ACON per model.
 - Installation differs: ACON is mainly above-ground with an in-ground option, while JumpSport is above-ground only.

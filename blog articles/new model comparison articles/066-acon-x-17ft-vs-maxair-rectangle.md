@@ -46,7 +46,7 @@ For backyard use, even demanding use, the ACON X 17ft is the realistic choice. M
 | Spring system | Coil springs (Performance Springs) | Coil springs |
 | Spring count | — | 120 side + 16 corner |
 | Spring length | — | 11.75 in side / 13.65 in corner |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | 250 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | 250 lb |
 | Frame material | Galvanized and powder-coated steel | steel frame |
 | Mat material | UV-treated cross-sewn polypropylene | Two-String Fly Bed; 100% multifilament polyester |
 | US standard | Yes (ASTM) | Unknown |
@@ -55,4 +55,4 @@ For backyard use, even demanding use, the ACON X 17ft is the realistic choice. M
 
 ## What matters most
 
-The price gap reflects two different products. The ACON X 17ft is about $3,999, above-ground, with a 10-year frame and 5 years on the mat and springs, and ACON recommends about 300 lb per jumper. MaxAir's rectangles start around $8,500 and are custom builds rated to 250 lb, with a 5-year frame and 1 year on the mat, reflecting a specialist rather than a long-warranty consumer product. So unless you specifically need a pro-style training rig, the ACON X covers serious family use at less than half the cost and with longer component cover.
+The price gap reflects two different products. The ACON X 17ft is about $3,999, above-ground, with a 10-year frame and 5 years on the mat and springs, and ACON recommends a limit of 300 lb. MaxAir's rectangles start around $8,500 and are custom builds rated to 250 lb, with a 5-year frame and 1 year on the mat, reflecting a specialist rather than a long-warranty consumer product. So unless you specifically need a pro-style training rig, the ACON X covers serious family use at less than half the cost and with longer component cover.

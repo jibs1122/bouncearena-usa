@@ -1,5 +1,6 @@
 import { formatUsd } from "@/lib/price";
 import type { Brand, Product } from "@/lib/types";
+import { isAconBrand } from "@/lib/vuly";
 import { formatWarrantyYears } from "@/lib/warranty";
 
 type SpringSystemKind = "coil" | "leaf" | "springless" | "other";
@@ -112,7 +113,9 @@ function summarizeBrand(brand: Brand): BrandTakeawaySummary {
     maxFootprintIn: footprintDetails?.maxIn ?? null,
     maxFootprintShape: footprintDetails?.shape ?? null,
     maxFootprintSecondDimIn: footprintDetails?.secondDimIn ?? null,
-    maxSingleUserWeightLb: maxNumber(brand.products.map((product) => product.maxSingleUserWeightLb)),
+    maxSingleUserWeightLb: isAconBrand(brand.name)
+      ? null
+      : maxNumber(brand.products.map((product) => product.maxSingleUserWeightLb)),
     maxCombinedWeightLb: maxNumber(
       brand.products.map((product) => product.combinedTotalWeightRatingLb),
     ),

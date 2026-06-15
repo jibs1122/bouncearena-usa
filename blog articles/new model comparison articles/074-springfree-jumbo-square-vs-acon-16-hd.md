@@ -44,7 +44,7 @@ Choose the Springfree Jumbo Square for a fully springless build and even square 
 | Spring system | Flexible composite rods (no springs) | Coil springs (Performance Springs) |
 | Spring count | 0 | 140 |
 | Spring length | — | 10" |
-| Max single-user weight | 220 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | 220 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-stabilized polypropylene (SoftEdge) | UV-treated cross-sewn polypropylene |
 | Net material | UV-stabilized FlexiNet | — |
@@ -54,4 +54,4 @@ Choose the Springfree Jumbo Square for a fully springless build and even square 
 
 ## What matters most
 
-With both around $2,499, price is not the divider; design and weight are. The Springfree uses flexible rods below a hidden frame in a 13x13ft square, rated to 220 lb, with 10 years on the frame, mat, and rods. The ACON 16 HD is a coil rectangle; ACON recommends about 300 lb per jumper, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. So the Springfree offers the no-springs safety design and even square space, while the ACON offers a firmer bounce and more weight headroom for older or heavier kids.
+With both around $2,499, price is not the divider; design and weight are. The Springfree uses flexible rods below a hidden frame in a 13x13ft square, rated to 220 lb, with 10 years on the frame, mat, and rods. The ACON 16 HD is a coil rectangle; ACON recommends a limit of 300 lb, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. So the Springfree offers the no-springs safety design and even square space, while the ACON offers a firmer bounce and more weight headroom for older or heavier kids.

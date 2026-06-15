@@ -27,7 +27,7 @@ Choose ACON if you want a high-performing above-ground trampoline and a simpler 
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models); North (243 lb).
+- Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); North (243 lb).
 - ACON offers round, rectangle; North covers round, oval, rectangle.
 - If you want a very large trampoline, ACON goes up to 10×17 ft rectangle; North tops out at 10×18 ft rectangle.
 - Warranties are otherwise matched; North adds longer net cover (2 yr).

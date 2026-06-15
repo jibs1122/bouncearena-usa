@@ -44,7 +44,7 @@ Choose the Akrobat if you are committing to an in-ground install and want the lo
 | Spring system | AkroSPRING Pro System | Coil springs (Performance Springs) |
 | Spring count | 110 | 140 |
 | Spring length | 8.5" | 10" |
-| Max single-user weight | 331 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | 331 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | — | Galvanized and powder-coated steel |
 | Mat material | AkroVENT Sport | UV-treated cross-sewn polypropylene |
 | US standard | Unknown | Yes (ASTM) |
@@ -53,4 +53,4 @@ Choose the Akrobat if you are committing to an in-ground install and want the lo
 
 ## What matters most
 
-Install flexibility and warranty are the dividers. The Akrobat 17x10 Flat is about $3,299, built specifically for a flush in-ground fit, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. The ACON 16 HD is about $2,499, works above-ground or sunk in-ground, and carries a 10-year frame, 5 years on the mat and springs, and 2 on the pads; ACON recommends about 300 lb per jumper. So the Akrobat costs more but protects the frame and springs far longer and is purpose-built for in-ground; the ACON is cheaper and more flexible on how you install it.
+Install flexibility and warranty are the dividers. The Akrobat 17x10 Flat is about $3,299, built specifically for a flush in-ground fit, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. The ACON 16 HD is about $2,499, works above-ground or sunk in-ground, and carries a 10-year frame, 5 years on the mat and springs, and 2 on the pads; ACON recommends a limit of 300 lb. So the Akrobat costs more but protects the frame and springs far longer and is purpose-built for in-ground; the ACON is cheaper and more flexible on how you install it.

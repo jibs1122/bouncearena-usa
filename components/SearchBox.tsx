@@ -15,6 +15,33 @@ function getCategoryLabel(category: SearchItem['category']): string {
   return category === 'brand' ? 'Brand' : 'Comparison';
 }
 
+function normalizeSearchText(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function getSearchResults(query: string, items: SearchItem[]) {
+  const q = normalizeSearchText(query);
+  if (!q) return [];
+  const terms = q.split(' ').filter(Boolean);
+
+  return items
+    .map((item) => {
+      const title = normalizeSearchText(item.title);
+      const hay = normalizeSearchText(`${item.title} ${item.description ?? ''}`);
+      const allTermsInTitle = terms.every((term) => title.includes(term));
+      const allTermsInHay = terms.every((term) => hay.includes(term));
+      const score =
+        (title.startsWith(q) ? 3 : 0) +
+        (title.includes(q) ? 2 : 0) +
+        (allTermsInTitle ? 2 : 0) +
+        (allTermsInHay ? 1 : 0);
+      return { item, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6);
+}
+
 export default function SearchBox({ items, mobile = false }: { items: SearchItem[]; mobile?: boolean }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -44,29 +71,20 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
     };
   }, []);
 
-  const results = useMemo(() => {
-    const q = deferredQuery.trim().toLowerCase();
-    if (!q) return [];
-    return items
-      .map((item) => {
-        const hay = `${item.title} ${item.description ?? ''}`.toLowerCase();
-        const score =
-          (item.title.toLowerCase().startsWith(q) ? 3 : 0) +
-          (item.title.toLowerCase().includes(q) ? 2 : 0) +
-          (hay.includes(q) ? 1 : 0);
-        return { item, score };
-      })
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 6);
-  }, [deferredQuery, items]);
+  const results = useMemo(() => getSearchResults(deferredQuery, items), [deferredQuery, items]);
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
+    const firstResult = getSearchResults(q, items)[0]?.item;
+    if (!firstResult) {
+      setOpen(true);
+      return;
+    }
+
     setOpen(false);
-    router.push(`/brands/`);
+    router.push(firstResult.href);
   }
 
   return (

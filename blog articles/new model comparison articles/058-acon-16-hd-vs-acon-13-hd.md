@@ -45,7 +45,7 @@ Choose the 13 HD for a tighter yard or a smaller budget. Choose the 16 HD if you
 | Spring system | Coil springs (Performance Springs) | Coil springs (Performance Springs) |
 | Spring count | 140 | 108 |
 | Spring length | 10" | 10" |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-treated cross-sewn polypropylene | UV-treated cross-sewn polypropylene |
 | US standard | Yes (ASTM) | Yes (ASTM) |
@@ -54,4 +54,4 @@ Choose the 13 HD for a tighter yard or a smaller budget. Choose the 16 HD if you
 
 ## What matters most
 
-With the specs identical, this is a size-and-space call. The 13 HD is about $1,899; the 16 HD is about $2,499, so the larger model costs roughly $600 more. Both carry a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON recommends about 300 lb per jumper with no fixed published limit on either. The 16 HD gives more usable length for tricks and for more than one jumper, but it also needs more clear yard space, so measure before committing to the bigger frame.
+With the specs identical, this is a size-and-space call. The 13 HD is about $1,899; the 16 HD is about $2,499, so the larger model costs roughly $600 more. Both carry a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON publishes no single-user limit, but recommends a limit of 300 lb on either. The 16 HD gives more usable length for tricks and for more than one jumper, but it also needs more clear yard space, so measure before committing to the bigger frame.

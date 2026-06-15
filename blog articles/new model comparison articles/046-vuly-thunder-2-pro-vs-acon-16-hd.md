@@ -46,7 +46,7 @@ Choose the Thunder 2 Pro for general family bouncing with the springs moved out 
 | Spring system | Leaf springs | Coil springs (Performance Springs) |
 | Spring count | — | 140 |
 | Spring length | — | 10" |
-| Max single-user weight | 330 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | 330 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | — | Galvanized and powder-coated steel |
 | Mat material | — | UV-treated cross-sewn polypropylene |
 | US standard | Unknown | Yes (ASTM) |
@@ -55,4 +55,4 @@ Choose the Thunder 2 Pro for general family bouncing with the springs moved out 
 
 ## What matters most
 
-Shape drives the difference in use. The Thunder 2 Pro is a 163-inch round at about $1,649 that gently centers jumpers, which suits casual family use. The ACON 16 HD is a rectangle at about $2,499 that spreads the bounce evenly across the mat, which is what kids working on flips and tricks want. The Thunder 2 Pro is rated to 330 lb per jumper; ACON publishes no fixed single-user limit but recommends about 300 lb, and backs the frame for 10 years with 5 years on the mat and springs and 2 on the pads. The Thunder 2 Pro matches the frame and mat terms but covers its leaf springs for 1 year.
+Shape drives the difference in use. The Thunder 2 Pro is a 163-inch round at about $1,649 that gently centers jumpers, which suits casual family use. The ACON 16 HD is a rectangle at about $2,499 that spreads the bounce evenly across the mat, which is what kids working on flips and tricks want. The Thunder 2 Pro is rated to 330 lb per jumper; ACON publishes no single-user limit, but recommends a limit of 300 lb, and backs the frame for 10 years with 5 years on the mat and springs and 2 on the pads. The Thunder 2 Pro matches the frame and mat terms but covers its leaf springs for 1 year.

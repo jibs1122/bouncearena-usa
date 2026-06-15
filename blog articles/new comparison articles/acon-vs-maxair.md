@@ -27,7 +27,7 @@ For family use, even demanding family use, ACON is the realistic choice. MaxAir 
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models); MaxAir (250 lb).
+- Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); MaxAir (250 lb).
 - ACON offers round, rectangle; MaxAir covers round, square, rectangle.
 - If you want a very large trampoline, ACON goes up to 10×17 ft rectangle; MaxAir tops out at 20 ft rectangle.
 - ACON leads on warranty (frame 10 yr, mat 5 yr).

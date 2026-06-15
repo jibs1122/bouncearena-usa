@@ -45,7 +45,7 @@ Choose the Springfree if removing the spring-and-frame contact point is your pri
 | Spring system | Flexible composite rods (no springs) | Coil springs (Air Series) |
 | Spring count | 0 | 110 |
 | Spring length | — | 8.5" |
-| Max single-user weight | 220 lb | No published single-user limit; ACON recommends about 300 lb |
+| Max single-user weight | 220 lb | No published single-user limit; ACON recommends a limit of 300 lb |
 | Frame material | Galvanized and powder-coated steel | Galvanized and powder-coated steel |
 | Mat material | UV-stabilized polypropylene (SoftEdge) | UV-treated cross-sewn polypropylene |
 | Net material | UV-stabilized FlexiNet | — |
@@ -55,4 +55,4 @@ Choose the Springfree if removing the spring-and-frame contact point is your pri
 
 ## What matters most
 
-Beyond the price gap, two things separate these. First, bounce feel: Springfree's rods give a softer, deeper rebound that suits younger and casual jumpers, while ACON's coils feel firmer and more responsive, which older or heavier kids tend to prefer. Second, weight: Springfree rates the Large Oval to 220 lb for a single jumper, while ACON publishes no fixed limit and recommends about 300 lb, which matters if a teen or adult will use it. The Springfree's draw is the safety design and 10-year cover on the frame, mat, and rods ($1,849); ACON's is performance and value ($1,399 to $1,599).
+Beyond the price gap, two things separate these. First, bounce feel: Springfree's rods give a softer, deeper rebound that suits younger and casual jumpers, while ACON's coils feel firmer and more responsive, which older or heavier kids tend to prefer. Second, weight: Springfree rates the Large Oval to 220 lb for a single jumper, while ACON publishes no single-user limit, but recommends a limit of 300 lb, which matters if a teen or adult will use it. The Springfree's draw is the safety design and 10-year cover on the frame, mat, and rods ($1,849); ACON's is performance and value ($1,399 to $1,599).

@@ -27,7 +27,7 @@ Choose Jumpzylla if low entry price is the priority and this is a first trampoli
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: Jumpzylla (450 lb); ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models).
+- Single-user weight isn't directly comparable: Jumpzylla (450 lb); ACON (no published single-user limit; ACON recommends a limit of 300 lb).
 - Jumpzylla offers round; ACON covers round, rectangle.
 - If you want a very large trampoline, Jumpzylla goes up to 16 ft round; ACON tops out at 10×17 ft rectangle.
 - Warranty is split: Jumpzylla leads on net 2 yr, while ACON leads on frame 10 yr, mat 5 yr, springs 5 yr.

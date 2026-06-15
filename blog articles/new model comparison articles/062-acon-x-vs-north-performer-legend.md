@@ -46,7 +46,7 @@ Choose the ACON X 17ft if you specifically want a large premium rectangle and no
 | Spring system | Coil springs (Performance Springs) | Coil springs |
 | Spring count | — | 124 |
 | Spring length | — | 8.9" |
-| Max single-user weight | No published single-user limit; ACON recommends about 300 lb | 243 lb |
+| Max single-user weight | No published single-user limit; ACON recommends a limit of 300 lb | 243 lb |
 | Frame material | Galvanized and powder-coated steel | Heavy-duty galvanised steel frame; galvanised black powder-coated legs |
 | Mat material | UV-treated cross-sewn polypropylene | Performance jump mat |
 | Net material | — | Heavy-duty UV-protected ripstop safety net |
@@ -56,4 +56,4 @@ Choose the ACON X 17ft if you specifically want a large premium rectangle and no
 
 ## What matters most
 
-Both share the same warranty backbone: a 10-year frame, 5 years on the mat and springs, and 2 on the pads. The ACON X 17ft is about $3,999 and comes only as a large rectangle, with ACON recommending about 300 lb per jumper. North's Legend models run about $2,050 to $3,150 and let you choose round, oval, or rectangle, which is the main advantage if your yard or use case is not a fit for a single big rectangle. Decide whether you need that exact flagship rectangle or want the shape flexibility North offers.
+Both share the same warranty backbone: a 10-year frame, 5 years on the mat and springs, and 2 on the pads. The ACON X 17ft is about $3,999 and comes only as a large rectangle; ACON publishes no single-user limit, but recommends a limit of 300 lb. North's Legend models run about $2,050 to $3,150 and let you choose round, oval, or rectangle, which is the main advantage if your yard or use case is not a fit for a single big rectangle. Decide whether you need that exact flagship rectangle or want the shape flexibility North offers.

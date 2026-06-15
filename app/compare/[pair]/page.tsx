@@ -435,7 +435,6 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
 
       return (
         <section className="mb-8">
-          <h2 className="mb-4 text-xl font-bold text-black">Featured Models</h2>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {modelCards.map(({ label, product, sourceUrl }, index) => (
               <a

@@ -28,7 +28,7 @@ Choose ACON if you want a premium trampoline built for the long term. Consider S
 Key takeaways
 
 - The two brands differ on bounce system — SkyBound uses springless bungee-cord system, while ACON uses traditional coil springs.
-- Single-user weight isn't directly comparable: SkyBound (roughly 100–330 lb depending on model); ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models).
+- Single-user weight isn't directly comparable: SkyBound (roughly 100–330 lb depending on model); ACON (no published single-user limit; ACON recommends a limit of 300 lb).
 - ACON publishes round, rectangle models; SkyBound's line-up varies by range and is best checked per model.
 - SkyBound warranty is set by product line — Official comparison material appears to range from about 2 to 10 years by model; springless series commonly shows 5 years on main components; compare against ACON per model.
 - Installation differs: SkyBound is above-ground only, while ACON is mainly above-ground with an in-ground option.

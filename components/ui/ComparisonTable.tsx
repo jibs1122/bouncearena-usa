@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { Product } from "@/lib/types";
 import { formatUsd } from "@/lib/price";
+import { isAconBrand } from "@/lib/vuly";
 import { formatWarrantyYears } from "@/lib/warranty";
 
 interface SpecRow {
@@ -67,6 +68,79 @@ function StatusIcon({ ok }: { ok: boolean }) {
   );
 }
 
+function productPrice(product: Product): number {
+  return product.exactSizePriceUsd ?? product.modelFromPriceUsd ?? Number.NEGATIVE_INFINITY;
+}
+
+function representativeKey(product: Product): string {
+  return [
+    product.brand,
+    product.size,
+    product.shape,
+    product.groundType,
+    product.maxDiameterIn ?? "",
+    product.overallLengthIn ?? "",
+    product.overallWidthIn ?? "",
+    product.springSystem,
+  ]
+    .map((part) => String(part).trim().toLowerCase())
+    .join("|");
+}
+
+function chooseRepresentativeProduct(products: Product[]): Product {
+  return [...products].sort((a, b) => {
+    const priceDelta = productPrice(b) - productPrice(a);
+    if (priceDelta !== 0) return priceDelta;
+    return a.model.localeCompare(b.model);
+  })[0];
+}
+
+function productFootprint(product: Product): number {
+  return Math.max(
+    product.maxDiameterIn ?? 0,
+    product.overallLengthIn ?? 0,
+    product.overallWidthIn ?? 0,
+  );
+}
+
+function reduceProductsForComparison(products: Product[]): Product[] {
+  if (products.length <= 12) return products;
+
+  const deduped = new Map<string, Product[]>();
+  for (const product of products) {
+    const key = representativeKey(product);
+    if (!deduped.has(key)) deduped.set(key, []);
+    deduped.get(key)!.push(product);
+  }
+
+  const representatives = Array.from(deduped.values()).map(chooseRepresentativeProduct);
+  const byBrand = new Map<string, Product[]>();
+  for (const product of representatives) {
+    if (!byBrand.has(product.brand)) byBrand.set(product.brand, []);
+    byBrand.get(product.brand)!.push(product);
+  }
+
+  const limited: Product[] = [];
+  for (const brandProducts of byBrand.values()) {
+    limited.push(
+      ...brandProducts
+        .sort((a, b) => {
+          const shapeCompare = a.shape.localeCompare(b.shape);
+          if (shapeCompare !== 0) return shapeCompare;
+          return productFootprint(a) - productFootprint(b);
+        })
+        .slice(0, 8),
+    );
+  }
+
+  return limited;
+}
+
+function formatMaxSingleUser(product: Product): ReactNode {
+  if (isAconBrand(product.brand)) return "No published limit (≈300 lb rec.)";
+  return product.maxSingleUserWeightLb ? `${product.maxSingleUserWeightLb} lb` : "—";
+}
+
 const SPEC_ROWS: SpecRow[] = [
   { label: "Size", getValue: (p) => p.size || "—" },
   { label: "Shape", getValue: (p) => p.shape || "—" },
@@ -79,7 +153,7 @@ const SPEC_ROWS: SpecRow[] = [
   { label: "Spring system", getValue: (p) => p.springSystem || "—" },
   { label: "Spring count", getValue: (p) => p.springCount?.toString() ?? "—" },
   { label: "Spring length", getValue: (p) => p.springLengthIn ? `${p.springLengthIn}"` : "—" },
-  { label: "Max single user", getValue: (p) => p.maxSingleUserWeightLb ? `${p.maxSingleUserWeightLb} lb` : "—" },
+  { label: "Max single user", getValue: formatMaxSingleUser },
   { label: "Combined weight", getValue: (p) => p.combinedTotalWeightRatingLb ? `${p.combinedTotalWeightRatingLb} lb` : "—" },
   { label: "Frame material", getValue: (p) => p.frameMaterial || "—" },
   { label: "Frame tube dia.", getValue: (p) => p.frameTubeDiameterIn ? `${p.frameTubeDiameterIn}"` : "—" },
@@ -102,12 +176,13 @@ const SPEC_ROWS: SpecRow[] = [
 
 export default function ComparisonTable({ products, title }: { products: Product[]; title?: string }) {
   if (products.length === 0) return null;
+  const tableProducts = reduceProductsForComparison(products);
 
   // With only one product there are no cross-model differences — show everything.
-  const collapsible = products.length > 1;
+  const collapsible = tableProducts.length > 1;
 
   const annotated = SPEC_ROWS.map((row) => {
-    const values = products.map((p) => row.getValue(p));
+    const values = tableProducts.map((p) => row.getValue(p));
     const hasData = values.some((v) => hasMeaningfulValue(v));
     const allSame = new Set(values.map(nodeKey)).size === 1;
     return { row, values, hasData, allSame };
@@ -137,7 +212,7 @@ export default function ComparisonTable({ products, title }: { products: Product
               <th className="sticky left-0 z-30 w-[180px] min-w-[180px] bg-[#38b1ab] px-4 py-3 text-left font-semibold border-r border-[#2e9a94]">
                 Specification
               </th>
-              {products.map((p) => (
+              {tableProducts.map((p) => (
                 <th
                   key={p.slug}
                   className="w-[150px] min-w-[150px] border-b border-black/[0.08] px-3 py-3 text-left align-top font-semibold"
@@ -165,7 +240,7 @@ export default function ComparisonTable({ products, title }: { products: Product
                     {row.label}
                   </td>
                   {values.map((val, j) => (
-                    <td key={products[j].slug} className="w-[150px] min-w-[150px] border-b border-black/[0.05] px-3 py-2.5 text-black/80">
+                    <td key={tableProducts[j].slug} className="w-[150px] min-w-[150px] border-b border-black/[0.05] px-3 py-2.5 text-black/80">
                       {val}
                     </td>
                   ))}
@@ -174,7 +249,7 @@ export default function ComparisonTable({ products, title }: { products: Product
             ) : (
               <tr>
                 <td
-                  colSpan={products.length + 1}
+                  colSpan={tableProducts.length + 1}
                   className="px-4 py-6 text-center text-black/30 italic"
                 >
                   All specs are identical across these models.

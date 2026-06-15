@@ -27,7 +27,7 @@ Choose ACON if you want a straightforward performance trampoline you can judge o
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: ACON (no published single-user limit; ~300 lb recommended on most models, no limit on high-end models); Berg (varies by line; 600 kg is a static test, not a single-user figure).
+- Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
 - ACON publishes round, rectangle models; Berg's line-up varies by range and is best checked per model.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against ACON per model.
 - Installation differs: ACON is mainly above-ground with an in-ground option, while Berg is above- or in-ground.
