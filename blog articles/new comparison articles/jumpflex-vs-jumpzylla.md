@@ -17,9 +17,9 @@ title: Jumpflex vs Jumpzylla — Trampoline Comparison 2026 | Bounce Arena
 
 A budget entry against a sturdier step up, and the real question is how long you want it to last.
 
-Jumpzylla is the cheaper, easy online buy, but it carries only a 1-year warranty across the main parts. Jumpflex costs more and is built for older kids and heavier use, with a 10-year frame and longer mat and spring cover.
+Jumpzylla is the cheaper, easy online buy, but it carries only a 1-year warranty across the main parts. Jumpflex costs more and is built for older kids and heavier use, with up to a 10-year frame warranty and longer mat and spring cover.
 
-Choose Jumpzylla if keeping the upfront cost down is the priority. Choose Jumpflex if you want it to last, since budget trampolines often need replacement parts within a few years and the longer cover protects against that.
+Choose Jumpzylla if keeping the upfront cost down is the priority. Choose Jumpflex if you want it to last, since budget trampolines often need replacement parts within a few years and the longer frame, mat, and spring cover protects against that.
 
 **Affiliate disclosure:** This page contains affiliate links and we may earn a commission on purchases.
 

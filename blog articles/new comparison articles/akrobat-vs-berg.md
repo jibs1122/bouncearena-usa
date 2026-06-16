@@ -17,7 +17,7 @@ title: Akrobat vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 Two European premium brands that come at the category from different angles.
 
-Akrobat is built around rectangular performance, above-ground or in-ground, and backs it with a lifetime frame and long spring cover. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with a long frame warranty but component terms that vary by line.
+Akrobat is built around rectangular performance, above-ground or in-ground, and backs it with a lifetime frame warranty and long spring cover. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with a long frame warranty but component terms that vary by line.
 
 Choose Akrobat if performance bounce and warranty are what you care about. Choose Berg if you want the widest choice of lines and installation formats and will compare the specific range you're after.
 

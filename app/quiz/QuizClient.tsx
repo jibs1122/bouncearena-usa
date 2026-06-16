@@ -146,6 +146,9 @@ export default function QuizClient() {
             Answer 8 quick questions and we&apos;ll match you with the best trampoline for your
             family — based on yard size, installation type, spring preference, safety-net preference, shape, and budget.
           </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-black/45">
+            This quiz contains affiliate links. If you buy through them, we may earn a commission at no extra cost to you.
+          </p>
         </div>
       )}
 

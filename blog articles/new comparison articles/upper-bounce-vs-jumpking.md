@@ -17,7 +17,7 @@ title: Upper Bounce vs JumpKing — Trampoline Comparison 2026 | Bounce Arena
 
 Two below-premium brands, so parts, range, and warranty separate them.
 
-Upper Bounce offers more shapes and strong replacement-parts support, but very short warranty terms. JumpKing is the older retail name, with a longer history and a 1-year frame, across a familiar range of rounds, ovals, and rectangles.
+Upper Bounce offers more shapes and strong replacement-parts support, but very short warranty terms. JumpKing is the older retail name, with a longer history and a 1-year frame warranty, across a familiar range of rounds, ovals, and rectangles.
 
 Choose Upper Bounce if you want more shapes and easy access to parts. Choose JumpKing if you prefer the established name and the shape you need is in its lineup. Either way, compare current price and the exact shape, since the two sit close together.
 

@@ -66,6 +66,27 @@ export default function PromoBell() {
     );
   }
 
+  function MobileCopyCodeButton({ brand, code }: { brand: string; code: string }) {
+    const active = copiedCode === code;
+    return (
+      <button
+        type="button"
+        onClick={() => copyCode(code)}
+        aria-label={`Copy ${brand} promo code ${code}`}
+        className={`flex min-h-11 min-w-0 items-center justify-between gap-1.5 rounded-xl border px-2.5 text-left transition-colors ${
+          active
+            ? 'border-[#38b1ab] bg-[#38b1ab] text-white'
+            : 'border-black/5 bg-black/[0.035] text-black/65 hover:border-[#38b1ab]/35 hover:text-[#38b1ab]'
+        }`}
+      >
+        <span className={`truncate text-[11px] font-semibold ${active ? 'text-white/85' : 'text-black/55'}`}>
+          {brand}
+        </span>
+        <span className="shrink-0 text-[11px] font-bold">{active ? 'Copied' : code}</span>
+      </button>
+    );
+  }
+
   return (
     <>
       {/* Desktop: fixed right edge */}
@@ -114,29 +135,32 @@ export default function PromoBell() {
 
       {/* Mobile: fixed bottom pill */}
       {!mobileClosed && (
-        <div className="fixed inset-x-0 bottom-3 z-30 px-3 lg:hidden">
-          <div className="mx-auto max-w-[26rem] rounded-[1.6rem] border border-black/10 bg-white/[0.96] px-4 py-3 shadow-[0_14px_34px_-22px_rgba(0,0,0,0.45)] backdrop-blur">
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#38b1ab]">Promo codes</span>
+        <div
+          aria-hidden="true"
+          className="h-[7.5rem] lg:hidden"
+        />
+      )}
+      {!mobileClosed && (
+        <div className="fixed inset-x-0 z-30 px-3 lg:hidden" style={{ bottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}>
+          <div className="mx-auto max-w-[26rem] rounded-[1.35rem] border border-black/10 bg-white/[0.96] px-3 py-2.5 shadow-[0_14px_34px_-22px_rgba(0,0,0,0.45)] backdrop-blur">
+            <div className="flex items-center justify-between gap-2">
+              <span className="min-w-0 truncate text-[11px] font-bold uppercase tracking-[0.1em] text-[#38b1ab]">
+                Promo codes <span className="font-semibold normal-case tracking-normal text-black/45">(click to copy)</span>
+              </span>
               <button
                 type="button"
                 aria-label="Close promo codes"
                 onClick={() => setMobileClosed(true)}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-black/40 transition-colors hover:bg-black/5 hover:text-black/70"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-black/40 transition-colors hover:bg-black/5 hover:text-black/70"
               >
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M6 6l12 12" /><path d="M18 6L6 18" />
                 </svg>
               </button>
             </div>
-            <div className="mt-2 grid grid-cols-1 gap-2 min-[380px]:grid-cols-2">
+            <div className="mt-1.5 grid grid-cols-2 gap-2">
               {PROMOS.map((promo) => (
-                <div key={promo.brand} className="min-w-0 rounded-2xl bg-black/[0.025] p-2">
-                  <div className="flex items-center justify-between gap-1.5">
-                    <span className="truncate text-xs font-semibold text-black/55">{promo.brand}</span>
-                    <CopyCodeButton brand={promo.brand} code={promo.code} />
-                  </div>
-                </div>
+                <MobileCopyCodeButton key={promo.brand} brand={promo.brand} code={promo.code} />
               ))}
             </div>
           </div>

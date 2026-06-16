@@ -17,9 +17,9 @@ title: Jumpzylla vs ACON — Trampoline Comparison 2026 | Bounce Arena
 
 A budget brand against a premium one, so the real question is first trampoline or long-term investment.
 
-Jumpzylla is the low-cost, easy online buy, round only, with a 1-year warranty across the main parts. ACON is a much bigger spend, but it brings a deeper performance lineup, a 10-year frame, and rectangular models built for a more even bounce.
+Jumpzylla is the low-cost, easy online buy, round only, with a 1-year warranty across the main parts. ACON is a much bigger spend, but it brings a deeper performance lineup, a 10-year frame warranty, and rectangular models built for a more even bounce.
 
-Choose Jumpzylla if low entry price is the priority and this is a first trampoline. Choose ACON if you want stronger performance, longer warranty, and a trampoline built to last for years.
+Choose Jumpzylla if low entry price is the priority and this is a first trampoline. Choose ACON if you want stronger performance, longer core warranty, and a trampoline built to last for years.
 
 **Affiliate disclosure:** This page contains affiliate links and we may earn a commission on purchases.
 

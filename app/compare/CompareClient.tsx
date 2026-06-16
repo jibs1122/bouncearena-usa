@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, Fragment, useRef } from 'react';
+import { useState, useMemo, useCallback, Fragment } from 'react';
 import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import type { Product } from '@/lib/types';
 import {
@@ -94,80 +94,83 @@ function DualRangeSlider({
   step?: number; fmt: (v: number) => string;
   onLow: (v: number) => void; onHigh: (v: number) => void;
 }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const dragging = useRef<'low' | 'high' | null>(null);
-
-  const pct = (v: number) => ((v - min) / (max - min)) * 100;
-
   function snapToStep(v: number) {
-    return Math.round(v / step) * step;
+    const precision = step.toString().split('.')[1]?.length ?? 0;
+    return Number((Math.round(v / step) * step).toFixed(precision));
   }
 
-  function valFromClientX(clientX: number): number {
-    const rect = trackRef.current?.getBoundingClientRect();
-    if (!rect) return min;
-    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    return snapToStep(min + ratio * (max - min));
+  function clamp(value: number, minValue: number, maxValue: number) {
+    if (!Number.isFinite(value)) return minValue;
+    return Math.min(maxValue, Math.max(minValue, snapToStep(value)));
   }
 
-  function startDrag(clientX: number) {
-    const val = valFromClientX(clientX);
-    const distLow = Math.abs(val - low);
-    const distHigh = Math.abs(val - high);
-    dragging.current = distLow <= distHigh ? 'low' : 'high';
+  function setLowValue(value: number) {
+    onLow(clamp(value, min, high - step));
   }
 
-  function moveDrag(clientX: number) {
-    if (!dragging.current) return;
-    const val = valFromClientX(clientX);
-    if (dragging.current === 'low') onLow(Math.min(val, high - step));
-    else onHigh(Math.max(val, low + step));
+  function setHighValue(value: number) {
+    onHigh(clamp(value, low + step, max));
   }
-
-  function endDrag() { dragging.current = null; }
-
-  // mouse
-  function onMouseDown(e: React.MouseEvent) {
-    e.preventDefault();
-    startDrag(e.clientX);
-    moveDrag(e.clientX);
-    const move = (ev: MouseEvent) => moveDrag(ev.clientX);
-    const up = () => { endDrag(); window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
-    window.addEventListener('mousemove', move);
-    window.addEventListener('mouseup', up);
-  }
-
-  // touch
-  function onTouchStart(e: React.TouchEvent) {
-    startDrag(e.touches[0].clientX);
-    moveDrag(e.touches[0].clientX);
-  }
-  function onTouchMove(e: React.TouchEvent) { moveDrag(e.touches[0].clientX); }
 
   return (
     <div>
-      <div className="flex justify-between text-xs mb-1">
+      <div className="mb-2 flex justify-between gap-3 text-xs">
         <span className="font-semibold uppercase tracking-wide text-[11px] text-black/40">{label}</span>
         <span className="font-bold text-black text-xs">
           {fmt(low)}{low !== high || high !== max ? ` – ${high >= max ? 'Any' : fmt(high)}` : ''}
         </span>
       </div>
-      <div
-        ref={trackRef}
-        className="relative h-5 flex items-center cursor-pointer select-none"
-        onMouseDown={onMouseDown}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-      >
-        <div className="absolute inset-x-0 h-1.5 rounded-full bg-black/10" />
-        <div className="absolute h-1.5 rounded-full bg-[#38b1ab]"
-          style={{ left: `${pct(low)}%`, right: `${100 - pct(high)}%` }} />
-        {/* low thumb */}
-        <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#38b1ab] shadow-sm"
-          style={{ left: `calc(${pct(low)}% - 8px)` }} />
-        {/* high thumb */}
-        <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#38b1ab] shadow-sm"
-          style={{ left: `calc(${pct(high)}% - 8px)` }} />
+      <div className="space-y-2">
+        <label className="block">
+          <span className="sr-only">Minimum {label.toLowerCase()}</span>
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={low}
+            onChange={(e) => setLowValue(e.currentTarget.valueAsNumber)}
+            className="h-11 w-full accent-[#38b1ab]"
+          />
+        </label>
+        <label className="block">
+          <span className="sr-only">Maximum {label.toLowerCase()}</span>
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={high}
+            onChange={(e) => setHighValue(e.currentTarget.valueAsNumber)}
+            className="h-11 w-full accent-[#38b1ab]"
+          />
+        </label>
+      </div>
+      <div className="mt-2 grid grid-cols-2 gap-2">
+        <label className="block">
+          <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-black/35">Min</span>
+          <input
+            type="number"
+            min={min}
+            max={high - step}
+            step={step}
+            value={low}
+            onChange={(e) => setLowValue(e.currentTarget.valueAsNumber)}
+            className="h-11 w-full rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-black"
+          />
+        </label>
+        <label className="block">
+          <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-black/35">Max</span>
+          <input
+            type="number"
+            min={low + step}
+            max={max}
+            step={step}
+            value={high}
+            onChange={(e) => setHighValue(e.currentTarget.valueAsNumber)}
+            className="h-11 w-full rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-black"
+          />
+        </label>
       </div>
       <div className="flex justify-between text-[10px] text-black/30 mt-0.5">
         <span>{fmt(min)}</span>
@@ -328,6 +331,12 @@ export default function CompareClient({ products }: { products: Product[] }) {
     [filtered],
   );
 
+  function onMobileSortChange(value: string) {
+    const [key, dir] = value.split(':') as [SortKey, SortDir];
+    setSortKey(key);
+    setSortDir(dir);
+  }
+
   const SortTh = ({ col, label, tip }: { col: SortKey; label: string; tip?: string }) => (
     <th className="text-left px-3 py-3 whitespace-nowrap">
       <button onClick={() => cycleSort(col)}
@@ -375,7 +384,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
             <div className="flex flex-wrap gap-1.5">
               {allBrands.map(b => (
                 <button key={b} onClick={() => toggleBrand(b)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${selectedBrands.has(b) ? 'text-white border-transparent' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}
+                  className={`min-h-11 rounded-full px-3 py-2 text-xs font-medium border transition-colors ${selectedBrands.has(b) ? 'text-white border-transparent' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}
                   style={selectedBrands.has(b) ? { backgroundColor: brandBadge(b).bg, borderColor: brandBadge(b).bg, color: brandBadge(b).text } : {}}>
                   {b}
                 </button>
@@ -390,7 +399,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
               <div className="flex flex-wrap gap-1.5">
                 {allShapes.map(s => (
                   <button key={s} onClick={() => toggleShape(s)}
-                    className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${selectedShapes.has(s) ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
+                    className={`min-h-11 rounded-full px-3 py-2 text-xs font-medium border transition-colors ${selectedShapes.has(s) ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
                     {s}
                   </button>
                 ))}
@@ -403,11 +412,11 @@ export default function CompareClient({ products }: { products: Product[] }) {
             <p className="text-[11px] font-semibold uppercase tracking-wide text-black/40 mb-2">Type</p>
             <div className="flex flex-wrap gap-1.5">
               <button onClick={() => setSpringlessOnly(o => !o)}
-                className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${springlessOnly ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
+                className={`min-h-11 rounded-full px-3 py-2 text-xs font-medium border transition-colors ${springlessOnly ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
                 Springless only
               </button>
               <button onClick={() => setAstmOnly(o => !o)}
-                className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${astmOnly ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
+                className={`min-h-11 rounded-full px-3 py-2 text-xs font-medium border transition-colors ${astmOnly ? 'bg-[#38b1ab] border-[#38b1ab] text-white' : 'border-black/15 text-black/60 hover:border-black/30 bg-white'}`}>
                 ASTM certified
               </button>
             </div>
@@ -435,8 +444,154 @@ export default function CompareClient({ products }: { products: Product[] }) {
         <span className="font-medium text-black">{matchingSizes} matching size{matchingSizes !== 1 ? 's' : ''}</span>
       </p>
 
+      <label className="mb-4 block md:hidden">
+        <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-black/40">Sort results</span>
+        <select
+          value={`${sortKey}:${sortDir}`}
+          onChange={(e) => onMobileSortChange(e.currentTarget.value)}
+          className="h-11 w-full rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-black"
+        >
+          <option value="price:asc">Price: low to high</option>
+          <option value="price:desc">Price: high to low</option>
+          <option value="size:asc">Size: small to large</option>
+          <option value="size:desc">Size: large to small</option>
+          <option value="weight:desc">Max weight: high to low</option>
+          <option value="warranty:desc">Frame warranty: high to low</option>
+        </select>
+      </label>
+
+      <div className="space-y-3 md:hidden">
+        {filtered.length === 0 ? (
+          <div className="rounded-2xl border border-black/[0.08] bg-white px-4 py-10 text-center text-sm text-black/40">
+            No models match your filters.
+          </div>
+        ) : (
+          filtered.map((row) => {
+            const key = `${row.brand}|||${row.model}`;
+            const canExpand = row.variants.length > 1;
+            const isExpanded = canExpand && expandedKeys.has(key);
+            const badge = brandBadge(row.brand);
+
+            return (
+              <article key={key} className="rounded-2xl border border-black/[0.08] bg-white p-4 shadow-sm">
+                <div className="mb-3">
+                  <span
+                    className="mb-1 inline-block rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+                    style={{ backgroundColor: badge.bg, color: badge.text }}
+                  >
+                    {row.brand}
+                  </span>
+                  <h2 className="text-base font-semibold leading-snug text-black">{row.model}</h2>
+                  {row.variants.length > 1 && (
+                    <p className="mt-0.5 text-xs text-black/40">{row.variants.length} matching sizes</p>
+                  )}
+                </div>
+
+                <div className="mb-3 flex flex-wrap gap-1">
+                  {row.variants.map((v, i) => (
+                    <span key={i} className="rounded border border-black/15 px-2 py-1 text-xs text-black/60">
+                      {variantLabel(v)}
+                    </span>
+                  ))}
+                </div>
+
+                <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                  <div>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Price</dt>
+                    <dd className="mt-0.5 font-semibold text-black">
+                      {row.minPrice !== null ? (
+                        <>
+                          {fmtPrice(row.minPrice)}
+                          {row.maxPrice !== null && row.maxPrice !== row.minPrice ? (
+                            <span className="font-normal text-black/40"> to {fmtPrice(row.maxPrice)}</span>
+                          ) : null}
+                        </>
+                      ) : '—'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Max weight</dt>
+                    <dd className="mt-0.5 text-black/70">{row.maxWeightLb !== null ? `${row.maxWeightLb} lb` : '—'}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Warranty</dt>
+                    <dd className="mt-0.5 text-black/70">{formatWarrantyYears(row.warrantyFrameYrs)}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Shape</dt>
+                    <dd className="mt-0.5 text-black/70">{row.shape || '—'}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Spring</dt>
+                    <dd className="mt-0.5 text-black/70">{row.springSystem || '—'}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">ASTM</dt>
+                    <dd className="mt-0.5 text-black/70">{row.astmCertified === true ? 'Certified' : 'Not listed'}</dd>
+                  </div>
+                </dl>
+
+                <div className="mt-4 flex flex-col gap-2">
+                  {row.shopUrl && (
+                    <a
+                      href={row.shopUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow sponsored"
+                      className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#38b1ab] px-4 py-2.5 text-sm font-semibold text-white"
+                    >
+                      {shopCtaLabel(row.shopUrl, row.brand)}
+                    </a>
+                  )}
+                  {canExpand && (
+                    <button
+                      type="button"
+                      onClick={() => toggleExpanded(key)}
+                      aria-expanded={isExpanded}
+                      className="inline-flex min-h-11 items-center justify-center rounded-xl border border-black/10 px-4 py-2.5 text-sm font-semibold text-black/65"
+                    >
+                      {isExpanded ? 'Hide sizes' : 'Show sizes'}
+                    </button>
+                  )}
+                </div>
+
+                {isExpanded && (
+                  <div className="mt-3 divide-y divide-black/[0.06] rounded-xl bg-black/[0.02] px-3">
+                    {row.variants.map((v, i) => {
+                      const variantUrl = getPreferredProductUrl(v);
+                      return (
+                        <div key={`${key}-${i}`} className="py-3 text-xs text-black/55">
+                          <div className="flex items-start justify-between gap-3">
+                            <span className="font-semibold text-black/70">{variantLabel(v)}</span>
+                            <span>{(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null ? fmtPrice((v.exactSizePriceUsd ?? v.modelFromPriceUsd)!) : '—'}</span>
+                          </div>
+                          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+                            <span>{v.maxSingleUserWeightLb ? `${v.maxSingleUserWeightLb} lb max` : 'Max weight —'}</span>
+                            <span>{formatWarrantyYears(v.warrantyFrameYears)}</span>
+                            <span>{v.meetsUsStandard === true ? 'ASTM certified' : 'ASTM not listed'}</span>
+                          </div>
+                          {variantUrl && (
+                            <a
+                              href={variantUrl}
+                              target="_blank"
+                              rel="noopener noreferrer nofollow sponsored"
+                              className="mt-2 inline-flex min-h-10 items-center text-xs font-semibold text-[#38b1ab]"
+                            >
+                              {shopCtaLabel(variantUrl, row.brand)}
+                            </a>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </article>
+            );
+          })
+        )}
+      </div>
+
       {/* ── table ────────────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-black/[0.08] overflow-hidden">
+      <div className="hidden rounded-2xl border border-black/[0.08] overflow-hidden md:block">
         <div className="overflow-x-auto">
           <table className="min-w-[980px] w-full">
             <thead className="bg-black/[0.03] border-b border-black/[0.08]">

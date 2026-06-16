@@ -6,11 +6,19 @@ export interface QuizOption {
   imageAlt?: string;
 }
 
+export interface QuizLearnMoreLink {
+  prefix?: string;
+  text: string;
+  href: string;
+}
+
 export interface Question {
   id: string;
   title: string;
   subtitle?: string;
   subtitleExtra?: string;
+  learnMoreLabel?: string;
+  learnMoreLinks?: QuizLearnMoreLink[];
   questionImage?: string;
   type: 'single' | 'multi';
   maxSelect?: number;
@@ -27,6 +35,13 @@ export function buildQuestions(): Question[] {
       title: 'What size is your backyard?',
       subtitle:
         'We use this to recommend trampolines that actually fit your space. Allow at least 3 feet of clearance on all sides between the trampoline and fences, walls, or trees.',
+      learnMoreLinks: [
+        {
+          prefix: 'Learn more: ',
+          text: 'How to choose the right trampoline size',
+          href: 'https://us.acon24.com/blogs/the-launch-pad/trampoline-sizes-guide-for-choosing-the-correct-size?sca_ref=11261719.jjbGKHHa7yLAnuwn',
+        },
+      ],
       type: 'single',
       options: [
         { id: 'small', label: 'Small', description: 'Room for 8–10ft' },
@@ -60,7 +75,13 @@ export function buildQuestions(): Question[] {
       id: 'groundTypePreference',
       title: 'Do you want an above-ground or in-ground trampoline?',
       subtitle:
-        'This is treated as a hard requirement in the quiz. Above-ground models are easier to set up and move. In-ground models sit lower in the yard and have a cleaner look, but usually require more installation work.',
+        'Above-ground models are easier to set up and move. In-ground models sit lower in the yard and have a cleaner look, but usually require more installation work.',
+      learnMoreLinks: [
+        {
+          text: 'in-ground vs above-ground trampolines',
+          href: 'https://us.acon24.com/blogs/the-launch-pad/in-ground-vs-above-ground-trampolines-installation-differences?sca_ref=11261719.jjbGKHHa7yLAnuwn',
+        },
+      ],
       type: 'single',
       allowSkip: false,
       options: [
@@ -75,6 +96,17 @@ export function buildQuestions(): Question[] {
       title: 'Do you have a shape preference?',
       subtitle:
         'Round trampolines are usually more common, more forgiving for casual family play, and often cost less. Rectangular-style models give a more even bounce and suit gymnastics-style use, but they usually cost more and need more yard space.',
+      learnMoreLabel: 'Learn more:',
+      learnMoreLinks: [
+        {
+          text: 'Round vs Rectangle Trampolines (by ACON)',
+          href: 'https://www.acon24.com/blogs/the-launch-pad/round-vs-rectangular-trampoline-which-is-better-for-you/?sca_ref=11261719.jjbGKHHa7yLAnuwn',
+        },
+        {
+          text: 'Rectangle Trampolines Vs Round Trampolines - Which Is Better? (by Vuly)',
+          href: 'https://www.vulyplay.com/aff/100/?url=blog/rectangle-trampolines',
+        },
+      ],
       type: 'single',
       options: [
         {
@@ -100,6 +132,13 @@ export function buildQuestions(): Question[] {
       id: 'budget',
       title: "What's your budget?",
       subtitle: 'Choose up to two ranges if you want to widen the budget.',
+      learnMoreLinks: [
+        {
+          prefix: 'Learn more: ',
+          text: 'Are You Paying Too Much for Your Trampoline?',
+          href: 'https://us.acon24.com/blogs/the-launch-pad/trampoline-cost-are-you-paying-too-much-for-your-trampoline?sca_ref=11261719.jjbGKHHa7yLAnuwn',
+        },
+      ],
       type: 'multi',
       maxSelect: 2,
       options: [
@@ -117,6 +156,17 @@ export function buildQuestions(): Question[] {
       id: 'springType',
       title: 'What type of spring system do you prefer?',
       subtitle: 'Choose the system you want, or select "Not sure" to see both.',
+      learnMoreLabel: 'Learn more about Springless trampolines:',
+      learnMoreLinks: [
+        {
+          text: 'What is a Springless Trampoline? (by Vuly)',
+          href: 'https://www.vulyplay.com/aff/100/?url=blog/what-is-a-springless-trampoline',
+        },
+        {
+          text: 'Springless vs Spring Trampolines (by ACON)',
+          href: 'https://us.acon24.com/blogs/the-launch-pad/springless-vs-spring-trampolines-which-is-better-and-safer?sca_ref=11261719.jjbGKHHa7yLAnuwn',
+        }
+      ],
       type: 'single',
       allowSkip: false,
       options: [
@@ -145,7 +195,18 @@ export function buildQuestions(): Question[] {
       id: 'safetyNetPreference',
       title: 'Do you want a safety net?',
       subtitle:
-        'Some performance and in-ground models offer the net as an optional add-on. Optional nets can match either preference.',
+        'A safety net helps keep jumpers contained, while some in-ground and performance models sell the net as an optional add-on.',
+      learnMoreLabel: 'Learn more:',
+      learnMoreLinks: [
+        {
+          text: 'How to Use a Trampoline Safely (by Vuly)',
+          href: 'https://www.vulyplay.com/aff/100/?url=blog/how-to-use-a-trampoline-safely',
+        },
+        {
+          text: "Trampolines Without Enclosures & Nets - Why They're Not Safe (by Vuly)",
+          href: 'https://www.vulyplay.com/aff/100/?url=blog/trampolines-without-enclosures-why-theyre-not-safe',
+        },
+      ],
       type: 'single',
       options: [
         {
@@ -172,6 +233,13 @@ export function buildQuestions(): Question[] {
       title: 'Is ASTM certification important to you?',
       subtitle:
         'ASTM F381 and F2225 are widely used US safety and durability benchmarks for recreational trampolines, covering design, padding, warning labels, and test methods.',
+      learnMoreLinks: [
+        {
+          prefix: 'Learn more: ',
+          text: 'Why Should Your Trampoline Be ASTM Safety Certified?',
+          href: 'https://us.acon24.com/blogs/the-launch-pad/why-should-your-trampoline-be-safety-certified?sca_ref=11261719.jjbGKHHa7yLAnuwn',
+        },
+      ],
       type: 'single',
       options: [
         { id: 'yes', label: 'Yes, this matters to me' },

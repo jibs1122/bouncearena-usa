@@ -1,12 +1,12 @@
 ---
 canonical: https://www.bouncearenareviews.com/compare/north-vs-avyna/
-meta-description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame; North is the focused in-ground option.
-meta-og:description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame; North is the focused in-ground option.
+meta-description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame warranty; North is the focused in-ground option.
+meta-og:description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame warranty; North is the focused in-ground option.
 meta-og:title: North vs Avyna Trampolines
 meta-og:url: https://www.bouncearenareviews.com/compare/north-vs-avyna/
 meta-robots: index, follow
 meta-twitter:card: summary_large_image
-meta-twitter:description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame; North is the focused in-ground option.
+meta-twitter:description: North vs Avyna: two serious in-ground brands. Avyna carries more weight and a lifetime frame warranty; North is the focused in-ground option.
 meta-twitter:site: @bouncearena
 meta-twitter:title: North vs Avyna Trampolines
 meta-viewport: width=device-width, initial-scale=1
@@ -17,9 +17,9 @@ title: North vs Avyna — Trampoline Comparison 2026 | Bounce Arena
 
 Both are serious in-ground choices, so capacity and warranty decide it.
 
-Avyna carries the higher single-jumper limit and a lifetime frame with long spring cover. North is the more focused in-ground build, with a 10-year frame and an installation engineered to sit flush.
+Avyna carries the higher single-jumper limit and a lifetime frame warranty with long spring cover. North is the more focused in-ground build, with a 10-year frame warranty and an installation engineered to sit flush.
 
-Choose Avyna if you want the higher weight limit and a lifetime frame. Choose North if you want a focused in-ground build and its coverage suits your needs.
+Choose Avyna if you want the higher weight limit and a lifetime frame warranty. Choose North if you want a focused in-ground build and its coverage suits your needs.
 
 **Affiliate disclosure:** This page contains affiliate links and we may earn a commission on purchases.
 

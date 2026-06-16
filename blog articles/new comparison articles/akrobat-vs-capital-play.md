@@ -17,7 +17,7 @@ title: Akrobat vs Capital Play — Trampoline Comparison 2026 | Bounce Arena
 
 Both are in-ground systems, so warranty and capacity do the separating.
 
-Akrobat carries the stronger warranty, with a lifetime frame and long spring cover, plus a higher single-jumper limit and performance-leaning rectangles. Capital Play is a simpler in-ground setup at a lower price, with a 10-year frame and a lower weight limit.
+Akrobat carries the stronger warranty, with a lifetime frame warranty and long spring cover, plus a higher single-jumper limit and performance-leaning rectangles. Capital Play is a simpler in-ground setup at a lower price, with a 10-year frame warranty and a lower weight limit.
 
 Choose Akrobat if you want the higher capacity, stronger warranty, and more performance feel. Choose Capital Play if its single in-ground setup fits your yard and the lower cost is the draw.
 

@@ -17,7 +17,7 @@ title: SkyBound vs ACON — Trampoline Comparison 2026 | Bounce Arena
 
 A variable mid-tier brand against a premium performance one.
 
-ACON is the stronger performance and durability story, with a 10-year frame and consistent mat and spring cover. SkyBound is more mixed, selling parts and complete trampolines including a springless-style line, and is the lower-cost, less consistent option with a 5-year frame.
+ACON is the stronger performance and durability story, with a 10-year frame warranty and consistent mat and spring cover. SkyBound is more mixed, selling parts and complete trampolines including a springless-style line, and warranty terms that vary by product line.
 
 Choose ACON if you want a premium trampoline built for the long term. Consider SkyBound if you're staying in a lower price bracket or its specific design fits.
 

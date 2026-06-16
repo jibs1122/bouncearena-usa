@@ -48,7 +48,7 @@ export default function Header({ searchItems = [] }: { searchItems?: SearchItem[
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((o) => !o)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-black/65 transition-colors hover:bg-black/5 hover:text-black lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-black/65 transition-colors hover:bg-black/5 hover:text-black lg:hidden"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 {mobileOpen ? (

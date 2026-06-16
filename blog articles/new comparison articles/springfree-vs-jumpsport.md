@@ -17,7 +17,7 @@ title: Springfree vs JumpSport — Trampoline Comparison 2026 | Bounce Arena
 
 Both brands sell safety, but they get there in different ways.
 
-Springfree removes the springs entirely, running flexible rods below a hidden frame. JumpSport is the safety-led parent of AlleyOOP, which keeps traditional springs but engineers around them with the DoubleBounce two-mat system and a lifetime frame.
+Springfree removes the springs entirely, running flexible rods below a hidden frame. JumpSport is the safety-led parent of AlleyOOP, which keeps traditional springs but engineers around them with the DoubleBounce two-mat system and a lifetime frame warranty.
 
 Choose Springfree if a no-springs design is the point. If JumpSport appeals, look at the AlleyOOP models directly, since that's where the sprung, safety-engineered decision lives.
 

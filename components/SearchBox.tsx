@@ -45,6 +45,7 @@ function getSearchResults(query: string, items: SearchItem[]) {
 export default function SearchBox({ items, mobile = false }: { items: SearchItem[]; mobile?: boolean }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const deferredQuery = useDeferredValue(query);
   const router = useRouter();
   const pathname = usePathname();
@@ -54,6 +55,7 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
   useEffect(() => {
     setOpen(false);
     setQuery('');
+    setActiveIndex(-1);
   }, [pathname]);
 
   useEffect(() => {
@@ -72,19 +74,62 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
   }, []);
 
   const results = useMemo(() => getSearchResults(deferredQuery, items), [deferredQuery, items]);
+  const activeResult = activeIndex >= 0 ? results[activeIndex]?.item : undefined;
+
+  useEffect(() => {
+    setActiveIndex((current) => (current >= results.length ? -1 : current));
+  }, [results.length]);
+
+  function goToResult(item: SearchItem) {
+    setOpen(false);
+    setActiveIndex(-1);
+    router.push(item.href);
+  }
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
+    if (open && activeResult) {
+      goToResult(activeResult);
+      return;
+    }
     const firstResult = getSearchResults(q, items)[0]?.item;
     if (!firstResult) {
       setOpen(true);
       return;
     }
 
-    setOpen(false);
-    router.push(firstResult.href);
+    goToResult(firstResult);
+  }
+
+  function onInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (results.length === 0) return;
+      setOpen(true);
+      setActiveIndex((current) => (current + 1) % results.length);
+      return;
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (results.length === 0) return;
+      setOpen(true);
+      setActiveIndex((current) => (current <= 0 ? results.length - 1 : current - 1));
+      return;
+    }
+
+    if (e.key === 'Enter' && open && activeResult) {
+      e.preventDefault();
+      goToResult(activeResult);
+      return;
+    }
+
+    if (e.key === 'Escape') {
+      setOpen(false);
+      setActiveIndex(-1);
+    }
   }
 
   return (
@@ -100,12 +145,16 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
           <input
             type="search"
             value={query}
-            onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+            onChange={(e) => { setQuery(e.target.value); setOpen(true); setActiveIndex(-1); }}
             onFocus={() => setOpen(true)}
+            onKeyDown={onInputKeyDown}
             placeholder="Search brands and comparisons…"
+            role="combobox"
             aria-autocomplete="list"
             aria-controls={listId}
             aria-expanded={open}
+            aria-haspopup="listbox"
+            aria-activedescendant={activeIndex >= 0 ? `${listId}-option-${activeIndex}` : undefined}
             className="w-full bg-transparent text-sm text-black placeholder:text-black/35 focus:outline-none"
           />
         </div>
@@ -114,16 +163,24 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
       {open && query.trim() && (
         <div
           id={listId}
+          role="listbox"
+          aria-label="Search suggestions"
           className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_22px_54px_-34px_rgba(0,0,0,0.45)]"
         >
           {results.length > 0 ? (
             <div className="py-2">
-              {results.map(({ item }) => (
+              {results.map(({ item }, index) => (
                 <Link
                   key={item.href}
+                  id={`${listId}-option-${index}`}
+                  role="option"
+                  aria-selected={activeIndex === index}
                   href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-4 py-3 transition-colors hover:bg-[#38b1ab]/[0.06]"
+                  onClick={() => { setOpen(false); setActiveIndex(-1); }}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  className={`block px-4 py-3 transition-colors hover:bg-[#38b1ab]/[0.06] ${
+                    activeIndex === index ? 'bg-[#38b1ab]/[0.06]' : ''
+                  }`}
                 >
                   <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#38b1ab]">
                     {getCategoryLabel(item.category)}

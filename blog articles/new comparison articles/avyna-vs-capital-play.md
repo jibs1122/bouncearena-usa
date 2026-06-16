@@ -17,7 +17,7 @@ title: Avyna vs Capital Play — Trampoline Comparison 2026 | Bounce Arena
 
 Both are in-ground choices, so this turns on capacity and warranty.
 
-Avyna offers more sizes and shapes, a higher single-jumper limit, and a lifetime frame with long spring cover. Capital Play is a single, focused in-ground system at a lower price, with a 10-year frame and a lower weight limit.
+Avyna offers more sizes and shapes, a higher single-jumper limit, and a lifetime frame warranty with long spring cover. Capital Play is a single, focused in-ground system at a lower price, with a 10-year frame warranty and a lower weight limit.
 
 Choose Avyna if you want more choice, higher capacity, and the longer frame warranty. Choose Capital Play if its one in-ground footprint fits and the lower price wins.
 

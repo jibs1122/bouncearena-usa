@@ -428,9 +428,6 @@ export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): stri
 
   // Fallback merit reasons when signals are low and card is sparse
   if (reasons.length < 2) {
-    if (entry.joeyRating && !reasons.some(r => r.includes('reviewed'))) {
-      reasons.push('Rated and reviewed by the Bounce Arena team');
-    }
     if (reasons.length < 2 && entry.metricScores.durability >= 8 && !reasons.some(r => r.toLowerCase().includes('durabilit'))) {
       reasons.push('Rates highly for durability and long-term build quality');
     }

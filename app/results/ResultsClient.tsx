@@ -14,7 +14,6 @@ import {
   type ScoredEntry,
 } from '@/lib/quizScoring';
 import type { QuizEntry } from '@/lib/quizTrampolines';
-import AffiliateDisclosure from '@/components/ui/AffiliateDisclosure';
 import { formatUsd } from '@/lib/price';
 import { hasModelImage } from '@/lib/modelImages';
 import { isAffiliateBrand } from '@/lib/vuly';
@@ -312,6 +311,11 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
             <p className="mt-3 max-w-xl text-base leading-7 text-black/50">
               Based on your preferences listed below, these are the strongest matches for your family.
             </p>
+            {showAffiliateDisclosure && (
+              <p className="mt-2 max-w-xl text-xs leading-6 text-black/40">
+                These results may contain affiliate links. If you buy through them, we may earn a commission at no extra cost to you.
+              </p>
+            )}
             <AnswerRecap answers={answers} />
           </>
         )}
@@ -350,7 +354,6 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
               ← Retake the quiz
             </Link>
           </div>
-          {showAffiliateDisclosure && <AffiliateDisclosure className="text-center" />}
         </div>
       )}
     </section>

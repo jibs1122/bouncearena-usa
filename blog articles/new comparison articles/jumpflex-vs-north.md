@@ -17,7 +17,7 @@ title: Jumpflex vs North — Trampoline Comparison 2026 | Bounce Arena
 
 Above-ground or in-ground is the real fork here.
 
-Jumpflex is an above-ground brand, mostly round, with a 10-year frame and a clean online purchase. North is built for in-ground installs and includes large rectangles, at a higher price.
+Jumpflex is an above-ground brand, mostly round, with up to a 10-year frame warranty and a clean online purchase. North is built for in-ground installs and includes large rectangles, at a higher price.
 
 Choose Jumpflex if you want a simple above-ground trampoline. Choose North if you're planning a flush in-ground install or want a large rectangular bounce.
 

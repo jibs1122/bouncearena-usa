@@ -17,7 +17,7 @@ title: ACON vs Beast — Trampoline Comparison 2026 | Bounce Arena
 
 Both ACON and Beast sell to buyers who care more about bounce quality than the lowest price, but they sit in different corners of the market.
 
-ACON is the established premium performance brand, with a full lineup of rounds and rectangles and a longer warranty, including a 10-year frame against Beast's five. Beast is narrower and built around trick-style models, with shorter cover on the mat, springs, and pads. On weight, ACON publishes no single-user limit, but recommends a limit of 300 lb, while Beast caps a single jumper at 250 lb.
+ACON is the established premium performance brand, with a full lineup of rounds and rectangles and a longer warranty, including a 10-year frame warranty against Beast's 5-year frame warranty. Beast is narrower and built around trick-style models, with shorter cover on the mat, springs, and pads. On weight, ACON publishes no single-user limit, but recommends a limit of 300 lb, while Beast caps a single jumper at 250 lb.
 
 For an all-round family trampoline backed for the long term, ACON is the safer pick. Beast makes sense if you specifically want its compact, trick-focused setup.
 

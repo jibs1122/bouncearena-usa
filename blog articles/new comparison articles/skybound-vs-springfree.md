@@ -17,7 +17,7 @@ title: SkyBound vs Springfree — Trampoline Comparison 2026 | Bounce Arena
 
 The choice here is the spring design.
 
-SkyBound's springless-style line swaps metal springs for bungee cords and backs the frame for 5 years. Springfree removes springs entirely, using flexible rods below a hidden frame, with a 10-year warranty across the frame, mat, net, and rods.
+SkyBound's springless-style line swaps metal springs for bungee cords and backs the frame with a 5-year warranty. Springfree removes springs entirely, using flexible rods below a hidden frame, with a 10-year warranty across the frame, mat, net, and rods.
 
 Choose SkyBound if you want a lower-cost take on the springless idea. Choose Springfree if you want the established rod-based design and much longer coverage.
 

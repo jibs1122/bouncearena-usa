@@ -17,9 +17,9 @@ title: SkyBound vs Skywalker — Trampoline Comparison 2026 | Bounce Arena
 
 Two retail brands, so this is about warranty, support, and consistency.
 
-Skywalker is the familiar mass-market default, with broad availability and strong replacement-parts support, though its standard models carry a shorter 3-year frame. SkyBound is more mixed, with parts, mid-tier models, and a springless-style line, and a longer 5-year frame across its lineup.
+Skywalker is the familiar mass-market default, with broad availability and strong replacement-parts support, though its standard models carry a shorter 3-year frame warranty. SkyBound is more mixed, with parts, mid-tier models, and a springless-style line, and warranty terms that vary by product line.
 
-Choose Skywalker if you want the safer default with wide parts availability. Choose SkyBound if its longer frame warranty or design fits what you're after.
+Choose Skywalker if you want the safer default with wide parts availability. Choose SkyBound if one of its specific designs and warranty terms fits what you're after.
 
 **Affiliate disclosure:** This page contains affiliate links and we may earn a commission on purchases.
 

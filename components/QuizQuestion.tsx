@@ -11,11 +11,19 @@ export interface QuizOption {
   imageAlt?: string;
 }
 
+export interface QuizLearnMoreLink {
+  prefix?: string;
+  text: string;
+  href: string;
+}
+
 export interface Question {
   id: string;
   title: string;
   subtitle?: string;
   subtitleExtra?: string;
+  learnMoreLabel?: string;
+  learnMoreLinks?: QuizLearnMoreLink[];
   questionImage?: string; // supporting image shown above options
   type: 'single' | 'multi';
   maxSelect?: number;
@@ -108,6 +116,43 @@ export default function QuizQuestion({
 
         {question.subtitleExtra && (
           <p className="mt-2 text-base leading-7 text-black/55">{question.subtitleExtra}</p>
+        )}
+
+        {question.learnMoreLinks && question.learnMoreLinks.length > 0 && (
+          question.learnMoreLabel ? (
+            <div className="mt-2 text-sm leading-6 text-black/45">
+              <p>{question.learnMoreLabel}</p>
+              <ul className="mt-1 list-disc space-y-1 pl-5">
+                {question.learnMoreLinks.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="sponsored noopener nofollow"
+                      className="font-medium text-[#38b1ab] underline underline-offset-4 hover:text-[#2e9a94] transition-colors"
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            question.learnMoreLinks.map((link) => (
+              <p key={link.href} className="mt-2 text-sm leading-6 text-black/45">
+                {link.prefix ?? 'Learn more about '}
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="sponsored noopener nofollow"
+                  className="font-medium text-[#38b1ab] underline underline-offset-4 hover:text-[#2e9a94] transition-colors"
+                >
+                  {link.text}
+                </a>
+                .
+              </p>
+            ))
+          )
         )}
 
         {question.affiliateLink && (

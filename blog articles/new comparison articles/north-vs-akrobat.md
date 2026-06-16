@@ -17,7 +17,7 @@ title: North vs Akrobat — Trampoline Comparison 2026 | Bounce Arena
 
 Both are in-ground-capable performance brands, so warranty does much of the separating.
 
-North is engineered specifically for flush in-ground installs. Akrobat carries the stronger warranty, with a lifetime frame and long spring cover, plus a performance-leaning rectangular bounce.
+North is engineered specifically for flush in-ground installs. Akrobat carries the stronger warranty, with a lifetime frame warranty and long spring cover, plus a performance-leaning rectangular bounce.
 
 Choose North if you want a system purpose-built for in-ground use. Choose Akrobat if the longer warranty and the performance feel matter more for a long-term install.
 

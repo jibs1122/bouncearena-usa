@@ -4,6 +4,7 @@ import { isAconBrand } from "@/lib/vuly";
 import { formatWarrantyYears } from "@/lib/warranty";
 
 type SpringSystemKind = "coil" | "leaf" | "springless" | "other";
+type NumberRange = { min: number | null; max: number | null; distinctCount: number };
 
 type BrandTakeawaySummary = {
   name: string;
@@ -19,6 +20,12 @@ type BrandTakeawaySummary = {
   matWarrantyYears: number | null;
   springsWarrantyYears: number | null;
   netWarrantyYears: number | null;
+  warrantyRanges: {
+    frameWarrantyYears: NumberRange;
+    matWarrantyYears: NumberRange;
+    springsWarrantyYears: NumberRange;
+    netWarrantyYears: NumberRange;
+  };
   astmKnownCount: number;
   astmYesCount: number;
 };
@@ -30,6 +37,16 @@ function productPrice(product: Product): number | null {
 function maxNumber(values: Array<number | null>): number | null {
   const usable = values.filter((value): value is number => value !== null);
   return usable.length > 0 ? Math.max(...usable) : null;
+}
+
+function numberRange(values: Array<number | null>): NumberRange {
+  const usable = values.filter((value): value is number => value !== null);
+  if (usable.length === 0) return { min: null, max: null, distinctCount: 0 };
+  return {
+    min: Math.min(...usable),
+    max: Math.max(...usable),
+    distinctCount: new Set(usable).size,
+  };
 }
 
 function classifySpringSystem(system: string): SpringSystemKind | null {
@@ -96,6 +113,12 @@ function summarizeBrand(brand: Brand): BrandTakeawaySummary {
       .filter((shape): shape is string => shape !== null),
   );
   const astmKnown = brand.products.filter((product) => product.meetsUsStandard !== null);
+  const frameWarrantyRange = numberRange(brand.products.map((product) => product.warrantyFrameYears));
+  const matWarrantyRange = numberRange(brand.products.map((product) => product.warrantyMatYears));
+  const springsWarrantyRange = numberRange(
+    brand.products.map((product) => product.warrantySpringsYears),
+  );
+  const netWarrantyRange = numberRange(brand.products.map((product) => product.warrantyNetYears));
 
   const footprintDetails = brand.products
     .map(productFootprintDetails)
@@ -119,10 +142,16 @@ function summarizeBrand(brand: Brand): BrandTakeawaySummary {
     maxCombinedWeightLb: maxNumber(
       brand.products.map((product) => product.combinedTotalWeightRatingLb),
     ),
-    frameWarrantyYears: maxNumber(brand.products.map((product) => product.warrantyFrameYears)),
-    matWarrantyYears: maxNumber(brand.products.map((product) => product.warrantyMatYears)),
-    springsWarrantyYears: maxNumber(brand.products.map((product) => product.warrantySpringsYears)),
-    netWarrantyYears: maxNumber(brand.products.map((product) => product.warrantyNetYears)),
+    frameWarrantyYears: frameWarrantyRange.max,
+    matWarrantyYears: matWarrantyRange.max,
+    springsWarrantyYears: springsWarrantyRange.max,
+    netWarrantyYears: netWarrantyRange.max,
+    warrantyRanges: {
+      frameWarrantyYears: frameWarrantyRange,
+      matWarrantyYears: matWarrantyRange,
+      springsWarrantyYears: springsWarrantyRange,
+      netWarrantyYears: netWarrantyRange,
+    },
     astmKnownCount: astmKnown.length,
     astmYesCount: astmKnown.filter((product) => product.meetsUsStandard === true).length,
   };
@@ -199,6 +228,13 @@ function buildWarrantyTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary)
 
   if (!material) return null;
 
+  if (
+    a.warrantyRanges.frameWarrantyYears.distinctCount > 1 ||
+    b.warrantyRanges.frameWarrantyYears.distinctCount > 1
+  ) {
+    return `${better.name}'s top-end frame warranty reaches ${formatWarrantyYears(betterYears)} vs ${formatWarrantyYears(otherYears)}; compare exact models because terms vary by line.`;
+  }
+
   return `${better.name} carries the stronger frame warranty — ${formatWarrantyYears(betterYears)} vs ${formatWarrantyYears(otherYears)}.`;
 }
 
@@ -216,6 +252,12 @@ function buildComponentWarrantyTakeaway(a: BrandTakeawaySummary, b: BrandTakeawa
     const aYears = a[key];
     const bYears = b[key];
     if (aYears === null || bYears === null || aYears === bYears) continue;
+    if (
+      a.warrantyRanges[key].distinctCount > 1 ||
+      b.warrantyRanges[key].distinctCount > 1
+    ) {
+      continue;
+    }
     if (aYears > bYears) aWins.push(label);
     else bWins.push(label);
   }
@@ -223,11 +265,22 @@ function buildComponentWarrantyTakeaway(a: BrandTakeawaySummary, b: BrandTakeawa
   if (aWins.length < 2 && bWins.length < 2) return null;
   const better = aWins.length > bWins.length ? a : b;
   const winList = better === a ? aWins : bWins;
+  const frameWinner =
+    a.frameWarrantyYears !== null &&
+    b.frameWarrantyYears !== null &&
+    a.frameWarrantyYears !== b.frameWarrantyYears
+      ? a.frameWarrantyYears > b.frameWarrantyYears
+        ? a
+        : b
+      : null;
+
+  if (frameWinner && frameWinner.name !== better.name) return null;
+
   const componentStr =
     winList.length === 1
       ? winList[0]
       : winList.slice(0, -1).join(", ") + " and " + winList[winList.length - 1];
-  return `${better.name} pulls ahead on warranty, with stronger coverage on the ${componentStr}.`;
+  return `${better.name} has stronger component warranty coverage on the ${componentStr}.`;
 }
 
 function buildWeightTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): string | null {
