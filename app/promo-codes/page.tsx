@@ -20,12 +20,6 @@ const PROMOS: { brand: string; code: string; description: string; expires?: stri
     description: "15% off sitewide on Vuly trampolines.",
     affiliateUrl: "https://www.vulyplay.com/aff/100/",
   },
-  {
-    brand: "Vuly",
-    code: "BOUNCESURGE",
-    description: "Discount on Vuly trampolines — apply at checkout.",
-    affiliateUrl: "https://www.vulyplay.com/aff/100/",
-  },
 ];
 
 export default function PromoCodesPage() {

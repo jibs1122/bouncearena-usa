@@ -138,12 +138,6 @@ function buildPromoCtas(brandA: Brand, brandB: Brand): ComparePromo[] {
         description: "Use code BOUNCE15 for a discount on any Vuly trampoline.",
         href: VULY_PROMO_AFFILIATE_URL,
       });
-      promos.push({
-        brand: "Vuly",
-        code: "BOUNCESURGE",
-        description: "Use code BOUNCESURGE for a free gift.",
-        href: VULY_PROMO_AFFILIATE_URL,
-      });
     }
 
     if (isAconBrand(brand.name)) {
@@ -168,12 +162,6 @@ function buildPromoCtasFromLabels(labels: string[]): ComparePromo[] {
       brand: "Vuly",
       code: "BOUNCE15",
       description: "Use code BOUNCE15 for a discount on any Vuly trampoline.",
-      href: VULY_PROMO_AFFILIATE_URL,
-    });
-    promos.push({
-      brand: "Vuly",
-      code: "BOUNCESURGE",
-      description: "Use code BOUNCESURGE for a free gift.",
       href: VULY_PROMO_AFFILIATE_URL,
     });
   }

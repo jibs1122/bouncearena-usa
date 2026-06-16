@@ -99,8 +99,8 @@ function BrandPromoSection({
       <section className="mb-10 max-w-4xl rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6 shadow-sm">
         <h2 className="text-xl font-bold text-black">Vuly Promo Codes</h2>
         <p className="mt-3 text-sm leading-6 text-black/70">
-          We partner with Vuly directly, so the codes below are arrangements we hold and verify,
-          not guesses pulled from a coupon site. Both are live as of the date shown.
+          We partner with Vuly directly, so the code below is an arrangement we hold and verify,
+          not a guess pulled from a coupon site. It is live as of the date shown.
         </p>
         <p className="mt-4 text-sm font-semibold text-black">
           Last verified: {lastVerified}
@@ -116,26 +116,11 @@ function BrandPromoSection({
               Applies to trampolines, accessories, and play equipment, with no category restriction.
             </p>
           </div>
-          <div>
-            <p className="font-semibold text-black">
-              <code className="rounded bg-white px-1.5 py-0.5 text-[#2e9a94]">BOUNCESURGE</code>{" "}
-              — free Bluetooth speaker with your order.
-            </p>
-            <p className="mt-1 text-sm leading-6 text-black/65">
-              Minimum spend and speaker model are still being confirmed, so check the order summary
-              before paying.
-            </p>
-          </div>
         </div>
 
         <p className="mt-5 text-sm leading-6 text-black/70">
-          You can only use one code per order, so pick the one worth more to you. BOUNCE15 is a
-          flat $15 off whatever the cart size, so on most orders the free speaker is the better deal
-          unless you value the speaker at less than $15.
-        </p>
-        <p className="mt-3 text-sm leading-6 text-black/70">
           <strong className="text-black">To apply:</strong> add your trampoline to the cart, enter
-          the code in the promo field at checkout, and confirm the discount or speaker shows in your
+          the code in the promo field at checkout, and confirm the discount shows in your
           order summary before paying.
         </p>
 
@@ -146,7 +131,7 @@ function BrandPromoSection({
             rel="noopener noreferrer nofollow sponsored"
             className="mt-5 inline-flex items-center rounded-xl bg-[#38b1ab] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
           >
-            Shop Vuly with these codes →
+            Shop Vuly with this code →
           </a>
         )}
         <p className="mt-4 text-xs italic leading-5 text-black/50">
