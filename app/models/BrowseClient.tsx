@@ -9,6 +9,7 @@ import {
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
+import { isAconBrand } from '@/lib/vuly';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -55,6 +56,11 @@ function groundTypeLabel(groundType: GroundType): string {
 
 function shopCtaLabel(url: string | null, brand: string) {
   return `View at ${getShopDestinationLabel(url, brand)} \u2192`;
+}
+
+function formatSingleUserWeight(brand: string, weight: number | null) {
+  if (isAconBrand(brand)) return 'No published limit (≈300 lb rec.)';
+  return weight !== null ? `${weight} lb` : '—';
 }
 
 // ─── brand colours ───────────────────────────────────────────────────────────
@@ -270,7 +276,9 @@ function buildRows(products: Product[]): ModelRow[] {
     const astmCertified = ps.some(p => p.meetsUsStandard === true) ? true
       : ps.every(p => p.meetsUsStandard === false) ? false : null;
     const prices = ps.map(p => p.exactSizePriceUsd ?? p.modelFromPriceUsd).filter((p): p is number => p !== null);
-    const weights = ps.map(p => p.maxSingleUserWeightLb).filter((w): w is number => w !== null);
+    const weights = isAconBrand(brand)
+      ? []
+      : ps.map(p => p.maxSingleUserWeightLb).filter((w): w is number => w !== null);
     const warranties = ps.map(p => p.warrantyFrameYears).filter((w): w is number => w !== null);
     const sizes = ps.map(p => sizeFt(p)).filter((s): s is number => s !== null);
     const shopUrl = getPreferredModelUrl(brand, ps);
@@ -603,7 +611,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                   </div>
                   <div>
                     <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Max weight</dt>
-                    <dd className="mt-0.5 text-black/70">{row.maxWeightLb !== null ? `${row.maxWeightLb} lb` : '—'}</dd>
+                    <dd className="mt-0.5 text-black/70">{formatSingleUserWeight(row.brand, row.maxWeightLb)}</dd>
                   </div>
                   <div>
                     <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Warranty</dt>
@@ -657,7 +665,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                             <span>{(v.exactSizePriceUsd ?? v.modelFromPriceUsd) != null ? fmtPrice((v.exactSizePriceUsd ?? v.modelFromPriceUsd)!) : '—'}</span>
                           </div>
                           <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
-                            <span>{v.maxSingleUserWeightLb ? `${v.maxSingleUserWeightLb} lb max` : 'Max weight —'}</span>
+                            <span>{formatSingleUserWeight(row.brand, v.maxSingleUserWeightLb)}</span>
                             <span>{formatWarrantyYears(v.warrantyFrameYears)}</span>
                             <span>{v.meetsUsStandard === true ? 'ASTM certified' : 'ASTM not listed'}</span>
                           </div>
@@ -794,7 +802,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
                       {/* weight */}
                       <td className="px-3 py-3 align-top text-sm text-black/60 whitespace-nowrap">
-                        {row.maxWeightLb !== null ? `${row.maxWeightLb} lb` : '—'}
+                        {formatSingleUserWeight(row.brand, row.maxWeightLb)}
                       </td>
 
                       {/* warranty */}
@@ -842,7 +850,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
                             </a>
                           )}
                         </td>
-                        <td className="px-3 py-2 text-xs text-black/50">{v.maxSingleUserWeightLb ? `${v.maxSingleUserWeightLb} lb` : '—'}</td>
+                        <td className="px-3 py-2 text-xs text-black/50">{formatSingleUserWeight(row.brand, v.maxSingleUserWeightLb)}</td>
                         <td className="px-3 py-2 text-xs text-black/50">{formatWarrantyYears(v.warrantyFrameYears)}</td>
                         <td className="px-3 py-2 text-center text-xs">
                           {v.meetsUsStandard === true
