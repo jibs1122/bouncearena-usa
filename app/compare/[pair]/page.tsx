@@ -302,13 +302,12 @@ function prepareModelComparisonContent(markdown: string, hasPromos: boolean): st
     "<AffiliateDisclosureSlot />",
     hasPromos ? "<ComparePromoCtaSlot />" : null,
     "<ModelCardsSlot />",
-    "<QuizCtaSlot />",
   ].filter(Boolean).join("\n\n");
   const withIntroBlocks = cleaned.includes("\n## Quick verdict")
     ? cleaned.replace(/\n+## Quick verdict/, `\n\n${sharedBlocks}\n\n## Quick verdict`)
     : `${cleaned}\n\n${sharedBlocks}`;
 
-  return `${withIntroBlocks.trim()}\n\n<RelatedReadingSlot />`;
+  return `${withIntroBlocks.trim()}\n\n<RelatedReadingSlot />\n\n<QuizCtaSlot />`;
 }
 
 export async function generateStaticParams() {
@@ -751,20 +750,6 @@ export default async function ComparePairPage({ params }: Props) {
           </section>
           )}
 
-          <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
-            <h2 className="text-lg font-bold text-black mb-2">Not sure which brand fits best?</h2>
-            <p className="text-sm leading-6 text-black/60 mb-4 max-w-2xl">
-              Take the quiz and get a tailored trampoline recommendation based on yard size,
-              budget, safety priorities, and who will be using it.
-            </p>
-            <Link
-              href="/quiz/"
-              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
-            >
-              Take the quiz →
-            </Link>
-          </section>
-
           <section className="mb-10">
             <h2 className="text-xl font-bold text-black mb-4">Full Spec Comparison</h2>
             {keyTakeaways.length > 0 && (
@@ -833,6 +818,20 @@ export default async function ComparePairPage({ params }: Props) {
                 ))}
               </div>
             )}
+          </section>
+
+          <section className="mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+            <h2 className="text-lg font-bold text-black mb-2">Not sure which trampoline fits best?</h2>
+            <p className="text-sm leading-6 text-black/60 mb-4 max-w-2xl">
+              Take the quiz and get a tailored trampoline recommendation based on yard size,
+              budget, safety priorities, and who will be using it.
+            </p>
+            <Link
+              href="/quiz/"
+              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+            >
+              Take the quiz →
+            </Link>
           </section>
         </div>
       </div>
