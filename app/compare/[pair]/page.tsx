@@ -472,7 +472,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
       );
     },
     QuizCtaSlot: () => (
-      <section className="mb-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+      <section className="mb-8 mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
         <h2 className="mb-2 text-lg font-bold text-black">Not sure which trampoline fits best?</h2>
         <p className="mb-4 max-w-2xl text-sm leading-6 text-black/60">
           Take the quiz and get a tailored trampoline recommendation based on yard size,

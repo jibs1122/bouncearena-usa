@@ -6,7 +6,7 @@ comparison_type: model
 publish_status: needs_review
 seo:
   meta_title: Vuly Thunder 2 vs Thunder 2 Pro — Trampoline Comparison 2026
-  meta_description: "Vuly Thunder 2 vs Thunder 2 Pro: same leaf-spring system and warranty. The Pro is the bigger, pricier version — 163 inches at $1,649 vs 145 at $879."
+  meta_description: "Vuly Thunder 2 vs Thunder 2 Pro: compare frame size, full-length leaf springs, underside access, size options, warranty, and Large-size pricing."
 data_issues: []
 assumptions:
 - 'Vuly Thunder 2: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -25,11 +25,11 @@ sides:
 ---
 # Vuly Thunder 2 vs Thunder 2 Pro
 
-Both use Vuly's leaf-spring system and carry the same warranty, so this is not a quality or design choice. The Pro is simply the larger, more expensive version.
+Both sit in Vuly's leaf-spring range, but they are not just the same trampoline with different branding. The Thunder 2 Pro is slightly wider in the Large size and uses full-length leaf springs for a smoother bounce, while the standard Thunder 2 keeps underside access and offers the larger XXL option.
 
 ## Quick verdict
 
-Get the Thunder 2 Pro if you want the bigger 163-inch jumping area and have the yard for it. The standard Thunder 2 saves about $770 and is the better value for most families.
+Choose the Thunder 2 if you are working to a tighter budget, want underside access, or need the XXL size. Consider the Thunder 2 Pro if you want the smoother full-length leaf-spring bounce and prefer a design without underside access.
 
 ## Full spec comparison
 
@@ -37,18 +37,22 @@ Get the Thunder 2 Pro if you want the bigger 163-inch jumping area and have the 
 |---|---|---|
 | Brand | Vuly | Vuly |
 | Model / line | Vuly Thunder 2 (L) | Vuly Thunder 2 Pro (L) |
-| Size | L | L |
+| Size options | M, L, XL, XXL | M, L, XL |
 | Shape | Round | Round |
 | Install type | above ground | above ground |
 | Safety net | yes | yes |
-| Overall footprint | 12.1ft × 12.1ft | 13.6ft × 13.6ft |
+| Safety net height | 191cm | 191cm |
+| Large frame size | 409cm diameter | 415cm diameter |
 | Jumping mat size | 124" diameter | 124.0" diameter |
-| Spring system | Leaf springs | Leaf springs |
-| Max single-user weight | 330 lb | 330 lb |
+| Spring system | Leaf springs | Full-length leaf springs |
+| Underside access | Yes | No |
+| Max user weight | 150kg on M and L; 140kg on larger models | 150kg on M and L; 140kg on XL |
 | US standard | Unknown | Unknown |
-| Warranty | Frame 10 yr; mat 5 yr; springs 1 yr; net 1 yr | Frame 10 yr; mat 5 yr; springs 1 yr; net 1 yr |
-| Price | $879 | $1,649 |
+| Warranty | Frame 10 yr; springs 5 yr; mat 5 yr; net 1 yr | Frame 10 yr; springs 5 yr; mat 5 yr; net 1 yr |
+| Large price at time of writing | $1,499 | $2,499 |
 
 ## What matters most
 
-Both share a 330 lb single-user limit, a 10-year frame, 5 years on the mat, and 1 year on the leaf springs and net. The only meaningful difference is size and price: the Thunder 2 is about 145 inches across at $879, while the Thunder 2 Pro is about 163 inches at $1,649. That is a large jump in cost for about a foot and a half more diameter, so it only makes sense if the extra room genuinely matters for your space and the number of kids using it.
+The Pro is only slightly wider in the Large size, at 415cm versus 409cm, so the decision is less about raw footprint and more about bounce feel, access, size range, and price. The Thunder 2 Pro's full-length leaf springs are the main upgrade if you want the smoother bounce feel. The standard Thunder 2 still shares the 191cm safety net height, the same 150kg weight capacity on M and L sizes, the same 10-year frame warranty, and the same 5-year spring and mat warranty.
+
+The Thunder 2 is the more practical pick if price matters or you want the XXL size option. It was $1,499 for the Large size at time of writing, compared with $2,499 for the Large Thunder 2 Pro. The Thunder 2 Pro is easier to justify if the smoother Pro bounce matters more than the extra cost and you prefer the no-underside-access design.
