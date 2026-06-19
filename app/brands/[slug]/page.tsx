@@ -389,7 +389,7 @@ export default async function BrandPage({ params }: Props) {
           )}
 
           {featuredModels.length > 0 && (
-            <section className="mb-10">
+            <section className="mb-10 mt-10">
               <div className="mb-4 flex items-end justify-between gap-4">
                 <h2 className="text-xl font-bold text-black">Featured Models</h2>
               </div>
@@ -478,6 +478,20 @@ export default async function BrandPage({ params }: Props) {
 
           <BrandPromoSection brandName={brand.name} affiliateUrl={promoAffiliateUrl} />
 
+          <section className="mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+            <h2 className="text-lg font-bold text-black mb-2">Not sure which trampoline fits best?</h2>
+            <p className="text-sm leading-6 text-black/60 mb-4 max-w-2xl">
+              Take the quiz and get a tailored trampoline recommendation based on yard size,
+              budget, safety priorities, and who will be using it.
+            </p>
+            <Link
+              href="/quiz/"
+              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+            >
+              Take the quiz →
+            </Link>
+          </section>
+
           {/* Related comparisons */}
           {relatedComparisons.length > 0 && (
             <section className="mb-10">
@@ -500,20 +514,6 @@ export default async function BrandPage({ params }: Props) {
               </div>
             </section>
           )}
-
-          <section className="mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
-            <h2 className="text-lg font-bold text-black mb-2">Not sure which trampoline fits best?</h2>
-            <p className="text-sm leading-6 text-black/60 mb-4 max-w-2xl">
-              Take the quiz and get a tailored trampoline recommendation based on yard size,
-              budget, safety priorities, and who will be using it.
-            </p>
-            <Link
-              href="/quiz/"
-              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
-            >
-              Take the quiz →
-            </Link>
-          </section>
 
           {/* FAQ JSON-LD hook */}
           <JsonLd

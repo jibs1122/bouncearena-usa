@@ -161,6 +161,10 @@ function DualRangeSlider({
     onHigh(clamp(value, low + step, max));
   }
 
+  const range = max - min || 1;
+  const lowPct = ((low - min) / range) * 100;
+  const highPct = ((high - min) / range) * 100;
+
   return (
     <div>
       <div className="mb-2 flex justify-between gap-3 text-xs">
@@ -169,8 +173,13 @@ function DualRangeSlider({
           {fmt(low)}{low !== high || high !== max ? ` – ${high >= max ? 'Any' : fmt(high)}` : ''}
         </span>
       </div>
-      <div className="space-y-2">
-        <label className="block">
+      <div className="relative h-11">
+        <div className="absolute left-0 right-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-black/70" />
+        <div
+          className="absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-[#38b1ab]"
+          style={{ left: `${lowPct}%`, right: `${100 - highPct}%` }}
+        />
+        <label className="absolute inset-0">
           <span className="sr-only">Minimum {label.toLowerCase()}</span>
           <input
             type="range"
@@ -179,10 +188,10 @@ function DualRangeSlider({
             step={step}
             value={low}
             onChange={(e) => setLowValue(e.currentTarget.valueAsNumber)}
-            className="h-11 w-full accent-[#38b1ab]"
+            className="dual-range-input z-20"
           />
         </label>
-        <label className="block">
+        <label className="absolute inset-0">
           <span className="sr-only">Maximum {label.toLowerCase()}</span>
           <input
             type="range"
@@ -191,7 +200,7 @@ function DualRangeSlider({
             step={step}
             value={high}
             onChange={(e) => setHighValue(e.currentTarget.valueAsNumber)}
-            className="h-11 w-full accent-[#38b1ab]"
+            className="dual-range-input z-30"
           />
         </label>
       </div>

@@ -229,6 +229,20 @@ export default async function BlogPostPage({ params }: PageProps) {
             options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
           />
 
+          <section className="mt-10 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+            <h2 className="mb-2 text-lg font-bold text-black">Still not sure which trampoline fits best?</h2>
+            <p className="mb-4 text-sm leading-6 text-black/60">
+              Take the quiz and get a tailored trampoline recommendation based on yard size,
+              budget, safety priorities, and who will be using it.
+            </p>
+            <Link
+              href="/quiz/"
+              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+            >
+              Take the quiz →
+            </Link>
+          </section>
+
           {relatedPosts.length > 0 ? (
             <section className="mt-12 rounded-xl border border-black/[0.08] bg-black/[0.02] p-6">
               <h2 className="mb-4 text-lg font-bold text-black">Related Guides</h2>
@@ -245,20 +259,6 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             </section>
           ) : null}
-
-          <section className="mt-10 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
-            <h2 className="mb-2 text-lg font-bold text-black">Still not sure which trampoline fits best?</h2>
-            <p className="mb-4 text-sm leading-6 text-black/60">
-              Take the quiz and get a tailored trampoline recommendation based on yard size,
-              budget, safety priorities, and who will be using it.
-            </p>
-            <Link
-              href="/quiz/"
-              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
-            >
-              Take the quiz →
-            </Link>
-          </section>
         </div>
       </article>
     </>

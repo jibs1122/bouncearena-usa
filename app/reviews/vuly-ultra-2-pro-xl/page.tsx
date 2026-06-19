@@ -234,6 +234,20 @@ export default function VulyUltra2ProXLReview() {
             </p>
           </section>
 
+          <section className="rounded-2xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+            <h2 className="text-lg font-bold text-black mb-2">Not sure which trampoline fits best?</h2>
+            <p className="text-sm leading-6 text-black/60 mb-4 max-w-2xl">
+              Take the quiz and get a tailored trampoline recommendation based on yard size,
+              budget, safety priorities, and who will be using it.
+            </p>
+            <Link
+              href="/quiz/"
+              className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+            >
+              Take the quiz →
+            </Link>
+          </section>
+
           <section className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-6">
             <h2 className="text-lg font-bold text-black mb-4">Related Reading</h2>
             <div className="flex flex-wrap gap-3">
@@ -260,12 +274,6 @@ export default function VulyUltra2ProXLReview() {
                 className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
               >
                 ACON vs Vuly
-              </Link>
-              <Link
-                href="/quiz/"
-                className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
-              >
-                Take the quiz
               </Link>
             </div>
           </section>
