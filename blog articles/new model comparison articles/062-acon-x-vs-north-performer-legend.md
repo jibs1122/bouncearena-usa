@@ -17,7 +17,7 @@ sides:
   row_indices:
   - 15
   matched_models:
-  - ACON ACON X 17ft Rectangular Trampoline with Net and Ladder
+  - ACON X 17ft Rectangular Trampoline with Net and Ladder
 - label: North Performer / Legend
   row_indices:
   - 137
@@ -37,7 +37,7 @@ Choose the ACON X 17ft if you specifically want a large premium rectangle and no
 | Specification | ACON X | North Performer / Legend |
 |---|---|---|
 | Brand | ACON | North |
-| Model / line | ACON ACON X 17ft Rectangular Trampoline with Net and Ladder | North Legend Rectangle 17.5 ft x 12 ft |
+| Model / line | ACON X 17ft Rectangular Trampoline with Net and Ladder | North Legend Rectangle 17.5 ft x 12 ft |
 | Size | 17ft | 17.5 ft x 12 ft |
 | Shape | Rectangle | Rectangle |
 | Install type | above ground | Above ground |

@@ -33,7 +33,6 @@ export default function VulyThunder2MediumReview() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Review",
-    datePublished: "2026-04-15",
     name: "Vuly Thunder 2 Medium — Owner Review",
     author: { "@type": "Person", name: "Jess" },
     itemReviewed: {

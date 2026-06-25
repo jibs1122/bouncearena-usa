@@ -18,7 +18,7 @@ Price: $2,199.
 
 [Acon](https://www.bouncearenareviews.com/brands/acon/) is a Finnish brand respected for bounce quality in the US market. The Air 14ft Round with Premium Net hits the family-yard sweet spot.
 
-It uses 96 coil springs at 8.5 inches, a galvanized and powder-coated 2 inch steel frame, and is ASTM certified. The 14ft size suits kids of all ages and gives multiple jumpers room to bounce together.
+It uses 96 coil springs at 8.5 inches, a galvanized and powder-coated 2 inch steel frame, and is ASTM certified. The 14ft size suits kids of all ages and gives more usable mat space.
 
 Price: $1,299.
 

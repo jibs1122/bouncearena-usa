@@ -16,12 +16,12 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: ACON 13 HD
   row_indices:
   - 1
   matched_models:
-  - ACON ACON 13 HD Rectangular Trampoline with Net and Ladder
+  - ACON 13 HD Rectangular Trampoline with Net and Ladder
 ---
 # ACON 16 HD vs ACON 13 HD
 
@@ -36,7 +36,7 @@ Choose the 13 HD for a tighter yard or a smaller budget. Choose the 16 HD if you
 | Specification | ACON 16 HD | ACON 13 HD |
 |---|---|---|
 | Brand | ACON | ACON |
-| Model / line | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder | ACON ACON 13 HD Rectangular Trampoline with Net and Ladder |
+| Model / line | ACON 16 HD Rectangular Trampoline with Net and Ladder | ACON 13 HD Rectangular Trampoline with Net and Ladder |
 | Size | 16 HD | 13 HD |
 | Shape | Rectangle | Rectangle |
 | Install type | above ground | above ground |

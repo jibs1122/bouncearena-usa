@@ -16,7 +16,7 @@ sides:
   row_indices:
   - 15
   matched_models:
-  - ACON ACON X 17ft Rectangular Trampoline with Net and Ladder
+  - ACON X 17ft Rectangular Trampoline with Net and Ladder
 - label: MaxAir Rectangle
   row_indices:
   - 132
@@ -36,7 +36,7 @@ For backyard use, even demanding use, the ACON X 17ft is the realistic choice. M
 | Specification | ACON X 17ft | MaxAir Rectangle |
 |---|---|---|
 | Brand | ACON | MaxAir |
-| Model / line | ACON ACON X 17ft Rectangular Trampoline with Net and Ladder | MaxAir 10' x 20' Super Tramp Trampoline Premium Package Kit (10x20ft) |
+| Model / line | ACON X 17ft Rectangular Trampoline with Net and Ladder | MaxAir 10' x 20' Super Tramp Trampoline Premium Package Kit (10x20ft) |
 | Size | 17ft | 10x20ft |
 | Shape | Rectangle | Rectangle |
 | Install type | above ground | inground |

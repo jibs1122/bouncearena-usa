@@ -1,5 +1,6 @@
 import { getAllProducts } from "@/lib/products";
 import { getModelImage, getModelImageId } from "@/lib/modelImages";
+import { formatBrandModelName } from "@/lib/displayText";
 
 type BlogModelImage = {
   src: string;
@@ -168,7 +169,7 @@ export function resolveBlogModelImage(title: string): BlogModelImage | null {
 
   return {
     src: best.candidate.image.src,
-    alt: `${best.candidate.brand} ${best.candidate.model}`,
+    alt: formatBrandModelName(best.candidate.brand, best.candidate.model),
     brand: best.candidate.brand,
     model: best.candidate.model,
   };

@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import type { Brand, Product } from "@/lib/types";
+import type { Product } from "@/lib/types";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
-import ComparePromoCta, { type ComparePromo } from "@/components/ui/ComparePromoCta";
+import ComparePromoCta from "@/components/ui/ComparePromoCta";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import ModelImage from "@/components/ui/ModelImage";
@@ -23,13 +23,13 @@ import { brandSlug, getAllProducts } from "@/lib/products";
 import { formatUsd } from "@/lib/price";
 import { buildCompareTakeaways } from "@/lib/compareTakeaways";
 import { getPreferredProductUrl } from "@/lib/productLinks";
-import { hasModelImage } from "@/lib/modelImages";
-import { isAconBrand, isAffiliateBrand, isVulyBrand } from "@/lib/vuly";
+import { getModelImage, hasModelImage } from "@/lib/modelImages";
+import { isAffiliateBrand } from "@/lib/vuly";
+import { buildPromoCtasForBrands, buildPromoCtasFromLabels } from "@/lib/promoCtas";
+import { formatBrandModelName, modelNameWithoutBrandPrefix } from "@/lib/displayText";
+import { getModelComparisonLinks, getPromoPageForBrand } from "@/lib/internalLinks";
 
 type Props = { params: Promise<{ pair: string }> };
-
-const VULY_PROMO_AFFILIATE_URL = "https://www.vulyplay.com/aff/100/";
-const ACON_PROMO_AFFILIATE_URL = "https://us.acon24.com?sca_ref=11261719.jjbGKHHa7yLAnuwn";
 
 type FeaturedModel = {
   brand: string;
@@ -127,57 +127,6 @@ function buildFeaturedModel(products: Product[]): FeaturedModel | null {
   return bestCandidate ?? null;
 }
 
-function buildPromoCtas(brandA: Brand, brandB: Brand): ComparePromo[] {
-  const promos: ComparePromo[] = [];
-
-  for (const brand of [brandA, brandB]) {
-    if (isVulyBrand(brand.name)) {
-      promos.push({
-        brand: "Vuly",
-        code: "BOUNCE15",
-        description: "Use code BOUNCE15 for a discount on any Vuly trampoline.",
-        href: VULY_PROMO_AFFILIATE_URL,
-      });
-    }
-
-    if (isAconBrand(brand.name)) {
-      promos.push({
-        brand: "ACON",
-        code: "BOUNCE",
-        description: "Use code BOUNCE for up to $150 off at ACON.",
-        href: ACON_PROMO_AFFILIATE_URL,
-      });
-    }
-  }
-
-  return promos;
-}
-
-function buildPromoCtasFromLabels(labels: string[]): ComparePromo[] {
-  const promos: ComparePromo[] = [];
-  const normalized = labels.join(" ").toLowerCase();
-
-  if (normalized.includes("vuly")) {
-    promos.push({
-      brand: "Vuly",
-      code: "BOUNCE15",
-      description: "Use code BOUNCE15 for a discount on any Vuly trampoline.",
-      href: VULY_PROMO_AFFILIATE_URL,
-    });
-  }
-
-  if (normalized.includes("acon")) {
-    promos.push({
-      brand: "ACON",
-      code: "BOUNCE",
-      description: "Use code BOUNCE for up to $150 off at ACON.",
-      href: ACON_PROMO_AFFILIATE_URL,
-    });
-  }
-
-  return promos;
-}
-
 function buildModelComparisonCards(article: ModelComparisonArticle): ModelComparisonCard[] {
   if (article.sides.length < 2) return [];
 
@@ -259,6 +208,16 @@ function buildModelComparisonRelatedLinks(article: ModelComparisonArticle): Rela
 
   for (const brand of articleBrands) {
     addLink(`/brands/${brand.slug}/`, `${brand.name} brand page`);
+    const promoPage = getPromoPageForBrand(brand.name);
+    if (promoPage) addLink(promoPage.href, promoPage.label);
+  }
+
+  for (const product of getModelComparisonProducts(article, productsBySourceRow)) {
+    getModelComparisonLinks(product.brand, product.model).forEach((link) =>
+      {
+        if (link.href !== `/compare/${article.slug}/`) addLink(link.href, link.label);
+      },
+    );
   }
 
   getApprovedComparisons()
@@ -378,6 +337,37 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
     publisher: { "@type": "Organization", name: "Bounce Arena", url: siteUrl },
   };
 
+  const itemListSchema = modelCards.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: `${article.title} compared models`,
+        itemListElement: modelCards.map(({ product }, index) => {
+          const image = getModelImage(product.brand, product.model);
+
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Product",
+              name: formatBrandModelName(product.brand, product.model),
+              brand: { "@type": "Brand", name: product.brand },
+              image: image ? `${siteUrl}${image.src}` : undefined,
+              offers:
+                (product.exactSizePriceUsd ?? product.modelFromPriceUsd) !== null
+                  ? {
+                      "@type": "Offer",
+                      priceCurrency: "USD",
+                      price: product.exactSizePriceUsd ?? product.modelFromPriceUsd,
+                      url: getPreferredProductUrl(product) ?? undefined,
+                    }
+                  : undefined,
+            },
+          };
+        }),
+      }
+    : null;
+
   const components = {
     h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
       <h1 className="mb-6 text-3xl font-bold leading-tight text-black sm:text-4xl" {...props} />
@@ -429,7 +419,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
                 href={sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer nofollow sponsored"
-                aria-label={`Open ${label} in a new tab`}
+                aria-label={`Open ${formatBrandModelName(product.brand, label)} in a new tab`}
                 className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
               >
                 <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
@@ -437,7 +427,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
                   <ModelImage
                     brand={product.brand}
                     model={product.model}
-                    alt={`${product.brand} ${product.model}`}
+                    alt={formatBrandModelName(product.brand, product.model)}
                     sizes="(min-width: 1024px) 44vw, 100vw"
                     priority={index === 0}
                     className="p-5 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
@@ -450,7 +440,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
                       {product.brand}
                     </p>
                     <h3 className="mt-1 text-lg font-semibold leading-snug text-black">
-                      {label}
+                      {modelNameWithoutBrandPrefix(product.brand, label)}
                     </h3>
                   </div>
 
@@ -508,6 +498,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
     <>
       <JsonLd data={breadcrumb} />
       <JsonLd data={articleSchema} />
+      {itemListSchema ? <JsonLd data={itemListSchema} /> : null}
 
       <article className="mx-auto max-w-4xl px-5 py-10 sm:px-8">
         <nav className="mb-6 text-sm text-black/40">
@@ -549,7 +540,7 @@ export default async function ComparePairPage({ params }: Props) {
   const featuredModels = [featuredModelA, featuredModelB].filter(
     (model): model is FeaturedModel => model !== null,
   );
-  const promoCtas = buildPromoCtas(brandA, brandB);
+  const promoCtas = buildPromoCtasForBrands([brandA.name, brandB.name]);
   const showAffiliateDisclosure = comparison.forceAffiliateDisclosure || [featuredModelA, featuredModelB].some(
     (model) => model?.sourceUrl && isAffiliateBrand(model.brand),
   );
@@ -572,6 +563,9 @@ export default async function ComparePairPage({ params }: Props) {
         item.brandB.slug === brandB.slug,
     )
     .slice(0, 6);
+  const promoPageLinks = [brandA.name, brandB.name]
+    .map(getPromoPageForBrand)
+    .filter((link): link is NonNullable<typeof link> => link !== null);
 
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -674,7 +668,7 @@ export default async function ComparePairPage({ params }: Props) {
                           <ModelImage
                             brand={model.brand}
                             model={model.model}
-                            alt={`${model.brand} ${model.model}`}
+                            alt={formatBrandModelName(model.brand, model.model)}
                             sizes="(min-width: 1024px) 44vw, 100vw"
                             priority={index === 0}
                             className="p-5 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
@@ -696,7 +690,7 @@ export default async function ComparePairPage({ params }: Props) {
                             {model.brand}
                           </p>
                           <h3 className="mt-1 text-lg font-semibold leading-snug text-black">
-                            {model.model}
+                            {modelNameWithoutBrandPrefix(model.brand, model.model)}
                           </h3>
                         </div>
 
@@ -732,7 +726,7 @@ export default async function ComparePairPage({ params }: Props) {
                       href={model.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer nofollow sponsored"
-                      aria-label={`Open ${model.brand} ${model.model} in a new tab`}
+                      aria-label={`Open ${formatBrandModelName(model.brand, model.model)} in a new tab`}
                       className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
                     >
                       {cardContent}
@@ -818,6 +812,15 @@ export default async function ComparePairPage({ params }: Props) {
                   {brandB.name} brand page
                 </Link>
               )}
+              {promoPageLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm px-3 py-2 rounded-lg bg-white border border-black/[0.08] text-black/70 hover:border-[#38b1ab]/40 hover:text-black transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
             {relatedComparisons.length > 0 && (
               <div className="flex flex-wrap gap-3">

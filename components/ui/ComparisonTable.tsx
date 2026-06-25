@@ -237,7 +237,7 @@ export default function ComparisonTable({ products, title }: { products: Product
                       i % 2 === 0 ? "bg-white" : "bg-[#f7f8f8]"
                     }`}
                   >
-                    {row.label}
+                    {row.label}{" "}
                   </td>
                   {values.map((val, j) => (
                     <td key={tableProducts[j].slug} className="w-[150px] min-w-[150px] border-b border-black/[0.05] px-3 py-2.5 text-black/80">
@@ -266,7 +266,7 @@ export default function ComparisonTable({ products, title }: { products: Product
           <dl className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 lg:grid-cols-4">
             {sharedRows.map(({ row, values }) => (
               <div key={row.label}>
-                <dt className="text-[11px] font-semibold uppercase tracking-wide text-black/40">{row.label}</dt>
+                <dt className="text-[11px] font-semibold uppercase tracking-wide text-black/40">{row.label}: </dt>
                 <dd className="mt-0.5 text-sm text-black/80">{values[0]}</dd>
               </div>
             ))}

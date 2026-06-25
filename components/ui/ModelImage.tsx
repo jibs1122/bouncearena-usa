@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getModelImage } from "@/lib/modelImages";
+import { formatBrandModelName } from "@/lib/displayText";
 
 export default function ModelImage({
   brand,
@@ -25,7 +26,7 @@ export default function ModelImage({
   return (
     <Image
       src={image.src}
-      alt={alt ?? `${brand} ${model}`}
+      alt={alt ?? formatBrandModelName(brand, model)}
       fill
       priority={priority}
       sizes={sizes}

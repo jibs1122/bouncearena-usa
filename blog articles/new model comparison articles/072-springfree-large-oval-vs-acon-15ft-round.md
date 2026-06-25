@@ -20,7 +20,7 @@ sides:
   row_indices:
   - 14
   matched_models:
-  - ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder
+  - ACON Air 15ft Round Trampoline with Standard Net and Ladder
 ---
 # Springfree Large Oval vs ACON 15ft Round
 
@@ -35,7 +35,7 @@ Choose the Springfree if removing the spring-and-frame contact point is your pri
 | Specification | Springfree Large Oval | ACON 15ft Round |
 |---|---|---|
 | Brand | Springfree | ACON |
-| Model / line | Springfree Large Oval (8x13ft) | ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder |
+| Model / line | Springfree Large Oval (8x13ft) | ACON Air 15ft Round Trampoline with Standard Net and Ladder |
 | Size | 8x13ft | 15ft |
 | Shape | Oval | Round |
 | Install type | above ground | above ground |

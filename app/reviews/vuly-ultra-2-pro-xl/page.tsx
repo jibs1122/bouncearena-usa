@@ -33,7 +33,6 @@ export default function VulyUltra2ProXLReview() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Review",
-    datePublished: "2026-04-01",
     name: "Vuly Ultra 2 Pro XL — Owner Review",
     author: { "@type": "Person", name: "Imogen" },
     itemReviewed: {
@@ -220,7 +219,7 @@ export default function VulyUltra2ProXLReview() {
             <h2 className="text-lg font-bold text-black mb-2">Verdict</h2>
             <p>
               Imogen would buy the Vuly Ultra 2 Pro XL again without hesitation. She believes
-              it will last her kids' entire childhood and considers it one of the best
+              it will last her kids&apos; entire childhood and considers it one of the best
               investments her family has made.
             </p>
           </section>

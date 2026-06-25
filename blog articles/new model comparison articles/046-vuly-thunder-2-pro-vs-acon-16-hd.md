@@ -21,7 +21,7 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 ---
 # Vuly Thunder 2 Pro vs ACON 16 HD
 
@@ -36,7 +36,7 @@ Choose the Thunder 2 Pro for general family bouncing with the springs moved out 
 | Specification | Vuly Thunder 2 Pro | ACON 16 HD |
 |---|---|---|
 | Brand | Vuly | ACON |
-| Model / line | Vuly Thunder 2 Pro (L) | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder |
+| Model / line | Vuly Thunder 2 Pro (L) | ACON 16 HD Rectangular Trampoline with Net and Ladder |
 | Size | L | 16 HD |
 | Shape | Round | Rectangle |
 | Install type | above ground | above ground |

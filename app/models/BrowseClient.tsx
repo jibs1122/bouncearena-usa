@@ -10,6 +10,8 @@ import {
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
 import { isAconBrand } from '@/lib/vuly';
+import { modelNameWithoutBrandPrefix } from '@/lib/displayText';
+import { getModelComparisonLinks, type InternalLink } from '@/lib/internalLinks';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -131,6 +133,7 @@ interface ModelRow {
   warrantyFrameYrs: number | null;
   shopUrl: string | null;
   brandPage: string;
+  comparisonLinks: InternalLink[];
   variants: Product[];
 }
 
@@ -302,6 +305,7 @@ function buildRows(products: Product[]): ModelRow[] {
       warrantyFrameYrs: warranties.length ? Math.max(...warranties) : null,
       shopUrl,
       brandPage: `/brands/${brandSlug(brand)}/`,
+      comparisonLinks: getModelComparisonLinks(brand, model),
       variants: ps,
     };
   });
@@ -419,7 +423,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
     setSortDir(dir);
   }
 
-  const SortTh = ({
+  const renderSortTh = ({
     col,
     label,
     tip,
@@ -590,7 +594,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
                   >
                     {row.brand}
                   </span>
-                  <h2 className="text-base font-semibold leading-snug text-black">{row.model}</h2>
+                  <h2 className="text-base font-semibold leading-snug text-black">
+                    {modelNameWithoutBrandPrefix(row.brand, row.model)}
+                  </h2>
                   {row.variants.length > 1 && (
                     <p className="mt-0.5 text-xs text-black/40">{row.variants.length} matching sizes</p>
                   )}
@@ -606,7 +612,7 @@ export default function CompareClient({ products }: { products: Product[] }) {
 
                 <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
                   <div>
-                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Price</dt>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Price: </dt>
                     <dd className="mt-0.5 font-semibold text-black">
                       {row.minPrice !== null ? (
                         <>
@@ -619,28 +625,41 @@ export default function CompareClient({ products }: { products: Product[] }) {
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Max weight</dt>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Max weight: </dt>
                     <dd className="mt-0.5 text-black/70">{formatSingleUserWeight(row.brand, row.maxWeightLb)}</dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Warranty</dt>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Warranty: </dt>
                     <dd className="mt-0.5 text-black/70">{formatWarrantyYears(row.warrantyFrameYrs)}</dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Ground</dt>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Ground: </dt>
                     <dd className="mt-0.5 text-black/70">{groundTypeLabel(row.groundType)}</dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Spring</dt>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">Spring: </dt>
                     <dd className="mt-0.5 text-black/70">{row.springSystem || '—'}</dd>
                   </div>
                   <div>
-                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">ASTM</dt>
+                    <dt className="text-[10px] font-semibold uppercase tracking-wide text-black/35">ASTM: </dt>
                     <dd className="mt-0.5 text-black/70">{row.astmCertified === true ? 'Certified' : 'Not listed'}</dd>
                   </div>
                 </dl>
 
                 <div className="mt-4 flex flex-col gap-2">
+                  {row.comparisonLinks.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {row.comparisonLinks.map((link) => (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          className="rounded-lg border border-black/[0.08] bg-black/[0.02] px-2.5 py-1.5 text-xs font-medium text-black/60"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                   {row.shopUrl && (
                     <a
                       href={row.shopUrl}
@@ -718,19 +737,18 @@ export default function CompareClient({ products }: { products: Product[] }) {
                     <span>type</span>
                   </span>
                 </th>
-                <SortTh col="price" label="Price" />
-                <SortTh col="weight" label="Max weight" tip="Max single-user weight in lb" />
-                <SortTh
-                  col="warranty"
-                  label={
+                {renderSortTh({ col: 'price', label: 'Price' })}
+                {renderSortTh({ col: 'weight', label: 'Max weight', tip: 'Max single-user weight in lb' })}
+                {renderSortTh({
+                  col: 'warranty',
+                  label:
                     <span className="inline-flex flex-col leading-tight">
                       <span>Frame</span>
                       <span>warranty</span>
-                    </span>
-                  }
-                  className="min-w-[88px]"
-                  labelClassName="whitespace-normal"
-                />
+                    </span>,
+                  className: 'min-w-[88px]',
+                  labelClassName: 'whitespace-normal',
+                })}
                 <th className="text-center px-3 py-3 text-xs font-semibold uppercase tracking-wide text-black/40 min-w-[60px]">
                   ASTM <Tip text="ASTM F381/F2225 certified per official brand documentation" />
                 </th>
@@ -763,7 +781,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
                           style={{ backgroundColor: badge.bg, color: badge.text }}>
                           {row.brand}
                         </span>
-                        <p className="text-[13px] font-medium text-black leading-snug sm:text-sm">{row.model}</p>
+                        <p className="text-[13px] font-medium text-black leading-snug sm:text-sm">
+                          {modelNameWithoutBrandPrefix(row.brand, row.model)}
+                        </p>
                         {row.variants.length > 1 && (
                           <p className="text-[11px] text-black/35 mt-0.5">{row.variants.length} matching sizes</p>
                         )}
@@ -836,6 +856,26 @@ export default function CompareClient({ products }: { products: Product[] }) {
                         ) : null}
                       </td>
                     </tr>
+
+                    {row.comparisonLinks.length > 0 && (
+                      <tr className="border-t border-black/[0.04] bg-white">
+                        <td className="px-4 pb-3 pt-0 text-xs text-black/40">Compare: </td>
+                        <td colSpan={8} className="px-3 pb-3 pt-0">
+                          <div className="flex flex-wrap gap-2">
+                            {row.comparisonLinks.map((link) => (
+                              <a
+                                key={link.href}
+                                href={link.href}
+                                onClick={(e) => e.stopPropagation()}
+                                className="rounded-lg border border-black/[0.08] bg-black/[0.02] px-2.5 py-1.5 text-xs font-medium text-black/60 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+                              >
+                                {link.label}
+                              </a>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    )}
 
                     {/* expanded variant rows */}
                     {isExpanded && row.variants.map((v, i) => {

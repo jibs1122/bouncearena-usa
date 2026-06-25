@@ -53,6 +53,7 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
   const listId = useId();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset transient search UI when navigation changes.
     setOpen(false);
     setQuery('');
     setActiveIndex(-1);
@@ -77,6 +78,7 @@ export default function SearchBox({ items, mobile = false }: { items: SearchItem
   const activeResult = activeIndex >= 0 ? results[activeIndex]?.item : undefined;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Keep keyboard focus index inside the current result set.
     setActiveIndex((current) => (current >= results.length ? -1 : current));
   }, [results.length]);
 

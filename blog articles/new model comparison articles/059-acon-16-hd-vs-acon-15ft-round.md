@@ -16,12 +16,12 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: ACON 15ft Round
   row_indices:
   - 14
   matched_models:
-  - ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder
+  - ACON Air 15ft Round Trampoline with Standard Net and Ladder
 ---
 # ACON 16 HD vs ACON 15ft Round
 
@@ -36,7 +36,7 @@ Choose the 15ft round for general family use and a central spot in the yard. Cho
 | Specification | ACON 16 HD | ACON 15ft Round |
 |---|---|---|
 | Brand | ACON | ACON |
-| Model / line | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder | ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder |
+| Model / line | ACON 16 HD Rectangular Trampoline with Net and Ladder | ACON Air 15ft Round Trampoline with Standard Net and Ladder |
 | Size | 16 HD | 15ft |
 | Shape | Rectangle | Round |
 | Install type | above ground | above ground |

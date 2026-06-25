@@ -33,7 +33,6 @@ export default function SpringfreeMediumRoundReview() {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "Review",
-    datePublished: "2026-03-01",
     name: "Springfree Medium Round — Owner Review",
     author: { "@type": "Person", name: "Anthea" },
     itemReviewed: {

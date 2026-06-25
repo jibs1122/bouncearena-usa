@@ -22,8 +22,8 @@ sides:
   - 11
   - 14
   matched_models:
-  - ACON ACON Air 14ft Round Trampoline with Standard Net and Ladder
-  - ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder
+  - ACON Air 14ft Round Trampoline with Standard Net and Ladder
+  - ACON Air 15ft Round Trampoline with Standard Net and Ladder
 ---
 # Jumpflex HERO 14ft vs ACON 14/15ft
 
@@ -38,7 +38,7 @@ Choose the HERO 14ft for the higher weight limit and a lower price. Choose the A
 | Specification | Jumpflex HERO 14ft | ACON 14/15ft |
 |---|---|---|
 | Brand | Jumpflex | ACON |
-| Model / line | Jumpflex HERO™ Trampoline (14ft) | ACON ACON Air 14ft Round Trampoline with Standard Net and Ladder<br>ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder |
+| Model / line | Jumpflex HERO™ Trampoline (14ft) | ACON Air 14ft Round Trampoline with Standard Net and Ladder<br>ACON Air 15ft Round Trampoline with Standard Net and Ladder |
 | Size | 14ft | 14ft, 15ft |
 | Shape | Round | Round |
 | Install type | above ground | above ground |

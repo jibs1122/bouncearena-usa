@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { cleanDuplicateBrandPrefixes, removeDuplicateReview } from "@/lib/displayText";
 
 const MODEL_COMPARISON_DIR = path.join(
   process.cwd(),
@@ -52,7 +53,7 @@ function getModelComparisonFiles(): string[] {
 }
 
 function normalizeLabel(label: string): string {
-  return label.trim();
+  return cleanDuplicateBrandPrefixes(label);
 }
 
 function parseModelComparison(filename: string): ModelComparisonArticle | null {
@@ -81,12 +82,14 @@ function parseModelComparison(filename: string): ModelComparisonArticle | null {
 
   return {
     comparisonId: data.comparison_id ?? 0,
-    title: data.title,
+    title: removeDuplicateReview(cleanDuplicateBrandPrefixes(data.title)),
     slug: data.slug,
     publishStatus: data.publish_status ?? "ready",
-    metaTitle: data.seo?.meta_title ?? `${data.title} — Trampoline Comparison 2026`,
+    metaTitle: removeDuplicateReview(
+      cleanDuplicateBrandPrefixes(data.seo?.meta_title ?? `${data.title} — Trampoline Comparison 2026`),
+    ),
     metaDescription: data.seo?.meta_description ?? data.title,
-    content: parsed.content.replace(/<br>/g, "<br />").trim(),
+    content: cleanDuplicateBrandPrefixes(parsed.content.replace(/<br>/g, "<br />")).trim(),
     labels,
     sides,
   };

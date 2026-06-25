@@ -17,6 +17,7 @@ import type { QuizEntry } from '@/lib/quizTrampolines';
 import { formatUsd } from '@/lib/price';
 import { hasModelImage } from '@/lib/modelImages';
 import { isAffiliateBrand } from '@/lib/vuly';
+import { formatBrandModelName, modelNameWithoutBrandPrefix } from '@/lib/displayText';
 
 type RecapItem = {
   label: string;
@@ -182,7 +183,7 @@ function ResultCard({
                 <ModelImage
                   brand={rec.brand}
                   model={rec.model}
-                  alt={`${rec.brand} ${rec.model}`}
+                  alt={formatBrandModelName(rec.brand, rec.model)}
                   sizes={isTop ? '(min-width: 640px) 208px, 100vw' : '(min-width: 640px) 176px, 100vw'}
                   priority={isTop}
                 />
@@ -217,7 +218,7 @@ function ResultCard({
               isTop ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
             }`}
           >
-            {rec.model}
+            {modelNameWithoutBrandPrefix(rec.brand, rec.model)}
           </h2>
           <p className="text-xs text-black/40 mt-1">
             {rec.springType === 'springless' ? 'Springless' : 'Traditional spring'}

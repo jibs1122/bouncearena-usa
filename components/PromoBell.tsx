@@ -1,20 +1,33 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { trackOutboundClick } from '@/lib/gtag';
+import {
+  ACON_PROMO_AFFILIATE_URL,
+  VULY_PROMO_AFFILIATE_URL,
+  ZUPAPA_PROMO_AFFILIATE_URL,
+} from '@/lib/promoCtas';
 
-const VULY_AFF = 'https://www.vulyplay.com/aff/100/';
-const ACON_AFF = 'https://us.acon24.com?sca_ref=11261719.jjbGKHHa7yLAnuwn';
+const HIDDEN_PROMO_PATHS = new Set(['/privacy', '/terms', '/contact', '/admin', '/zupapa-promo-code']);
 
 const PROMOS = [
-  { brand: 'Vuly', code: 'BOUNCE15', href: VULY_AFF },
-  { brand: 'Acon', code: 'BOUNCE', href: ACON_AFF },
+  { brand: 'Vuly', code: 'BOUNCE15', href: VULY_PROMO_AFFILIATE_URL },
+  { brand: 'Acon', code: 'BOUNCE', href: ACON_PROMO_AFFILIATE_URL },
+];
+
+const DESKTOP_LINK_PROMOS = [
+  { brand: 'Zupapa', label: 'Activate 10% off', href: ZUPAPA_PROMO_AFFILIATE_URL },
 ];
 
 export default function PromoBell() {
+  const pathname = usePathname();
   const [mobileClosed, setMobileClosed] = useState(false);
   const [desktopClosed, setDesktopClosed] = useState(false);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const normalizedPath = pathname.replace(/\/$/, '') || '/';
+  if (HIDDEN_PROMO_PATHS.has(normalizedPath)) return null;
 
   async function copyCode(code: string) {
     try {
@@ -48,20 +61,22 @@ export default function PromoBell() {
     brand,
     href,
     location,
+    label = `Shop ${brand}`,
   }: {
     brand: string;
     href: string;
     location: string;
+    label?: string;
   }) {
     return (
       <a
         href={href}
         target="_blank"
         rel="nofollow noopener noreferrer"
-        onClick={() => trackOutboundClick({ url: href, label: `Shop ${brand}`, location })}
-        className="inline-flex text-xs font-semibold text-[#2e9a94] underline decoration-[#38b1ab]/45 underline-offset-4 transition-colors hover:text-[#247f7a] hover:decoration-[#247f7a]"
+        onClick={() => trackOutboundClick({ url: href, label, location })}
+        className="inline-flex whitespace-nowrap text-xs font-semibold text-[#2e9a94] underline decoration-[#38b1ab]/45 underline-offset-4 transition-colors hover:text-[#247f7a] hover:decoration-[#247f7a]"
       >
-        Shop {brand}
+        {label}
       </a>
     );
   }
@@ -94,19 +109,32 @@ export default function PromoBell() {
         <div className="fixed right-0 top-1/2 z-30 hidden -translate-y-1/2 lg:block">
           <div className="relative">
             <div className="rounded-l-2xl border border-r-0 border-black/10 bg-white/[0.96] px-4 py-4 shadow-[0_16px_40px_-22px_rgba(0,0,0,0.45)] backdrop-blur transition-transform hover:-translate-x-1">
-              <div className="w-[184px] pr-7">
+              <div className="w-[228px] pr-7">
                 <p className="text-sm font-semibold leading-5 text-black">Trampoline promo codes</p>
                 <div className="mt-3 space-y-3">
                   {PROMOS.map((promo) => (
                     <div key={promo.brand} className="rounded-2xl bg-black/[0.025] p-2.5">
-                      <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center justify-between gap-4">
                         <span className="text-xs font-semibold text-black/55">{promo.brand}</span>
                         <CopyCodeButton brand={promo.brand} code={promo.code} />
                       </div>
-                      <div className="mt-2 pl-[3.1rem]">
+                      <div className="mt-2 flex justify-end">
                         <ShopButton
                           brand={promo.brand}
                           href={promo.href}
+                          location={`promo_pill_desktop_${promo.brand.toLowerCase()}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  {DESKTOP_LINK_PROMOS.map((promo) => (
+                    <div key={promo.brand} className="rounded-2xl bg-black/[0.025] p-2.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-semibold text-black/55">{promo.brand}</span>
+                        <ShopButton
+                          brand={promo.brand}
+                          href={promo.href}
+                          label={promo.label}
                           location={`promo_pill_desktop_${promo.brand.toLowerCase()}`}
                         />
                       </div>

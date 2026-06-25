@@ -16,12 +16,12 @@ sides:
   row_indices:
   - 11
   matched_models:
-  - ACON ACON Air 14ft Round Trampoline with Standard Net and Ladder
+  - ACON Air 14ft Round Trampoline with Standard Net and Ladder
 - label: ACON 15ft Round
   row_indices:
   - 14
   matched_models:
-  - ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder
+  - ACON Air 15ft Round Trampoline with Standard Net and Ladder
 ---
 # ACON 14ft vs ACON 15ft Round
 
@@ -36,7 +36,7 @@ Choose the 14ft for a more compact fit in a tighter yard. Choose the 15ft if you
 | Specification | ACON 14ft | ACON 15ft Round |
 |---|---|---|
 | Brand | ACON | ACON |
-| Model / line | ACON ACON Air 14ft Round Trampoline with Standard Net and Ladder | ACON ACON Air 15ft Round Trampoline with Standard Net and Ladder |
+| Model / line | ACON Air 14ft Round Trampoline with Standard Net and Ladder | ACON Air 15ft Round Trampoline with Standard Net and Ladder |
 | Size | 14ft | 15ft |
 | Shape | Round | Round |
 | Install type | above ground | above ground |

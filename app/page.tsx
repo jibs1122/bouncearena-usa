@@ -32,14 +32,6 @@ export default function HomePage() {
     name: "Bounce Arena",
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com",
     description: "Independent trampoline reviews and comparisons.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com"}/brands/?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (

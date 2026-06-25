@@ -143,7 +143,7 @@ export default function QuizClient() {
             Trampoline quiz — find the right option for your family
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-7 text-black/55">
-            Answer 8 quick questions and we&apos;ll match you with the best trampoline for your
+            Answer {questions.length}{" "}quick questions and we&apos;ll match you with the best trampoline for your
             family — based on yard size, installation type, spring preference, safety-net preference, shape, and budget.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-black/45">

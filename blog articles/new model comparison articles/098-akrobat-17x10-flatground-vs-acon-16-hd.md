@@ -20,7 +20,7 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 ---
 # Akrobat 17x10 FlatGround vs ACON 16 HD
 
@@ -35,7 +35,7 @@ Choose the Akrobat if you are committing to an in-ground install and want the lo
 | Specification | Akrobat 17x10 FlatGround | ACON 16 HD |
 |---|---|---|
 | Brand | Akrobat | ACON |
-| Model / line | Akrobat Primus Flat 17x10 (17x10ft) | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder |
+| Model / line | Akrobat Primus Flat 17x10 (17x10ft) | ACON 16 HD Rectangular Trampoline with Net and Ladder |
 | Size | 17x10ft | 16 HD |
 | Shape | Rectangular | Rectangle |
 | Install type | inground | above ground |

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { getAllBrands, brandSlug } from '@/lib/products';
 import type { Brand } from '@/lib/types';
+import { cleanDuplicateBrandPrefixes, removeDuplicateReview } from '@/lib/displayText';
 
 const USA_SHEET_URL =
   'https://docs.google.com/spreadsheets/d/1CLjH67Sf9o2diBMUwiG9zmkhs47N90GmL4LxQ6TYsZk/edit?usp=sharing';
@@ -786,7 +787,7 @@ function hydrateComparison(
 
   return {
     ...definition,
-    title: `${definition.labelA} vs ${definition.labelB}`,
+    title: removeDuplicateReview(cleanDuplicateBrandPrefixes(`${definition.labelA} vs ${definition.labelB}`)),
     href: `/compare/${definition.slug}/`,
     brandA,
     brandB,

@@ -20,7 +20,7 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 ---
 # Springfree Jumbo Square vs ACON 16 HD
 
@@ -35,7 +35,7 @@ Choose the Springfree Jumbo Square for a fully springless build and even square 
 | Specification | Springfree Jumbo Square | ACON 16 HD |
 |---|---|---|
 | Brand | Springfree | ACON |
-| Model / line | Springfree Jumbo Square (13x13ft) | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder |
+| Model / line | Springfree Jumbo Square (13x13ft) | ACON 16 HD Rectangular Trampoline with Net and Ladder |
 | Size | 13x13ft | 16 HD |
 | Shape | Square | Rectangle |
 | Install type | above ground | above ground |

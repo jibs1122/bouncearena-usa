@@ -18,7 +18,7 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: Texas Trampolines Round / Rectangle
   row_indices:
   - 207
@@ -46,7 +46,7 @@ Choose Texas Trampolines for the higher 400 lb limit and a lifetime frame. Choos
 | Specification | ACON 16 HD | Texas Trampolines Round / Rectangle |
 |---|---|---|
 | Brand | ACON | Texas Trampolines |
-| Model / line | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder | Texas Trampolines 8X8 HEAVY DUTY Trampoline (8x8ft)<br>Texas Trampolines 7.3x12.3 Kids Delight Rectangular Trampoline (7.3x12.3ft)<br>Texas Trampolines 9x15 Texas Standard Rectangular Trampoline (9x15ft)<br>+ 2 more |
+| Model / line | ACON 16 HD Rectangular Trampoline with Net and Ladder | Texas Trampolines 8X8 HEAVY DUTY Trampoline (8x8ft)<br>Texas Trampolines 7.3x12.3 Kids Delight Rectangular Trampoline (7.3x12.3ft)<br>Texas Trampolines 9x15 Texas Standard Rectangular Trampoline (9x15ft)<br>+ 2 more |
 | Size | 16 HD | 8x8ft, 7.3x12.3ft, 9x15ft, 12.3x12.3ft + 1 more |
 | Shape | Rectangle | Square, Rectangular |
 | Install type | above ground | — |

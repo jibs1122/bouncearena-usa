@@ -7,13 +7,17 @@ import { getApprovedComparisons } from "@/lib/comparisons";
 import { BRAND_INTROS } from "@/lib/brandIntros";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
+import ComparePromoCta from "@/components/ui/ComparePromoCta";
 import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import ModelImage from "@/components/ui/ModelImage";
 import { formatUsd } from "@/lib/price";
 import { getPreferredBrandUrl, getPreferredModelUrl, withAffiliateTracking } from "@/lib/productLinks";
-import { hasModelImage } from "@/lib/modelImages";
-import { isAconBrand, isAffiliateBrand, isVulyBrand } from "@/lib/vuly";
+import { getModelImage, hasModelImage } from "@/lib/modelImages";
+import { isAffiliateBrand } from "@/lib/vuly";
+import { buildPromoCtasForBrands } from "@/lib/promoCtas";
+import { formatBrandModelName, modelNameWithoutBrandPrefix } from "@/lib/displayText";
+import { getPopularLinksForBrand } from "@/lib/internalLinks";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -28,25 +32,6 @@ type FeaturedModel = {
   springSystem: string;
   sourceUrl: string | null;
 };
-
-const VULY_PROMO_AFFILIATE_URL = "https://www.vulyplay.com/aff/100/";
-const ACON_PROMO_AFFILIATE_URL = "https://us.acon24.com?sca_ref=11261719.jjbGKHHa7yLAnuwn";
-
-const ACON_DISCOUNT_TIERS = [
-  { threshold: "Spend $200 or more", discount: "$15 off" },
-  { threshold: "Spend $400 or more", discount: "$25 off" },
-  { threshold: "Spend $1,000 or more", discount: "$50 off" },
-  { threshold: "Spend $2,000 or more", discount: "$90 off" },
-  { threshold: "Spend $3,000 or more", discount: "$120 off" },
-  { threshold: "Spend $4,000 or more", discount: "$150 off" },
-];
-
-function getCurrentMonthYear() {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    year: "numeric",
-  }).format(new Date());
-}
 
 function buildFeaturedModels(products: Product[]): FeaturedModel[] {
   const grouped = new Map<string, Product[]>();
@@ -83,138 +68,6 @@ function buildFeaturedModels(products: Product[]): FeaturedModel[] {
       return bPrice - aPrice;
     })
     .slice(0, 4);
-}
-
-function BrandPromoSection({
-  brandName,
-  affiliateUrl,
-}: {
-  brandName: string;
-  affiliateUrl: string | null;
-}) {
-  const lastVerified = getCurrentMonthYear();
-
-  if (isVulyBrand(brandName)) {
-    return (
-      <section className="mb-10 max-w-4xl rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-black">Vuly Promo Codes</h2>
-        <p className="mt-3 text-sm leading-6 text-black/70">
-          We partner with Vuly directly, so the code below is an arrangement we hold and verify,
-          not a guess pulled from a coupon site. It is live as of the date shown.
-        </p>
-        <p className="mt-4 text-sm font-semibold text-black">
-          Last verified: {lastVerified}
-        </p>
-
-        <div className="mt-5 space-y-4">
-          <div>
-            <p className="font-semibold text-black">
-              <code className="rounded bg-white px-1.5 py-0.5 text-[#2e9a94]">BOUNCE15</code>{" "}
-              — discount on any purchase.
-            </p>
-            <p className="mt-1 text-sm leading-6 text-black/65">
-              Applies to trampolines, accessories, and play equipment, with no category restriction.
-            </p>
-          </div>
-        </div>
-
-        <p className="mt-5 text-sm leading-6 text-black/70">
-          <strong className="text-black">To apply:</strong> add your trampoline to the cart, enter
-          the code in the promo field at checkout, and confirm the discount shows in your
-          order summary before paying.
-        </p>
-
-        {affiliateUrl && (
-          <a
-            href={affiliateUrl}
-            target="_blank"
-            rel="noopener noreferrer nofollow sponsored"
-            className="mt-5 inline-flex items-center rounded-xl bg-[#38b1ab] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
-          >
-            Shop Vuly with this code →
-          </a>
-        )}
-        <p className="mt-4 text-xs italic leading-5 text-black/50">
-          We may earn a commission when you use a code or buy through our links, at no extra cost to you.
-        </p>
-      </section>
-    );
-  }
-
-  if (isAconBrand(brandName)) {
-    return (
-      <section className="mb-10 max-w-4xl rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-black">Acon Promo Code</h2>
-        <p className="mt-3 text-sm leading-6 text-black/70">
-          We partner with Acon directly, so the code below is one we hold and verify. It is live as
-          of the date shown.
-        </p>
-        <p className="mt-4 text-sm font-semibold text-black">
-          Last verified: {lastVerified}
-        </p>
-
-        <div className="mt-5">
-          <p className="font-semibold text-black">
-            <code className="rounded bg-white px-1.5 py-0.5 text-[#2e9a94]">BOUNCE</code>{" "}
-            — $15 to $150 off, scaled to your order.
-          </p>
-          <p className="mt-1 text-sm leading-6 text-black/65">
-            The discount grows with how much you spend:
-          </p>
-        </div>
-
-        <div className="mt-4 overflow-hidden rounded-xl border border-black/[0.08] bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-black/[0.03] text-black">
-              <tr>
-                <th className="px-4 py-3 font-semibold">Order total</th>
-                <th className="px-4 py-3 font-semibold">
-                  Discount with <code>BOUNCE</code>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-black/[0.06] text-black/70">
-              {ACON_DISCOUNT_TIERS.map((tier) => (
-                <tr key={tier.threshold}>
-                  <td className="px-4 py-3">{tier.threshold}</td>
-                  <td className="px-4 py-3 font-medium text-black">{tier.discount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="mt-5 text-sm leading-6 text-black/70">
-          <strong className="text-black">To apply:</strong> add your Acon trampoline to the cart,
-          enter <code className="rounded bg-white px-1 py-0.5 text-[#2e9a94]">BOUNCE</code> in the
-          promo field at checkout, and confirm the discount matching your order total shows before
-          you pay.
-        </p>
-
-        {affiliateUrl && (
-          <a
-            href={affiliateUrl}
-            target="_blank"
-            rel="noopener noreferrer nofollow sponsored"
-            className="mt-5 inline-flex items-center rounded-xl bg-[#38b1ab] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
-          >
-            Shop Acon with BOUNCE →
-          </a>
-        )}
-        <p className="mt-4 text-xs italic leading-5 text-black/50">
-          We may earn a commission when you use a code or buy through our links, at no extra cost to you.
-        </p>
-      </section>
-    );
-  }
-
-  return null;
-}
-
-function getPromoAffiliateUrl(brandName: string): string | null {
-  if (isVulyBrand(brandName)) return VULY_PROMO_AFFILIATE_URL;
-  if (isAconBrand(brandName)) return ACON_PROMO_AFFILIATE_URL;
-  return null;
 }
 
 export async function generateStaticParams() {
@@ -273,11 +126,15 @@ export default async function BrandPage({ params }: Props) {
 
   const productJsonLds = brand.products
     .filter((p) => p.exactSizePriceUsd || p.modelFromPriceUsd)
-    .map((p) => ({
+    .map((p) => {
+      const image = getModelImage(p.brand, p.model);
+
+      return {
       "@context": "https://schema.org",
       "@type": "Product",
-      name: `${p.brand} ${p.model}${p.size ? ` ${p.size}` : ""}`,
+      name: `${p.brand} ${modelNameWithoutBrandPrefix(p.brand, p.model)}${p.size ? ` ${p.size}` : ""}`,
       brand: { "@type": "Brand", name: p.brand },
+      image: image ? `${siteUrl}${image.src}` : undefined,
       offers: {
         "@type": "Offer",
         priceCurrency: "USD",
@@ -289,15 +146,17 @@ export default async function BrandPage({ params }: Props) {
       ...(p.meetsUsStandard
         ? { additionalProperty: [{ "@type": "PropertyValue", name: "ASTM Certified", value: "Yes" }] }
         : {}),
-    }));
+      };
+    });
 
   const hasAffiliate = brand.products.some((p) => p.sourceUrls.length > 0);
   const showAffiliateDisclosure = hasAffiliate && isAffiliateBrand(brand.name);
   const brandAffiliateUrl = getPreferredBrandUrl(brand.name, brand.sourceUrl);
-  const promoAffiliateUrl = getPromoAffiliateUrl(brand.name);
+  const promoCtas = buildPromoCtasForBrands([brand.name]);
   const astmCount = brand.products.filter((p) => p.meetsUsStandard === true).length;
   const minPrice = brand.fromPriceUsd;
   const featuredModels = buildFeaturedModels(brand.products);
+  const popularLinks = getPopularLinksForBrand(brand.name);
 
   // Comparisons that feature this brand
   const relatedComparisons = getApprovedComparisons().filter(
@@ -388,6 +247,25 @@ export default async function BrandPage({ params }: Props) {
             </div>
           )}
 
+          {promoCtas.length > 0 ? <ComparePromoCta promos={promoCtas} /> : null}
+
+          {popularLinks.length > 0 && (
+            <section className="mb-10 rounded-xl border border-black/[0.08] bg-black/[0.02] p-6">
+              <h2 className="mb-4 text-xl font-bold text-black">Compare popular models</h2>
+              <div className="flex flex-wrap gap-3">
+                {popularLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {featuredModels.length > 0 && (
             <section className="mb-10 mt-10">
               <div className="mb-4 flex items-end justify-between gap-4">
@@ -403,7 +281,7 @@ export default async function BrandPage({ params }: Props) {
                         <ModelImage
                           brand={model.brand}
                           model={model.model}
-                          alt={`${model.brand} ${model.model}`}
+                          alt={formatBrandModelName(model.brand, model.model)}
                           sizes="(min-width: 1280px) 22vw, (min-width: 640px) 46vw, 100vw"
                           priority={index === 0}
                           className="p-4 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
@@ -416,7 +294,7 @@ export default async function BrandPage({ params }: Props) {
                             {model.brand}
                           </p>
                           <h3 className="mt-1 text-sm font-semibold leading-snug text-black">
-                            {model.model}
+                            {modelNameWithoutBrandPrefix(model.brand, model.model)}
                           </h3>
                         </div>
 
@@ -452,7 +330,7 @@ export default async function BrandPage({ params }: Props) {
                       href={model.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer nofollow sponsored"
-                      aria-label={`Open ${model.brand} ${model.model} in a new tab`}
+                      aria-label={`Open ${formatBrandModelName(model.brand, model.model)} in a new tab`}
                       className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
                     >
                       {cardContent}
@@ -476,9 +354,7 @@ export default async function BrandPage({ params }: Props) {
             <ComparisonTable products={brand.products} />
           </section>
 
-          <BrandPromoSection brandName={brand.name} affiliateUrl={promoAffiliateUrl} />
-
-          <section className="mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+          <section className="mb-10 mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
             <h2 className="text-lg font-bold text-black mb-2">Not sure which trampoline fits best?</h2>
             <p className="text-sm leading-6 text-black/60 mb-4 max-w-2xl">
               Take the quiz and get a tailored trampoline recommendation based on yard size,
@@ -514,38 +390,6 @@ export default async function BrandPage({ params }: Props) {
               </div>
             </section>
           )}
-
-          {/* FAQ JSON-LD hook */}
-          <JsonLd
-            data={{
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: [
-                {
-                  "@type": "Question",
-                  name: `Is ${brand.name} ASTM certified?`,
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      astmCount > 0
-                        ? `${brand.name} has ${astmCount} model${astmCount !== 1 ? "s" : ""} that meet ASTM F381/F2225 safety standards according to official brand documentation.`
-                        : `ASTM certification status for ${brand.name} could not be independently verified from official brand documentation. Please check directly with the manufacturer.`,
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: `What is the price of ${brand.name} trampolines in the US?`,
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      minPrice !== null
-                        ? `${brand.name} trampolines start from ${formatUsd(minPrice)}. Prices vary by model and size.`
-                        : `Pricing for ${brand.name} trampolines was not available at time of last data update. Please check the brand website for current pricing.`,
-                  },
-                },
-              ],
-            }}
-          />
         </div>
       </div>
     </>

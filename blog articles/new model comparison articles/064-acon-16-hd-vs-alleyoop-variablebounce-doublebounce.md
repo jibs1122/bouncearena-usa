@@ -18,7 +18,7 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: AlleyOOP VariableBounce / DoubleBounce
   row_indices:
   - 37
@@ -46,7 +46,7 @@ Choose the ACON 16 HD for a rectangle, a higher weight allowance, and a bounce s
 | Specification | ACON 16 HD | AlleyOOP VariableBounce / DoubleBounce |
 |---|---|---|
 | Brand | ACON | AlleyOOP |
-| Model / line | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder | AlleyOOP 12' Trampoline with Enclosure (12ft)<br>AlleyOOP 14' Trampoline with Enclosure (14ft)<br>AlleyOOP DoubleBounce 14' Trampoline with Enclosure (14ft)<br>+ 2 more |
+| Model / line | ACON 16 HD Rectangular Trampoline with Net and Ladder | AlleyOOP 12' Trampoline with Enclosure (12ft)<br>AlleyOOP 14' Trampoline with Enclosure (14ft)<br>AlleyOOP DoubleBounce 14' Trampoline with Enclosure (14ft)<br>+ 2 more |
 | Size | 16 HD | 12ft, 14ft, 10x17ft, 12x17ft |
 | Shape | Rectangle | Round, Rectangle, Oval |
 | Install type | above ground | above ground |

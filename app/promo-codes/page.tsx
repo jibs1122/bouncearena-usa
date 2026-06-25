@@ -3,22 +3,48 @@ import Link from "next/link";
 import PromoCard from "@/components/ui/PromoCard";
 import AffiliateDisclosure from "@/components/ui/AffiliateDisclosure";
 import JsonLd from "@/components/seo/JsonLd";
+import {
+  ACON_PROMO_AFFILIATE_URL,
+  VULY_PROMO_AFFILIATE_URL,
+  ZUPAPA_PROMO_AFFILIATE_URL,
+} from "@/lib/promoCtas";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 export const metadata: Metadata = {
   title: "Trampoline Promo Codes & Discount Codes 2026",
   description:
-    "Find the latest trampoline promo codes and discount codes — Springfree, Acon, Vuly, Skywalker, and more. Click to copy and save on your purchase.",
+    "Find the latest trampoline promo codes and discount links — ACON, Vuly, Zupapa, and more. Copy codes or click discount links to save on your purchase.",
   alternates: { canonical: `${SITE_URL}/promo-codes/` },
 };
 
-const PROMOS: { brand: string; code: string; description: string; expires?: string; affiliateUrl?: string }[] = [
+const PROMOS: {
+  brand: string;
+  code?: string;
+  description: string;
+  expires?: string;
+  affiliateUrl?: string;
+  copyable?: boolean;
+  actionLabel?: string;
+}[] = [
   {
     brand: "Vuly",
     code: "BOUNCE15",
     description: "15% off sitewide on Vuly trampolines.",
-    affiliateUrl: "https://www.vulyplay.com/aff/100/",
+    affiliateUrl: VULY_PROMO_AFFILIATE_URL,
+  },
+  {
+    brand: "ACON",
+    code: "BOUNCE",
+    description: "$15 to $150 off ACON orders, scaled by order total.",
+    affiliateUrl: ACON_PROMO_AFFILIATE_URL,
+  },
+  {
+    brand: "Zupapa",
+    description: "Click through with this link and 10% off will be applied automatically.",
+    affiliateUrl: ZUPAPA_PROMO_AFFILIATE_URL,
+    copyable: false,
+    actionLabel: "Activate 10% off",
   },
 ];
 
@@ -50,8 +76,8 @@ export default function PromoCodesPage() {
           Trampoline Promo Codes
         </h1>
         <p className="text-black/60 mb-2 max-w-2xl">
-          Current discount codes for trampoline brands. Click &ldquo;Copy&rdquo; to copy
-          the code, then paste at checkout on the brand&apos;s website.
+          Current discount codes and links for trampoline brands. Click &ldquo;Copy&rdquo;
+          where available, or use the discount link when the saving is applied automatically.
         </p>
         <p className="text-sm text-black/50 border border-black/[0.08] bg-black/[0.02] rounded-lg px-4 py-2 mb-6 inline-block">
           Always verify the code is active at checkout. Promo codes may expire or have terms.
@@ -74,6 +100,30 @@ export default function PromoCodesPage() {
             </p>
           </div>
         )}
+
+        <section className="mb-10 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
+          <h2 className="mb-3 text-lg font-bold text-black">Brand-specific promo pages</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/vuly-promo-code/"
+              className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+            >
+              Vuly promo code BOUNCE15
+            </Link>
+            <Link
+              href="/acon-promo-code/"
+              className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+            >
+              ACON promo code BOUNCE
+            </Link>
+            <Link
+              href="/zupapa-promo-code/"
+              className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+            >
+              Zupapa promo code
+            </Link>
+          </div>
+        </section>
 
         <section className="rounded-xl border border-black/[0.08] bg-black/[0.02] p-6 text-sm text-black/50 leading-relaxed">
           <h2 className="font-bold text-black/70 mb-2">About These Codes</h2>

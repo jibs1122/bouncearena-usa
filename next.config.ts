@@ -1,9 +1,23 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
+  turbopack: {
+    root: path.join(__dirname),
+  },
   outputFileTracingIncludes: {
     "/*": ["./data/products-us.csv"],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "bouncearenareviews.com" }],
+        destination: "https://www.bouncearenareviews.com/:path*",
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [

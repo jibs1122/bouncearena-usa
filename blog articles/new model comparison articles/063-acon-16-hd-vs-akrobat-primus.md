@@ -17,7 +17,7 @@ sides:
   row_indices:
   - 3
   matched_models:
-  - ACON ACON 16 HD Rectangular Trampoline with Net and Ladder
+  - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: Akrobat Primus
   row_indices:
   - 23
@@ -37,7 +37,7 @@ Choose the ACON 16 HD to save several hundred dollars on a comparable rectangle.
 | Specification | ACON 16 HD | Akrobat Primus |
 |---|---|---|
 | Brand | ACON | Akrobat |
-| Model / line | ACON ACON 16 HD Rectangular Trampoline with Net and Ladder | Akrobat Primus Challenger (14x10ft) |
+| Model / line | ACON 16 HD Rectangular Trampoline with Net and Ladder | Akrobat Primus Challenger (14x10ft) |
 | Size | 16 HD | 14x10ft |
 | Shape | Rectangle | Rectangular |
 | Install type | above ground | above ground |
