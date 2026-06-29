@@ -14,7 +14,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenarev
 export const metadata: Metadata = {
   title: "Trampoline Promo Codes & Discount Codes 2026",
   description:
-    "Find the latest trampoline promo codes and discount links — ACON, Vuly, Zupapa, and more. Copy codes or click discount links to save on your purchase.",
+    "Find the latest trampoline promo codes for ACON, Vuly, Zupapa, and more. Copy codes and use brand shop links to save on your purchase.",
   alternates: { canonical: `${SITE_URL}/promo-codes/` },
 };
 
@@ -41,10 +41,10 @@ const PROMOS: {
   },
   {
     brand: "Zupapa",
-    description: "Click through with this link and 10% off will be applied automatically.",
+    code: "BOUNCE",
+    description: "10% off at Zupapa.",
     affiliateUrl: ZUPAPA_PROMO_AFFILIATE_URL,
-    copyable: false,
-    actionLabel: "Activate 10% off",
+    actionLabel: "Shop Zupapa",
   },
 ];
 
@@ -77,7 +77,7 @@ export default function PromoCodesPage() {
         </h1>
         <p className="text-black/60 mb-2 max-w-2xl">
           Current discount codes and links for trampoline brands. Click &ldquo;Copy&rdquo;
-          where available, or use the discount link when the saving is applied automatically.
+          to save a code, then use the shop link for the brand you want.
         </p>
         <p className="text-sm text-black/50 border border-black/[0.08] bg-black/[0.02] rounded-lg px-4 py-2 mb-6 inline-block">
           Always verify the code is active at checkout. Promo codes may expire or have terms.
@@ -120,7 +120,7 @@ export default function PromoCodesPage() {
               href="/zupapa-promo-code/"
               className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
             >
-              Zupapa promo code
+              Zupapa promo code BOUNCE
             </Link>
           </div>
         </section>

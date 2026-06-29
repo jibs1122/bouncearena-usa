@@ -8,7 +8,7 @@ export type InternalLink = {
 export const PROMO_PAGE_BY_BRAND: Record<string, InternalLink> = {
   ACON: { label: "ACON promo code", href: "/acon-promo-code/" },
   Vuly: { label: "Vuly promo code", href: "/vuly-promo-code/" },
-  Zupapa: { label: "Zupapa promo code", href: "/zupapa-promo-code/" },
+  Zupapa: { label: "Zupapa promo code BOUNCE", href: "/zupapa-promo-code/" },
 };
 
 export const BRAND_POPULAR_LINKS: Record<string, InternalLink[]> = {

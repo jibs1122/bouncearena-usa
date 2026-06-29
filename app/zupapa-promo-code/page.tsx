@@ -17,12 +17,12 @@ function getCurrentMonthYear() {
 export const metadata: Metadata = {
   title: { absolute: "Zupapa Promo Code 2026 - 10% Off | Bounce Arena" },
   description:
-    "Use the Zupapa promo code link for 10% off any purchase. Compare Zupapa round, rectangular and kids trampolines before you buy.",
+    "Use Zupapa promo code BOUNCE for 10% off any purchase. Compare Zupapa round, rectangular and kids trampolines before you buy.",
   alternates: { canonical: `${SITE_URL}/zupapa-promo-code/` },
   openGraph: {
     title: "Zupapa Promo Code 2026 - 10% Off",
     description:
-      "Use the Zupapa promo code link for 10% off any purchase.",
+      "Use Zupapa promo code BOUNCE for 10% off any purchase.",
     url: `${SITE_URL}/zupapa-promo-code/`,
   },
 };
@@ -121,18 +121,21 @@ export default function ZupapaPromoCodePage() {
             Zupapa Promo Code 2026
           </h1>
           <p className="mb-4 text-lg leading-8 text-black/70">
-            Click the Zupapa discount link and a code will be applied automatically for 10% off any purchase.
+            Use code <code className="rounded bg-black/[0.04] px-1.5 py-0.5 font-mono text-[#2e9a94]">BOUNCE</code> at Zupapa for 10% off any purchase.
           </p>
           <p className="mb-4 leading-7 text-black/65">
-            Add products to your cart after clicking the link, then verify the discount has been applied before you pay.
+            Click through to Zupapa, add products to your cart, enter the code at checkout, and verify the discount has been applied before you pay.
           </p>
           <p className="mb-6 text-sm font-semibold text-black">Last verified: {lastVerified}</p>
           <AffiliateDisclosure className="mb-8" />
 
           <section className="mb-10 rounded-2xl border border-[#38b1ab]/20 bg-[#f7fbfa] p-6">
-            <h2 className="mb-3 text-xl font-bold text-black">Zupapa discount link</h2>
+            <h2 className="mb-3 text-xl font-bold text-black">Zupapa code</h2>
+            <p className="mb-4 text-black/70">
+              Code: <code className="rounded bg-white px-2 py-1 font-mono font-bold tracking-wider text-[#2e9a94]">BOUNCE</code>
+            </p>
             <p className="mb-5 text-sm leading-6 text-black/65">
-              No code needs to be copied. Click the link, shop Zupapa, and check that 10% off appears before checkout.
+              Use the Zupapa discount link, enter <code className="rounded bg-white px-1 py-0.5 text-[#2e9a94]">BOUNCE</code> in the promo field at checkout, and check that 10% off appears before you pay.
             </p>
             <a
               href={ZUPAPA_PROMO_AFFILIATE_URL}
@@ -140,7 +143,7 @@ export default function ZupapaPromoCodePage() {
               rel="noopener noreferrer nofollow sponsored"
               className="inline-flex items-center justify-center rounded-xl bg-[#38b1ab] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
             >
-              Activate 10% off at Zupapa
+              Shop Zupapa with BOUNCE
             </a>
           </section>
 

@@ -14,10 +14,7 @@ const HIDDEN_PROMO_PATHS = new Set(['/privacy', '/terms', '/contact', '/admin', 
 const PROMOS = [
   { brand: 'Vuly', code: 'BOUNCE15', href: VULY_PROMO_AFFILIATE_URL },
   { brand: 'Acon', code: 'BOUNCE', href: ACON_PROMO_AFFILIATE_URL },
-];
-
-const DESKTOP_LINK_PROMOS = [
-  { brand: 'Zupapa', label: 'Activate 10% off', href: ZUPAPA_PROMO_AFFILIATE_URL },
+  { brand: 'Zupapa', code: 'BOUNCE', href: ZUPAPA_PROMO_AFFILIATE_URL },
 ];
 
 export default function PromoBell() {
@@ -29,22 +26,23 @@ export default function PromoBell() {
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
   if (HIDDEN_PROMO_PATHS.has(normalizedPath)) return null;
 
-  async function copyCode(code: string) {
+  async function copyCode(brand: string, code: string) {
+    const copiedKey = `${brand}:${code}`;
     try {
       await navigator.clipboard.writeText(code);
-      setCopiedCode(code);
+      setCopiedCode(copiedKey);
       window.setTimeout(() => {
-        setCopiedCode((current) => (current === code ? null : current));
+        setCopiedCode((current) => (current === copiedKey ? null : current));
       }, 1800);
     } catch {}
   }
 
   function CopyCodeButton({ brand, code }: { brand: string; code: string }) {
-    const active = copiedCode === code;
+    const active = copiedCode === `${brand}:${code}`;
     return (
       <button
         type="button"
-        onClick={() => copyCode(code)}
+        onClick={() => copyCode(brand, code)}
         aria-label={`Copy ${brand} promo code ${code}`}
         className={`h-8 min-w-[5.75rem] rounded-full border px-3 text-[11px] font-bold transition-colors ${
           active
@@ -82,11 +80,11 @@ export default function PromoBell() {
   }
 
   function MobileCopyCodeButton({ brand, code }: { brand: string; code: string }) {
-    const active = copiedCode === code;
+    const active = copiedCode === `${brand}:${code}`;
     return (
       <button
         type="button"
-        onClick={() => copyCode(code)}
+        onClick={() => copyCode(brand, code)}
         aria-label={`Copy ${brand} promo code ${code}`}
         className={`flex min-h-11 min-w-0 items-center justify-between gap-1.5 rounded-xl border px-2.5 text-left transition-colors ${
           active
@@ -122,19 +120,6 @@ export default function PromoBell() {
                         <ShopButton
                           brand={promo.brand}
                           href={promo.href}
-                          location={`promo_pill_desktop_${promo.brand.toLowerCase()}`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                  {DESKTOP_LINK_PROMOS.map((promo) => (
-                    <div key={promo.brand} className="rounded-2xl bg-black/[0.025] p-2.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs font-semibold text-black/55">{promo.brand}</span>
-                        <ShopButton
-                          brand={promo.brand}
-                          href={promo.href}
-                          label={promo.label}
                           location={`promo_pill_desktop_${promo.brand.toLowerCase()}`}
                         />
                       </div>
@@ -186,7 +171,7 @@ export default function PromoBell() {
                 </svg>
               </button>
             </div>
-            <div className="mt-1.5 grid grid-cols-2 gap-2">
+            <div className="mt-1.5 grid grid-cols-3 gap-2">
               {PROMOS.map((promo) => (
                 <MobileCopyCodeButton key={promo.brand} brand={promo.brand} code={promo.code} />
               ))}

@@ -24,16 +24,18 @@ function copyFallback(code: string) {
 export default function ComparePromoCta({ promos }: { promos: ComparePromo[] }) {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  async function copyCode(code: string) {
+  async function copyCode(brand: string, code: string) {
+    const copiedKey = `${brand}:${code}`;
+
     try {
       await navigator.clipboard.writeText(code);
     } catch {
       copyFallback(code);
     }
 
-    setCopiedCode(code);
+    setCopiedCode(copiedKey);
     window.setTimeout(() => {
-      setCopiedCode((current) => (current === code ? null : current));
+      setCopiedCode((current) => (current === copiedKey ? null : current));
     }, 1800);
   }
 
@@ -72,7 +74,7 @@ export default function ComparePromoCta({ promos }: { promos: ComparePromo[] }) 
             const displayValue = promo.displayValue ?? code;
             const canCopy = Boolean(code && promo.copyable !== false);
             const isLinkOnly = Boolean(promo.href && !displayValue);
-            const copied = canCopy && copiedCode === code;
+            const copied = canCopy && copiedCode === `${promo.brand}:${code}`;
 
             return (
               <div
@@ -102,7 +104,7 @@ export default function ComparePromoCta({ promos }: { promos: ComparePromo[] }) 
                   {canCopy && code && (
                     <button
                       type="button"
-                      onClick={() => copyCode(code)}
+                      onClick={() => copyCode(promo.brand, code)}
                       className={`rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
                         copied
                           ? "bg-[#16a34a] text-white"

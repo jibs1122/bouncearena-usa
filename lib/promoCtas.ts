@@ -36,10 +36,9 @@ export function getPromoCtaForBrand(brandName: string): ComparePromo | null {
   if (isZupapaBrand(brandName)) {
     return {
       brand: "Zupapa",
-      copyable: false,
+      code: "BOUNCE",
       actionLabel: "Activate 10% off",
-      description:
-        "Click the Zupapa discount link and a code will be applied automatically for 10% off any purchase.",
+      description: "Use code BOUNCE for 10% off at Zupapa.",
       href: ZUPAPA_PROMO_AFFILIATE_URL,
     };
   }
