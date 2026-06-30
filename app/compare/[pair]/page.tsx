@@ -632,7 +632,7 @@ export default async function ComparePairPage({ params }: Props) {
       <JsonLd data={articleSchema} />
 
       <div className="py-10">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <nav className="text-sm text-black/40 mb-6">
             <Link href="/" className="hover:text-black transition-colors">Home</Link>
             <span className="mx-2">/</span>

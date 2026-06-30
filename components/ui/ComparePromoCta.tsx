@@ -61,14 +61,16 @@ export default function ComparePromoCta({ promos }: { promos: ComparePromo[] }) 
           <h2 className="mt-1 text-xl font-bold text-black">
             Save on {brandNames.join(" and ")}
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-black/65">
+          <div className="mt-2 space-y-1 text-sm leading-6 text-black/65">
             {promos.length === 1
-              ? promos[0].description
-              : promos.map((promo) => promo.description).join(" ")}
-          </p>
+              ? <p>{promos[0].description}</p>
+              : promos.map((promo) => (
+                  <p key={promo.brand}>{promo.description}</p>
+                ))}
+          </div>
         </div>
 
-        <div className="flex flex-shrink-0 flex-wrap gap-3 lg:justify-end">
+        <div className="flex flex-shrink-0 flex-col gap-3">
           {promos.map((promo) => {
             const code = promo.code;
             const displayValue = promo.displayValue ?? code;
