@@ -502,6 +502,12 @@ export default async function AdminPage({
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
+          <Link
+            href="/admin/products-csv/"
+            className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
+          >
+            Products CSV →
+          </Link>
           {PRESETS.map((preset) => (
             <Link
               key={preset.label}

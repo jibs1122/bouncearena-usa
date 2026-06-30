@@ -20,7 +20,11 @@ sides:
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: Texas Trampolines Round / Rectangle
-  row_indices: []
+  row_indices:
+  - 239
+  - 240
+  - 241
+  - 242
   matched_models:
   - Texas Trampolines 8X8 HEAVY DUTY Trampoline (8x8ft)
   - Texas Trampolines 7.3x12.3 Kids Delight Rectangular Trampoline (7.3x12.3ft)

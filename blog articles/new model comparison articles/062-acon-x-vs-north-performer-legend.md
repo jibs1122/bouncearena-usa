@@ -19,7 +19,8 @@ sides:
   matched_models:
   - ACON X 17ft Rectangular Trampoline with Net and Ladder
 - label: North Performer / Legend
-  row_indices: []
+  row_indices:
+  - 237
   matched_models:
   - North Legend Rectangle 17.5 ft x 12 ft
 ---

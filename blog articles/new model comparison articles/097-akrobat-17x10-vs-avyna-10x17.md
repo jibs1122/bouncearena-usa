@@ -15,7 +15,8 @@ assumptions:
   not say in-ground.'
 sides:
 - label: Akrobat 17x10
-  row_indices: []
+  row_indices:
+  - 234
   matched_models:
   - Akrobat Primus Challenger 17x10 (17x10ft)
 - label: Avyna 10x17

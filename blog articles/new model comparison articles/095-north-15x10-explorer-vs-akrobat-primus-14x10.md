@@ -21,7 +21,8 @@ sides:
   matched_models:
   - North 15ft x 10ft North In Ground Trampoline (15x10ft)
 - label: Akrobat Primus 14x10
-  row_indices: []
+  row_indices:
+  - 235
   matched_models:
   - Akrobat Primus Flat (14x10ft)
 ---

@@ -17,7 +17,8 @@ sides:
   matched_models:
   - Jumpflex HERO™ Trampoline (15ft)
 - label: Akrobat 17x10 FlatGround
-  row_indices: []
+  row_indices:
+  - 236
   matched_models:
   - Akrobat Primus Flat 17x10 (17x10ft)
 ---

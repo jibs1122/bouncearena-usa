@@ -12,7 +12,8 @@ assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
 sides:
 - label: Akrobat 17x10 FlatGround
-  row_indices: []
+  row_indices:
+  - 236
   matched_models:
   - Akrobat Primus Flat 17x10 (17x10ft)
 - label: ACON 16 HD
