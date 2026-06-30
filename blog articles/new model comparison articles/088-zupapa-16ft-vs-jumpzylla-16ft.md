@@ -14,14 +14,14 @@ assumptions:
 sides:
 - label: Zupapa 16ft
   row_indices:
-  - 246
-  - 250
+  - 78
+  - 82
   matched_models:
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (16ft)
   - Zupapa 1800LBS Double Frames Trampoline (16ft)
 - label: Jumpzylla 16ft
   row_indices:
-  - 116
+  - 65
   matched_models:
   - JUMPZYLLA Jumpzylla 16ft
 ---

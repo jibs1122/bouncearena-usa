@@ -16,12 +16,12 @@ assumptions:
 sides:
 - label: Skywalker 15ft Square
   row_indices:
-  - 156
+  - 5
   matched_models:
   - Skywalker 15' Premium Square Trampoline with Enclosure Net (15x15ft)
 - label: Zupapa 15ft Round
   row_indices:
-  - 245
+  - 77
   matched_models:
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (15ft)
 ---

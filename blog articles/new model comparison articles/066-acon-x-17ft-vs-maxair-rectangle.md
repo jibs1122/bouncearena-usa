@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: ACON X 17ft
   row_indices:
-  - 15
+  - 155
   matched_models:
   - ACON X 17ft Rectangular Trampoline with Net and Ladder
 - label: MaxAir Rectangle
   row_indices:
-  - 132
+  - 224
   matched_models:
   - MaxAir 10' x 20' Super Tramp Trampoline Premium Package Kit (10x20ft)
 ---

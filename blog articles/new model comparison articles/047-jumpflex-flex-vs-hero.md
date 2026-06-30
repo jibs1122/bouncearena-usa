@@ -12,19 +12,19 @@ assumptions: []
 sides:
 - label: Jumpflex FLEX
   row_indices:
-  - 88
-  - 89
-  - 90
+  - 106
+  - 107
+  - 108
   matched_models:
   - Jumpflex FLEX™ Trampoline (8ft)
   - Jumpflex FLEX™ Trampoline (10ft)
   - Jumpflex FLEX™ Trampoline (12ft)
 - label: Jumpflex HERO
   row_indices:
-  - 91
-  - 92
-  - 93
-  - 94
+  - 109
+  - 110
+  - 111
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (10ft)
   - Jumpflex HERO™ Trampoline (12ft)

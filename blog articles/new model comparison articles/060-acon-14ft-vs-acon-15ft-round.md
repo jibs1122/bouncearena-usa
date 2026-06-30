@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: ACON 14ft
   row_indices:
-  - 11
+  - 150
   matched_models:
   - ACON Air 14ft Round Trampoline with Standard Net and Ladder
 - label: ACON 15ft Round
   row_indices:
-  - 14
+  - 153
   matched_models:
   - ACON Air 15ft Round Trampoline with Standard Net and Ladder
 ---

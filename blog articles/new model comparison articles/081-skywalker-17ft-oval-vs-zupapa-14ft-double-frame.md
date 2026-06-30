@@ -13,12 +13,12 @@ assumptions: []
 sides:
 - label: Skywalker 17ft Oval
   row_indices:
-  - 162
+  - 11
   matched_models:
   - Skywalker 17' Oval Trampoline (17ft)
 - label: Zupapa 14ft Double Frame
   row_indices:
-  - 248
+  - 80
   matched_models:
   - Zupapa 1800LBS Double Frames Trampoline (14ft)
 ---

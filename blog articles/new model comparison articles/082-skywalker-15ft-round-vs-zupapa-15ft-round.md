@@ -16,12 +16,12 @@ assumptions:
 sides:
 - label: Skywalker 15ft Round
   row_indices:
-  - 157
+  - 6
   matched_models:
   - Skywalker 15' Round Trampoline (15ft)
 - label: Zupapa 15ft Round
   row_indices:
-  - 245
+  - 77
   matched_models:
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (15ft)
 ---

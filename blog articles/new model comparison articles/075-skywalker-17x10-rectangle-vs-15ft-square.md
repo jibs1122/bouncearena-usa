@@ -14,13 +14,13 @@ assumptions:
 sides:
 - label: Skywalker 17x10 Rectangle
   row_indices:
-  - 163
+  - 12
   matched_models:
   - Skywalker 17' x 10' Rectangle Olympic-Sized Premium Trampoline with Enclosure
     (17x10ft)
 - label: Skywalker 15ft Square
   row_indices:
-  - 156
+  - 5
   matched_models:
   - Skywalker 15' Premium Square Trampoline with Enclosure Net (15x15ft)
 ---

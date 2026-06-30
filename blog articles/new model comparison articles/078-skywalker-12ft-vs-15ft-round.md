@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: Skywalker 12ft
   row_indices:
-  - 152
+  - 1
   matched_models:
   - Skywalker 12' Round Trampoline (12ft)
 - label: Skywalker 15ft Round
   row_indices:
-  - 157
+  - 6
   matched_models:
   - Skywalker 15' Round Trampoline (15ft)
 ---

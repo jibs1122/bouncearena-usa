@@ -13,15 +13,15 @@ assumptions:
 sides:
 - label: Vuly Thunder 2
   row_indices:
-  - 225
+  - 156
   matched_models:
   - Vuly Thunder 2 (L)
 - label: Jumpflex HERO
   row_indices:
-  - 91
-  - 92
-  - 93
-  - 94
+  - 109
+  - 110
+  - 111
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (10ft)
   - Jumpflex HERO™ Trampoline (12ft)

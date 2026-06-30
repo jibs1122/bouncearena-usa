@@ -12,12 +12,11 @@ assumptions: []
 sides:
 - label: Jumpflex HERO 15ft
   row_indices:
-  - 94
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (15ft)
 - label: North Athlete 11x18
-  row_indices:
-  - 141
+  row_indices: []
   matched_models:
   - North Athlete Rectangle 18 ft x 11 ft
 ---

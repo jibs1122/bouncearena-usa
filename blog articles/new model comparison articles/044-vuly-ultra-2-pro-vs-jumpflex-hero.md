@@ -13,15 +13,15 @@ assumptions:
 sides:
 - label: Vuly Ultra 2 Pro
   row_indices:
-  - 231
+  - 164
   matched_models:
   - Vuly Ultra 2 Pro (L)
 - label: Jumpflex HERO
   row_indices:
-  - 91
-  - 92
-  - 93
-  - 94
+  - 109
+  - 110
+  - 111
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (10ft)
   - Jumpflex HERO™ Trampoline (12ft)

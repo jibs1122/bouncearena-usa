@@ -16,22 +16,20 @@ assumptions:
 sides:
 - label: ACON 16 HD
   row_indices:
-  - 3
+  - 142
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: AlleyOOP VariableBounce / DoubleBounce
   row_indices:
-  - 37
-  - 38
-  - 39
-  - 40
-  - 41
+  - 183
+  - 184
+  - 185
+  - 186
   matched_models:
   - AlleyOOP 12' Trampoline with Enclosure (12ft)
   - AlleyOOP 14' Trampoline with Enclosure (14ft)
   - AlleyOOP DoubleBounce 14' Trampoline with Enclosure (14ft)
   - AlleyOOP 10'×17' Rectangle Trampoline with Enclosure (10x17ft)
-  - AlleyOOP 12'×17' Oval Trampoline with Enclosure (12x17ft)
 ---
 # ACON 16 HD vs AlleyOOP VariableBounce / DoubleBounce
 

@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: Vuly Thunder 2 Pro
   row_indices:
-  - 227
+  - 158
   matched_models:
   - Vuly Thunder 2 Pro (L)
 - label: ACON 16 HD
   row_indices:
-  - 3
+  - 142
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 ---

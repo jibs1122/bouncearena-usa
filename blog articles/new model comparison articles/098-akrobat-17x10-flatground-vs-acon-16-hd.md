@@ -12,13 +12,12 @@ assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
 sides:
 - label: Akrobat 17x10 FlatGround
-  row_indices:
-  - 29
+  row_indices: []
   matched_models:
   - Akrobat Primus Flat 17x10 (17x10ft)
 - label: ACON 16 HD
   row_indices:
-  - 3
+  - 142
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 ---

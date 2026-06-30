@@ -15,19 +15,19 @@ assumptions:
 sides:
 - label: Skywalker Premium
   row_indices:
-  - 156
-  - 163
+  - 5
+  - 12
   matched_models:
   - Skywalker 15' Premium Square Trampoline with Enclosure Net (15x15ft)
   - Skywalker 17' x 10' Rectangle Olympic-Sized Premium Trampoline with Enclosure
     (17x10ft)
 - label: Skywalker Classic
   row_indices:
-  - 151
-  - 152
-  - 157
-  - 158
-  - 167
+  - 0
+  - 1
+  - 6
+  - 7
+  - 16
   matched_models:
   - Skywalker 10' Round Trampoline (10ft)
   - Skywalker 12' Round Trampoline (12ft)

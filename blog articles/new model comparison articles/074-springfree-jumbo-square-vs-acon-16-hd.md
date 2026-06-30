@@ -13,12 +13,12 @@ assumptions:
 sides:
 - label: Springfree Jumbo Square
   row_indices:
-  - 201
+  - 133
   matched_models:
   - Springfree Jumbo Square (13x13ft)
 - label: ACON 16 HD
   row_indices:
-  - 3
+  - 142
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 ---

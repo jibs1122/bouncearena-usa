@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: Jumpzylla 14ft
   row_indices:
-  - 114
+  - 63
   matched_models:
   - JUMPZYLLA Jumpzylla 14ft
 - label: Skywalker 14ft
   row_indices:
-  - 154
+  - 3
   matched_models:
   - Skywalker 14' Round Epic Series Trampoline (14ft)
 ---

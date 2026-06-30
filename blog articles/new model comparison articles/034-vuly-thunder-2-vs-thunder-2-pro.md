@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: Vuly Thunder 2
   row_indices:
-  - 225
+  - 156
   matched_models:
   - Vuly Thunder 2 (L)
 - label: Vuly Thunder 2 Pro
   row_indices:
-  - 227
+  - 158
   matched_models:
   - Vuly Thunder 2 Pro (L)
 ---

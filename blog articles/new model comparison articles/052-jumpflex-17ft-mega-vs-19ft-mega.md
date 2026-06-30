@@ -12,12 +12,12 @@ assumptions: []
 sides:
 - label: Jumpflex 17ft MEGA
   row_indices:
-  - 96
+  - 114
   matched_models:
   - Jumpflex MEGA™ Trampoline (17ft)
 - label: Jumpflex 19ft MEGA
   row_indices:
-  - 97
+  - 115
   matched_models:
   - Jumpflex MEGA™ Trampoline (19ft)
 ---

@@ -16,25 +16,25 @@ assumptions:
 sides:
 - label: Zupapa Round
   row_indices:
-  - 242
-  - 243
-  - 244
-  - 245
-  - 246
-  - 247
-  - 248
-  - 249
-  - 250
-  - 251
-  - 252
-  - 253
-  - 254
-  - 255
-  - 256
-  - 257
-  - 258
-  - 259
-  - 260
+  - 74
+  - 75
+  - 76
+  - 77
+  - 78
+  - 79
+  - 80
+  - 81
+  - 82
+  - 83
+  - 84
+  - 85
+  - 86
+  - 87
+  - 88
+  - 89
+  - 90
+  - 91
+  - 92
   matched_models:
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (10ft)
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (12ft)
@@ -57,11 +57,11 @@ sides:
   - Zupapa Saffun Outdoor Trampoline With Enclosure (16ft)
 - label: Zupapa Rectangle
   row_indices:
-  - 251
-  - 261
-  - 262
-  - 263
-  - 264
+  - 83
+  - 93
+  - 94
+  - 95
+  - 96
   matched_models:
   - Zupapa 220LBS 6FT Rectangle Kids Trampoline (6ft)
   - Zupapa Zupapa 1800LBS/2500LBS Rectangular Trampoline (8x14ft)

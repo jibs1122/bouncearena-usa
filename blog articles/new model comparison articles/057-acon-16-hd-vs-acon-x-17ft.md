@@ -13,12 +13,12 @@ assumptions:
 sides:
 - label: ACON 16 HD
   row_indices:
-  - 3
+  - 142
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: ACON X 17ft
   row_indices:
-  - 15
+  - 155
   matched_models:
   - ACON X 17ft Rectangular Trampoline with Net and Ladder
 ---

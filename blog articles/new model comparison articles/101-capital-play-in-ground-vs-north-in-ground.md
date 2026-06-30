@@ -12,15 +12,15 @@ assumptions: []
 sides:
 - label: Capital Play In-ground
   row_indices:
-  - 67
+  - 203
   matched_models:
   - Capital Play 11ft x 8ft Capital Inground Trampoline (11x8ft)
 - label: North In-ground
   row_indices:
-  - 133
-  - 134
-  - 135
-  - 136
+  - 206
+  - 207
+  - 208
+  - 209
   matched_models:
   - North 12ft x 8ft North In Ground Trampoline (12x8ft)
   - North 14ft Round North In Ground Trampoline

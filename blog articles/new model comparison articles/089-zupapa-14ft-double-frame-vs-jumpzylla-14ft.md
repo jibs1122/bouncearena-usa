@@ -12,12 +12,12 @@ assumptions: []
 sides:
 - label: Zupapa 14ft Double Frame
   row_indices:
-  - 248
+  - 80
   matched_models:
   - Zupapa 1800LBS Double Frames Trampoline (14ft)
 - label: Jumpzylla 14ft
   row_indices:
-  - 114
+  - 63
   matched_models:
   - JUMPZYLLA Jumpzylla 14ft
 ---

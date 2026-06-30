@@ -12,12 +12,12 @@ assumptions: []
 sides:
 - label: Jumpflex 15ft HERO
   row_indices:
-  - 94
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (15ft)
 - label: Jumpflex 17ft MEGA
   row_indices:
-  - 96
+  - 114
   matched_models:
   - Jumpflex MEGA™ Trampoline (17ft)
 ---

@@ -12,10 +12,10 @@ assumptions: []
 sides:
 - label: Springfree Round
   row_indices:
-  - 198
-  - 200
-  - 205
-  - 206
+  - 130
+  - 132
+  - 137
+  - 138
   matched_models:
   - Springfree Compact Round (8ft)
   - Springfree Jumbo Round (13ft)
@@ -23,10 +23,10 @@ sides:
   - Springfree Mini Round (6ft)
 - label: Springfree Oval
   row_indices:
-  - 197
-  - 199
-  - 202
-  - 204
+  - 129
+  - 131
+  - 134
+  - 136
   matched_models:
   - Springfree Compact Oval (6x9ft)
   - Springfree Jumbo Oval (12x19ft)

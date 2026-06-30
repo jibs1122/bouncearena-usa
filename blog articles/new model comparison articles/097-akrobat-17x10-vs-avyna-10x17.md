@@ -15,13 +15,12 @@ assumptions:
   not say in-ground.'
 sides:
 - label: Akrobat 17x10
-  row_indices:
-  - 24
+  row_indices: []
   matched_models:
   - Akrobat Primus Challenger 17x10 (17x10ft)
 - label: Avyna 10x17
   row_indices:
-  - 46
+  - 191
   matched_models:
   - Avyna 10×17' Rectangle Trampoline Pro-Line Avyna Above Ground (10x17ft)
 ---

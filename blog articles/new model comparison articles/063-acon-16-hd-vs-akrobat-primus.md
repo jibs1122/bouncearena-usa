@@ -15,12 +15,11 @@ assumptions:
 sides:
 - label: ACON 16 HD
   row_indices:
-  - 3
+  - 142
   matched_models:
   - ACON 16 HD Rectangular Trampoline with Net and Ladder
 - label: Akrobat Primus
-  row_indices:
-  - 23
+  row_indices: []
   matched_models:
   - Akrobat Primus Challenger (14x10ft)
 ---

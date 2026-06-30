@@ -14,13 +14,13 @@ assumptions:
 sides:
 - label: Jumpflex HERO 14ft
   row_indices:
-  - 93
+  - 111
   matched_models:
   - Jumpflex HERO™ Trampoline (14ft)
 - label: ACON 14/15ft
   row_indices:
-  - 11
-  - 14
+  - 150
+  - 153
   matched_models:
   - ACON Air 14ft Round Trampoline with Standard Net and Ladder
   - ACON Air 15ft Round Trampoline with Standard Net and Ladder

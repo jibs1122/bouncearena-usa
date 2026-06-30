@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: Jumpzylla 16ft
   row_indices:
-  - 116
+  - 65
   matched_models:
   - JUMPZYLLA Jumpzylla 16ft
 - label: Skywalker 16ft
   row_indices:
-  - 161
+  - 10
   matched_models:
   - Skywalker 16' Round Outdoor Trampoline with Safety Enclosure - Made in USA (16ft)
 ---

@@ -13,12 +13,12 @@ assumptions:
 sides:
 - label: Vuly Thunder 2
   row_indices:
-  - 225
+  - 156
   matched_models:
   - Vuly Thunder 2 (L)
 - label: Springfree Large Oval
   row_indices:
-  - 202
+  - 134
   matched_models:
   - Springfree Large Oval (8x13ft)
 ---

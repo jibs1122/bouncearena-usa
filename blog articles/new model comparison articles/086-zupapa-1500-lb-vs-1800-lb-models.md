@@ -12,11 +12,11 @@ assumptions: []
 sides:
 - label: Zupapa 1500 lb
   row_indices:
-  - 242
-  - 243
-  - 244
-  - 245
-  - 246
+  - 74
+  - 75
+  - 76
+  - 77
+  - 78
   matched_models:
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (10ft)
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (12ft)
@@ -25,10 +25,10 @@ sides:
   - Zupapa 1500LBS Upgraded Trampoline 10-16FT (16ft)
 - label: Zupapa 1800 lb models
   row_indices:
-  - 247
-  - 248
-  - 249
-  - 250
+  - 79
+  - 80
+  - 81
+  - 82
   matched_models:
   - Zupapa 1800LBS Double Frames Trampoline (12ft)
   - Zupapa 1800LBS Double Frames Trampoline (14ft)

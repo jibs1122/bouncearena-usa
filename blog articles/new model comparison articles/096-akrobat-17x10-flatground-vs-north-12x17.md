@@ -12,13 +12,12 @@ assumptions:
 - 'North 12x17: Normalised North 12x17 to the 17ft x 12ft North In Ground row.'
 sides:
 - label: Akrobat 17x10 FlatGround
-  row_indices:
-  - 29
+  row_indices: []
   matched_models:
   - Akrobat Primus Flat 17x10 (17x10ft)
 - label: North 12x17
   row_indices:
-  - 136
+  - 209
   matched_models:
   - North 17ft x 12ft North In Ground Trampoline (17x12ft)
 ---

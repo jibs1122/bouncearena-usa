@@ -13,12 +13,12 @@ assumptions: []
 sides:
 - label: Springfree Large Oval
   row_indices:
-  - 202
+  - 134
   matched_models:
   - Springfree Large Oval (8x13ft)
 - label: Jumpflex HERO 14ft
   row_indices:
-  - 93
+  - 111
   matched_models:
   - Jumpflex HERO™ Trampoline (14ft)
 ---

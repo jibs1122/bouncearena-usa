@@ -13,12 +13,12 @@ assumptions:
 sides:
 - label: Springfree Large Oval
   row_indices:
-  - 202
+  - 134
   matched_models:
   - Springfree Large Oval (8x13ft)
 - label: ACON 15ft Round
   row_indices:
-  - 14
+  - 153
   matched_models:
   - ACON Air 15ft Round Trampoline with Standard Net and Ladder
 ---

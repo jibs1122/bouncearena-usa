@@ -14,12 +14,12 @@ assumptions:
 sides:
 - label: Vuly Thunder 2 Pro
   row_indices:
-  - 227
+  - 158
   matched_models:
   - Vuly Thunder 2 Pro (L)
 - label: Springfree Jumbo Square
   row_indices:
-  - 201
+  - 133
   matched_models:
   - Springfree Jumbo Square (13x13ft)
 ---

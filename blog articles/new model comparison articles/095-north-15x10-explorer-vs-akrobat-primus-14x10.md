@@ -17,12 +17,11 @@ assumptions:
 sides:
 - label: North 15x10 Explorer
   row_indices:
-  - 135
+  - 208
   matched_models:
   - North 15ft x 10ft North In Ground Trampoline (15x10ft)
 - label: Akrobat Primus 14x10
-  row_indices:
-  - 28
+  row_indices: []
   matched_models:
   - Akrobat Primus Flat (14x10ft)
 ---

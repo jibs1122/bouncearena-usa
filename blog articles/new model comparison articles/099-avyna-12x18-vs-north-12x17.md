@@ -13,12 +13,12 @@ assumptions:
 sides:
 - label: Avyna 12x18
   row_indices:
-  - 52
+  - 197
   matched_models:
   - Avyna 12×18' Rectangle Pro-Line MAX Avyna In-Ground Trampoline (12x18ft)
 - label: North 12x17
   row_indices:
-  - 136
+  - 209
   matched_models:
   - North 17ft x 12ft North In Ground Trampoline (17x12ft)
 ---

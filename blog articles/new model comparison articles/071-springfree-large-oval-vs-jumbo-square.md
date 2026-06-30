@@ -12,12 +12,12 @@ assumptions: []
 sides:
 - label: Springfree Large Oval
   row_indices:
-  - 202
+  - 134
   matched_models:
   - Springfree Large Oval (8x13ft)
 - label: Springfree Jumbo Square
   row_indices:
-  - 201
+  - 133
   matched_models:
   - Springfree Jumbo Square (13x13ft)
 ---

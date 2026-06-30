@@ -12,18 +12,18 @@ assumptions: []
 sides:
 - label: Capital Play In-ground
   row_indices:
-  - 67
+  - 203
   matched_models:
   - Capital Play 11ft x 8ft Capital Inground Trampoline (11x8ft)
 - label: Avyna In-ground
   row_indices:
-  - 47
-  - 48
-  - 49
-  - 50
-  - 51
-  - 52
-  - 53
+  - 192
+  - 193
+  - 194
+  - 195
+  - 196
+  - 197
+  - 198
   matched_models:
   - Avyna 12' Round Pro-Line Avyna In-ground Trampoline (12ft)
   - Avyna 14' Round Pro-Line Avyna In-ground Trampoline (14ft)

@@ -13,12 +13,11 @@ assumptions: []
 sides:
 - label: Jumpflex HERO 15ft
   row_indices:
-  - 94
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (15ft)
 - label: Akrobat 17x10 FlatGround
-  row_indices:
-  - 29
+  row_indices: []
   matched_models:
   - Akrobat Primus Flat 17x10 (17x10ft)
 ---

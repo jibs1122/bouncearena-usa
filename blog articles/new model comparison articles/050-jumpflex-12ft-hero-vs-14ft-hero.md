@@ -12,12 +12,12 @@ assumptions: []
 sides:
 - label: Jumpflex 12ft HERO
   row_indices:
-  - 92
+  - 110
   matched_models:
   - Jumpflex HERO™ Trampoline (12ft)
 - label: Jumpflex 14ft HERO
   row_indices:
-  - 93
+  - 111
   matched_models:
   - Jumpflex HERO™ Trampoline (14ft)
 ---

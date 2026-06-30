@@ -12,10 +12,10 @@ assumptions: []
 sides:
 - label: Jumpflex HERO
   row_indices:
-  - 91
-  - 92
-  - 93
-  - 94
+  - 109
+  - 110
+  - 111
+  - 112
   matched_models:
   - Jumpflex HERO™ Trampoline (10ft)
   - Jumpflex HERO™ Trampoline (12ft)
@@ -23,9 +23,9 @@ sides:
   - Jumpflex HERO™ Trampoline (15ft)
 - label: Jumpflex MEGA
   row_indices:
-  - 95
-  - 96
-  - 97
+  - 113
+  - 114
+  - 115
   matched_models:
   - Jumpflex MEGA™ Trampoline (14ft)
   - Jumpflex MEGA™ Trampoline (17ft)
