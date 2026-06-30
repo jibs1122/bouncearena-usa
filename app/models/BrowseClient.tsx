@@ -5,7 +5,7 @@ import type { GroundType, Product } from '@/lib/types';
 import {
   getPreferredModelUrl,
   getPreferredProductUrl,
-  getShopDestinationLabel,
+  getShopCtaLabel,
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
@@ -57,7 +57,7 @@ function groundTypeLabel(groundType: GroundType): string {
 }
 
 function shopCtaLabel(url: string | null, brand: string) {
-  return `View at ${getShopDestinationLabel(url, brand)} \u2192`;
+  return `${getShopCtaLabel(url, brand)} \u2192`;
 }
 
 function formatSingleUserWeight(brand: string, weight: number | null) {

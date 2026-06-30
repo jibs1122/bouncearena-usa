@@ -56,6 +56,9 @@ export default function Footer() {
         <p className="mt-8 border-t border-black/[0.06] pt-5 text-center text-xs text-black/30 sm:text-left">
           © Bounce Arena {new Date().getFullYear()}
         </p>
+        <p className="mt-3 max-w-2xl text-center text-xs leading-5 text-black/35 sm:text-left">
+          Bounce Arena participates in affiliate programs and may earn a commission from qualifying purchases. As an Amazon Associate we earn from qualifying purchases.
+        </p>
       </div>
     </footer>
   );

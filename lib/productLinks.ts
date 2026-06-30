@@ -4,9 +4,23 @@ const ACON_AFFILIATE_PARAM = "sca_ref";
 const ACON_AFFILIATE_REF = "11261719.jjbGKHHa7yLAnuwn";
 const ZUPAPA_AFFILIATE_PARAM = "ref";
 const ZUPAPA_AFFILIATE_REF = "bltzjtnf";
+const AMAZON_AFFILIATE_PARAM = "tag";
+const AMAZON_AFFILIATE_TAG = "bounce092-20";
+const PREFER_BRAND_FALLBACK = new Set(["JUMPZYLLA", "Springfree", "Skywalker", "Jumpflex", "ORCC"]);
+const ZUPAPA_AMAZON_STORE_URL =
+  "https://www.amazon.com/stores/Zupapa/page/A4397CF9-9F64-4B86-9113-1C34215A1A86";
+const ZUPAPA_AMAZON_RECTANGULAR_URL =
+  "https://www.amazon.com/Zupapa-Trampoline-Gymnastics-Trampolines-Rectangular/dp/B0D868MDHQ";
+const ZUPAPA_AMAZON_ROUND_URL =
+  "https://www.amazon.com/Zupapa-Trampoline-Trampolines-Enclosure-Trampolin/dp/B0DFXYMNN9";
+const ZUPAPA_AMAZON_SQUARE_14_URL =
+  "https://www.amazon.com/Zupapa-Rectangle-Trampoline-Capacity-Assurance/dp/B0GWM28YT4";
 
 type ProductLinkLike = {
   brand: string;
+  model?: string;
+  size?: string;
+  shape?: string;
   sourceUrls: string[];
   exactSizePriceUsd?: number | null;
   modelFromPriceUsd?: number | null;
@@ -21,6 +35,11 @@ function isZupapaUrl(url: URL): boolean {
   return url.hostname.toLowerCase() === "www.zupapa.us";
 }
 
+function isAmazonParsedUrl(url: URL): boolean {
+  const hostname = url.hostname.toLowerCase();
+  return hostname === "amazon.com" || hostname === "www.amazon.com";
+}
+
 export function withAffiliateTracking(url: string | null): string | null {
   if (!url) return null;
 
@@ -32,6 +51,9 @@ export function withAffiliateTracking(url: string | null): string | null {
     if (isZupapaUrl(parsed)) {
       parsed.searchParams.set(ZUPAPA_AFFILIATE_PARAM, ZUPAPA_AFFILIATE_REF);
     }
+    if (isAmazonParsedUrl(parsed)) {
+      parsed.searchParams.set(AMAZON_AFFILIATE_PARAM, AMAZON_AFFILIATE_TAG);
+    }
     return parsed.toString();
   } catch {
     return url;
@@ -42,7 +64,72 @@ export function getBrandFallbackUrl(brandName: string): string | null {
   return withAffiliateTracking(BRAND_SHOP_URLS[brandName] ?? null);
 }
 
+function normalizedBrandName(brandName: string): string {
+  return brandName.trim().toLowerCase();
+}
+
+function normalizedSizeLabel(size: string | undefined): string {
+  return (size ?? "").trim().toLowerCase().replace(/\s+/g, "");
+}
+
+function normalizedShapeLabel(shape: string | undefined): string {
+  return (shape ?? "").trim().toLowerCase();
+}
+
+function isZupapaBrandName(brandName: string): boolean {
+  return normalizedBrandName(brandName) === "zupapa";
+}
+
+function getZupapaAmazonProductUrl(product: ProductLinkLike): string | null {
+  const shape = normalizedShapeLabel(product.shape);
+  const size = normalizedSizeLabel(product.size);
+
+  if (shape === "rectangle" && ["8x14ft", "9x15ft", "10x17ft"].includes(size)) {
+    return withAffiliateTracking(ZUPAPA_AMAZON_RECTANGULAR_URL);
+  }
+
+  if (shape === "round" && ["12ft", "14ft", "15ft", "16ft"].includes(size)) {
+    return withAffiliateTracking(ZUPAPA_AMAZON_ROUND_URL);
+  }
+
+  if (shape === "square" && size === "14x14ft") {
+    return withAffiliateTracking(ZUPAPA_AMAZON_SQUARE_14_URL);
+  }
+
+  return null;
+}
+
+export function getAmazonBrandUrl(brandName: string): string | null {
+  if (isZupapaBrandName(brandName)) {
+    return withAffiliateTracking(ZUPAPA_AMAZON_STORE_URL);
+  }
+
+  return null;
+}
+
+export function getAmazonProductUrl(product: ProductLinkLike): string | null {
+  if (isZupapaBrandName(product.brand)) {
+    return getZupapaAmazonProductUrl(product);
+  }
+
+  return null;
+}
+
+export function getAmazonModelUrl(brandName: string, products: ProductLinkLike[]): string | null {
+  if (!isZupapaBrandName(brandName)) return null;
+
+  for (const product of products) {
+    const amazonUrl = getAmazonProductUrl(product);
+    if (amazonUrl) return amazonUrl;
+  }
+
+  return null;
+}
+
 export function getPreferredBrandUrl(brandName: string, csvFallback: string | null): string | null {
+  if (PREFER_BRAND_FALLBACK.has(brandName)) {
+    return getBrandFallbackUrl(brandName) ?? withAffiliateTracking(csvFallback);
+  }
   return withAffiliateTracking(csvFallback ?? getBrandFallbackUrl(brandName));
 }
 
@@ -91,6 +178,16 @@ const HOST_LABELS: Record<string, string> = {
   "www.sportspowerltd.net": "Sports Power",
 };
 
+export function isAmazonUrl(url: string | null): boolean {
+  if (!url) return false;
+
+  try {
+    return isAmazonParsedUrl(new URL(url));
+  } catch {
+    return false;
+  }
+}
+
 function titleCaseHostLabel(hostname: string): string {
   const normalized = hostname.replace(/^www\./, "").split(".")[0] ?? "";
   return normalized
@@ -121,4 +218,16 @@ export function getShopDestinationLabel(
   } catch {
     return fallbackBrandName;
   }
+}
+
+export function getShopCtaLabel(
+  url: string | null,
+  brandName: string,
+  verb = "View",
+): string {
+  const destination = getShopDestinationLabel(url, brandName);
+  if (isAmazonUrl(url)) {
+    return `${verb} ${brandName} on ${destination}`;
+  }
+  return `${verb} at ${destination}`;
 }

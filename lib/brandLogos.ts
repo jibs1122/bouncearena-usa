@@ -38,17 +38,18 @@ export const BRAND_SHOP_URLS: Record<string, string> = {
   'Akrobat':                  'https://www.akrobat.com/us/trampolines/all-trampolines',
   'Texas Trampolines':        'http://www.texastrampolines.com/display.asp?departmentID=262&view=all',
   'Crazy Ape':                'https://crazyape.shop/collections/trampolines',
-  'Springfree':               'https://www.springfreetrampoline.com/collections/trampolines',
+  'Springfree':               'https://www.amazon.com/stores/SpringfreeTrampoline/page/58A3ACF0-B069-4CBF-BE94-90D6287FA73E?tag=bounce092-20',
   'ACON':                     'https://us.acon24.com/collections/menu-trampolines',
-  'Jumpflex':                 'https://www.jumpflex.com/',
+  'Jumpflex':                 'https://www.amazon.com/stores/Jumpflex/page/1D21C722-6A37-4FCF-9579-322B558A355C?tag=bounce092-20',
   'Vuly':                     'https://www.vulyplay.com/aff/100/',
-  'Skywalker':                'https://www.skywalkertrampolines.com/collections/trampolines',
+  'Skywalker':                'https://www.amazon.com/stores/SkywalkerTrampolines/page/BD97F687-9035-41A4-A529-C990960C862B?tag=bounce092-20',
   'Upper Bounce':             'https://machrus.com/collections/upper-bounce-trampolines',
   'Zupapa':                   'https://www.zupapa.us/?ref=bltzjtnf',
+  'JUMPZYLLA':                'https://www.amazon.com/stores/JUMPZYLLA/page/076B3548-F40F-45F3-B42F-647D3985453B?lp_asin=B09Q19MDH9&tag=bounce092-20',
   'JumpKing':                 'https://www.jumpking.com/trampolines',
   'Sportspower / Bounce Pro': 'https://www.sportspowerltd.net/trampolines',
   'Little Tikes':             'https://www.littletikes.com/collections/trampolines',
-  'ORCC':                     'https://www.zupapa.us/collections/trampolines?ref=bltzjtnf',
+  'ORCC':                     'https://www.amazon.com/stores/page/67583A3C-507F-411A-A70A-F9CE8A03F0EA?tag=bounce092-20',
 };
 
 export function getBrandLogoUrl(brandName: string): string | null {

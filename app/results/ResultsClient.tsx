@@ -18,6 +18,7 @@ import { formatUsd } from '@/lib/price';
 import { hasModelImage } from '@/lib/modelImages';
 import { isAffiliateBrand } from '@/lib/vuly';
 import { formatBrandModelName, modelNameWithoutBrandPrefix } from '@/lib/displayText';
+import { getShopDestinationLabel, isAmazonUrl } from '@/lib/productLinks';
 
 type RecapItem = {
   label: string;
@@ -256,7 +257,7 @@ function ResultCard({
                   rel="nofollow noopener noreferrer sponsored"
                   className="inline-flex items-center gap-2 bg-[#38b1ab] text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-[#2e9a94] transition-colors active:scale-95"
                 >
-                  Check current price at {rec.brand} →
+                  Check current price at {getShopDestinationLabel(href, rec.brand)} →
                 </a>
                 <p className="mt-1.5 text-xs text-black/30">Opens product page in a new tab</p>
               </>
@@ -278,6 +279,13 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
     [entries, answers],
   );
   const showAffiliateDisclosure = recommendations.some((rec) => isAffiliateBrand(rec.brand) && rec.sourceUrl);
+  const affiliateRecommendationUrls = recommendations
+    .filter((rec) => isAffiliateBrand(rec.brand) && rec.sourceUrl)
+    .map((rec) => rec.sourceUrl);
+  const affiliateDisclosureText = affiliateRecommendationUrls.length > 0
+    && affiliateRecommendationUrls.every((url) => isAmazonUrl(url))
+    ? 'As an Amazon Associate we earn from qualifying purchases.'
+    : 'These results may contain affiliate links. If you buy through them, we may earn a commission at no extra cost to you. As an Amazon Associate we earn from qualifying purchases.';
 
   if (!answers) {
     return (
@@ -314,7 +322,7 @@ function ResultsContent({ entries }: { entries: QuizEntry[] }) {
             </p>
             {showAffiliateDisclosure && (
               <p className="mt-2 max-w-xl text-xs leading-6 text-black/40">
-                These results may contain affiliate links. If you buy through them, we may earn a commission at no extra cost to you.
+                {affiliateDisclosureText}
               </p>
             )}
             <AnswerRecap answers={answers} />

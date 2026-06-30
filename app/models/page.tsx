@@ -49,7 +49,7 @@ export default function ModelsPage() {
           Filter every trampoline in the catalog by price, size, brand, and ASTM certification. Click any row to see per-size specs.
         </p>
         <p className="-mt-4 mb-8 max-w-2xl text-xs italic leading-relaxed text-black/40">
-          This page contains affiliate links and we may earn a commission on purchases.
+          This page contains affiliate links and we may earn a commission on purchases. As an Amazon Associate we earn from qualifying purchases.
         </p>
       </div>
 

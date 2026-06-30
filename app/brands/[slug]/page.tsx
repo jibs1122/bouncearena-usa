@@ -12,7 +12,15 @@ import JsonLd from "@/components/seo/JsonLd";
 import BrandLogoAvatar from "@/components/ui/BrandLogoAvatar";
 import ModelImage from "@/components/ui/ModelImage";
 import { formatUsd } from "@/lib/price";
-import { getPreferredBrandUrl, getPreferredModelUrl, withAffiliateTracking } from "@/lib/productLinks";
+import {
+  getAmazonBrandUrl,
+  getAmazonModelUrl,
+  getPreferredBrandUrl,
+  getPreferredModelUrl,
+  getShopCtaLabel,
+  isAmazonUrl,
+  withAffiliateTracking,
+} from "@/lib/productLinks";
 import { getModelImage, hasModelImage } from "@/lib/modelImages";
 import { isAffiliateBrand } from "@/lib/vuly";
 import { buildPromoCtasForBrands } from "@/lib/promoCtas";
@@ -31,7 +39,16 @@ type FeaturedModel = {
   sizes: string[];
   springSystem: string;
   sourceUrl: string | null;
+  amazonUrl: string | null;
 };
+
+function featuredModelImageClass(brand: string): string {
+  const baseClass = "transition-transform duration-500 ease-out group-hover:scale-[1.04]";
+  const normalizedBrand = brand.trim().toLowerCase();
+  if (normalizedBrand === "jumpzylla") return `p-10 sm:p-12 lg:p-14 ${baseClass}`;
+  if (normalizedBrand === "orcc") return `p-4 sm:p-5 ${baseClass}`;
+  return `p-4 ${baseClass}`;
+}
 
 function buildFeaturedModels(products: Product[]): FeaturedModel[] {
   const grouped = new Map<string, Product[]>();
@@ -57,8 +74,9 @@ function buildFeaturedModels(products: Product[]): FeaturedModel[] {
         priceFrom: prices.length > 0 ? Math.min(...prices) : null,
         priceTo: prices.length > 0 ? Math.max(...prices) : null,
         sizes: Array.from(new Set(variants.map((variant) => variant.size).filter(Boolean))),
-        springSystem: variants[0]?.springSystem ?? "",
+        springSystem: variants.find((variant) => variant.springSystem.trim())?.springSystem ?? "",
         sourceUrl: getPreferredModelUrl(brand, variants),
+        amazonUrl: getAmazonModelUrl(brand, variants),
       };
     })
     .filter((model) => hasModelImage(model.brand, model.model))
@@ -152,6 +170,13 @@ export default async function BrandPage({ params }: Props) {
   const hasAffiliate = brand.products.some((p) => p.sourceUrls.length > 0);
   const showAffiliateDisclosure = hasAffiliate && isAffiliateBrand(brand.name);
   const brandAffiliateUrl = getPreferredBrandUrl(brand.name, brand.sourceUrl);
+  const amazonBrandUrl = getAmazonBrandUrl(brand.name);
+  const affiliateUrls = brand.products.flatMap((p) => p.sourceUrls);
+  const affiliateDisclosureVariant = affiliateUrls.length > 0
+    && affiliateUrls.every((url) => isAmazonUrl(url))
+    && (!brandAffiliateUrl || isAmazonUrl(brandAffiliateUrl))
+    ? "amazon"
+    : "general";
   const promoCtas = buildPromoCtasForBrands([brand.name]);
   const astmCount = brand.products.filter((p) => p.meetsUsStandard === true).length;
   const minPrice = brand.fromPriceUsd;
@@ -222,19 +247,35 @@ export default async function BrandPage({ params }: Props) {
               </div>
             </div>
 
-            {brandAffiliateUrl && (
-              <a
-                href={brandAffiliateUrl}
-                target="_blank"
-                rel="noopener noreferrer nofollow sponsored"
-                className="flex-shrink-0 inline-flex items-center px-5 py-2.5 rounded-xl bg-[#38b1ab] text-white font-semibold hover:bg-[#2e9a94] transition-colors text-sm"
-              >
-                Shop {brand.name} →
-              </a>
+            {(brandAffiliateUrl || amazonBrandUrl) && (
+              <div className="flex flex-shrink-0 flex-wrap gap-2">
+                {brandAffiliateUrl && (
+                  <a
+                    href={brandAffiliateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow sponsored"
+                    className="inline-flex items-center rounded-xl bg-[#38b1ab] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2e9a94]"
+                  >
+                    {isAmazonUrl(brandAffiliateUrl) ? `Shop ${brand.name} on Amazon` : `Shop ${brand.name}`} →
+                  </a>
+                )}
+                {amazonBrandUrl && amazonBrandUrl !== brandAffiliateUrl && (
+                  <a
+                    href={amazonBrandUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow sponsored"
+                    className="inline-flex items-center rounded-xl border border-[#38b1ab]/30 bg-white px-5 py-2.5 text-sm font-semibold text-[#238985] transition-colors hover:border-[#38b1ab]/60 hover:bg-[#38b1ab]/[0.06]"
+                  >
+                    Shop {brand.name} on Amazon →
+                  </a>
+                )}
+              </div>
             )}
           </div>
 
-          {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
+          {showAffiliateDisclosure ? (
+            <AffiliateDisclosure className="mb-8" variant={affiliateDisclosureVariant} />
+          ) : null}
 
           {/* Brand intro */}
           {BRAND_INTROS[brand.name] && (
@@ -274,8 +315,11 @@ export default async function BrandPage({ params }: Props) {
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {featuredModels.map((model, index) => {
-                  const cardContent = (
-                    <>
+                  return (
+                    <article
+                      key={`${model.brand}-${model.model}`}
+                      className="group overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)]"
+                    >
                       <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,177,171,0.14),_transparent_62%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         <ModelImage
@@ -284,7 +328,7 @@ export default async function BrandPage({ params }: Props) {
                           alt={formatBrandModelName(model.brand, model.model)}
                           sizes="(min-width: 1280px) 22vw, (min-width: 640px) 46vw, 100vw"
                           priority={index === 0}
-                          className="p-4 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                          className={featuredModelImageClass(model.brand)}
                         />
                       </div>
 
@@ -298,12 +342,13 @@ export default async function BrandPage({ params }: Props) {
                           </h3>
                         </div>
 
-                        <p className="text-xs leading-6 text-black/50">
-                          {model.springSystem || "Spring system not listed"}
-                          {model.sizes.length > 0 && ` · ${model.sizes.join(", ")}`}
-                        </p>
+                        {(model.springSystem || model.sizes.length > 0) && (
+                          <p className="text-xs leading-6 text-black/50">
+                            {[model.springSystem, model.sizes.join(", ")].filter(Boolean).join(" · ")}
+                          </p>
+                        )}
 
-                        <div className="flex items-center justify-between gap-3">
+                        <div className="space-y-3">
                           <div className="text-sm font-semibold text-black">
                             {model.priceFrom !== null
                               ? model.priceTo !== null && model.priceTo !== model.priceFrom
@@ -311,36 +356,34 @@ export default async function BrandPage({ params }: Props) {
                                 : `From ${formatUsd(model.priceFrom)}`
                               : "Price varies"}
                           </div>
-                          {model.sourceUrl && (
-                            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#38b1ab] transition-all duration-200 group-hover:gap-1.5 group-hover:text-[#2e9a94]">
-                              View
-                              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                                →
-                              </span>
-                            </span>
+                          {(model.sourceUrl || model.amazonUrl) && (
+                            <div className="flex flex-wrap gap-2">
+                              {model.sourceUrl && (
+                                <a
+                                  href={model.sourceUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer nofollow sponsored"
+                                  className="inline-flex items-center rounded-lg bg-[#38b1ab] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#2e9a94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2"
+                                >
+                                  {getShopCtaLabel(model.sourceUrl, model.brand)}
+                                  <span className="ml-1">→</span>
+                                </a>
+                              )}
+                              {model.amazonUrl && model.amazonUrl !== model.sourceUrl && (
+                                <a
+                                  href={model.amazonUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer nofollow sponsored"
+                                  className="inline-flex items-center rounded-lg border border-[#38b1ab]/30 bg-white px-3 py-2 text-xs font-semibold text-[#238985] transition-colors hover:border-[#38b1ab]/60 hover:bg-[#38b1ab]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2"
+                                >
+                                  View on Amazon
+                                  <span className="ml-1">→</span>
+                                </a>
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>
-                    </>
-                  );
-
-                  return model.sourceUrl ? (
-                    <a
-                      key={`${model.brand}-${model.model}`}
-                      href={model.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow sponsored"
-                      aria-label={`Open ${formatBrandModelName(model.brand, model.model)} in a new tab`}
-                      className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
-                    >
-                      {cardContent}
-                    </a>
-                  ) : (
-                    <article
-                      key={`${model.brand}-${model.model}`}
-                      className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm"
-                    >
-                      {cardContent}
                     </article>
                   );
                 })}

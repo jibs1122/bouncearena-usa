@@ -22,7 +22,12 @@ import {
 import { brandSlug, getAllProducts } from "@/lib/products";
 import { formatUsd } from "@/lib/price";
 import { buildCompareTakeaways } from "@/lib/compareTakeaways";
-import { getPreferredProductUrl } from "@/lib/productLinks";
+import {
+  getAmazonModelUrl,
+  getPreferredProductUrl,
+  getShopCtaLabel,
+  isAmazonUrl,
+} from "@/lib/productLinks";
 import { getModelImage, hasModelImage } from "@/lib/modelImages";
 import { isAffiliateBrand } from "@/lib/vuly";
 import { buildPromoCtasForBrands, buildPromoCtasFromLabels } from "@/lib/promoCtas";
@@ -39,6 +44,7 @@ type FeaturedModel = {
   sizes: string[];
   springSystem: string;
   sourceUrl: string | null;
+  amazonUrl: string | null;
   hasImage: boolean;
 };
 
@@ -75,6 +81,14 @@ function splitIntroIntoParagraphs(intro: string): string[] {
   return paragraphs;
 }
 
+function featuredModelImageClass(brand: string): string {
+  const baseClass = "transition-transform duration-500 ease-out group-hover:scale-[1.04]";
+  const normalizedBrand = brand.trim().toLowerCase();
+  if (normalizedBrand === "jumpzylla") return `p-10 sm:p-12 lg:p-14 ${baseClass}`;
+  if (normalizedBrand === "orcc") return `p-5 sm:p-6 ${baseClass}`;
+  return `p-5 ${baseClass}`;
+}
+
 function buildFeaturedModel(products: Product[]): FeaturedModel | null {
   const grouped = new Map<string, Product[]>();
 
@@ -106,8 +120,9 @@ function buildFeaturedModel(products: Product[]): FeaturedModel | null {
       priceFrom: prices.length > 0 ? Math.min(...prices) : null,
       priceTo: prices.length > 0 ? Math.max(...prices) : null,
       sizes: Array.from(new Set(variants.map((variant) => variant.size).filter(Boolean))),
-      springSystem: variants[0]?.springSystem ?? "",
+      springSystem: variants.find((variant) => variant.springSystem.trim())?.springSystem ?? "",
       sourceUrl: representativeVariant ? getPreferredProductUrl(representativeVariant) : null,
+      amazonUrl: getAmazonModelUrl(brand, variants),
       hasImage: hasModelImage(brand, model),
       rankingPrice: representativeVariant?.exactSizePriceUsd
         ?? representativeVariant?.modelFromPriceUsd
@@ -316,6 +331,14 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
   const modelCards = buildModelComparisonCards(article);
   const relatedReadingLinks = buildModelComparisonRelatedLinks(article);
   const content = prepareModelComparisonContent(article.content, promoCtas.length > 0);
+  const affiliateModelUrls = modelCards
+    .filter(({ product }) => isAffiliateBrand(product.brand))
+    .map(({ sourceUrl }) => sourceUrl);
+  const affiliateDisclosureVariant = affiliateModelUrls.length > 0
+    && affiliateModelUrls.every((url) => isAmazonUrl(url))
+    && promoCtas.length === 0
+    ? "amazon"
+    : "general";
 
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -405,7 +428,9 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
     td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
       <td className="border-b border-black/[0.05] px-4 py-2.5 align-top text-black/80" {...props} />
     ),
-    AffiliateDisclosureSlot: () => <AffiliateDisclosure className="mb-8" />,
+    AffiliateDisclosureSlot: () => (
+      <AffiliateDisclosure className="mb-8" variant={affiliateDisclosureVariant} />
+    ),
     ComparePromoCtaSlot: () => <ComparePromoCta promos={promoCtas} />,
     ModelCardsSlot: () => {
       if (modelCards.length < 2) return null;
@@ -430,7 +455,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
                     alt={formatBrandModelName(product.brand, product.model)}
                     sizes="(min-width: 1024px) 44vw, 100vw"
                     priority={index === 0}
-                    className="p-5 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                    className={featuredModelImageClass(product.brand)}
                   />
                 </div>
 
@@ -449,7 +474,7 @@ function ModelComparisonPage({ article }: { article: ModelComparisonArticle }) {
                   </p>
 
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-[#38b1ab] transition-all duration-200 group-hover:gap-1.5 group-hover:text-[#2e9a94]">
-                    View model
+                    {getShopCtaLabel(sourceUrl, product.brand)}
                     <span className="transition-transform duration-200 group-hover:translate-x-0.5">
                       →
                     </span>
@@ -544,6 +569,15 @@ export default async function ComparePairPage({ params }: Props) {
   const showAffiliateDisclosure = comparison.forceAffiliateDisclosure || [featuredModelA, featuredModelB].some(
     (model) => model?.sourceUrl && isAffiliateBrand(model.brand),
   );
+  const affiliateFeaturedUrls = featuredModels
+    .filter((model) => isAffiliateBrand(model.brand))
+    .map((model) => model.sourceUrl)
+    .filter((url): url is string => url !== null);
+  const affiliateDisclosureVariant = affiliateFeaturedUrls.length > 0
+    && affiliateFeaturedUrls.every((url) => isAmazonUrl(url))
+    && promoCtas.length === 0
+    ? "amazon"
+    : "general";
   const allProducts = [...brandA.products, ...brandB.products];
   const hasFullSpecData = comparison.brandAHasData && comparison.brandBHasData;
   const keyTakeaways =
@@ -651,7 +685,9 @@ export default async function ComparePairPage({ params }: Props) {
               </p>
             ))}
           </div>
-          {showAffiliateDisclosure ? <AffiliateDisclosure className="mb-8" /> : null}
+          {showAffiliateDisclosure ? (
+            <AffiliateDisclosure className="mb-8" variant={affiliateDisclosureVariant} />
+          ) : null}
 
           <ComparePromoCta promos={promoCtas} />
 
@@ -660,8 +696,11 @@ export default async function ComparePairPage({ params }: Props) {
               <h2 className="mb-4 text-xl font-bold text-black">Featured Models</h2>
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {featuredModels.map((model, index) => {
-                  const cardContent = (
-                    <>
+                  return (
+                    <article
+                      key={`${comparison.slug}-${model.brand}-${model.model}`}
+                      className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)]"
+                    >
                       <div className="relative aspect-[4/3] overflow-hidden border-b border-black/[0.06] bg-[#f7fbfa]">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,177,171,0.14),_transparent_62%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         {model.hasImage ? (
@@ -671,7 +710,7 @@ export default async function ComparePairPage({ params }: Props) {
                             alt={formatBrandModelName(model.brand, model.model)}
                             sizes="(min-width: 1024px) 44vw, 100vw"
                             priority={index === 0}
-                            className="p-5 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                            className={featuredModelImageClass(model.brand)}
                           />
                         ) : (
                           <div className="flex h-full w-full items-center justify-center p-6">
@@ -694,12 +733,13 @@ export default async function ComparePairPage({ params }: Props) {
                           </h3>
                         </div>
 
-                        <p className="text-sm leading-6 text-black/50">
-                          {model.springSystem || "Spring system not listed"}
-                          {model.sizes.length > 0 && ` · ${model.sizes.join(", ")}`}
-                        </p>
+                        {(model.springSystem || model.sizes.length > 0) && (
+                          <p className="text-sm leading-6 text-black/50">
+                            {[model.springSystem, model.sizes.join(", ")].filter(Boolean).join(" · ")}
+                          </p>
+                        )}
 
-                        <div className="flex items-center justify-between gap-3">
+                        <div className="space-y-3">
                           <div className="text-sm font-semibold text-black">
                             {model.priceFrom !== null
                               ? model.priceTo !== null && model.priceTo !== model.priceFrom
@@ -707,36 +747,34 @@ export default async function ComparePairPage({ params }: Props) {
                                 : `From ${formatUsd(model.priceFrom)}`
                               : "Price varies"}
                           </div>
-                          {model.sourceUrl && (
-                            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#38b1ab] transition-all duration-200 group-hover:gap-1.5 group-hover:text-[#2e9a94]">
-                              View
-                              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                                →
-                              </span>
-                            </span>
+                          {(model.sourceUrl || model.amazonUrl) && (
+                            <div className="flex flex-wrap gap-2">
+                              {model.sourceUrl && (
+                                <a
+                                  href={model.sourceUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer nofollow sponsored"
+                                  className="inline-flex items-center rounded-lg bg-[#38b1ab] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#2e9a94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2"
+                                >
+                                  {getShopCtaLabel(model.sourceUrl, model.brand)}
+                                  <span className="ml-1">→</span>
+                                </a>
+                              )}
+                              {model.amazonUrl && model.amazonUrl !== model.sourceUrl && (
+                                <a
+                                  href={model.amazonUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer nofollow sponsored"
+                                  className="inline-flex items-center rounded-lg border border-[#38b1ab]/30 bg-white px-3 py-2 text-xs font-semibold text-[#238985] transition-colors hover:border-[#38b1ab]/60 hover:bg-[#38b1ab]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2"
+                                >
+                                  View on Amazon
+                                  <span className="ml-1">→</span>
+                                </a>
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>
-                    </>
-                  );
-
-                  return model.sourceUrl ? (
-                    <a
-                      key={`${comparison.slug}-${model.brand}-${model.model}`}
-                      href={model.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow sponsored"
-                      aria-label={`Open ${formatBrandModelName(model.brand, model.model)} in a new tab`}
-                      className="group block overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#38b1ab]/30 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38b1ab]/35 focus-visible:ring-offset-2 active:translate-y-0"
-                    >
-                      {cardContent}
-                    </a>
-                  ) : (
-                    <article
-                      key={`${comparison.slug}-${model.brand}-${model.model}`}
-                      className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-sm"
-                    >
-                      {cardContent}
                     </article>
                   );
                 })}

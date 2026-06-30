@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { formatUsd } from '@/lib/price';
+import { getAllProducts } from '@/lib/products';
+import { getAmazonProductUrl, getPreferredProductUrl, getShopDestinationLabel } from '@/lib/productLinks';
 import {
   baseMeritScore,
   budgetRanges,
@@ -95,6 +97,11 @@ type FilterState = {
   sort: 'rank' | 'total' | 'merit' | 'price' | 'bounce' | 'durability';
   onlyJoey: boolean;
 };
+type ExternalUrlFilterState = {
+  q: string;
+  brand: string;
+  host: string;
+};
 
 type RowData = {
   entry: QuizEntryAdmin;
@@ -103,6 +110,20 @@ type RowData = {
   tieBreak: number;
   overallRank: number;
   eligible: boolean;
+};
+
+type ExternalUrlRow = {
+  id: string;
+  brand: string;
+  model: string;
+  size: string;
+  shape: string;
+  rawUrl: string | null;
+  usedUrl: string | null;
+  secondaryUrl: string | null;
+  destination: string;
+  host: string;
+  secondaryHost: string;
 };
 
 function getSingleSearchParam(searchParams: SearchParams, key: string): string {
@@ -161,6 +182,14 @@ function buildFilterState(searchParams: SearchParams): FilterState {
   };
 }
 
+function buildExternalUrlFilterState(searchParams: SearchParams): ExternalUrlFilterState {
+  return {
+    q: getSingleSearchParam(searchParams, 'extQ').trim(),
+    brand: getSingleSearchParam(searchParams, 'extBrand'),
+    host: getSingleSearchParam(searchParams, 'extHost'),
+  };
+}
+
 function buildHref(params: Record<string, string>) {
   return `/admin/?${new URLSearchParams(params).toString()}`;
 }
@@ -183,6 +212,14 @@ function buildFilterQuery(filters: FilterState) {
   if (filters.eligibility !== 'all') params.eligibility = filters.eligibility;
   if (filters.sort !== 'rank') params.sort = filters.sort;
   if (filters.onlyJoey) params.onlyJoey = '1';
+  return params;
+}
+
+function buildExternalUrlFilterQuery(filters: ExternalUrlFilterState) {
+  const params: Record<string, string> = {};
+  if (filters.q) params.extQ = filters.q;
+  if (filters.brand) params.extBrand = filters.brand;
+  if (filters.host) params.extHost = filters.host;
   return params;
 }
 
@@ -215,6 +252,63 @@ function formatPrice(entry: QuizEntryAdmin) {
     return `${formatUsd(entry.priceFrom)}–${formatUsd(entry.priceTo)}`;
   }
   return formatUsd(entry.priceFrom);
+}
+
+function getUrlHost(url: string | null): string {
+  if (!url) return 'No URL';
+
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'Invalid URL';
+  }
+}
+
+function buildExternalUrlRows(): ExternalUrlRow[] {
+  return getAllProducts().map((product) => {
+    const rawUrl = product.sourceUrls[0] ?? null;
+    const usedUrl = getPreferredProductUrl(product);
+    const secondaryUrl = getAmazonProductUrl(product);
+
+    return {
+      id: `${product.sourceRowIndex}-${product.brand}-${product.model}-${product.size}`,
+      brand: product.brand,
+      model: product.model,
+      size: product.size,
+      shape: product.shape,
+      rawUrl,
+      usedUrl,
+      secondaryUrl,
+      destination: getShopDestinationLabel(usedUrl, product.brand),
+      host: getUrlHost(usedUrl),
+      secondaryHost: getUrlHost(secondaryUrl),
+    };
+  });
+}
+
+function filterExternalUrlRows(rows: ExternalUrlRow[], filters: ExternalUrlFilterState) {
+  const query = filters.q.toLowerCase();
+
+  return rows.filter((row) => {
+    if (filters.brand && row.brand !== filters.brand) return false;
+    if (filters.host && row.host !== filters.host && row.secondaryHost !== filters.host) return false;
+    if (!query) return true;
+
+    const haystack = [
+      row.brand,
+      row.model,
+      row.size,
+      row.shape,
+      row.destination,
+      row.host,
+      row.secondaryHost,
+      row.rawUrl ?? '',
+      row.usedUrl ?? '',
+      row.secondaryUrl ?? '',
+    ].join(' ').toLowerCase();
+
+    return haystack.includes(query);
+  });
 }
 
 function formatSizeRange(entry: QuizEntryAdmin) {
@@ -330,9 +424,12 @@ export default async function AdminPage({
   const resolvedSearchParams = await searchParams;
   const answers = buildAnswers(resolvedSearchParams);
   const filters = buildFilterState(resolvedSearchParams);
+  const externalUrlFilters = buildExternalUrlFilterState(resolvedSearchParams);
   const answerQuery = buildAnswerQuery(resolvedSearchParams);
   const filterQuery = buildFilterQuery(filters);
+  const externalUrlFilterQuery = buildExternalUrlFilterQuery(externalUrlFilters);
   const entries = getQuizEntriesForAdmin();
+  const externalUrlRowsAll = buildExternalUrlRows();
 
   const rankedRows = entries
     .map((entry) => {
@@ -364,6 +461,11 @@ export default async function AdminPage({
 
   const rows = sortRows(filterRows(rankedRows, filters), filters.sort);
   const brands = Array.from(new Set(entries.map((entry) => entry.brand))).sort((a, b) => a.localeCompare(b));
+  const externalUrlRows = filterExternalUrlRows(externalUrlRowsAll, externalUrlFilters);
+  const externalUrlBrands = Array.from(new Set(externalUrlRowsAll.map((row) => row.brand))).sort((a, b) => a.localeCompare(b));
+  const externalUrlHosts = Array.from(
+    new Set(externalUrlRowsAll.flatMap((row) => [row.host, row.secondaryHost])),
+  ).filter((host) => host !== 'No URL').sort((a, b) => a.localeCompare(b));
   const surfacedCount = rankedRows.filter((row) => row.entry.surfaced).length;
   const springlessCount = rankedRows.filter((row) => row.entry.springType === 'springless').length;
   const joeyRatedCount = rankedRows.filter((row) => row.entry.joeyRating).length;
@@ -403,7 +505,7 @@ export default async function AdminPage({
           {PRESETS.map((preset) => (
             <Link
               key={preset.label}
-              href={buildHref({ ...preset.params, ...filterQuery })}
+              href={buildHref({ ...preset.params, ...filterQuery, ...externalUrlFilterQuery })}
               className="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-black/70 transition-colors hover:border-[#38b1ab]/40 hover:text-black"
             >
               {preset.label}
@@ -482,7 +584,7 @@ export default async function AdminPage({
           </div>
 
           <form action="/admin" method="get" className="space-y-5">
-            {hiddenInputs(filterQuery)}
+          {hiddenInputs({ ...filterQuery, ...externalUrlFilterQuery })}
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <label className="block">
@@ -692,7 +794,7 @@ export default async function AdminPage({
         </div>
 
         <form action="/admin" method="get" className="space-y-4">
-          {hiddenInputs(answerQuery)}
+          {hiddenInputs({ ...answerQuery, ...externalUrlFilterQuery })}
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <label className="block">
               <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Search</span>
@@ -912,6 +1014,152 @@ export default async function AdminPage({
                   </tr>
                 );
               })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-black/[0.08] bg-white p-6">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-bold text-black">External Model URLs</h2>
+            <p className="text-sm text-black/55">
+              Showing {externalUrlRows.length} of {externalUrlRowsAll.length} model rows. Used URL is the resolved outbound destination after site link rules; secondary URL is an additional outbound option when present.
+            </p>
+          </div>
+          <Link
+            href={buildHref({ ...answerQuery, ...filterQuery })}
+            className="rounded-lg border border-black/[0.08] px-3 py-2 text-sm text-black/65 transition-colors hover:border-black/20 hover:text-black"
+          >
+            Reset URL filters
+          </Link>
+        </div>
+
+        <form action="/admin" method="get" className="mb-5 grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_220px_220px_auto]">
+          {hiddenInputs({ ...answerQuery, ...filterQuery })}
+          <label className="block">
+            <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Search URLs</span>
+            <input
+              type="text"
+              name="extQ"
+              defaultValue={externalUrlFilters.q}
+              placeholder="Brand, model, host, URL"
+              className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors placeholder:text-black/30 focus:border-[#38b1ab]"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Brand</span>
+            <select
+              name="extBrand"
+              defaultValue={externalUrlFilters.brand}
+              className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+            >
+              <option value="">All brands</option>
+              {externalUrlBrands.map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-black/40">Host</span>
+            <select
+              name="extHost"
+              defaultValue={externalUrlFilters.host}
+              className="w-full rounded-xl border border-black/[0.1] bg-white px-3 py-2.5 text-sm text-black outline-none transition-colors focus:border-[#38b1ab]"
+            >
+              <option value="">All hosts</option>
+              {externalUrlHosts.map((host) => (
+                <option key={host} value={host}>
+                  {host}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <button
+            type="submit"
+            className="self-end rounded-xl bg-[#38b1ab] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2f9893]"
+          >
+            Filter URLs
+          </button>
+        </form>
+
+        <div className="overflow-x-auto">
+          <table className="min-w-[1450px] border-separate border-spacing-0 text-xs">
+            <thead>
+              <tr className="text-left text-black/45">
+                <th className="sticky left-0 z-30 min-w-[120px] bg-white px-2 py-2 font-semibold">Brand</th>
+                <th className="sticky left-[120px] z-30 min-w-[260px] bg-white px-2 py-2 font-semibold">Model</th>
+                <th className="px-2 py-2 font-semibold">Size</th>
+                <th className="px-2 py-2 font-semibold">Shape</th>
+                <th className="px-2 py-2 font-semibold">Destination</th>
+                <th className="px-2 py-2 font-semibold">Host</th>
+                <th className="px-2 py-2 font-semibold">Used URL</th>
+                <th className="px-2 py-2 font-semibold">Secondary URL</th>
+                <th className="px-2 py-2 font-semibold">CSV source URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {externalUrlRows.map((row) => (
+                <tr key={row.id} className="align-top">
+                  <td className="sticky left-0 z-20 bg-white px-2 py-2 font-medium text-black shadow-[1px_0_0_rgba(0,0,0,0.06)]">
+                    {row.brand}
+                  </td>
+                  <td className="sticky left-[120px] z-20 bg-white px-2 py-2 text-black/75 shadow-[1px_0_0_rgba(0,0,0,0.06)]">
+                    <div className="line-clamp-2 min-w-[260px]">{row.model}</div>
+                  </td>
+                  <td className="px-2 py-2 text-black/60">{row.size || '—'}</td>
+                  <td className="px-2 py-2 text-black/60">{row.shape || '—'}</td>
+                  <td className="px-2 py-2 font-medium text-black/70">{row.destination}</td>
+                  <td className="px-2 py-2 text-black/55">{row.host}</td>
+                  <td className="max-w-[420px] px-2 py-2">
+                    {row.usedUrl ? (
+                      <a
+                        href={row.usedUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow sponsored"
+                        className="break-all text-[#238985] underline decoration-[#238985]/35 underline-offset-2"
+                      >
+                        {row.usedUrl}
+                      </a>
+                    ) : (
+                      <span className="text-black/35">—</span>
+                    )}
+                  </td>
+                  <td className="max-w-[420px] px-2 py-2">
+                    {row.secondaryUrl ? (
+                      <a
+                        href={row.secondaryUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow sponsored"
+                        className="break-all text-[#238985] underline decoration-[#238985]/35 underline-offset-2"
+                      >
+                        {row.secondaryUrl}
+                      </a>
+                    ) : (
+                      <span className="text-black/35">—</span>
+                    )}
+                  </td>
+                  <td className="max-w-[420px] px-2 py-2">
+                    {row.rawUrl ? (
+                      <a
+                        href={row.rawUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="break-all text-black/55 underline decoration-black/20 underline-offset-2"
+                      >
+                        {row.rawUrl}
+                      </a>
+                    ) : (
+                      <span className="text-black/35">—</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

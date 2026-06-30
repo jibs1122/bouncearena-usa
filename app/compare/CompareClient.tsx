@@ -7,6 +7,7 @@ import {
   getPreferredModelUrl,
   getPreferredProductUrl,
   getShopDestinationLabel,
+  isAmazonUrl,
 } from '@/lib/productLinks';
 import { formatUsd } from '@/lib/price';
 import { formatWarrantyYears } from '@/lib/warranty';
@@ -347,6 +348,16 @@ export default function CompareClient({ products }: { products: Product[] }) {
     () => filtered.some((row) => isAffiliateBrand(row.brand) && row.shopUrl !== null),
     [filtered],
   );
+  const affiliateDisclosureVariant = useMemo(() => {
+    const affiliateUrls = filtered
+      .filter((row) => isAffiliateBrand(row.brand) && row.shopUrl !== null)
+      .map((row) => row.shopUrl)
+      .filter((url): url is string => url !== null);
+
+    return affiliateUrls.length > 0 && affiliateUrls.every((url) => isAmazonUrl(url))
+      ? "amazon"
+      : "general";
+  }, [filtered]);
 
   function onMobileSortChange(value: string) {
     const [key, dir] = value.split(':') as [SortKey, SortDir];
@@ -762,7 +773,9 @@ export default function CompareClient({ products }: { products: Product[] }) {
         </div>
       </div>
 
-      {showAffiliateDisclosure ? <AffiliateDisclosure className="mt-4 text-center" /> : null}
+      {showAffiliateDisclosure ? (
+        <AffiliateDisclosure className="mt-4 text-center" variant={affiliateDisclosureVariant} />
+      ) : null}
     </div>
   );
 }

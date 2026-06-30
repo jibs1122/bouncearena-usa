@@ -86,16 +86,16 @@ export default function PromoBell() {
         type="button"
         onClick={() => copyCode(brand, code)}
         aria-label={`Copy ${brand} promo code ${code}`}
-        className={`flex min-h-11 min-w-0 items-center justify-between gap-1.5 rounded-xl border px-2.5 text-left transition-colors ${
+        className={`flex min-h-[3.25rem] min-w-0 flex-col items-center justify-center gap-0.5 rounded-xl border px-2 py-1.5 text-center transition-colors ${
           active
             ? 'border-[#38b1ab] bg-[#38b1ab] text-white'
             : 'border-black/5 bg-black/[0.035] text-black/65 hover:border-[#38b1ab]/35 hover:text-[#38b1ab]'
         }`}
       >
-        <span className={`truncate text-[11px] font-semibold ${active ? 'text-white/85' : 'text-black/55'}`}>
+        <span className={`w-full truncate text-[10px] font-semibold leading-3 ${active ? 'text-white/85' : 'text-black/55'}`}>
           {brand}
         </span>
-        <span className="shrink-0 text-[11px] font-bold">{active ? 'Copied' : code}</span>
+        <span className="w-full truncate text-[11px] font-bold leading-4">{active ? 'Copied' : code}</span>
       </button>
     );
   }
@@ -150,28 +150,28 @@ export default function PromoBell() {
       {!mobileClosed && (
         <div
           aria-hidden="true"
-          className="h-[7.5rem] lg:hidden"
+          className="h-[6.75rem] lg:hidden"
         />
       )}
       {!mobileClosed && (
         <div className="fixed inset-x-0 z-30 px-3 lg:hidden" style={{ bottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}>
-          <div className="mx-auto max-w-[26rem] rounded-[1.35rem] border border-black/10 bg-white/[0.96] px-3 py-2.5 shadow-[0_14px_34px_-22px_rgba(0,0,0,0.45)] backdrop-blur">
+          <div className="mx-auto max-w-[26rem] rounded-[1.35rem] border border-black/10 bg-white/[0.96] px-3 py-2 shadow-[0_14px_34px_-22px_rgba(0,0,0,0.45)] backdrop-blur">
             <div className="flex items-center justify-between gap-2">
-              <span className="min-w-0 truncate text-[11px] font-bold uppercase tracking-[0.1em] text-[#38b1ab]">
+              <span className="min-w-0 truncate text-[11px] font-bold uppercase leading-4 tracking-[0.1em] text-[#38b1ab]">
                 Promo codes <span className="font-semibold normal-case tracking-normal text-black/45">(click to copy)</span>
               </span>
               <button
                 type="button"
                 aria-label="Close promo codes"
                 onClick={() => setMobileClosed(true)}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-black/40 transition-colors hover:bg-black/5 hover:text-black/70"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-black/40 transition-colors hover:bg-black/5 hover:text-black/70"
               >
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M6 6l12 12" /><path d="M18 6L6 18" />
                 </svg>
               </button>
             </div>
-            <div className="mt-1.5 grid grid-cols-3 gap-2">
+            <div className="mt-1 grid grid-cols-3 gap-2">
               {PROMOS.map((promo) => (
                 <MobileCopyCodeButton key={promo.brand} brand={promo.brand} code={promo.code} />
               ))}
