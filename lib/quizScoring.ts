@@ -77,6 +77,7 @@ const MODEL_FAMILY_TOKENS = [
   'apex',
   'alpha',
   'hyper',
+  'hd',
 ];
 
 function mentionsOtherModelFamily(reason: string, model: string): boolean {
@@ -92,6 +93,125 @@ function mentionsOtherModelFamily(reason: string, model: string): boolean {
 
 function brandSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function addReason(reasons: string[], reason: string | null | undefined): void {
+  if (!reason) return;
+  if (reasons.some((existing) => existing.toLowerCase() === reason.toLowerCase())) return;
+  reasons.push(reason);
+}
+
+function formatRange(range: [number, number] | null, formatter = (value: number) => String(value)): string | null {
+  if (!range) return null;
+  const [min, max] = range;
+  return min === max ? formatter(min) : `${formatter(min)}-${formatter(max)}`;
+}
+
+function formatInches(value: number): string {
+  return Number.isInteger(value) ? `${value}-inch` : `${value.toFixed(1)}-inch`;
+}
+
+function formatYears(value: number): string {
+  return value === 1 ? '1-year' : `${value}-year`;
+}
+
+function cleanSpringSystem(springSystem: string, springType: QuizEntry['springType']): string {
+  const trimmed = springSystem.trim();
+  const coilMatch = trimmed.match(/^coil springs?\s*\(([^)]+)\)$/i);
+  if (coilMatch) return `${coilMatch[1]} coil springs`;
+  if (/^coil springs?$/i.test(trimmed)) return 'coil springs';
+  if (trimmed) return trimmed.charAt(0).toLowerCase() + trimmed.slice(1);
+  return springType === 'springless' ? 'springless system' : 'coil springs';
+}
+
+function modelSizePhrase(entry: QuizEntry): string | null {
+  if (entry.availableSizeLabels.length === 1) return `${entry.availableSizeLabels[0]} model`;
+  if (entry.availableSizeLabels.length > 1) {
+    return `${entry.availableSizeLabels[0]}-${entry.availableSizeLabels[entry.availableSizeLabels.length - 1]} size range`;
+  }
+  return null;
+}
+
+function buildModelSizeReason(entry: QuizEntry, backyardSize: QuizAnswers['backyardSize']): string | null {
+  if (backyardSize === 'not-sure') return null;
+  const sizePhrase = modelSizePhrase(entry);
+  if (!sizePhrase) return null;
+  const yardLabel: Record<Exclude<QuizAnswers['backyardSize'], 'not-sure'>, string> = {
+    small: 'small yard',
+    medium: 'medium yard',
+    large: 'large yard',
+    'long-narrow': 'long, narrow yard',
+  };
+  return `${sizePhrase} fits your ${yardLabel[backyardSize]} preference`;
+}
+
+function buildModelSpringReason(entry: QuizEntry): string {
+  const springSystem = cleanSpringSystem(entry.springSystem, entry.springType);
+  const springCount = formatRange(entry.springCountRange);
+  const springLength = formatRange(entry.springLengthRange, formatInches);
+  const prefix = springCount && springLength
+    ? `${springCount} ${springLength}`
+    : springLength ?? springCount;
+
+  return prefix
+    ? `Uses ${prefix} ${springSystem} on this model`
+    : `Uses ${springSystem} on this model`;
+}
+
+function buildModelCapacityReason(entry: QuizEntry): string | null {
+  if (entry.maxSingleUserWeightLb === null && entry.combinedTotalWeightRatingLb === null) return null;
+  const parts = [
+    entry.maxSingleUserWeightLb !== null ? `${entry.maxSingleUserWeightLb} lb single-jumper rating` : null,
+    entry.combinedTotalWeightRatingLb !== null ? `${entry.combinedTotalWeightRatingLb} lb combined rating` : null,
+  ].filter(Boolean);
+  return `${parts.join(' and ')} on this model`;
+}
+
+function buildModelDurabilityReason(entry: QuizEntry): string | null {
+  const capacityReason = buildModelCapacityReason(entry);
+  if (entry.frameMaterial) {
+    return capacityReason
+      ? `${entry.frameMaterial} frame with a ${capacityReason.toLowerCase()}`
+      : `${entry.frameMaterial} frame listed for this model`;
+  }
+  if (entry.matMaterial) return `${entry.matMaterial} mat material listed for this model`;
+  return capacityReason;
+}
+
+function buildModelWarrantyReason(entry: QuizEntry): string | null {
+  if (entry.warrantyFrameYears === null) return null;
+  const partCoverages = [
+    entry.warrantyMatYears !== null ? `${formatYears(entry.warrantyMatYears)} mat` : null,
+    entry.warrantySpringsYears !== null ? `${formatYears(entry.warrantySpringsYears)} spring` : null,
+    entry.warrantyPartsYears !== null ? `${formatYears(entry.warrantyPartsYears)} parts` : null,
+  ].filter(Boolean);
+
+  if (partCoverages.length === 0) {
+    return `${formatYears(entry.warrantyFrameYears)} frame warranty on this model`;
+  }
+
+  return `${formatYears(entry.warrantyFrameYears)} frame warranty with ${partCoverages.slice(0, 2).join(' and ')} coverage`;
+}
+
+function buildModelStandardsReason(entry: QuizEntry): string | null {
+  if (!entry.meetsUSStandards) return null;
+  return entry.usStandardDetails
+    ? `Lists ${entry.usStandardDetails} compliance for this model`
+    : 'Lists US safety-standard compliance for this model';
+}
+
+function buildModelBudgetReason(entry: QuizEntry, budgets: BudgetId[]): string | null {
+  const bounds = getBudgetBounds(budgets);
+  if (!bounds || entry.priceFrom === null) return null;
+  const [min, max] = bounds;
+  if (entry.priceFrom < min || entry.priceFrom > max) return null;
+  const price = `$${entry.priceFrom.toLocaleString('en-US')}`;
+  return `Starts at ${price}, inside your selected budget range`;
+}
+
+function fallbackBrandReason(entry: QuizEntry, reason: string | undefined): string | undefined {
+  if (!reason) return undefined;
+  return mentionsOtherModelFamily(reason, entry.model) ? undefined : reason;
 }
 
 export function tieBreakBrandScore(entry: QuizEntry): number {
@@ -352,53 +472,67 @@ export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): stri
   const mr = entry.matchReasons;
 
   if (answers.groundTypePreference === 'above-ground' && ['above-ground', 'both'].includes(entry.groundType)) {
-    reasons.push('Matches your preference for an above-ground trampoline');
+    addReason(reasons, 'Matches your preference for an above-ground trampoline');
   } else if (answers.groundTypePreference === 'in-ground' && ['in-ground', 'both'].includes(entry.groundType)) {
-    reasons.push('Matches your preference for an in-ground trampoline');
+    addReason(reasons, 'Matches your preference for an in-ground trampoline');
   }
 
-  if (answers.springType === 'springless' && mr.springless) reasons.push(mr.springless);
-  else if (answers.springType === 'traditional' && mr.traditional) reasons.push(mr.traditional);
+  if (answers.springType === 'springless' || answers.springType === 'traditional') {
+    addReason(reasons, buildModelSpringReason(entry));
+  }
 
   if (answers.backyardSize !== 'not-sure') {
-    const sizeSnippet =
-      answers.backyardSize === 'small'
-        ? mr.smallYard
-        : answers.backyardSize === 'medium'
-          ? mr.mediumYard
-          : answers.backyardSize === 'large'
-            ? mr.largeYard
-            : answers.backyardSize === 'long-narrow'
-              ? mr.longNarrowYard
-              : undefined;
-    if (sizeSnippet && !mentionsOtherModelFamily(sizeSnippet, entry.model)) reasons.push(sizeSnippet);
+    const sizeSnippet = buildModelSizeReason(entry, answers.backyardSize);
+    addReason(reasons, sizeSnippet);
   }
 
   if (answers.shapePreference === 'round' && entry.shape.trim().toLowerCase() === 'round') {
-    reasons.push('Matches your preference for a round trampoline shape');
+    addReason(reasons, 'Matches your preference for a round trampoline shape');
   } else if (
     answers.shapePreference === 'rectangle' &&
     ['rectangle', 'square', 'oval'].includes(entry.shape.trim().toLowerCase())
   ) {
-    reasons.push('Matches your preference for a rectangular-style trampoline shape');
+    addReason(reasons, 'Matches your preference for a rectangular-style trampoline shape');
+  }
+
+  for (const priority of answers.priorities.slice(0, 2)) {
+    if (priority === 'bounce') {
+      addReason(reasons, buildModelSpringReason(entry));
+    } else if (priority === 'durability') {
+      const modelReason = buildModelDurabilityReason(entry);
+      addReason(reasons, modelReason);
+      if (!modelReason) addReason(reasons, fallbackBrandReason(entry, mr.durability));
+    } else if (priority === 'value') {
+      const modelReason = buildModelBudgetReason(entry, answers.budget);
+      addReason(reasons, modelReason);
+      if (!modelReason) addReason(reasons, fallbackBrandReason(entry, mr.valueForMoney));
+    } else if (priority === 'assembly') {
+      addReason(reasons, fallbackBrandReason(entry, mr.assembly));
+    } else if (priority === 'warranty') {
+      const modelReason = buildModelWarrantyReason(entry);
+      addReason(reasons, modelReason);
+      if (!modelReason) addReason(reasons, fallbackBrandReason(entry, mr.warranty));
+    }
   }
 
   if (answers.safetyNetPreference === 'yes' && safetyNetMatches(entry, 'yes')) {
-    reasons.push(
+    addReason(
+      reasons,
       entry.safetyNet === 'optional'
         ? 'Safety net is available as an option'
         : 'Includes a safety net to match your preference',
     );
   } else if (answers.safetyNetPreference === 'no' && safetyNetMatches(entry, 'no')) {
-    reasons.push(
+    addReason(
+      reasons,
       entry.safetyNet === 'optional'
         ? 'Can be configured without a safety net'
         : 'Matches your preference for no safety net',
     );
   }
 
-  if (answers.standards === 'yes' && entry.meetsUSStandards && mr.meetsStandards) {
-    reasons.push(mr.meetsStandards);
+  if (answers.standards === 'yes' && entry.meetsUSStandards) {
+    addReason(reasons, buildModelStandardsReason(entry) ?? fallbackBrandReason(entry, mr.meetsStandards));
   }
 
   const budgetKeyMap: Partial<Record<BudgetId, keyof typeof mr>> = {
@@ -410,32 +544,23 @@ export function selectMatchReasons(entry: QuizEntry, answers: QuizAnswers): stri
   };
   for (const budget of answers.budget) {
     const budgetKey = budgetKeyMap[budget];
-    const budgetSnippet = budgetKey ? mr[budgetKey] : undefined;
+    const budgetSnippet = buildModelBudgetReason(entry, answers.budget) ?? (budgetKey ? fallbackBrandReason(entry, mr[budgetKey]) : undefined);
     if (budgetSnippet) {
-      reasons.push(budgetSnippet);
+      addReason(reasons, budgetSnippet);
       break;
     }
-  }
-
-  for (const priority of answers.priorities.slice(0, 2)) {
-    if (reasons.length >= 4) break;
-    if (priority === 'bounce' && mr.bounce) reasons.push(mr.bounce);
-    else if (priority === 'durability' && mr.durability) reasons.push(mr.durability);
-    else if (priority === 'value' && mr.valueForMoney) reasons.push(mr.valueForMoney);
-    else if (priority === 'assembly' && mr.assembly) reasons.push(mr.assembly);
-    else if (priority === 'warranty' && mr.warranty) reasons.push(mr.warranty);
   }
 
   // Fallback merit reasons when signals are low and card is sparse
   if (reasons.length < 2) {
     if (reasons.length < 2 && entry.metricScores.durability >= 8 && !reasons.some(r => r.toLowerCase().includes('durabilit'))) {
-      reasons.push('Rates highly for durability and long-term build quality');
+      addReason(reasons, buildModelDurabilityReason(entry) ?? 'Rates highly for durability and long-term build quality');
     }
     if (reasons.length < 2 && entry.metricScores.bounce >= 8 && !reasons.some(r => r.toLowerCase().includes('bounce'))) {
-      reasons.push('Strong bounce quality rating among tested trampolines');
+      addReason(reasons, buildModelSpringReason(entry));
     }
     if (reasons.length < 2 && entry.metricScores.value >= 8 && !reasons.some(r => r.toLowerCase().includes('value') || r.toLowerCase().includes('price'))) {
-      reasons.push('Competitive value for money across its size range');
+      addReason(reasons, buildModelBudgetReason(entry, answers.budget) ?? 'Competitive value for money across its size range');
     }
   }
 

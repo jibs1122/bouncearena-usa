@@ -22,6 +22,7 @@ const FEATURED_BRAND_ORDER = [
   "Vuly",
   "Jumpflex",
   "Skywalker",
+  "SkyBound",
   "Zupapa",
   "AlleyOOP",
   "Akrobat",

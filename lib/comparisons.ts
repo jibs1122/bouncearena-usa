@@ -3,22 +3,27 @@ import path from 'path';
 import { getAllBrands, brandSlug } from '@/lib/products';
 import type { Brand } from '@/lib/types';
 import { cleanDuplicateBrandPrefixes, removeDuplicateReview } from '@/lib/displayText';
+import { SKYBOUND_COMPARISON_DEFINITIONS } from '@/lib/skyboundComparePages';
 
 const USA_SHEET_URL =
   'https://docs.google.com/spreadsheets/d/1CLjH67Sf9o2diBMUwiG9zmkhs47N90GmL4LxQ6TYsZk/edit?usp=sharing';
 
-type ComparisonDefinition = {
+export type ComparisonDefinition = {
   slug: string;
   labelA: string;
   labelB: string;
   dataBrandA: string;
   dataBrandB: string;
+  metaTitle?: string;
   intro: string;
   introParagraphs?: string[];
   keyTakeaways?: string[];
+  specTableKeyTakeaways?: string[];
+  keyDifferencesHeading?: string;
   sharedSpecs?: Array<{ label: string; value: string }>;
   metaDescription?: string;
   forceAffiliateDisclosure?: boolean;
+  contentLayout?: 'default' | 'skybound-compare-copy';
   source?: 'manual' | 'draft';
 };
 
@@ -757,9 +762,12 @@ function getDraftComparisonDefinitions(): ComparisonDefinition[] {
 }
 
 function getComparisonDefinitions(): ComparisonDefinition[] {
-  const seen = new Set(BASE_COMPARISON_DEFINITIONS.map((definition) => definition.slug));
+  const seen = new Set([
+    ...BASE_COMPARISON_DEFINITIONS.map((definition) => definition.slug),
+    ...SKYBOUND_COMPARISON_DEFINITIONS.map((definition) => definition.slug),
+  ]);
   const drafts = getDraftComparisonDefinitions().filter((definition) => !seen.has(definition.slug));
-  return [...BASE_COMPARISON_DEFINITIONS, ...drafts];
+  return [...BASE_COMPARISON_DEFINITIONS, ...SKYBOUND_COMPARISON_DEFINITIONS, ...drafts];
 }
 
 function hydrateComparison(

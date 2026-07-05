@@ -176,6 +176,8 @@ const HOST_LABELS: Record<string, string> = {
   "www.trampolines.com": "Trampolines.com",
   "sportspowerltd.net": "Sports Power",
   "www.sportspowerltd.net": "Sports Power",
+  "skyboundusa.com": "SkyBound",
+  "www.skyboundusa.com": "SkyBound",
 };
 
 export function isAmazonUrl(url: string | null): boolean {

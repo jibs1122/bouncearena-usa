@@ -20,7 +20,23 @@ export interface QuizEntry {
   matchReasons: QuizBrandData['matchReasons'];
   sourceUrl: string | null;  // best shop / product URL for this model
   availableSizesIn: number[]; // max diameter or length in inches for each size variant
+  availableSizeLabels: string[];
   shape: string;
+  springSystem: string;
+  springCountRange: [number, number] | null;
+  springLengthRange: [number, number] | null;
+  maxSingleUserWeightLb: number | null;
+  combinedTotalWeightRatingLb: number | null;
+  staticWeightRatingLb: number | null;
+  frameMaterial: string;
+  matMaterial: string;
+  warrantyFrameYears: number | null;
+  warrantyMatYears: number | null;
+  warrantySpringsYears: number | null;
+  warrantyNetYears: number | null;
+  warrantyPadsYears: number | null;
+  warrantyPartsYears: number | null;
+  usStandardDetails: string;
 }
 
 export interface QuizEntryAdmin extends QuizEntry {
@@ -66,6 +82,22 @@ function deriveSafetyNetAvailability(products: ReturnType<typeof getAllProducts>
   if (values.has('yes')) return 'yes';
   if (values.has('no')) return 'no';
   return 'unknown';
+}
+
+function uniqueStrings(values: string[]): string[] {
+  return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
+}
+
+function numberRange(values: Array<number | null>): [number, number] | null {
+  const numbers = values.filter((value): value is number => value !== null);
+  if (numbers.length === 0) return null;
+  return [Math.min(...numbers), Math.max(...numbers)];
+}
+
+function maxNumber(values: Array<number | null>): number | null {
+  const numbers = values.filter((value): value is number => value !== null);
+  if (numbers.length === 0) return null;
+  return Math.max(...numbers);
 }
 
 type QuizCache = {
@@ -119,6 +151,7 @@ function buildQuizEntries(): QuizEntryAdmin[] {
     const sizesIn = ps.map(p => p.maxDiameterIn ?? p.overallLengthIn ?? p.overallWidthIn).filter((s): s is number => s !== null);
     const maxSizeIn = sizesIn.length ? Math.max(...sizesIn) : null;
     const minSizeIn = sizesIn.length ? Math.min(...sizesIn) : null;
+    const availableSizeLabels = uniqueStrings(ps.map((p) => p.size));
 
     const shape = ps[0].shape ?? '';
     const groundTypes = new Set(ps.map((p) => p.groundType));
@@ -139,7 +172,8 @@ function buildQuizEntries(): QuizEntryAdmin[] {
       longNarrow: isLongNarrow,
     };
 
-    const springSystem = ps[0].springSystem ?? '';
+    const springSystems = uniqueStrings(ps.map((p) => p.springSystem));
+    const springSystem = springSystems[0] ?? '';
     const derivedSpringless = isSpringless(springSystem);
     const springType: 'springless' | 'traditional' =
       model_?.springType ??
@@ -175,7 +209,23 @@ function buildQuizEntries(): QuizEntryAdmin[] {
       matchReasons,
       sourceUrl,
       availableSizesIn: sizesIn,
+      availableSizeLabels,
       shape,
+      springSystem,
+      springCountRange: numberRange(ps.map((p) => p.springCount)),
+      springLengthRange: numberRange(ps.map((p) => p.springLengthIn)),
+      maxSingleUserWeightLb: maxNumber(ps.map((p) => p.maxSingleUserWeightLb)),
+      combinedTotalWeightRatingLb: maxNumber(ps.map((p) => p.combinedTotalWeightRatingLb)),
+      staticWeightRatingLb: maxNumber(ps.map((p) => p.staticWeightRatingLb)),
+      frameMaterial: uniqueStrings(ps.map((p) => p.frameMaterial))[0] ?? '',
+      matMaterial: uniqueStrings(ps.map((p) => p.matMaterial))[0] ?? '',
+      warrantyFrameYears: maxNumber(ps.map((p) => p.warrantyFrameYears)),
+      warrantyMatYears: maxNumber(ps.map((p) => p.warrantyMatYears)),
+      warrantySpringsYears: maxNumber(ps.map((p) => p.warrantySpringsYears)),
+      warrantyNetYears: maxNumber(ps.map((p) => p.warrantyNetYears)),
+      warrantyPadsYears: maxNumber(ps.map((p) => p.warrantyPadsYears)),
+      warrantyPartsYears: maxNumber(ps.map((p) => p.warrantyPartsYears)),
+      usStandardDetails: uniqueStrings(ps.map((p) => p.usStandardDetails))[0] ?? '',
       surfaced: exclusionReasons.length === 0,
       exclusionReasons,
       rawSpringSystem: springSystem,

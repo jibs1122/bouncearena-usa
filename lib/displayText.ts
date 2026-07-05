@@ -5,6 +5,7 @@ const BRAND_PREFIXES = [
   "Zupapa",
   "Jumpflex",
   "Skywalker",
+  "SkyBound",
   "Akrobat",
   "Avyna",
   "North",

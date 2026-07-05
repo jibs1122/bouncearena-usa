@@ -88,6 +88,7 @@ const BRAND_COLOURS: Record<string, BrandColour> = {
   North:                    { bg: '#68727c', text: '#fff' },
   ORCC:                     { bg: '#4ca000', text: '#fff', chipText: '#367600' },
   Skywalker:                { bg: '#2b78bd', text: '#fff' },
+  SkyBound:                 { bg: '#1589c9', text: '#fff' },
   Sportspower:              { bg: '#c90000', text: '#fff' },
   'Sportspower / Bounce Pro': { bg: '#c90000', text: '#fff' },
   Springfree:               { bg: '#008bd2', text: '#fff' },

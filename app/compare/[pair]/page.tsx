@@ -314,7 +314,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const description = comparison.metaDescription ?? comparison.intro;
   return {
-    title: `${comparison.title} — Trampoline Comparison 2026`,
+    title: comparison.metaTitle
+      ? { absolute: comparison.metaTitle }
+      : `${comparison.title} — Trampoline Comparison 2026`,
     description,
     alternates: { canonical: `${siteUrl}${comparison.href}` },
     openGraph: {
@@ -556,6 +558,7 @@ export default async function ComparePairPage({ params }: Props) {
   }
 
   const { brandA, brandB } = comparison;
+  const isSkyboundCopyLayout = comparison.contentLayout === "skybound-compare-copy";
   const introParagraphs =
     comparison.introParagraphs && comparison.introParagraphs.length > 0
       ? comparison.introParagraphs
@@ -586,6 +589,12 @@ export default async function ComparePairPage({ params }: Props) {
       : hasFullSpecData
         ? buildCompareTakeaways(brandA, brandB)
         : [];
+  const specTableKeyTakeaways = comparison.specTableKeyTakeaways ?? [];
+  const tableTakeaways = specTableKeyTakeaways.length > 0
+    ? specTableKeyTakeaways
+    : !isSkyboundCopyLayout
+      ? keyTakeaways
+      : [];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
   const relatedComparisons = getApprovedComparisons()
     .filter((item) => item.slug !== comparison.slug)
@@ -784,13 +793,13 @@ export default async function ComparePairPage({ params }: Props) {
 
           <section className="mb-10">
             <h2 className="text-xl font-bold text-black mb-4">Full Spec Comparison</h2>
-            {keyTakeaways.length > 0 && (
+            {tableTakeaways.length > 0 && (
               <div className="mb-5 rounded-2xl border border-black/[0.08] bg-black/[0.015] p-5">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-black/40">
-                  Key takeaways
+                  {specTableKeyTakeaways.length > 0 ? "Spec table key takeaways" : "Key takeaways"}
                 </p>
                 <ul className="space-y-2 text-sm leading-6 text-black/65">
-                  {keyTakeaways.map((takeaway) => (
+                  {tableTakeaways.map((takeaway) => (
                     <li key={takeaway} className="flex gap-2">
                       <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38b1ab]" />
                       <span>{takeaway}</span>
@@ -816,6 +825,35 @@ export default async function ComparePairPage({ params }: Props) {
               </div>
             )}
           </section>
+
+          {isSkyboundCopyLayout && keyTakeaways.length > 0 ? (
+            <section className="mb-10">
+              <h2 className="mb-4 text-xl font-bold text-black">
+                {comparison.keyDifferencesHeading ?? "Key differences"}
+              </h2>
+              <ul className="space-y-3 text-[17px] leading-8 text-black/70">
+                {keyTakeaways.map((takeaway) => {
+                  const [lead, ...rest] = takeaway.split(": ");
+                  const body = rest.join(": ");
+
+                  return (
+                    <li key={takeaway} className="flex gap-3">
+                      <span className="mt-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38b1ab]" />
+                      <span>
+                        {body ? (
+                          <>
+                            <strong className="font-semibold text-black">{lead}:</strong> {body}
+                          </>
+                        ) : (
+                          takeaway
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          ) : null}
 
           <section className="mt-8 rounded-xl border border-[#38b1ab]/20 bg-[#38b1ab]/[0.06] p-6">
             <h2 className="text-lg font-bold text-black mb-2">Not sure which trampoline fits best?</h2>

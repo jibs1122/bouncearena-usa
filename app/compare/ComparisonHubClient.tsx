@@ -42,6 +42,7 @@ type ComparisonHubClientProps = {
 
 const DEFAULT_BRAND_COMPARISON_LIMIT = 12;
 const DEFAULT_MODEL_COMPARISON_LIMIT = 12;
+const DEFAULT_PINNED_BRAND_SLUGS = new Set(['skybound']);
 
 function normalizeText(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -69,6 +70,21 @@ function matchesSelectedBrands(brands: HubBrandRef[], selectedBrandSlugs: string
 
 function brandNames(brands: HubBrandRef[]): string {
   return brands.map((brand) => brand.name).join(' ');
+}
+
+function includesPinnedBrand(comparison: HubBrandComparison): boolean {
+  return comparison.brands.some((brand) => DEFAULT_PINNED_BRAND_SLUGS.has(brand.slug));
+}
+
+function prioritizeDefaultBrandComparisons(
+  comparisons: HubBrandComparison[],
+): HubBrandComparison[] {
+  return [...comparisons].sort((a, b) => {
+    const aPinned = includesPinnedBrand(a);
+    const bPinned = includesPinnedBrand(b);
+    if (aPinned !== bPinned) return aPinned ? -1 : 1;
+    return 0;
+  });
 }
 
 function formatBrandList(names: string[]): string {
@@ -250,7 +266,7 @@ export default function ComparisonHubClient({
   const visibleBrandComparisons =
     hasActiveFilter || showAllBrandComparisons
       ? filteredBrandComparisons
-      : filteredBrandComparisons.slice(0, DEFAULT_BRAND_COMPARISON_LIMIT);
+      : prioritizeDefaultBrandComparisons(filteredBrandComparisons).slice(0, DEFAULT_BRAND_COMPARISON_LIMIT);
   const visibleModelComparisons =
     hasActiveFilter || showAllModelComparisons
       ? filteredModelComparisons

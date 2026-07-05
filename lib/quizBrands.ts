@@ -224,6 +224,19 @@ export const QUIZ_BRAND_DATA: QuizBrandData[] = [
     },
   },
   {
+    slug: 'skybound',
+    springType: 'mixed',
+    metricScores: { bounce: 6, durability: 7, value: 8, assembly: 7, warranty: 7 },
+    matchReasons: {
+      springless: 'Springless models use bungee cords instead of exposed coil springs',
+      traditional: 'Coil-spring SkySoar, SkyLift, SkyRise, AiryBounce and Stratos models cover most backyard sizes',
+      valueForMoney: 'Broad direct-pricing range with many family-size options under premium-brand pricing',
+      warranty: 'Most outdoor models list 5-year frame coverage with 1- to 5-year part terms by series',
+      bounce: 'Mixed lineup spans basic family bounce, AiryBounce coil models, and springless bungee designs',
+      durability: 'Galvanized or powder-coated steel frames and published ASTM compliance across the catalog',
+    },
+  },
+  {
     slug: 'sportspower-bounce-pro',
     springType: 'traditional',
     metricScores: { bounce: 6, durability: 6, value: 7, assembly: 6, warranty: 6 },

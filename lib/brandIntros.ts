@@ -11,6 +11,13 @@ export const BRAND_INTROS: Record<string, string[]> = {
     "It is one of the highest-volume mass-market trampoline brands in the US.",
   ],
 
+  SkyBound: [
+    "SkyBound USA sells direct-to-consumer backyard trampolines, mini trampolines, replacement parts, and accessories from its California operation.",
+    "The outdoor lineup spans springless round models, AiryBounce and Stratos coil-spring models, SkyLift curved-pole models, SkyRise straight-pole models, SkySoar family trampolines, and rectangular or square specialty models.",
+    "Pricing is value-led compared with premium European and performance brands, with many round backyard models under $700 and larger rectangular models reaching higher.",
+    "SkyBound publishes ASTM F963, ASTM F381, and ASTM F2225 compliance across the catalog, with warranty terms that vary by series.",
+  ],
+
   'Little Tikes': [
     "Little Tikes is a long-established US toy brand best known for plastic outdoor play equipment for toddlers and young kids.",
     "Its trampoline lineup focuses on the kids and toddler segment, with models ranging from compact 3ft indoor trampolines with handlebars to 7ft outdoor models with safety nets and Mega outdoor models from 10ft up to 15ft.",
