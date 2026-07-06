@@ -29,5 +29,5 @@ Key takeaways
 
 - The two brands differ on bounce system — Akrobat uses high-performance coil springs, while Berg uses traditional coil springs.
 - Single-user weight isn't directly comparable: Akrobat (331 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
-- Akrobat publishes rectangle models; Berg's line-up varies by range and is best checked per model.
-- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against Akrobat per model.
+- Akrobat publishes rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
+- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.

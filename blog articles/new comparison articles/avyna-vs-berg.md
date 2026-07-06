@@ -17,7 +17,7 @@ title: Avyna vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 Both are premium and both can go in the ground, but they lean in different directions.
 
-Avyna is the heavy-duty, high-capacity pick, with a high single-jumper limit, a lifetime frame warranty, and its breathable Air X-TREME mat. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with a long frame warranty and component cover that changes by line.
+Avyna is the heavy-duty, high-capacity pick, with a high single-jumper limit, a lifetime frame warranty, and its breathable Air X-TREME mat. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with a long frame warranty and component coverage that changes by line.
 
 Choose Avyna if you want the higher weight limit and a lifetime frame warranty for a heavy-duty in-ground build. Choose Berg if a wider range of formats matters more than a single headline capacity.
 
@@ -28,6 +28,6 @@ Choose Avyna if you want the higher weight limit and a lifetime frame warranty f
 Key takeaways
 
 - Single-user weight isn't directly comparable: Avyna (352 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
-- Avyna publishes round, square, rectangle models; Berg's line-up varies by range and is best checked per model.
-- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against Avyna per model.
+- Avyna publishes round, square, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
+- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Best-for: Avyna reads as a premium Dutch in-ground / high-capacity brand; Berg as a premium European family/performance brand.

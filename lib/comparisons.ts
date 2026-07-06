@@ -49,12 +49,18 @@ const BASE_COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     labelB: 'ACON',
     dataBrandA: 'Springfree',
     dataBrandB: 'ACON',
-    intro: `Both are premium, so the real question is springs or no springs.
+    intro: `If you're choosing between Springfree and ACON, you've narrowed it to two very different ideas of a premium trampoline. The main difference is what's under the mat: Springfree replaces springs entirely with flexible fiberglass rods, while ACON uses a traditional coil-spring system built for performance bounce.
 
-Springfree removes springs entirely, using flexible rods below a hidden frame, which takes away one way a child can hit hard metal and gives a softer, deeper feel. ACON keeps coil springs and builds rectangular models for a firmer, more even bounce that suits older kids and people doing flips or tricks.
+That mechanical difference shapes everything else: the bounce feel, the warranty terms, the maintenance, and the price.
 
 Choose Springfree if a safety-led, springless design is the priority. Choose ACON if you want a stronger, more responsive bounce and the option of a performance rectangle.`,
-    metaDescription: 'Springfree vs ACON: springs or no springs. Springfree is the safety-led family pick; ACON is the performance choice with rectangular models.',
+    keyTakeaways: [
+      'Springfree uses flexible rods instead of springs; ACON uses coil springs.',
+      "ACON supports heavier jumpers — it recommends around 300 lb per jumper, against Springfree's 220 lb cap on full-size models.",
+      'Springfree is the cleaner safety-led design; ACON is the stronger fit for performance bounce and rectangles.',
+      "Springfree has flat 10-year coverage across frame, mat, net, and rods; ACON has 10-year frame coverage and 5-year mat and spring coverage.",
+    ],
+    metaDescription: "Springfree vs ACON: flexible rods vs performance coil springs. Two premium brands with opposite ideas about what's under the mat.",
   },
   {
     slug: 'springfree-vs-vuly',
@@ -62,11 +68,17 @@ Choose Springfree if a safety-led, springless design is the priority. Choose ACO
     labelB: 'Vuly',
     dataBrandA: 'Springfree',
     dataBrandB: 'Vuly',
-    intro: `Both step away from a plain exposed-coil edge, but in different ways.
+    intro: `Springfree and Vuly both solve the same problem — springs near the jumper — in different ways.
 
 Springfree removes springs entirely, using flexible rods below a hidden frame. Vuly offers two systems: traditional coil models and its Thunder leaf-spring models, which move the springs out of the jumping path while keeping a spring-style bounce, plus a wide set of family add-ons.
 
-Choose Springfree if you want the fully springless design and its long single warranty. Choose Vuly if you want a broader range, an accessory ecosystem, and a leaf-spring option that stops short of going fully springless.`,
+Choose Springfree if you want the fully springless design and its flat 10-year warranty across frame, mat, and net. Choose Vuly if you want a broader range, an accessory ecosystem, and a leaf-spring option that keeps springs out of the jumping area while keeping a springy feel.`,
+    keyTakeaways: [
+      'Springfree uses flexible rods instead of springs; Vuly offers both coil and leaf-spring models.',
+      'Vuly gives you more range and accessories; Springfree gives you the cleaner fully springless design.',
+      'Both cover round options; Springfree also comes in oval and square.',
+      "If you're after a very large trampoline, Vuly tops out at its XL size (about 15½ ft); Springfree tops out with jumbo oval and square models.",
+    ],
     metaDescription: 'Springfree vs Vuly: a fully springless design against Vuly\'s coil and leaf-spring range. Springfree is cleaner on safety; Vuly is more flexible.',
   },
   {
@@ -75,11 +87,17 @@ Choose Springfree if you want the fully springless design and its long single wa
     labelB: 'Vuly',
     dataBrandA: 'ACON',
     dataBrandB: 'Vuly',
-    intro: `This splits on bounce style and shape.
+    intro: `ACON and Vuly split on bounce style and shape.
 
 ACON offers both round and rectangular models, with the rectangles built for a firmer, more even bounce that suits older kids and people doing flips or tricks. Vuly is round only, with both coil and Thunder leaf-spring models and a strong set of family add-ons.
 
 Choose ACON if performance bounce or a rectangle is the goal. Choose Vuly if you want a versatile family setup with accessories and the option of a softer leaf-spring bounce.`,
+    keyTakeaways: [
+      'Vuly offers both coil and leaf-spring models; ACON uses coil springs.',
+      'ACON is the stronger fit for performance bounce and rectangles; Vuly is the broader family setup with more accessories.',
+      'ACON offers round and rectangular models; Vuly is round only.',
+      "ACON has the stronger standard warranty position on mats and springs: 5-year coverage against Vuly's shorter entry-line terms.",
+    ],
     metaDescription: 'ACON vs Vuly: a performance brand with rectangles against a round-only family brand with coil and leaf-spring models and accessories.',
   },
   {
@@ -88,12 +106,20 @@ Choose ACON if performance bounce or a rectangle is the goal. Choose Vuly if you
     labelB: 'Jumpflex',
     dataBrandA: 'Springfree',
     dataBrandB: 'Jumpflex',
-    intro: `The decision here is springs or no springs.
+    intro: `Springfree and Jumpflex take opposite approaches to the edge of the mat. Springfree removes springs, running flexible rods below a hidden frame, which takes one kind of hard-metal contact off the table.
 
-Springfree removes springs, running flexible rods below a hidden frame, which takes one kind of hard-metal contact off the table. Jumpflex keeps coil springs and competes on higher weight limits and a 10-year frame warranty.
+Jumpflex keeps coil springs and competes on raw specs, with the HERO line rated to 350 lb and MEGA to 500 lb, plus a 10-year frame warranty on HERO and MEGA models.
 
-Choose Springfree if you're set on the springless design and a long single warranty. Choose Jumpflex if you want a stronger spring bounce and a higher weight limit for older or heavier kids.`,
-    metaDescription: 'Springfree vs Jumpflex: a springless safety design against a higher-capacity coil brand. Two different reasons to pay above budget.',
+If you're weighing whether to pay more, the decision is less about which brand is "better" and more about what kind of trampoline you want to own.
+
+Choose Springfree if you're set on the springless design and long single warranty coverage. Choose Jumpflex if you want a stronger spring bounce and a higher weight limit for older or heavier kids.`,
+    keyTakeaways: [
+      'Springfree uses flexible rods instead of springs; Jumpflex is coil only.',
+      'Jumpflex rates its MEGA models to 500 lb; Springfree caps full-size models at 220 lb per jumper.',
+      "Springfree has flat 10-year coverage across frame, mat, net, and rods; Jumpflex's strongest coverage is on HERO and MEGA.",
+      'Jumpflex gives you round, square, and rectangular options; Springfree covers round, oval, and square.',
+    ],
+    metaDescription: 'Springfree vs Jumpflex: springless safety design vs higher-capacity coil bounce. Compare rods, weight ratings, warranty, and shapes.',
   },
   {
     slug: 'acon-vs-jumpflex',
@@ -103,9 +129,15 @@ Choose Springfree if you're set on the springless design and a long single warra
     dataBrandB: 'Jumpflex',
     intro: `Both are coil performance brands, so this is about which leans further toward performance.
 
-ACON builds rectangular models for serious bouncing and publishes no single-user weight limit, recommending about 300 lb, with a 10-year frame warranty and 5-year warranty on the mat and springs. Jumpflex rates its HERO models to 350 lb and competes on value and capacity, with the same 10-year frame warranty and 5-year warranty on the mat and springs.
+ACON builds rectangular models for serious bouncing and publishes no single-user weight limit, recommending about 300 lb, with a 10-year frame warranty and 5-year warranty on the mat and springs. Jumpflex rates its HERO models to 350 lb and competes on value and capacity, with the same frame, mat, and spring coverage.
 
 Choose ACON if you want the stronger performance benchmark and its rectangles. Choose Jumpflex if you want a higher listed weight limit at a more value-led price.`,
+    keyTakeaways: [
+      'Both brands use coil springs, but ACON leans harder into performance rectangles while Jumpflex leans into value and capacity.',
+      "Jumpflex rates HERO models to 350 lb and MEGA models to 500 lb; ACON publishes no hard cap and recommends around 300 lb per jumper.",
+      'Both offer 10-year frame coverage and 5-year mat and spring coverage on the main lines compared here.',
+      "On full-size rounds, Jumpflex undercuts ACON — the HERO 10ft is $749 against ACON's Air 10ft at $899.",
+    ],
     metaDescription: 'ACON vs Jumpflex: two coil performance brands. ACON leans further into performance and rectangles; Jumpflex is the higher-value, higher-capacity pick.',
   },
   {
@@ -116,9 +148,15 @@ Choose ACON if you want the stronger performance benchmark and its rectangles. C
     dataBrandB: 'Jumpflex',
     intro: `Both are family brands above the budget tier, but they differ in shape and range.
 
-Vuly is round only, with coil and Thunder leaf-spring models and a strong accessory range. Jumpflex covers round, square, and rectangle and is built around higher weight limits for bigger jumpers.
+Vuly is round only, with coil and Thunder leaf-spring models and a strong accessory range. Jumpflex covers round, square, and rectangle and is built around higher weight limits — 350 lb on HERO and 500 lb on MEGA, against Vuly's 330 lb.
 
 Choose Vuly if the accessory ecosystem and a leaf-spring option matter most. Choose Jumpflex if you want more shape choice and a higher weight limit for older kids.`,
+    keyTakeaways: [
+      'Vuly offers both coil and leaf-spring models; Jumpflex is coil only.',
+      'Jumpflex gives you more shape choice, with round, square, and rectangle models; Vuly is round only.',
+      "Jumpflex rates HERO to 350 lb and MEGA to 500 lb, against Vuly's 330 lb rating.",
+      "If you're after the largest round-family size, Vuly tops out at its XL size (about 15½ ft).",
+    ],
     metaDescription: 'Vuly vs Jumpflex: a round-only family brand with accessories against a coil brand with more shapes and higher capacity.',
   },
   {
@@ -267,7 +305,7 @@ Choose Skywalker if the lower price and easy retail availability win. Choose Vul
 
 Zupapa is the entry-level value pick, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. Jumpflex is built for older kids and heavier use, with up to a 10-year frame warranty, commonly 5-year warranty on the mat and springs, and a higher weight limit.
 
-Choose Zupapa if you want a strong frame warranty at a lower price. Choose Jumpflex if you're keeping it for years and want the higher weight limit and longer mat and spring cover.`,
+Choose Zupapa if you want a strong frame warranty at a lower price. Choose Jumpflex if you're keeping it for years and want the higher weight limit and longer mat and spring coverage.`,
     metaDescription: 'Zupapa vs Jumpflex: an entry-level value brand against a sturdier step up for older kids and heavier use.',
   },
   {
@@ -293,7 +331,7 @@ Choose Skywalker if it's a first trampoline for younger kids. Choose Jumpflex if
 
 Zupapa uses metal coil springs with padding over the edge, the standard backyard setup, with a solid 10-year frame warranty. Springfree removes springs entirely, runs flexible rods below the mat, and hides the frame, taking one kind of hard-metal contact off the table, at a much higher price.
 
-Choose Zupapa if you want a coil trampoline with a strong frame warranty for the money. Choose Springfree if you're set on the springless design and the longest single-warranty cover.`,
+Choose Zupapa if you want a coil trampoline with a strong frame warranty for the money. Choose Springfree if you're set on the springless design and the longest single-warranty coverage.`,
     metaDescription: 'Zupapa vs Springfree: a value coil brand against a premium springless one. Springs or no springs, at very different prices.',
   },
   {
@@ -302,11 +340,17 @@ Choose Zupapa if you want a coil trampoline with a strong frame warranty for the
     labelB: 'ACON',
     dataBrandA: 'Zupapa',
     dataBrandB: 'ACON',
-    intro: `This is about tier and use.
+    intro: `Zupapa and ACON sit in different tiers and suit different use.
 
-Zupapa is the value range, mostly round and built for casual family jumping, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. ACON publishes no single-user weight limit and recommends about 300 lb, with a 10-year frame warranty, 5-year warranty on the mat and springs, and rectangular models for a more even bounce.
+Zupapa is the value brand, covering family rounds and a line of large, heavy-duty rectangles, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. ACON publishes no single-user weight limit and recommends about 300 lb, with a 10-year frame warranty, 5-year warranty on the mat and springs, and rectangular models for a more even bounce.
 
 Choose Zupapa for casual family jumping at a value price. Choose ACON for harder use, performance bounce, and the option of a rectangle.`,
+    keyTakeaways: [
+      'Zupapa is the value brand; ACON is the premium performance brand.',
+      "ACON publishes no hard single-user limit and recommends around 300 lb per jumper; Zupapa publishes model-specific ratings across its rounds and rectangles.",
+      'Zupapa covers family rounds and large rectangles; ACON covers rounds plus performance rectangles.',
+      "Zupapa has 10-year frame coverage across most of the range; ACON pairs 10-year frame coverage with longer mat and spring coverage.",
+    ],
     metaDescription: 'Zupapa vs ACON: a value coil brand against a premium performance one. Casual family jumping vs harder use and rectangles.',
   },
   {
@@ -319,7 +363,7 @@ Choose Zupapa for casual family jumping at a value price. Choose ACON for harder
 
 Zupapa is the value pick, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. Vuly is the more polished family setup, with a 10-year frame warranty on its upper models, 5-year warranty on the mat and springs, and a wider accessory range.
 
-Choose Zupapa if you want strong frame cover at a value price. Choose Vuly if you want a more refined setup with broader accessories.`,
+Choose Zupapa if you want strong frame coverage at a value price. Choose Vuly if you want a more refined setup with broader accessories.`,
     metaDescription: 'Zupapa vs Vuly: a value brand with a strong frame warranty against a more polished family setup with accessories.',
   },
   {
@@ -356,10 +400,16 @@ Choose Skywalker for availability and an entry-level fit. Choose AlleyOOP if you
     dataBrandB: 'Zupapa',
     intro: `Both are value brands, so this is about warranty and brand familiarity.
 
-Skywalker is the established retail name, with broad parts availability and a standard 3-year frame warranty. Zupapa offers longer cover for the money, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads.
+Skywalker is the established retail name, with broad parts availability and a 3-year frame warranty on its standard models (the Olympic rectangle line runs longer). Zupapa offers longer coverage for the money, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads.
 
 Either works as a first family trampoline. Choose Skywalker for the familiar brand and easy parts access. Choose Zupapa for the longer frame warranty.`,
-    metaDescription: 'Skywalker vs Zupapa: two value brands. Skywalker is the familiar retail name with broad parts support; Zupapa offers longer frame cover.',
+    keyTakeaways: [
+      "Warranty is the bigger difference: Zupapa lists 10-year frame coverage, while Skywalker's standard models use 3-year frame coverage.",
+      "On 10ft rounds, pricing is near-parity: Skywalker starts around $249 against Zupapa's roughly $240-$460 range.",
+      'Skywalker has broader retail familiarity and easier parts access; Zupapa gives stronger warranty coverage for the money.',
+      'Either works as a first family trampoline.',
+    ],
+    metaDescription: 'Skywalker vs Zupapa: two value brands. Skywalker is the familiar retail name with broad parts support; Zupapa offers longer frame coverage.',
   },
   {
     slug: 'skywalker-vs-jumpking',
@@ -369,7 +419,7 @@ Either works as a first family trampoline. Choose Skywalker for the familiar bra
     dataBrandB: 'JumpKing',
     intro: `Both are mainstream retail spring brands, so warranty is the divide.
 
-Skywalker carries a standard 3-year frame warranty and 1-year warranty on the mat and springs. JumpKing is the older retail name, with a 1-year frame warranty and shorter cover on the mat, springs, and pads, across a familiar range of rounds, ovals, and rectangles.
+Skywalker carries a standard 3-year frame warranty and 1-year warranty on the mat and springs. JumpKing is the older retail name, with a 1-year frame warranty and shorter coverage on the mat, springs, and pads, across a familiar range of rounds, ovals, and rectangles.
 
 Choose Skywalker for the stronger standard warranty. Choose JumpKing when its price, size, or availability lines up with what you need.`,
     metaDescription: 'Skywalker vs JumpKing: two mainstream retail spring brands. Skywalker has the stronger standard warranty; JumpKing is the legacy alternative.',
@@ -382,7 +432,7 @@ Choose Skywalker for the stronger standard warranty. Choose JumpKing when its pr
     dataBrandB: 'JumpKing',
     intro: `This is spec-value against a legacy retail name.
 
-Zupapa offers a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. JumpKing is the older retail brand, with a 1-year frame warranty and shorter cover on the mat, springs, and pads.
+Zupapa offers a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. JumpKing is the older retail brand, with a 1-year frame warranty and shorter coverage on the mat, springs, and pads.
 
 Choose Zupapa for the much longer warranty at the price. Choose JumpKing when its price, size, or availability fits what you need.`,
     metaDescription: 'Zupapa vs JumpKing: spec-value against a legacy retail name. Zupapa has the much longer warranty for the money.',
@@ -463,7 +513,7 @@ Choose Skywalker for the safer retail default and easier parts support. Choose J
 Skywalker is the cleaner default, with a standard 3-year frame warranty and 1-year warranty on the mat and springs, and broad parts support. Upper Bounce carries very short warranty terms but competes on shape options, including rectangles and squares, and strong replacement-parts availability.
 
 Choose Skywalker for the longer frame warranty and easy support. Choose Upper Bounce if you want a rectangle or square, or value its parts ecosystem.`,
-    metaDescription: 'Upper Bounce vs Skywalker: a budget parts-and-shapes brand against the retail default. Skywalker has the longer frame warranty; Upper Bounce has more shapes.',
+    metaDescription: 'Upper Bounce vs Skywalker: budget parts-and-shapes brand vs retail default. Skywalker has the longer frame warranty; Upper Bounce has more shapes.',
   },
   {
     slug: 'upper-bounce-vs-zupapa',
@@ -499,7 +549,7 @@ Choose Upper Bounce if parts availability is a priority. Choose Jumpzylla for th
     dataBrandB: 'Jumpflex',
     intro: `This is a legacy retail brand against a clear step up.
 
-JumpKing is the older retail option, with a 1-year frame warranty and shorter cover on the mat, springs, and pads, but a good range of rectangular models. Jumpflex is built for the long term, with up to a 10-year frame warranty and commonly 5-year warranty on the mat and springs.
+JumpKing is the older retail option, with a 1-year frame warranty and shorter coverage on the mat, springs, and pads, but a good range of rectangular models. Jumpflex is built for the long term, with up to a 10-year frame warranty and commonly 5-year warranty on the mat and springs.
 
 Choose JumpKing if you want a rectangle from a familiar name at a lower price. Choose Jumpflex if you want a sturdier build that lasts, with a much longer warranty.`,
     metaDescription: 'JumpKing vs Jumpflex: a legacy retail brand against a sturdier long-term family trampoline. A clear step up in build and warranty.',
@@ -540,8 +590,8 @@ Choose ACON for the lower entry price. Choose Akrobat for the stronger warranty 
 
 Avyna is rated to 350 lb per jumper, with a lifetime frame warranty, 10-year warranty on springs, and 3-year warranty on the mat and pads. Akrobat is rated to 331 lb, with a lifetime frame warranty, 12-year warranty on springs, and 5-year warranty on the mat and pads.
 
-Choose Avyna if the higher weight rating leads. Choose Akrobat for the longer mat, spring, and pad cover.`,
-    metaDescription: 'Avyna vs Akrobat: two premium in-ground performance brands. Avyna leans toward capacity; Akrobat toward longer mat, spring, and pad cover.',
+Choose Avyna if the higher weight rating leads. Choose Akrobat for the longer mat, spring, and pad coverage.`,
+    metaDescription: 'Avyna vs Akrobat: two premium in-ground performance brands. Avyna leans toward capacity; Akrobat toward longer mat, spring, and pad coverage.',
   },
   {
     slug: 'skywalker-vs-sportspower',

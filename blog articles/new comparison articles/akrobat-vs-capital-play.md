@@ -28,7 +28,7 @@ Choose Akrobat if you want the higher capacity, stronger warranty, and more perf
 Key takeaways
 
 - The two brands differ on bounce system — Akrobat uses high-performance coil springs, while Capital Play uses traditional coil springs.
-- Akrobat claims a higher single-user weight limit — up to 331 lb vs 265 lb.
+- Akrobat lists a higher single-user weight limit — up to 331 lb vs 265 lb.
 - If you want a very large trampoline, Akrobat goes up to 12×17 ft rectangle; Capital Play tops out at 8×11 ft rectangle.
 - Akrobat leads on warranty (frame lifetime, springs 12 yr).
 - Installation differs: Akrobat is above- or in-ground, while Capital Play is in-ground.

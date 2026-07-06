@@ -29,5 +29,5 @@ Key takeaways
 
 - The two brands differ on bounce system — Springfree uses springless flexible composite rods (no springs), while JumpSport uses traditional coil springs.
 - Single-user weight isn't directly comparable: Springfree (220 lb); JumpSport (model-dependent).
-- Springfree publishes round, oval, square models; JumpSport's line-up varies by range and is best checked per model.
-- JumpSport warranty is set by product line — Varies by JumpSport line; AlleyOOP frame warranty is commonly lifetime; compare against Springfree per model.
+- Springfree publishes round, oval, square models; JumpSport's line-up varies by range; use the table rows for the exact models shown.
+- JumpSport warranty is set by product line — JumpSport terms vary by line; AlleyOOP frame warranty is commonly lifetime.

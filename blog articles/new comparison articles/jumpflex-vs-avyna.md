@@ -27,7 +27,7 @@ Choose Jumpflex if you want a straightforward above-ground trampoline at a sensi
 
 Key takeaways
 
-- Jumpflex claims a higher single-user weight limit — up to 500 lb vs 352 lb.
+- Jumpflex lists a higher single-user weight limit — up to 500 lb vs 352 lb.
 - If you want a very large trampoline, Jumpflex goes up to 16×16 ft square; Avyna tops out at 12×18 ft rectangle.
 - Warranty is split: Jumpflex leads on mat 5 yr, while Avyna leads on frame lifetime, springs 10 yr.
 - Installation differs: Jumpflex is above-ground only, while Avyna is above- or in-ground.

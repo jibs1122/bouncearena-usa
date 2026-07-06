@@ -27,7 +27,7 @@ Choose Avyna if you want more choice, higher capacity, and the longer frame warr
 
 Key takeaways
 
-- Avyna claims a higher single-user weight limit — up to 352 lb vs 265 lb.
+- Avyna lists a higher single-user weight limit — up to 352 lb vs 265 lb.
 - Avyna offers round, square, rectangle; Capital Play covers rectangle.
 - If you want a very large trampoline, Avyna goes up to 12×18 ft rectangle; Capital Play tops out at 8×11 ft rectangle.
 - Warranty is split: Avyna leads on frame lifetime, springs 10 yr, while Capital Play leads on mat 5 yr.

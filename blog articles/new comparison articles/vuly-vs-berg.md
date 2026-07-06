@@ -17,7 +17,7 @@ title: Vuly vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 Accessories and simplicity against range and installation formats.
 
-Vuly is above-ground and round, with coil and Thunder leaf-spring models and plenty of add-ons, which makes it strong as a family-lifestyle setup. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with component cover that varies by line.
+Vuly is above-ground and round, with coil and Thunder leaf-spring models and plenty of add-ons, which makes it strong as a family-lifestyle setup. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with component coverage that varies by line.
 
 Choose Vuly if you want a simpler lineup with a wide accessory range. Choose Berg if you want more installation formats and the depth of a broader range.
 
@@ -29,6 +29,6 @@ Key takeaways
 
 - The two brands differ on bounce system — Vuly uses a mix of coil-spring and leaf-spring models, while Berg uses traditional coil springs.
 - Single-user weight isn't directly comparable: Vuly (330 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
-- Vuly publishes round models; Berg's line-up varies by range and is best checked per model.
-- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against Vuly per model.
+- Vuly publishes round models; Berg's line-up varies by range; use the table rows for the exact models shown.
+- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: Vuly is above-ground only, while Berg is above- or in-ground.

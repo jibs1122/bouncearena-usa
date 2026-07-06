@@ -1,12 +1,12 @@
 ---
 canonical: https://www.bouncearenareviews.com/compare/acon-vs-berg/
-meta-description: ACON vs Berg: a focused performance coil brand against a broad European range. ACON has more consistent component cover; Berg has more formats.
-meta-og:description: ACON vs Berg: a focused performance coil brand against a broad European range. ACON has more consistent component cover; Berg has more formats.
+meta-description: ACON vs Berg: a focused performance coil brand against a broad European range. ACON has more consistent component coverage; Berg has more formats.
+meta-og:description: ACON vs Berg: a focused performance coil brand against a broad European range. ACON has more consistent component coverage; Berg has more formats.
 meta-og:title: ACON vs Berg Trampolines
 meta-og:url: https://www.bouncearenareviews.com/compare/acon-vs-berg/
 meta-robots: index, follow
 meta-twitter:card: summary_large_image
-meta-twitter:description: ACON vs Berg: a focused performance coil brand against a broad European range. ACON has more consistent component cover; Berg has more formats.
+meta-twitter:description: ACON vs Berg: a focused performance coil brand against a broad European range. ACON has more consistent component coverage; Berg has more formats.
 meta-twitter:site: @bouncearena
 meta-twitter:title: ACON vs Berg Trampolines
 meta-viewport: width=device-width, initial-scale=1
@@ -28,6 +28,6 @@ Choose ACON if you want a straightforward performance trampoline you can judge o
 Key takeaways
 
 - Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
-- ACON publishes round, rectangle models; Berg's line-up varies by range and is best checked per model.
-- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against ACON per model.
+- ACON publishes round, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
+- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: ACON is mainly above-ground with an in-ground option, while Berg is above- or in-ground.

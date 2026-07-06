@@ -28,7 +28,7 @@ Choose North if you want a system purpose-built for in-ground use. Choose Akroba
 Key takeaways
 
 - The two brands differ on bounce system — North uses traditional coil springs, while Akrobat uses high-performance coil springs.
-- Akrobat claims a higher single-user weight limit — up to 331 lb vs 243 lb.
+- Akrobat lists a higher single-user weight limit — up to 331 lb vs 243 lb.
 - North offers round, oval, rectangle; Akrobat covers rectangle.
 - If you want a very large trampoline, North goes up to 10×18 ft rectangle; Akrobat tops out at 12×17 ft rectangle.
 - Akrobat leads on warranty (frame lifetime, springs 12 yr, net 5 yr).

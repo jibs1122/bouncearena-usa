@@ -27,7 +27,7 @@ Choose Jumpzylla if keeping the upfront cost down is the priority. Choose Jumpfl
 
 Key takeaways
 
-- Jumpflex claims a higher single-user weight limit — up to 500 lb vs 450 lb.
+- Jumpflex lists a higher single-user weight limit — up to 500 lb vs 450 lb.
 - Jumpflex offers round, square, rectangle; Jumpzylla covers round.
 - If you want a very large trampoline, Jumpflex goes up to 16×16 ft square; Jumpzylla tops out at 16 ft round.
 - Warranty is split: Jumpflex leads on frame 10 yr, mat 5 yr, springs 5 yr, while Jumpzylla leads on net 2 yr.

@@ -27,7 +27,7 @@ Choose Avyna if you want the higher weight limit and a lifetime frame warranty. 
 
 Key takeaways
 
-- Avyna claims a higher single-user weight limit — up to 352 lb vs 243 lb.
+- Avyna lists a higher single-user weight limit — up to 352 lb vs 243 lb.
 - North offers round, oval, rectangle; Avyna covers round, square, rectangle.
 - If you want a very large trampoline, North goes up to 10×18 ft rectangle; Avyna tops out at 12×18 ft rectangle.
 - Warranty is split: North leads on mat 5 yr, net 2 yr, while Avyna leads on frame lifetime, springs 10 yr.

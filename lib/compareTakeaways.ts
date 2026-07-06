@@ -8,6 +8,7 @@ type NumberRange = { min: number | null; max: number | null; distinctCount: numb
 
 type BrandTakeawaySummary = {
   name: string;
+  products: Product[];
   prices: number[];
   springSystems: Set<SpringSystemKind>;
   shapes: Set<string>;
@@ -130,6 +131,7 @@ function summarizeBrand(brand: Brand): BrandTakeawaySummary {
 
   return {
     name: brand.name,
+    products: brand.products,
     prices,
     springSystems,
     shapes,
@@ -158,20 +160,46 @@ function summarizeBrand(brand: Brand): BrandTakeawaySummary {
 }
 
 function formatFeet(inches: number): string {
-  const feet = inches / 12;
-  return Number.isInteger(feet) ? `${feet} ft` : `${Number(feet.toFixed(1))} ft`;
+  const halfFeet = Math.round((inches / 12) * 2) / 2;
+  if (Number.isInteger(halfFeet)) return `${halfFeet} ft`;
+  return `${Math.floor(halfFeet)}½ ft`;
 }
 
-function formatSpringSystems(summary: BrandTakeawaySummary): string {
-  const labels: Record<SpringSystemKind, string> = {
-    coil: "traditional spring",
-    leaf: "leaf-spring",
-    springless: "springless",
-    other: "other spring",
-  };
-  const systems = [...summary.springSystems].map((system) => labels[system]).sort();
-  if (systems.length === 1) return `${summary.name} uses ${systems[0]} models`;
-  return `${summary.name} spans ${systems.join(" and ")} models`;
+function describeSpringSystems(summary: BrandTakeawaySummary): string {
+  const hasCoil = summary.springSystems.has("coil");
+  const hasLeaf = summary.springSystems.has("leaf");
+  const hasSpringless = summary.springSystems.has("springless");
+
+  if (summary.name === "Springfree" && hasSpringless && !hasCoil && !hasLeaf) {
+    return "Springfree uses flexible rods instead of springs";
+  }
+  if (summary.name === "Vuly" && hasCoil && hasLeaf) {
+    return "Vuly offers both coil and leaf-spring models";
+  }
+  if (hasCoil && hasLeaf && hasSpringless) {
+    return `${summary.name} offers coil, leaf-spring, and springless models`;
+  }
+  if (hasCoil && hasLeaf) {
+    return `${summary.name} offers both coil and leaf-spring models`;
+  }
+  if (hasCoil && hasSpringless) {
+    return `${summary.name} offers both coil and springless models`;
+  }
+  if (hasLeaf && hasSpringless) {
+    return `${summary.name} offers both leaf-spring and springless models`;
+  }
+  if (hasSpringless) {
+    return `${summary.name} uses a springless design`;
+  }
+  if (hasLeaf) {
+    return `${summary.name} uses leaf springs`;
+  }
+  if (hasCoil) {
+    return summary.name === "Jumpflex"
+      ? "Jumpflex is coil only"
+      : `${summary.name} uses coil springs`;
+  }
+  return `${summary.name} uses a different spring system`;
 }
 
 function setsDiffer<T>(a: Set<T>, b: Set<T>): boolean {
@@ -182,26 +210,54 @@ function setsDiffer<T>(a: Set<T>, b: Set<T>): boolean {
 function buildSpringSystemTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): string | null {
   if (a.springSystems.size === 0 || b.springSystems.size === 0) return null;
   if (!setsDiffer(a.springSystems, b.springSystems)) return null;
-  return `The two brands differ on spring type — ${formatSpringSystems(a)}, while ${formatSpringSystems(b)}.`;
+  return `${describeSpringSystems(a)}; ${describeSpringSystems(b)}.`;
+}
+
+type ProductPick = { product: Product; price: number };
+
+function shortModelName(product: Product): string {
+  const pattern = new RegExp(`^${product.brand}\\s+`, "i");
+  return product.model.replace(pattern, "").trim();
+}
+
+function isFullSizeProduct(product: Product): boolean {
+  const footprint = productFootprintIn(product);
+  return footprint !== null && footprint >= 120;
+}
+
+function buildComparableFullSizeEntry(summary: BrandTakeawaySummary): ProductPick | null {
+  const candidates = summary.products
+    .filter(isFullSizeProduct)
+    .map((product) => {
+      const price = productPrice(product);
+      return price === null ? null : { product, price };
+    })
+    .filter((pick): pick is ProductPick => pick !== null)
+    .sort((a, b) => a.price - b.price);
+
+  return candidates[0] ?? null;
 }
 
 function buildPriceTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): string | null {
-  if (a.prices.length === 0 || b.prices.length === 0) return null;
-  const aMin = Math.min(...a.prices);
-  const bMin = Math.min(...b.prices);
-  const aMax = Math.max(...a.prices);
-  const bMax = Math.max(...b.prices);
-  const lower = aMin <= bMin ? a : b;
+  const aEntry = buildComparableFullSizeEntry(a);
+  const bEntry = buildComparableFullSizeEntry(b);
+  if (!aEntry || !bEntry) return null;
+
+  const lower = aEntry.price <= bEntry.price ? a : b;
   const higher = lower === a ? b : a;
-  const lowerMin = Math.min(...lower.prices);
-  const higherMin = Math.min(...higher.prices);
-  const entryGap = higherMin - lowerMin;
-  const entryGapIsMaterial = entryGap >= 200 || higherMin / Math.max(lowerMin, 1) >= 1.25;
+  const lowerEntry = lower === a ? aEntry : bEntry;
+  const higherEntry = higher === a ? aEntry : bEntry;
+  const entryGap = higherEntry.price - lowerEntry.price;
+  const entryGapIsMaterial =
+    entryGap >= 200 || higherEntry.price / Math.max(lowerEntry.price, 1) >= 1.25;
 
   if (entryGapIsMaterial) {
-    return `${lower.name} starts significantly cheaper — ${formatUsd(lowerMin)} vs ${formatUsd(higherMin)}.`;
+    return `On comparable full-size models, ${lower.name} starts lower — ${shortModelName(lowerEntry.product)} at ${formatUsd(lowerEntry.price)} vs ${shortModelName(higherEntry.product)} at ${formatUsd(higherEntry.price)}.`;
   }
 
+  if (a.prices.length === 0 || b.prices.length === 0) return null;
+  const aMax = Math.max(...a.prices);
+  const bMax = Math.max(...b.prices);
   const topEndGap = Math.abs(aMax - bMax);
   if (topEndGap >= 700 || Math.max(aMax, bMax) / Math.max(Math.min(aMax, bMax), 1) >= 1.5) {
     const higherTop = aMax > bMax ? a : b;
@@ -284,14 +340,19 @@ function buildComponentWarrantyTakeaway(a: BrandTakeawaySummary, b: BrandTakeawa
 }
 
 function buildWeightTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): string | null {
-  if (a.maxSingleUserWeightLb !== null && b.maxSingleUserWeightLb !== null) {
-    if (a.maxSingleUserWeightLb === b.maxSingleUserWeightLb) return null;
-    const higher = a.maxSingleUserWeightLb > b.maxSingleUserWeightLb ? a : b;
+  const aWeightPick = pickMainstreamWeightProduct(a);
+  const bWeightPick = pickMainstreamWeightProduct(b);
+
+  if (aWeightPick !== null && bWeightPick !== null) {
+    if (aWeightPick.weight === bWeightPick.weight) return null;
+    const higher = aWeightPick.weight > bWeightPick.weight ? a : b;
     const lower = higher === a ? b : a;
-    const higherWeight = higher.maxSingleUserWeightLb!;
-    const lowerWeight = lower.maxSingleUserWeightLb!;
+    const higherPick = higher === a ? aWeightPick : bWeightPick;
+    const lowerPick = lower === a ? aWeightPick : bWeightPick;
+    const higherWeight = higherPick.weight;
+    const lowerWeight = lowerPick.weight;
     if (higherWeight - lowerWeight >= 75 || higherWeight / Math.max(lowerWeight, 1) >= 1.25) {
-      return `${higher.name} claims a higher single-user weight limit — up to ${higherWeight} lb vs ${lowerWeight} lb.`;
+      return `${higher.name} rates its ${shortModelName(higherPick.product)} to ${higherWeight} lb per jumper; ${lower.name} lists ${lowerWeight} lb on ${shortModelName(lowerPick.product)}.`;
     }
   }
 
@@ -304,7 +365,34 @@ function buildWeightTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): 
   const lowerWeight = lower.maxCombinedWeightLb!;
 
   if (higherWeight - lowerWeight < 150 && higherWeight / Math.max(lowerWeight, 1) < 1.25) return null;
-  return `${higher.name} claims a higher combined weight capacity: ${higherWeight} lb vs ${lowerWeight} lb.`;
+  return `${higher.name} lists a higher combined weight capacity: ${higherWeight} lb vs ${lowerWeight} lb.`;
+}
+
+function pickMainstreamWeightProduct(
+  summary: BrandTakeawaySummary,
+): { product: Product; weight: number } | null {
+  const weightedProducts = summary.products
+    .filter(isFullSizeProduct)
+    .map((product) =>
+      product.maxSingleUserWeightLb === null
+        ? null
+        : { product, weight: product.maxSingleUserWeightLb },
+    )
+    .filter((pick): pick is { product: Product; weight: number } => pick !== null);
+
+  const mainstreamRounds = weightedProducts.filter(({ product }) => {
+    const shape = normalizeShape(product.shape);
+    const model = product.model.toLowerCase();
+    return (
+      shape === "round" &&
+      !model.includes("olympic") &&
+      !model.includes("premium") &&
+      !model.includes("epic")
+    );
+  });
+
+  const candidates = mainstreamRounds.length > 0 ? mainstreamRounds : weightedProducts;
+  return [...candidates].sort((a, b) => b.weight - a.weight)[0] ?? null;
 }
 
 function formatShapeList(shapes: Set<string>): string {
@@ -360,22 +448,15 @@ function buildSizeTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): st
 }
 
 function buildStandardsTakeaway(a: BrandTakeawaySummary, b: BrandTakeawaySummary): string | null {
-  if (a.astmKnownCount === 0 || b.astmKnownCount === 0) return null;
-  if (a.astmYesCount === b.astmYesCount) return null;
-
-  const stronger = a.astmYesCount > b.astmYesCount ? a : b;
-  const other = stronger === a ? b : a;
-  if (stronger.astmYesCount === 0) return null;
-
-  return `${stronger.name} has more ASTM-certified models in this comparison (${stronger.astmYesCount} vs ${other.astmYesCount}).`;
+  return null;
 }
 
 export function buildCompareTakeaways(brandA: Brand, brandB: Brand): string[] {
   const a = summarizeBrand(brandA);
   const b = summarizeBrand(brandB);
-  const takeaways = [
+  const priceTakeaway = buildPriceTakeaway(a, b);
+  const nonPriceTakeaways = [
     buildSpringSystemTakeaway(a, b),
-    buildPriceTakeaway(a, b),
     buildWarrantyTakeaway(a, b),
     buildWeightTakeaway(a, b),
     buildShapeTakeaway(a, b),
@@ -383,8 +464,11 @@ export function buildCompareTakeaways(brandA: Brand, brandB: Brand): string[] {
     buildComponentWarrantyTakeaway(a, b),
     buildStandardsTakeaway(a, b),
   ].filter((takeaway): takeaway is string => takeaway !== null);
+  const takeaways = priceTakeaway
+    ? [...nonPriceTakeaways.slice(0, 4), priceTakeaway]
+    : nonPriceTakeaways.slice(0, 5);
 
-  if (takeaways.length > 0) return takeaways.slice(0, 5);
+  if (takeaways.length > 0) return takeaways;
 
   return [
     "The biggest differences are model-specific, so use the table below to compare the exact size, warranty, weight rating, and price rows for the models you are considering.",

@@ -29,5 +29,5 @@ Key takeaways
 
 - The two brands differ on bounce system — SkyBound uses springless bungee-cord system, while Springfree uses springless flexible composite rods (no springs).
 - Single-user weight isn't directly comparable: SkyBound (roughly 100–330 lb depending on model); Springfree (220 lb).
-- Springfree publishes round, oval, square models; SkyBound's line-up varies by range and is best checked per model.
-- SkyBound warranty is set by product line — Official comparison material appears to range from about 2 to 10 years by model; springless series commonly shows 5 years on main components; compare against Springfree per model.
+- Springfree publishes round, oval, square models; SkyBound's line-up varies by range; use the table rows for the exact models shown.
+- SkyBound warranty is set by product line — 5 years on most frames, 10 years on AltitudeX, and 2-5 years on listed parts by line.

@@ -65,6 +65,13 @@ type RelatedReadingLink = {
 };
 
 function splitIntroIntoParagraphs(intro: string): string[] {
+  const explicitParagraphs = intro
+    .split(/\n\s*\n/g)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
+  if (explicitParagraphs.length > 1) return explicitParagraphs;
+
   const sentences = intro.match(/[^.!?]+[.!?]+(?:["')\]]+)?|[^.!?]+$/g);
 
   if (!sentences) {
@@ -72,10 +79,17 @@ function splitIntroIntoParagraphs(intro: string): string[] {
   }
 
   const cleanedSentences = sentences.map((sentence) => sentence.trim()).filter(Boolean);
+  const chooseIndex = cleanedSentences.findIndex((sentence) => /^Choose\s+/i.test(sentence));
+  const bodySentences = chooseIndex >= 0 ? cleanedSentences.slice(0, chooseIndex) : cleanedSentences;
+  const verdictSentences = chooseIndex >= 0 ? cleanedSentences.slice(chooseIndex) : [];
   const paragraphs: string[] = [];
 
-  for (let index = 0; index < cleanedSentences.length; index += 2) {
-    paragraphs.push(cleanedSentences.slice(index, index + 2).join(" "));
+  for (let index = 0; index < bodySentences.length; index += 2) {
+    paragraphs.push(bodySentences.slice(index, index + 2).join(" "));
+  }
+
+  if (verdictSentences.length > 0) {
+    paragraphs.push(verdictSentences.join(" "));
   }
 
   return paragraphs;

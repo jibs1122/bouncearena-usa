@@ -17,7 +17,7 @@ title: North vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 A focused in-ground brand against a wider European range.
 
-North is built specifically for in-ground installs. Berg spans above-ground, flat-ground, and in-ground across many lines, with a long frame warranty and component cover that varies by line.
+North is built specifically for in-ground installs. Berg spans above-ground, flat-ground, and in-ground across many lines, with a long frame warranty and component coverage that varies by line.
 
 Choose North if you want a system engineered for in-ground use. Choose Berg if you want more installation formats and range depth, and will compare the exact line against your yard.
 
@@ -28,6 +28,6 @@ Choose North if you want a system engineered for in-ground use. Choose Berg if y
 Key takeaways
 
 - Single-user weight isn't directly comparable: North (243 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
-- North publishes round, oval, rectangle models; Berg's line-up varies by range and is best checked per model.
-- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against North per model.
+- North publishes round, oval, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
+- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Best-for: North reads as a premium brand with both above and in-ground models; Berg as a premium European family/performance brand.

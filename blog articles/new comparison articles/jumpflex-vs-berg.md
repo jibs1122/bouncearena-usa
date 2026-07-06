@@ -17,7 +17,7 @@ title: Jumpflex vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 An above-ground value brand against a wide European range.
 
-Jumpflex keeps it simple: above-ground coil models in round, square, and rectangle, with clear sizing and an easy online purchase. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with component cover that varies by line.
+Jumpflex keeps it simple: above-ground coil models in round, square, and rectangle, with clear sizing and an easy online purchase. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with component coverage that varies by line.
 
 Choose Jumpflex if you want clear sizing and a simple above-ground buy. Choose Berg if you want in-ground options or the depth of a wider range, and will compare the specific line against the Jumpflex you're considering.
 
@@ -28,6 +28,6 @@ Choose Jumpflex if you want clear sizing and a simple above-ground buy. Choose B
 Key takeaways
 
 - Single-user weight isn't directly comparable: Jumpflex (500 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
-- Jumpflex publishes round, square, rectangle models; Berg's line-up varies by range and is best checked per model.
-- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs; compare against Jumpflex per model.
+- Jumpflex publishes round, square, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
+- Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: Jumpflex is above-ground only, while Berg is above- or in-ground.

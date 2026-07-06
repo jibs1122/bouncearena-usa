@@ -29,5 +29,5 @@ Key takeaways
 
 - The two brands differ on bounce system — SkyBound uses springless bungee-cord system, while Skywalker uses coil springs, with some stretch-band models.
 - Single-user weight isn't directly comparable: SkyBound (roughly 100–330 lb depending on model); Skywalker (625 lb).
-- Skywalker publishes round, oval, square, rectangle models; SkyBound's line-up varies by range and is best checked per model.
-- SkyBound warranty is set by product line — Official comparison material appears to range from about 2 to 10 years by model; springless series commonly shows 5 years on main components; compare against Skywalker per model.
+- Skywalker publishes round, oval, square, rectangle models; SkyBound's line-up varies by range; use the table rows for the exact models shown.
+- SkyBound warranty is set by product line — 5 years on most frames, 10 years on AltitudeX, and 2-5 years on listed parts by line.

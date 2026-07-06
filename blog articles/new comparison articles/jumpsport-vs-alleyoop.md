@@ -28,6 +28,6 @@ If you're shopping for a backyard trampoline, look straight at the AlleyOOP mode
 Key takeaways
 
 - Single-user weight isn't directly comparable: JumpSport (model-dependent); AlleyOOP (245 lb).
-- AlleyOOP publishes round, oval, rectangle models; JumpSport's line-up varies by range and is best checked per model.
-- JumpSport warranty is set by product line — Varies by JumpSport line; AlleyOOP frame warranty is commonly lifetime; compare against AlleyOOP per model.
+- AlleyOOP publishes round, oval, rectangle models; JumpSport's line-up varies by range; use the table rows for the exact models shown.
+- JumpSport warranty is set by product line — JumpSport terms vary by line; AlleyOOP frame warranty is commonly lifetime.
 - Best-for: JumpSport reads as a safety-led trampoline brand family / parent to AlleyOOP; AlleyOOP as a premium US safety/performance spring brand.

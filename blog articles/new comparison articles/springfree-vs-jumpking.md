@@ -28,7 +28,7 @@ Choose JumpKing if budget, availability, or a specific shape leads and you accep
 Key takeaways
 
 - The two brands differ on bounce system — Springfree uses springless flexible composite rods (no springs), while JumpKing uses coil springs, with one bungee model.
-- JumpKing claims a higher single-user weight limit — up to 350 lb vs 220 lb.
+- JumpKing lists a higher single-user weight limit — up to 350 lb vs 220 lb.
 - Springfree offers round, oval, square; JumpKing covers round, oval, rectangle, hexagon.
 - If you want a very large trampoline, Springfree goes up to 12×19 ft oval; JumpKing tops out at 10×18 ft rectangle.
 - Springfree leads on warranty (frame 10 yr, mat 10 yr, net 10 yr).
