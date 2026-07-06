@@ -153,8 +153,17 @@ function rowToProduct(row: Record<string, string>, sourceRowIndex: number): Prod
 
 let _cache: ProductCache | null = null;
 
+function missingProductsCsvError(): Error {
+  return new Error(
+    `Missing product data CSV at ${CSV_PATH}. Ensure data/products-us.csv is a real tracked file in the app before deploying.`,
+  );
+}
+
 function getProductsFileVersion(): number {
-  if (!fs.existsSync(CSV_PATH)) return 0;
+  if (!fs.existsSync(CSV_PATH)) {
+    if (process.env.NODE_ENV === "production") throw missingProductsCsvError();
+    return 0;
+  }
   return fs.statSync(CSV_PATH).mtimeMs;
 }
 
@@ -164,6 +173,7 @@ export function getProductsDataVersion(): number {
 
 export function getAllProducts(): Product[] {
   if (!fs.existsSync(CSV_PATH)) {
+    if (process.env.NODE_ENV === "production") throw missingProductsCsvError();
     return [];
   }
 
@@ -191,6 +201,11 @@ export function getAllProducts(): Product[] {
   const validProducts = products.filter(
     (p) => p.brand && p.model && !EXCLUDED_BRANDS.has(p.brand)
   );
+
+  if (validProducts.length === 0 && process.env.NODE_ENV === "production") {
+    throw new Error(`No valid products were loaded from ${CSV_PATH}. Check the CSV contents before deploying.`);
+  }
+
   _cache = {
     version,
     products: validProducts,
