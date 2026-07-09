@@ -3,7 +3,7 @@ comparison_id: 61
 title: ACON 16 HD vs ACON 16 HD Pro
 slug: acon-16-hd-vs-acon-16-hd-pro
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 16 HD vs ACON 16 HD Pro — Trampoline Comparison 2026
   meta_description: "ACON 16 HD vs 16 HD Pro: the same rectangle. The only difference is the Pro's Performance spring package, which gives a stronger, more even bounce for about $500 more."
@@ -24,7 +24,7 @@ sides:
 ---
 # ACON 16 HD vs ACON 16 HD Pro
 
-This is the same 16 HD rectangle with one upgrade: the Pro version swaps in ACON's Performance spring package. Frame, size, and warranty are otherwise identical.
+The ACON 16 HD and 16 HD Pro are the same rectangle, with one upgrade: the Pro version swaps in ACON's Performance spring package. Frame, size, and warranty are otherwise identical.
 
 ## Quick verdict
 

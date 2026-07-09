@@ -3,7 +3,7 @@ comparison_id: 67
 title: Springfree Round vs Oval
 slug: springfree-round-vs-oval
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Springfree Round vs Oval — Trampoline Comparison 2026
   meta_description: "Springfree Round vs Oval: same springless system, different shapes and sizes. Rounds suit smaller or central yards; ovals give a longer jumping area."

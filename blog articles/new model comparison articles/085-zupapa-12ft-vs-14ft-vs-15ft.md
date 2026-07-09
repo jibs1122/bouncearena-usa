@@ -3,7 +3,7 @@ comparison_id: 85
 title: Zupapa 12ft vs 14ft vs 15ft
 slug: zupapa-12ft-vs-14ft-vs-15ft
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Zupapa 12ft vs 14ft vs 15ft — Trampoline Comparison 2026
   meta_description: "Zupapa 12ft vs 14ft vs 15ft: same round line, same 425 lb limit and warranty across all three. The only real difference is jumping area and price."

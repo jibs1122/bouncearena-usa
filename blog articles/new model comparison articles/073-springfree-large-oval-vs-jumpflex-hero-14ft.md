@@ -24,7 +24,7 @@ sides:
 ---
 # Springfree Large Oval vs Jumpflex HERO 14ft
 
-This is a fully springless oval against a coil-spring round. The Springfree Large Oval uses flexible rods below a hidden frame; the Jumpflex HERO 14ft uses traditional coils at roughly half the price.
+The Springfree Large Oval and Jumpflex HERO 14ft put a fully springless oval against a coil-spring round. The Springfree Large Oval uses flexible rods below a hidden frame; the Jumpflex HERO 14ft uses traditional coils at roughly half the price.
 
 ## Quick verdict
 

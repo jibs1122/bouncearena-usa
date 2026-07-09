@@ -17,7 +17,7 @@ title: Akrobat vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 Two European premium brands that come at the category from different angles.
 
-Akrobat is built around rectangular performance, above-ground or in-ground, and backs it with a lifetime frame warranty and long spring cover. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with a long frame warranty but component terms that vary by line.
+Akrobat is built around rectangular performance, above-ground or in-ground, and backs it with a lifetime warranty on the frame and a long one on the springs. Berg is broader, spanning above-ground, flat-ground, and in-ground across many lines, with a long frame warranty but component terms that vary by line.
 
 Choose Akrobat if performance bounce and warranty are what you care about. Choose Berg if you want the widest choice of lines and installation formats and will compare the specific range you're after.
 
@@ -28,6 +28,6 @@ Choose Akrobat if performance bounce and warranty are what you care about. Choos
 Key takeaways
 
 - The two brands differ on bounce system — Akrobat uses high-performance coil springs, while Berg uses traditional coil springs.
-- Single-user weight isn't directly comparable: Akrobat (331 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
+- Akrobat rates a single jumper to 331 lb; Berg publishes no single-user figure — its 600 kg number is a static test, not a jumper rating.
 - Akrobat publishes rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.

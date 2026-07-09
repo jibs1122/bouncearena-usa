@@ -3,7 +3,7 @@ comparison_id: 86
 title: Zupapa 1500 lb vs 1800 lb models
 slug: zupapa-1500-lb-vs-1800-lb-models
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Zupapa 1500 lb vs 1800 lb models — Trampoline Comparison 2026
   meta_description: "Zupapa 1500 lb vs 1800 lb models: two frame grades. The 1500 line suits typical family use; the 1800 Double Frame adds strength and a higher single-user limit."
@@ -37,7 +37,7 @@ sides:
 ---
 # Zupapa 1500 lb vs 1800 lb models
 
-These are two frame grades within Zupapa's range. The 1500LBS line suits typical family use; the 1800LBS Double Frame steps up the frame strength and the allowed weight.
+The Zupapa 1500LBS and 1800LBS models are two frame grades within Zupapa's range. The 1500LBS line suits typical family use; the 1800LBS Double Frame steps up the frame strength and the allowed weight.
 
 ## Quick verdict
 

@@ -23,7 +23,7 @@ sides:
 ---
 # Jumpflex HERO 15ft vs North Athlete 11x18
 
-These are not really cross-shopped on price. The HERO 15ft is an everyday family round at about $999; the North Athlete is a large 18x11ft rectangle at about $7,490, closer to a competition-scale setup.
+The Jumpflex HERO 15ft and North Athlete 11x18 are not really cross-shopped on price. The HERO 15ft is an everyday family round at about $999; the North Athlete is a large 18x11ft rectangle at about $7,490, closer to a competition-scale setup.
 
 ## Quick verdict
 

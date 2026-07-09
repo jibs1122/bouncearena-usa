@@ -15,7 +15,7 @@ title: JumpSport vs AlleyOOP — Trampoline Comparison 2026 | Bounce Arena
 
 # JumpSport vs AlleyOOP
 
-These are the same family, so this is brand context against the actual product line.
+AlleyOOP is JumpSport's premium line, so this comparison is really about where the standard JumpSport range ends and AlleyOOP begins.
 
 JumpSport is the broader, safety-led parent brand; AlleyOOP is the specific premium trampoline line, with the DoubleBounce two-mat system, adjustable PowerBounce springs, and a lifetime frame warranty. Their specs aren't identical, so the real decision happens at the AlleyOOP model level.
 
@@ -27,7 +27,7 @@ If you're shopping for a backyard trampoline, look straight at the AlleyOOP mode
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: JumpSport (model-dependent); AlleyOOP (245 lb).
+- AlleyOOP caps a single jumper at 245 lb; JumpSport's limits vary by model, so check the table rows.
 - AlleyOOP publishes round, oval, rectangle models; JumpSport's line-up varies by range; use the table rows for the exact models shown.
-- JumpSport warranty is set by product line — JumpSport terms vary by line; AlleyOOP frame warranty is commonly lifetime.
+- JumpSport's warranty terms vary by line; AlleyOOP frames are commonly lifetime.
 - Best-for: JumpSport reads as a safety-led trampoline brand family / parent to AlleyOOP; AlleyOOP as a premium US safety/performance spring brand.

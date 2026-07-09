@@ -76,7 +76,7 @@ Choose Springfree if you want the fully springless design and its flat 10-year w
     keyTakeaways: [
       'Springfree uses flexible rods instead of springs; Vuly offers both coil and leaf-spring models.',
       'Vuly gives you more range and accessories; Springfree gives you the cleaner fully springless design.',
-      'Both cover round options; Springfree also comes in oval and square.',
+      'Both include round options; Springfree also comes in oval and square.',
       "If you're after a very large trampoline, Vuly tops out at its XL size (about 15½ ft); Springfree tops out with jumbo oval and square models.",
     ],
     metaDescription: 'Springfree vs Vuly: a fully springless design against Vuly\'s coil and leaf-spring range. Springfree is cleaner on safety; Vuly is more flexible.',
@@ -112,7 +112,7 @@ Jumpflex keeps coil springs and competes on raw specs, with the HERO line rated 
 
 If you're weighing whether to pay more, the decision is less about which brand is "better" and more about what kind of trampoline you want to own.
 
-Choose Springfree if you're set on the springless design and long single warranty coverage. Choose Jumpflex if you want a stronger spring bounce and a higher weight limit for older or heavier kids.`,
+Choose Springfree if you're set on the springless design and its flat 10-year warranty across frame, mat, and net. Choose Jumpflex if you want a stronger spring bounce and a higher weight limit for older or heavier kids.`,
     keyTakeaways: [
       'Springfree uses flexible rods instead of springs; Jumpflex is coil only.',
       'Jumpflex rates its MEGA models to 500 lb; Springfree caps full-size models at 220 lb per jumper.',
@@ -127,7 +127,7 @@ Choose Springfree if you're set on the springless design and long single warrant
     labelB: 'Jumpflex',
     dataBrandA: 'ACON',
     dataBrandB: 'Jumpflex',
-    intro: `Both are coil performance brands, so this is about which leans further toward performance.
+    intro: `ACON and Jumpflex are both coil performance brands, so the question is which leans further toward performance.
 
 ACON builds rectangular models for serious bouncing and publishes no single-user weight limit, recommending about 300 lb, with a 10-year frame warranty and 5-year warranty on the mat and springs. Jumpflex rates its HERO models to 350 lb and competes on value and capacity, with the same frame, mat, and spring coverage.
 
@@ -146,7 +146,7 @@ Choose ACON if you want the stronger performance benchmark and its rectangles. C
     labelB: 'Jumpflex',
     dataBrandA: 'Vuly',
     dataBrandB: 'Jumpflex',
-    intro: `Both are family brands above the budget tier, but they differ in shape and range.
+    intro: `Vuly and Jumpflex are both family brands above the budget tier, but they differ in shape and range.
 
 Vuly is round only, with coil and Thunder leaf-spring models and a strong accessory range. Jumpflex covers round, square, and rectangle and is built around higher weight limits — 350 lb on HERO and 500 lb on MEGA, against Vuly's 330 lb.
 
@@ -178,7 +178,7 @@ Choose Vuly if you want more model choice and accessories. Choose AlleyOOP if a 
     labelB: 'AlleyOOP',
     dataBrandA: 'Jumpflex',
     dataBrandB: 'AlleyOOP',
-    intro: `This trades a higher weight limit against a longer warranty.
+    intro: `Jumpflex and AlleyOOP trade a higher weight limit against a longer warranty.
 
 Jumpflex is built around capacity for older kids and heavier use, with up to a 10-year frame warranty and commonly 5-year warranty on the mat and springs. AlleyOOP keeps coil springs in a safety-engineered build, with its DoubleBounce two-mat option and a lifetime frame warranty.
 
@@ -191,7 +191,7 @@ Choose Jumpflex if you want the higher listed weight limit at a lower starting p
     labelB: 'Avyna',
     dataBrandA: 'Springfree',
     dataBrandB: 'Avyna',
-    intro: `These solve different yard problems.
+    intro: `Springfree and Avyna solve different yard problems.
 
 Springfree is above-ground only and springless, using flexible rods below a hidden frame, with a long 10-year warranty across the frame, mat, net, and rods. Avyna offers both above-ground and in-ground installs on a heavier coil-spring build with a perforated, high-airflow mat and a lifetime frame warranty.
 
@@ -204,7 +204,7 @@ Choose Springfree if you want a safety-led, springless trampoline that sits abov
     labelB: 'ACON',
     dataBrandA: 'Avyna',
     dataBrandB: 'ACON',
-    intro: `Both run coil springs and both can install above-ground or in-ground, so the real divide is build and warranty.
+    intro: `Avyna and ACON both run coil springs and both can install above-ground or in-ground, so the real divide is build and warranty.
 
 Avyna uses a heavier frame and a perforated, high-airflow mat, is rated to 350 lb per jumper, and carries a lifetime frame warranty with 10-year warranty on springs. ACON publishes no single-user weight limit and recommends about 300 lb, with a 10-year frame warranty and 5-year warranty on the mat and springs, and its ACON X and HD rectangles lean toward performance and tricks.
 
@@ -230,7 +230,7 @@ Choose AlleyOOP if you want an above-ground, safety-engineered trampoline. Choos
     labelB: 'Springfree',
     dataBrandA: 'AlleyOOP',
     dataBrandB: 'Springfree',
-    intro: `Both are premium and safety-led, but they take different paths.
+    intro: `AlleyOOP and Springfree are both premium and safety-led, but they take different paths.
 
 Springfree removes springs entirely, using flexible rods below a hidden frame, with a long 10-year warranty across the frame, mat, net, and rods. AlleyOOP keeps coil springs in a safety-engineered build, adding its DoubleBounce two-mat option and a lifetime frame warranty.
 
@@ -243,7 +243,7 @@ Choose Springfree if a fully springless design is the point. Choose AlleyOOP if 
     labelB: 'ACON',
     dataBrandA: 'AlleyOOP',
     dataBrandB: 'ACON',
-    intro: `This splits on bounce against warranty.
+    intro: `AlleyOOP and ACON split on bounce against warranty.
 
 ACON builds rectangular models for serious bouncing and publishes no single-user weight limit, recommending about 300 lb, with a 10-year frame warranty and 5-year warranty on the mat and springs. AlleyOOP keeps coil springs in a safety-engineered build, with its DoubleBounce two-mat option and a lifetime frame warranty.
 
@@ -288,7 +288,7 @@ Choose Skywalker for an affordable everyday backyard trampoline. Choose ACON if 
     labelB: 'Vuly',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Vuly',
-    intro: `Both sell round trampolines, so this is about build durability and warranty.
+    intro: `Skywalker and Vuly both sell round trampolines, so this is about build durability and warranty.
 
 Skywalker is the simpler retail option, with a standard 3-year frame warranty and 1-year warranty on the mat and springs. Vuly is the more polished setup, with a 10-year frame warranty on its upper models, 5-year warranty on the mat and springs, and a wider accessory range.
 
@@ -385,7 +385,7 @@ Choose Zupapa if value and a strong frame warranty lead. Choose AlleyOOP if its 
     labelB: 'AlleyOOP',
     dataBrandA: 'Skywalker',
     dataBrandB: 'AlleyOOP',
-    intro: `These sit well apart on build and warranty.
+    intro: `Skywalker and AlleyOOP sit well apart on build and warranty.
 
 Skywalker is the entry-level retail option, with a standard 3-year frame warranty and 1-year warranty on the mat and springs. AlleyOOP is a heavier, safety-engineered build, with its DoubleBounce two-mat option and a lifetime frame warranty.
 
@@ -398,7 +398,7 @@ Choose Skywalker for availability and an entry-level fit. Choose AlleyOOP if you
     labelB: 'Zupapa',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Zupapa',
-    intro: `Both are value brands, so this is about warranty and brand familiarity.
+    intro: `Skywalker and Zupapa are both value brands, so this is about warranty and brand familiarity.
 
 Skywalker is the established retail name, with broad parts availability and a 3-year frame warranty on its standard models (the Olympic rectangle line runs longer). Zupapa offers longer coverage for the money, with a 10-year frame warranty and 2-year warranty on the mat, springs, and pads.
 
@@ -417,7 +417,7 @@ Either works as a first family trampoline. Choose Skywalker for the familiar bra
     labelB: 'JumpKing',
     dataBrandA: 'Skywalker',
     dataBrandB: 'JumpKing',
-    intro: `Both are mainstream retail spring brands, so warranty is the divide.
+    intro: `Skywalker and JumpKing are both mainstream retail spring brands, so warranty is the divide.
 
 Skywalker carries a standard 3-year frame warranty and 1-year warranty on the mat and springs. JumpKing is the older retail name, with a 1-year frame warranty and shorter coverage on the mat, springs, and pads, across a familiar range of rounds, ovals, and rectangles.
 
@@ -430,7 +430,7 @@ Choose Skywalker for the stronger standard warranty. Choose JumpKing when its pr
     labelB: 'JumpKing',
     dataBrandA: 'Zupapa',
     dataBrandB: 'JumpKing',
-    intro: `This is spec-value against a legacy retail name.
+    intro: `Zupapa and JumpKing compare spec-value against a legacy retail name.
 
 Zupapa offers a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. JumpKing is the older retail brand, with a 1-year frame warranty and shorter coverage on the mat, springs, and pads.
 
@@ -443,7 +443,7 @@ Choose Zupapa for the much longer warranty at the price. Choose JumpKing when it
     labelB: 'Zupapa',
     dataBrandA: 'ORCC',
     dataBrandB: 'Zupapa',
-    intro: `Both are Amazon-led, but they sit at different price points.
+    intro: `ORCC and Zupapa are both Amazon-led, but they sit at different price points.
 
 ORCC competes in the budget tier. Zupapa sits a step above, with longer warranty terms and higher listed weight ratings.
 
@@ -469,7 +469,7 @@ Compare the exact size and what's included for each, then let current pricing de
     labelB: 'Skywalker',
     dataBrandA: 'ORCC',
     dataBrandB: 'Skywalker',
-    intro: `This is the lowest tier of outdoor trampolines against the volume mid-tier standard.
+    intro: `ORCC and Skywalker compare the lowest tier of outdoor trampolines against the volume mid-tier standard.
 
 ORCC is an Amazon budget brand. Skywalker is the more established mid-tier name, with broader retail availability, stronger recognition, and longer warranty terms.
 
@@ -482,7 +482,7 @@ Choose ORCC for the lowest entry price. Choose Skywalker if you want a more prov
     labelB: 'Zupapa',
     dataBrandA: 'JUMPZYLLA',
     dataBrandB: 'Zupapa',
-    intro: `Both sit in the Amazon-led value space, so the split is warranty.
+    intro: `Jumpzylla and Zupapa both sit in the Amazon-led value space, so the split is warranty.
 
 Jumpzylla may land lower on price, but it carries only a 1-year warranty across the main parts. Zupapa has a 10-year frame warranty and 2-year warranty on the mat, springs, and pads.
 
@@ -495,7 +495,7 @@ Both suit casual family use. Choose Jumpzylla if the lower price leads. Choose Z
     labelB: 'Skywalker',
     dataBrandA: 'JUMPZYLLA',
     dataBrandB: 'Skywalker',
-    intro: `Both are budget round trampolines, so this is about warranty, capacity, and availability.
+    intro: `Jumpzylla and Skywalker are both budget round trampolines, so this is about warranty, capacity, and availability.
 
 Skywalker is the established retail default, with broad parts access and a standard 3-year frame warranty. Jumpzylla is the lower entry price and lists a higher weight limit, up to 450 lb on its 14 to 16ft models, but carries only a 1-year warranty across the main parts.
 
@@ -508,7 +508,7 @@ Choose Skywalker for the safer retail default and easier parts support. Choose J
     labelB: 'Skywalker',
     dataBrandA: 'Upper Bounce',
     dataBrandB: 'Skywalker',
-    intro: `Both are mass-market, so this is warranty and range.
+    intro: `Upper Bounce and Skywalker are both mass-market, so this is warranty and range.
 
 Skywalker is the cleaner default, with a standard 3-year frame warranty and 1-year warranty on the mat and springs, and broad parts support. Upper Bounce carries very short warranty terms but competes on shape options, including rectangles and squares, and strong replacement-parts availability.
 
@@ -521,7 +521,7 @@ Choose Skywalker for the longer frame warranty and easy support. Choose Upper Bo
     labelB: 'Zupapa',
     dataBrandA: 'Upper Bounce',
     dataBrandB: 'Zupapa',
-    intro: `Both compete below the premium tier, so warranty separates them.
+    intro: `Upper Bounce and Zupapa both compete below the premium tier, so warranty separates them.
 
 Zupapa has a 10-year frame warranty and 2-year warranty on the mat, springs, and pads. Upper Bounce carries very short warranty terms but offers more shapes, including rectangles and squares, and strong replacement-parts support.
 
@@ -534,7 +534,7 @@ Choose Zupapa for the stronger warranty. Choose Upper Bounce if you want a speci
     labelB: 'JUMPZYLLA',
     dataBrandA: 'Upper Bounce',
     dataBrandB: 'JUMPZYLLA',
-    intro: `Both compete in the Amazon budget tier and overlap heavily on price and target buyer.
+    intro: `Upper Bounce and JUMPZYLLA both compete in the Amazon budget tier and overlap heavily on price and target buyer.
 
 Upper Bounce is the older brand with strong replacement-parts availability, which matters since budget trampolines often need parts within a few years. Jumpzylla is newer, with curved enclosure poles and a higher listed weight capacity.
 
@@ -547,7 +547,7 @@ Choose Upper Bounce if parts availability is a priority. Choose Jumpzylla for th
     labelB: 'Jumpflex',
     dataBrandA: 'JumpKing',
     dataBrandB: 'Jumpflex',
-    intro: `This is a legacy retail brand against a clear step up.
+    intro: `JumpKing and Jumpflex put a legacy retail brand against a clear step up.
 
 JumpKing is the older retail option, with a 1-year frame warranty and shorter coverage on the mat, springs, and pads, but a good range of rectangular models. Jumpflex is built for the long term, with up to a 10-year frame warranty and commonly 5-year warranty on the mat and springs.
 
@@ -573,7 +573,7 @@ Choose Springfree if a safety-led, springless design is the priority. Choose Akr
     labelB: 'ACON',
     dataBrandA: 'Akrobat',
     dataBrandB: 'ACON',
-    intro: `Both are premium performance spring brands that can be set up above-ground or in-ground, so the real divide is warranty and entry price.
+    intro: `Akrobat and ACON are both premium performance spring brands that can be set up above-ground or in-ground, so the real divide is warranty and entry price.
 
 ACON publishes no single-user weight limit and recommends about 300 lb, with a 10-year frame warranty, 5-year warranty on the mat and springs, and 2-year warranty on pads. Akrobat carries a lifetime frame warranty, 12-year warranty on springs, and 5-year warranty on the mat and pads.
 
@@ -586,7 +586,7 @@ Choose ACON for the lower entry price. Choose Akrobat for the stronger warranty 
     labelB: 'Akrobat',
     dataBrandA: 'Avyna',
     dataBrandB: 'Akrobat',
-    intro: `Both are premium in-ground performance brands, so capacity and warranty separate them.
+    intro: `Avyna and Akrobat are both premium in-ground performance brands, so capacity and warranty separate them.
 
 Avyna is rated to 350 lb per jumper, with a lifetime frame warranty, 10-year warranty on springs, and 3-year warranty on the mat and pads. Akrobat is rated to 331 lb, with a lifetime frame warranty, 12-year warranty on springs, and 5-year warranty on the mat and pads.
 
@@ -599,7 +599,7 @@ Choose Avyna if the higher weight rating leads. Choose Akrobat for the longer ma
     labelB: 'Sportspower',
     dataBrandA: 'Skywalker',
     dataBrandB: 'Sportspower / Bounce Pro',
-    intro: `Both are mass-market brands sold heavily through Walmart and Costco, so this is a close, budget-tier call.
+    intro: `Skywalker and Sportspower are both mass-market brands sold heavily through Walmart and Costco, so this is a close, budget-tier call.
 
 Skywalker is the more recognized name, with broad availability and longer warranty terms. Sportspower, sold under the Bounce Pro label, typically prices at or below Skywalker with shorter coverage.
 
@@ -638,7 +638,7 @@ Choose Bounce Pro if the lowest price is the priority. Choose JumpKing if you wa
     labelB: 'ORCC',
     dataBrandA: 'BCAN',
     dataBrandB: 'ORCC',
-    intro: `Both are Amazon budget brands, but they target different uses.
+    intro: `BCAN and ORCC are both Amazon budget brands, but they target different uses.
 
 BCAN is best known for mini and small-diameter trampolines, including indoor models. ORCC produces full-size outdoor trampolines.
 
@@ -651,7 +651,7 @@ Choose BCAN if you want a mini or small trampoline, especially for indoor use. C
     labelB: 'Skywalker',
     dataBrandA: 'Little Tikes',
     dataBrandB: 'Skywalker',
-    intro: `These target different ages.
+    intro: `Little Tikes and Skywalker target different ages.
 
 Little Tikes makes small kids' trampolines, typically under 7ft, with low weight limits and toddler-focused designs. Skywalker covers the full residential size range, including a Mini line that competes more directly.
 
@@ -664,7 +664,7 @@ Choose Little Tikes if your kids are toddlers or preschoolers. Choose Skywalker 
     labelB: 'JUMPZYLLA',
     dataBrandA: 'Little Tikes',
     dataBrandB: 'JUMPZYLLA',
-    intro: `Both make kids' trampolines, but for different ages.
+    intro: `Little Tikes and JUMPZYLLA both make kids' trampolines, but for different ages.
 
 Little Tikes is the established toddler brand, with low-height designs and low weight limits. Jumpzylla targets older kids, with higher listed weight ratings and outdoor-grade construction.
 
@@ -677,7 +677,7 @@ Choose Little Tikes for toddlers and preschoolers. Choose Jumpzylla for older ki
     labelB: 'Little Tikes',
     dataBrandA: 'BCAN',
     dataBrandB: 'Little Tikes',
-    intro: `Both make smaller trampolines, but for different ages and settings.
+    intro: `BCAN and Little Tikes both make smaller trampolines, but for different ages and settings.
 
 BCAN focuses on indoor mini trampolines and small outdoor models for older kids. Little Tikes focuses on toddlers, with low-height, plastic-frame designs.
 

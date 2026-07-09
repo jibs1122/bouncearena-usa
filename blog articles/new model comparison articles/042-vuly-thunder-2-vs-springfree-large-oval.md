@@ -3,7 +3,7 @@ comparison_id: 42
 title: Vuly Thunder 2 vs Springfree Large Oval
 slug: vuly-thunder-2-vs-springfree-large-oval
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Vuly Thunder 2 vs Springfree Large Oval — Trampoline Comparison 2026
   meta_description: "Vuly Thunder 2 vs Springfree Large Oval: leaf springs against no springs. The Thunder 2 keeps a spring bounce out of reach; Springfree removes springs entirely."
@@ -24,7 +24,7 @@ sides:
 ---
 # Vuly Thunder 2 vs Springfree Large Oval
 
-This is a leaf-spring trampoline against a fully springless one. The Thunder 2 keeps a spring-style bounce but moves its leaf springs out of the jumping path; the Springfree Large Oval uses flexible rods below a hidden frame and has no springs at all.
+The Vuly Thunder 2 and Springfree Large Oval put a leaf-spring trampoline against a fully springless one. The Thunder 2 keeps a spring-style bounce but moves its leaf springs out of the jumping path; the Springfree Large Oval uses flexible rods below a hidden frame and has no springs at all.
 
 ## Quick verdict
 
@@ -54,4 +54,4 @@ Choose the Thunder 2 for a livelier spring bounce, a higher weight tolerance, an
 
 ## What matters most
 
-Both designs aim to keep hard springs away from where kids land, but they get there differently and at very different prices: the Thunder 2 is about $879, the Springfree Large Oval about $1,849. Weight tolerance is the practical divider, since the Thunder 2 is rated to 330 lb for a single jumper while the Springfree Large Oval tops out at 220 lb. The Springfree's appeal is the no-springs build and its 10-year cover on the frame, mat, and rods; the Thunder 2's is the spring-style feel at a much lower cost.
+Both designs aim to keep hard springs away from where kids land, but they get there differently and at very different prices: the Thunder 2 is about $879, the Springfree Large Oval about $1,849. Weight tolerance is the practical divider, since the Thunder 2 is rated to 330 lb for a single jumper while the Springfree Large Oval tops out at 220 lb. The Springfree's appeal is the no-springs build and its 10-year warranty across the frame, mat, and rods; the Thunder 2's is the spring-style feel at a much lower cost.

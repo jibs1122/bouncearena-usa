@@ -3,10 +3,10 @@ comparison_id: 37
 title: Vuly Ultra 2 Pro vs Thunder 2 Pro
 slug: vuly-ultra-2-pro-vs-thunder-2-pro
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Vuly Ultra 2 Pro vs Thunder 2 Pro — Trampoline Comparison 2026
-  meta_description: "Vuly Ultra 2 Pro vs Thunder 2 Pro: both round Vuly Pro models with a 330 lb limit. The difference is coil springs vs the leaf-spring system, plus a big size and price gap."
+  meta_description: "Vuly Ultra 2 Pro vs Thunder 2 Pro: both round Pro models with a 330 lb limit. Coil springs vs leaf springs, plus a big size and price gap."
 data_issues: []
 assumptions:
 - 'Vuly Ultra 2 Pro: Defaulted Vuly to size L because the XL rows have missing prices.'
@@ -25,7 +25,7 @@ sides:
 ---
 # Vuly Ultra 2 Pro vs Thunder 2 Pro
 
-Both are round Vuly Pro models with a 330 lb limit and a 10-year frame. The Ultra 2 Pro uses coil springs; the Thunder 2 Pro uses Vuly's leaf-spring system in a much larger, pricier build.
+The Vuly Ultra 2 Pro and Thunder 2 Pro are both round Vuly Pro models with a 330 lb limit and a 10-year frame. The Ultra 2 Pro uses coil springs; the Thunder 2 Pro uses Vuly's leaf-spring system in a much larger, pricier build.
 
 ## Quick verdict
 

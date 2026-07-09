@@ -3,7 +3,7 @@ comparison_id: 87
 title: Zupapa Double Frame vs Standard / No-Gap models
 slug: zupapa-double-frame-vs-standard-no-gap-models
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Zupapa Double Frame vs Standard / No-Gap models — Trampoline Comparison
     2026

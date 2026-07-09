@@ -3,7 +3,7 @@ comparison_id: 48
 title: Jumpflex HERO vs MEGA
 slug: jumpflex-hero-vs-mega
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Jumpflex HERO vs MEGA — Trampoline Comparison 2026
   meta_description: "Jumpflex HERO vs MEGA: a 350 lb round against a 500 lb square or rectangle. HERO suits most families; MEGA is built for the heaviest use and biggest jumpers."
@@ -33,7 +33,7 @@ sides:
 ---
 # Jumpflex HERO vs MEGA
 
-Both share Jumpflex's 10-year frame and 5-year mat and spring cover, so the real differences are shape and capacity. The HERO is a round rated to 350 lb; the MEGA is a square or rectangle rated to 500 lb.
+The Jumpflex HERO and MEGA share Jumpflex's 10-year frame and 5-year mat and spring warranty, so the real differences are shape and capacity. The HERO is a round rated to 350 lb; the MEGA is a square or rectangle rated to 500 lb.
 
 ## Quick verdict
 

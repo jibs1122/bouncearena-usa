@@ -27,7 +27,7 @@ Choose Jumpflex if you want clear sizing and a simple above-ground buy. Choose B
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: Jumpflex (500 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
+- Jumpflex rates its MEGA models to 500 lb per jumper; Berg publishes no single-user figure — its 600 kg number is a static test, not a jumper rating.
 - Jumpflex publishes round, square, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: Jumpflex is above-ground only, while Berg is above- or in-ground.

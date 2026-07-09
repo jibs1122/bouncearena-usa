@@ -3,7 +3,7 @@ comparison_id: 101
 title: Capital Play In-ground vs North In-ground
 slug: capital-play-in-ground-vs-north-in-ground
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Capital Play In-ground vs North In-ground — Trampoline Comparison 2026
   meta_description: "Capital Play In-ground vs North In-ground: two coil in-ground systems with similar warranty. North offers more sizes and shapes; Capital Play is a single 11x8 option."
@@ -29,7 +29,7 @@ sides:
 ---
 # Capital Play In-ground vs North In-ground
 
-Both are coil-spring in-ground systems with similar frame, mat, and spring cover, so the main difference is choice. Capital Play offers a single 11x8 option; North gives more sizes and shapes.
+The Capital Play In-ground and North In-ground are both coil-spring in-ground systems with similar frame, mat, and spring warranty, so the main difference is the range on offer. Capital Play offers a single 11x8 option; North gives more sizes and shapes.
 
 ## Quick verdict
 

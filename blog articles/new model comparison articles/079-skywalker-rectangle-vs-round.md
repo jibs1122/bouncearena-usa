@@ -3,7 +3,7 @@ comparison_id: 79
 title: Skywalker Rectangle vs Round
 slug: skywalker-rectangle-vs-round
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Skywalker Rectangle vs Round — Trampoline Comparison 2026
   meta_description: "Skywalker Rectangle vs Round: shape tracks use here. Rounds are the entry-tier family shape; the 17x10 Premium Rectangle suits flips and tricks with the highest limit."

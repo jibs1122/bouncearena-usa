@@ -28,9 +28,9 @@ Choose Jumpflex if you want a simple above-ground trampoline. Choose North if yo
 Key takeaways
 
 - Jumpflex lists a higher single-user weight limit — up to 500 lb vs 243 lb.
-- Jumpflex offers round, square, rectangle; North covers round, oval, rectangle.
+- Both make rounds and rectangles; Jumpflex adds squares, North adds ovals.
 - If you want a very large trampoline, Jumpflex goes up to 16×16 ft square; North tops out at 10×18 ft rectangle.
-- Warranties are otherwise matched; North adds longer net cover (2 yr).
+- Warranties are otherwise matched; North's net term is longer (2 yr).
 - Installation differs: Jumpflex is above-ground only, while North is above- or in-ground.
 
 Shared across all models

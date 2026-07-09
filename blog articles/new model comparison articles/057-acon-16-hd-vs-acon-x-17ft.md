@@ -3,7 +3,7 @@ comparison_id: 57
 title: ACON 16 HD vs ACON X 17ft
 slug: acon-16-hd-vs-acon-x-17ft
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 16 HD vs ACON X 17ft — Trampoline Comparison 2026
   meta_description: "ACON 16 HD vs ACON X 17ft: two premium ACON rectangles with the same warranty. The 16 HD suits most yards; the ACON X is the larger flagship."
@@ -24,7 +24,7 @@ sides:
 ---
 # ACON 16 HD vs ACON X 17ft
 
-Both are premium ACON rectangles with the same warranty and bounce character, so the decision is size and footprint. The 16 HD fits most family yards; the ACON X 17ft is the larger flagship.
+The ACON 16 HD and ACON X 17ft are both premium ACON rectangles with the same warranty and bounce character, so the decision is size and footprint. The 16 HD fits most family yards; the ACON X 17ft is the larger flagship.
 
 ## Quick verdict
 

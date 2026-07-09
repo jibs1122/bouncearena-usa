@@ -3,7 +3,7 @@ comparison_id: 45
 title: Vuly Thunder 2 vs Jumpflex HERO
 slug: vuly-thunder-2-vs-jumpflex-hero
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Vuly Thunder 2 vs Jumpflex HERO — Trampoline Comparison 2026
   meta_description: "Vuly Thunder 2 vs Jumpflex HERO: Vuly's leaf-spring system against traditional coil springs. The Thunder 2 keeps springs out of reach; HERO offers more sizes."
@@ -60,4 +60,4 @@ Choose the Thunder 2 if keeping springs away from the landing area is your prior
 
 ## What matters most
 
-The leaf-spring design is the Thunder 2's main draw, moving the springs to the frame base instead of across the mat edge; it is a 145-inch round at about $879. The HERO uses coils in sizes from 10 to 15ft at $749 to $999, so it is easier to fit to a specific yard and starts cheaper. The HERO is rated to 350 lb against 330 lb on the Thunder 2, and carries 5 years on its springs versus 1 year on the Thunder 2's leaf springs. So the trade is the safer-feeling edge against more sizes and longer spring cover.
+The leaf-spring design is the Thunder 2's main draw, moving the springs to the frame base instead of across the mat edge; it is a 145-inch round at about $879. The HERO uses coils in sizes from 10 to 15ft at $749 to $999, so it is easier to fit to a specific yard and starts cheaper. The HERO is rated to 350 lb against 330 lb on the Thunder 2, and carries 5 years on its springs versus 1 year on the Thunder 2's leaf springs. So the trade is the safer-feeling edge against more sizes and longer spring warranty.

@@ -3,7 +3,7 @@ comparison_id: 68
 title: Springfree Oval vs Square
 slug: springfree-oval-vs-square
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Springfree Oval vs Square — Trampoline Comparison 2026
   meta_description: "Springfree Oval vs Square: same springless system, different shapes. Ovals suit a longer narrow yard; squares give more even corner-to-corner room."

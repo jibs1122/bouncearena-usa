@@ -23,7 +23,7 @@ sides:
 ---
 # Jumpflex 17ft MEGA vs 19ft MEGA
 
-Both are 500 lb MEGA models with the same warranty, so the choice is shape and footprint. The 17ft is a rectangle; the 19ft is a square.
+The Jumpflex 17ft MEGA and 19ft MEGA are both 500 lb MEGA models with the same warranty, so the choice is shape and footprint. The 17ft is a rectangle; the 19ft is a square.
 
 ## Quick verdict
 

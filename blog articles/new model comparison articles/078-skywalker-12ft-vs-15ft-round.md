@@ -3,7 +3,7 @@ comparison_id: 78
 title: Skywalker 12ft vs 15ft Round
 slug: skywalker-12ft-vs-15ft-round
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Skywalker 12ft vs 15ft Round — Trampoline Comparison 2026
   meta_description: "Skywalker 12ft vs 15ft Round: same Classic line, two sizes. The 12ft suits younger kids and smaller yards; the 15ft adds room for about $60 more."
@@ -25,7 +25,7 @@ sides:
 ---
 # Skywalker 12ft vs 15ft Round
 
-Same Classic round line, so this is a size and capacity choice. The 12ft suits younger kids and smaller yards; the 15ft adds jumping room and a slightly higher limit.
+The Skywalker 12ft and Skywalker 15ft Round are two round Skywalker models, so this is a size and capacity choice. The 12ft suits younger kids and smaller yards; the 15ft adds jumping room and a slightly higher limit.
 
 ## Quick verdict
 
@@ -53,4 +53,4 @@ Choose the 12ft for a small yard or a single younger child. Choose the 15ft if y
 
 ## What matters most
 
-Both carry the Classic line's 3-year frame and 1 year on the mat and springs, so build is the same. The 12ft is rated to 250 lb at about $298; the 15ft is rated to 275 lb at about $359 to $390. The extra room on the 15ft helps when two kids share the mat, but it needs more clear space around it. For one younger jumper in a tight yard, the 12ft is enough; if you have the room, the 15ft is an easy step up for the price.
+The 12ft is rated to 250 lb at about $298, with a 3-year frame and 1 year on the mat and springs. The 15ft is rated to 275 lb at about $390, with a 7-year frame and 3 years on the mat and springs. The extra room on the 15ft helps when two kids share the mat, but it needs more clear space around it. For one younger jumper in a tight yard, the 12ft is enough; if you have the room, the 15ft is an easy step up for the price.

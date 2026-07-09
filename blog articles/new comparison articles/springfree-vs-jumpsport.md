@@ -15,7 +15,7 @@ title: Springfree vs JumpSport — Trampoline Comparison 2026 | Bounce Arena
 
 # Springfree vs JumpSport
 
-Both brands sell safety, but they get there in different ways.
+Springfree and JumpSport both sell safety, but they get there in different ways.
 
 Springfree removes the springs entirely, running flexible rods below a hidden frame. JumpSport is the safety-led parent of AlleyOOP, which keeps traditional springs but engineers around them with the DoubleBounce two-mat system and a lifetime frame warranty.
 
@@ -28,6 +28,6 @@ Choose Springfree if a no-springs design is the point. If JumpSport appeals, loo
 Key takeaways
 
 - The two brands differ on bounce system — Springfree uses springless flexible composite rods (no springs), while JumpSport uses traditional coil springs.
-- Single-user weight isn't directly comparable: Springfree (220 lb); JumpSport (model-dependent).
+- Springfree caps a single jumper at 220 lb; JumpSport's limits vary by model, so check the table rows.
 - Springfree publishes round, oval, square models; JumpSport's line-up varies by range; use the table rows for the exact models shown.
-- JumpSport warranty is set by product line — JumpSport terms vary by line; AlleyOOP frame warranty is commonly lifetime.
+- JumpSport's warranty terms vary by line; frames on its premium AlleyOOP line are commonly lifetime.

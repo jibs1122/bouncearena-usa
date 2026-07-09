@@ -3,7 +3,7 @@ comparison_id: 96
 title: Akrobat 17x10 FlatGround vs North 12x17
 slug: akrobat-17x10-flatground-vs-north-12x17
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Akrobat 17x10 FlatGround vs North 12x17 — Trampoline Comparison 2026
   meta_description: "Akrobat 17x10 FlatGround vs North 12x17: two premium in-ground rectangles at a similar price. Akrobat has a lifetime frame; North gives a slightly wider rectangle."
@@ -24,7 +24,7 @@ sides:
 ---
 # Akrobat 17x10 FlatGround vs North 12x17
 
-Both are premium in-ground rectangles priced close together, so warranty and dimensions decide it. Akrobat carries longer cover; North gives a slightly wider footprint.
+The Akrobat 17x10 FlatGround and North 12x17 are both premium in-ground rectangles priced close together, so warranty and dimensions decide it. Akrobat carries longer warranties; North gives a slightly wider footprint.
 
 ## Quick verdict
 

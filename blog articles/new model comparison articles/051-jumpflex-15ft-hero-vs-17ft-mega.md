@@ -23,7 +23,7 @@ sides:
 ---
 # Jumpflex 15ft HERO vs 17ft MEGA
 
-This is a step up in both size and duty within one brand. The 15ft HERO is a round rated to 350 lb; the 17ft MEGA is a rectangle rated to 500 lb.
+The 17ft MEGA is a step up from the 15ft HERO in both size and duty within one brand. The 15ft HERO is a round rated to 350 lb; the 17ft MEGA is a rectangle rated to 500 lb.
 
 ## Quick verdict
 
@@ -53,4 +53,4 @@ The 15ft HERO covers most families well. Choose the 17ft MEGA if you want a rect
 
 ## What matters most
 
-The two differ on shape, capacity, and price. The HERO ($999) is round and centers jumpers, which works for casual family use. The MEGA ($1,899) is rectangular, spreads the bounce evenly across the mat, and handles 500 lb for a single jumper, which suits people doing flips or tricks and heavier users. Both carry the same 10-year frame and 5-year mat and spring cover, so build quality is not the question. It is whether you need the extra capacity and the rectangle, which together justify the higher price.
+The two differ on shape, capacity, and price. The HERO ($999) is round and centers jumpers, which works for casual family use. The MEGA ($1,899) is rectangular, spreads the bounce evenly across the mat, and handles 500 lb for a single jumper, which suits people doing flips or tricks and heavier users. Both carry the same 10-year frame and 5-year mat and spring warranty, so build quality is not the question. It is whether you need the extra capacity and the rectangle, which together justify the higher price.

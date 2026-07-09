@@ -24,11 +24,11 @@ sides:
 ---
 # Jumpflex HERO 15ft vs Akrobat 17x10 FlatGround
 
-These solve different problems. The HERO 15ft is an above-ground round for everyday family use; the Akrobat 17x10 FlatGround is a flush-to-ground rectangle built as an in-ground performance setup.
+The Jumpflex HERO 15ft and the Akrobat 17x10 Flatground solve different problems. The HERO 15ft is an above-ground round for everyday family use; the Akrobat 17x10 FlatGround is a flush-to-ground rectangle built as an in-ground performance setup.
 
 ## Quick verdict
 
-Choose the HERO 15ft if you want a straightforward above-ground trampoline at a sensible price. Choose the Akrobat if you are committing to an in-ground install and want a performance rectangle with long warranty cover.
+Choose the HERO 15ft if you want a straightforward above-ground trampoline at a sensible price. Choose the Akrobat if you are committing to an in-ground install and want a performance rectangle with long warranties.
 
 ## Full spec comparison
 
@@ -55,4 +55,4 @@ Choose the HERO 15ft if you want a straightforward above-ground trampoline at a 
 
 ## What matters most
 
-Install type and price are the real story. The HERO 15ft is about $999 and drops into most yards with no digging. The Akrobat 17x10 Flat is about $3,299 and is designed to sit flush with the ground, which means excavation and a bigger commitment. The Akrobat also carries much longer cover: a lifetime frame, 12 years on springs, and 5 years on the mat and pads, against the HERO's 10-year frame and 5-year mat and springs. Decide on above-ground versus in-ground first; everything else follows from that.
+Install type and price are the real story. The HERO 15ft is about $999 and drops into most yards with no digging. The Akrobat 17x10 Flat is about $3,299 and is designed to sit flush with the ground, which means excavation and a bigger commitment. The Akrobat also carries much longer warranties: lifetime on the frame, 12 years on springs, and 5 years on the mat and pads, against the HERO's 10-year frame and 5-year mat and springs. Decide on above-ground versus in-ground first; everything else follows from that.

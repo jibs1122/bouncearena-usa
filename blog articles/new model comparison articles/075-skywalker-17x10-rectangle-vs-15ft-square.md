@@ -3,7 +3,7 @@ comparison_id: 75
 title: Skywalker 17x10 Rectangle vs 15ft Square
 slug: skywalker-17x10-rectangle-vs-15ft-square
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Skywalker 17x10 Rectangle vs 15ft Square — Trampoline Comparison 2026
   meta_description: "Skywalker 17x10 Rectangle vs 15ft Square: two large Premium models with the same warranty. The rectangle suits tricks and a longer yard; the square gives even space."
@@ -26,7 +26,7 @@ sides:
 ---
 # Skywalker 17x10 Rectangle vs 15ft Square
 
-Both are large Skywalker Premium models with the same warranty and high weight limits, so shape and footprint decide it. The 17x10 is a rectangle; the 15ft is a square.
+The Skywalker 17x10 Rectangle and 15ft Square are both large Skywalker Premium models with the same warranty and high weight limits, so shape and footprint decide it. The 17x10 is a rectangle; the 15ft is a square.
 
 ## Quick verdict
 

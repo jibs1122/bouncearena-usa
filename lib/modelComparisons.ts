@@ -63,7 +63,8 @@ function parseModelComparison(filename: string): ModelComparisonArticle | null {
   const data = parsed.data as FrontmatterData;
 
   if (!data.slug || !data.title) return null;
-  if (data.publish_status === "blocked_missing_data") return null;
+  const publishStatus = data.publish_status ?? "ready";
+  if (publishStatus !== "ready") return null;
 
   const labels = (data.sides ?? [])
     .map((side) => side.label)
@@ -84,7 +85,7 @@ function parseModelComparison(filename: string): ModelComparisonArticle | null {
     comparisonId: data.comparison_id ?? 0,
     title: removeDuplicateReview(cleanDuplicateBrandPrefixes(data.title)),
     slug: data.slug,
-    publishStatus: data.publish_status ?? "ready",
+    publishStatus,
     metaTitle: removeDuplicateReview(
       cleanDuplicateBrandPrefixes(data.seo?.meta_title ?? `${data.title} — Trampoline Comparison 2026`),
     ),

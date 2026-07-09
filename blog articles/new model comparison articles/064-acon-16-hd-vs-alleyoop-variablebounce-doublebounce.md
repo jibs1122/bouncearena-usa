@@ -3,11 +3,11 @@ comparison_id: 64
 title: ACON 16 HD vs AlleyOOP VariableBounce / DoubleBounce
 slug: acon-16-hd-vs-alleyoop-variablebounce-doublebounce
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 16 HD vs AlleyOOP VariableBounce / DoubleBounce — Trampoline Comparison
     2026
-  meta_description: "ACON 16 HD vs AlleyOOP VariableBounce/DoubleBounce: a performance rectangle against AlleyOOP's round and oval range with a lifetime frame and longer cover."
+  meta_description: "ACON 16 HD vs AlleyOOP VariableBounce/DoubleBounce: a performance rectangle against AlleyOOP's round and oval range with a lifetime frame and longer warranty."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -33,11 +33,11 @@ sides:
 ---
 # ACON 16 HD vs AlleyOOP VariableBounce / DoubleBounce
 
-This pairs a performance rectangle with AlleyOOP's round and oval models. The 16 HD is built around an even rectangular bounce; AlleyOOP focuses on safety-engineered round and oval designs with long warranty cover.
+The ACON 16 HD and AlleyOOP VariableBounce/DoubleBounce pair a performance rectangle with AlleyOOP's round and oval models. The 16 HD is built around an even rectangular bounce; AlleyOOP focuses on safety-engineered round and oval designs with long warranties.
 
 ## Quick verdict
 
-Choose the ACON 16 HD for a rectangle, a higher weight allowance, and a bounce suited to flips and tricks. Choose AlleyOOP if you want its round or oval shape and a lifetime frame with long mat cover.
+Choose the ACON 16 HD for a rectangle, a higher weight allowance, and a bounce suited to flips and tricks. Choose AlleyOOP if you want its round or oval shape and a lifetime frame with long mat warranty.
 
 ## Full spec comparison
 
@@ -63,4 +63,4 @@ Choose the ACON 16 HD for a rectangle, a higher weight allowance, and a bounce s
 
 ## What matters most
 
-Shape and warranty are the dividers. The 16 HD is a rectangle at about $2,499; ACON recommends a limit of 300 lb, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. AlleyOOP runs $1,275 to $2,250 in rounds and ovals, rated to 245 lb, with a lifetime frame, 10 years on the mat and net when you register or buy direct, and 5 years on springs and pads. So AlleyOOP can cost less and carries longer frame and mat cover, but the 16 HD allows more weight and gives the even rectangular bounce. Pick by shape and how much the warranty length matters.
+Shape and warranty are the dividers. The 16 HD is a rectangle at about $2,499; ACON recommends a limit of 300 lb, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. AlleyOOP runs $1,275 to $2,250 in rounds and ovals, rated to 245 lb, with a lifetime frame, 10 years on the mat and net when you register or buy direct, and 5 years on springs and pads. So AlleyOOP can cost less and carries longer frame and mat warranties, but the 16 HD allows more weight and gives the even rectangular bounce. Pick by shape and how much the warranty length matters.

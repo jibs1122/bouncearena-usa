@@ -3,10 +3,10 @@ comparison_id: 63
 title: ACON 16 HD vs Akrobat Primus
 slug: acon-16-hd-vs-akrobat-primus
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 16 HD vs Akrobat Primus — Trampoline Comparison 2026
-  meta_description: "ACON 16 HD vs Akrobat Primus: two premium above-ground rectangles. The 16 HD is the lower-priced pick; the Primus carries a lifetime frame and longer cover."
+  meta_description: "ACON 16 HD vs Akrobat Primus: two premium above-ground rectangles. The 16 HD is the lower-priced pick; the Primus carries a lifetime frame and longer warranty."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -26,7 +26,7 @@ sides:
 ---
 # ACON 16 HD vs Akrobat Primus
 
-Both are premium above-ground rectangles with a similar performance feel, so warranty and price separate them. The 16 HD is the lower-priced option; the Akrobat Primus carries longer cover.
+The ACON 16 HD and Akrobat Primus are both premium above-ground rectangles with a similar performance feel, so warranty and price separate them. The 16 HD is the lower-priced option; the Akrobat Primus carries longer warranty.
 
 ## Quick verdict
 
@@ -55,4 +55,4 @@ Choose the ACON 16 HD to save several hundred dollars on a comparable rectangle.
 
 ## What matters most
 
-The build quality is close; the warranty is where they diverge. The 16 HD is about $2,499 with a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON recommends a limit of 300 lb. The Primus Challenger runs $3,099 to $3,899 and is rated to 287 to 331 lb, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. So the Primus costs more upfront but protects the frame and springs for far longer. If you plan to keep it for many years, that cover can be worth the premium; if not, the 16 HD delivers similar performance for less.
+The build quality is close; the warranty is where they diverge. The 16 HD is about $2,499 with a 10-year frame, 5 years on the mat and springs, and 2 on the pads, and ACON recommends a limit of 300 lb. The Primus runs $3,099 to $3,899 and is rated to 287 to 331 lb, with a lifetime frame, 12 years on springs, and 5 years on the mat and pads. So the Primus costs more upfront but protects the frame and springs for far longer. If you plan to keep it for many years, that warranty can be worth the premium; if not, the 16 HD delivers similar performance for less.

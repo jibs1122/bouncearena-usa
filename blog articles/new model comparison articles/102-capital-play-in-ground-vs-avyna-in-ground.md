@@ -3,7 +3,7 @@ comparison_id: 102
 title: Capital Play In-ground vs Avyna In-ground
 slug: capital-play-in-ground-vs-avyna-in-ground
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Capital Play In-ground vs Avyna In-ground — Trampoline Comparison 2026
   meta_description: "Capital Play In-ground vs Avyna In-ground: two in-ground systems. Capital Play is a single 11x8 with a 10-year frame; Avyna offers more sizes and a lifetime frame."
@@ -35,7 +35,7 @@ sides:
 ---
 # Capital Play In-ground vs Avyna In-ground
 
-Both are in-ground systems, so weight limit, range, and warranty separate them. Capital Play is a single 11x8 option; Avyna offers more sizes, a higher weight limit, and a lifetime frame.
+The Capital Play In-ground and Avyna In-ground are both in-ground systems, so weight limit, range, and warranty separate them. Capital Play is a single 11x8 option; Avyna offers more sizes, a higher weight limit, and a lifetime frame.
 
 ## Quick verdict
 

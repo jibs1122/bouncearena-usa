@@ -29,7 +29,7 @@ Key takeaways
 
 - The two brands differ on bounce system — Springfree uses springless flexible composite rods (no springs), while North uses traditional coil springs.
 - North lists a higher single-user weight limit — up to 243 lb vs 220 lb.
-- Springfree offers round, oval, square; North covers round, oval, rectangle.
+- Both make rounds and ovals; Springfree adds squares, North adds rectangles.
 - If you want a very large trampoline, Springfree goes up to 12×19 ft oval; North tops out at 10×18 ft rectangle.
 - Springfree leads on warranty (mat 10 yr, net 10 yr).
 - Installation differs: Springfree is above-ground only, while North is above- or in-ground.

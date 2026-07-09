@@ -3,7 +3,7 @@ comparison_id: 58
 title: ACON 16 HD vs ACON 13 HD
 slug: acon-16-hd-vs-acon-13-hd
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 16 HD vs ACON 13 HD — Trampoline Comparison 2026
   meta_description: "ACON 16 HD vs ACON 13 HD: the same HD rectangle in two sizes. Identical warranty and weight specs; the only difference is jumping area and about $600."

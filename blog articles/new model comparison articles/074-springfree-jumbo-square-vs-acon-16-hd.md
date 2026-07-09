@@ -3,7 +3,7 @@ comparison_id: 74
 title: Springfree Jumbo Square vs ACON 16 HD
 slug: springfree-jumbo-square-vs-acon-16-hd
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Springfree Jumbo Square vs ACON 16 HD — Trampoline Comparison 2026
   meta_description: "Springfree Jumbo Square vs ACON 16 HD: no springs against coil springs at the same price. The square is the springless pick; the 16 HD allows more weight."
@@ -24,7 +24,7 @@ sides:
 ---
 # Springfree Jumbo Square vs ACON 16 HD
 
-Both are premium and priced about the same, so the real choice is springless against coil. The Springfree Jumbo Square removes springs with flexible rods; the ACON 16 HD is a performance coil rectangle.
+The Springfree Jumbo Square and ACON 16 HD are both premium and priced about the same, so the real choice is springless against coil. The Springfree Jumbo Square removes springs with flexible rods; the ACON 16 HD is a performance coil rectangle.
 
 ## Quick verdict
 

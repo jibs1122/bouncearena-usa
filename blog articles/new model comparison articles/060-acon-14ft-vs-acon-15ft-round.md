@@ -3,7 +3,7 @@ comparison_id: 60
 title: ACON 14ft vs ACON 15ft Round
 slug: acon-14ft-vs-acon-15ft-round
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 14ft vs ACON 15ft Round — Trampoline Comparison 2026
   meta_description: "ACON 14ft vs 15ft Round: the same Air round in two sizes. Identical warranty and weight specs; the only difference is jumping area and price."

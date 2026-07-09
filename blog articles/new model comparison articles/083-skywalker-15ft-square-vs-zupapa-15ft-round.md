@@ -3,7 +3,7 @@ comparison_id: 83
 title: Skywalker 15ft Square vs Zupapa 15ft Round
 slug: skywalker-15ft-square-vs-zupapa-15ft-round
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Skywalker 15ft Square vs Zupapa 15ft Round — Trampoline Comparison 2026
   meta_description: "Skywalker 15ft Square vs Zupapa 15ft Round: a high-capacity Premium square against a value round. Skywalker allows more weight; Zupapa is the simpler, cheaper round."
@@ -27,7 +27,7 @@ sides:
 ---
 # Skywalker 15ft Square vs Zupapa 15ft Round
 
-This pairs Skywalker's high-capacity Premium square with Zupapa's value round. The shapes differ and so do the weight limits, with Skywalker rated much higher.
+The Skywalker 15ft Premium Square and Zupapa 15ft Round pair Skywalker's high-capacity Premium square with Zupapa's value round. The shapes differ and so do the weight limits, with Skywalker rated much higher.
 
 ## Quick verdict
 

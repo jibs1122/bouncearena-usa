@@ -17,7 +17,7 @@ title: Jumpflex vs Avyna — Trampoline Comparison 2026 | Bounce Arena
 
 The deciding question is above-ground or in-ground.
 
-Jumpflex is an above-ground value brand with a 10-year frame warranty and a high single-jumper limit on its HERO models. Avyna is the heavier-duty option, offering both above-ground and in-ground builds with a lifetime frame warranty and long spring cover, at a higher price.
+Jumpflex is an above-ground value brand with a 10-year frame warranty and a high single-jumper limit on its HERO models. Avyna is the heavier-duty option, offering both above-ground and in-ground builds with a lifetime warranty on the frame and a long one on the springs, at a higher price.
 
 Choose Jumpflex if you want a straightforward above-ground trampoline at a sensible price. Choose Avyna if you want a heavier build, a lifetime frame warranty, or a flush in-ground installation.
 

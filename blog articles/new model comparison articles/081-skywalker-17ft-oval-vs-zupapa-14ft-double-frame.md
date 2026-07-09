@@ -24,7 +24,7 @@ sides:
 ---
 # Skywalker 17ft Oval vs Zupapa 14ft Double Frame
 
-These are both value trampolines but built to different standards. The Skywalker is a 17ft oval; the Zupapa 14ft Double Frame is a heavy-duty round with a much higher weight limit and longer warranty.
+The Skywalker 17ft Oval and Zupapa 14ft Double Frame are both value trampolines but built to different standards. The Skywalker is a 17ft oval; the Zupapa 14ft Double Frame is a heavy-duty round with a much higher weight limit and longer warranty.
 
 ## Quick verdict
 

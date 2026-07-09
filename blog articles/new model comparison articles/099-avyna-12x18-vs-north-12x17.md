@@ -3,7 +3,7 @@ comparison_id: 99
 title: Avyna 12x18 vs North 12x17
 slug: avyna-12x18-vs-north-12x17
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Avyna 12x18 vs North 12x17 — Trampoline Comparison 2026
   meta_description: "Avyna 12x18 vs North 12x17: two large premium in-ground rectangles. Avyna allows more weight and has a lifetime frame; North is a focused option for less."
@@ -24,7 +24,7 @@ sides:
 ---
 # Avyna 12x18 vs North 12x17
 
-Both are large premium in-ground rectangles, so weight limit and warranty decide it. Avyna pushes a higher capacity and a lifetime frame; North offers a focused in-ground rectangle for less.
+The Avyna 12x18 and North 12x17 are both large premium in-ground rectangles, so weight limit and warranty decide it. Avyna pushes a higher capacity and a lifetime frame; North offers a focused in-ground rectangle for less.
 
 ## Quick verdict
 
@@ -50,4 +50,4 @@ Choose the Avyna 12x18 for a higher weight limit and a lifetime frame. Choose th
 
 ## What matters most
 
-The Avyna 12x18 is rated to 350 lb at about $3,995, with a lifetime frame, 10 years on springs, and 3 years on the mat and pads. The North 17x12 is rated to 243 lb at about $3,249, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. So the Avyna allows substantially more weight per jumper and protects the frame for life, but costs about $750 more. The North is the more affordable focused in-ground rectangle with longer mat and spring cover. Weigh the higher capacity and lifetime frame against the lower price.
+The Avyna 12x18 is rated to 350 lb at about $3,995, with a lifetime frame, 10 years on springs, and 3 years on the mat and pads. The North 17x12 is rated to 243 lb at about $3,249, with a 10-year frame, 5 years on the mat and springs, and 2 on the pads. So the Avyna allows substantially more weight per jumper and protects the frame for life, but costs about $750 more. The North is the more affordable focused in-ground rectangle with longer mat and spring warranty. Weigh the higher capacity and lifetime frame against the lower price.

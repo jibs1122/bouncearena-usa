@@ -139,7 +139,7 @@ export const SKYBOUND_COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     metaDescription: "SkyBound vs Upper Bounce: warranty gap, gymnastics rectangles, jumper limits, and two brands rooted in replacement parts.",
     introParagraphs: [
       "SkyBound and Upper Bounce have unusually similar origins: both are best known to many owners as replacement-parts brands — the name on the box when you reorder a mat, net, or set of springs — and both also sell complete trampolines. If you are comparing their complete sets, the two ranges differ far more than the shared parts heritage suggests.",
-      "Upper Bounce (a Machrus brand) sells coil-spring rounds from 7.5 ft to 16 ft, plus a line of gymnastics-style rectangles and squares rated to 500 lb per jumper — one of the more affordable ways to get a large rectangle. The trade-off is warranty: Machrus covers jumping mats and metal parts for 6 months, and covers and other parts for 30 days, which is among the shortest coverage of any brand we track.",
+      "Upper Bounce (a Machrus brand) sells coil-spring rounds from 7 ft 6 in to 16 ft, plus a line of gymnastics-style rectangles and squares rated to 500 lb per jumper — one of the more affordable ways to get a large rectangle. The trade-off is warranty: Machrus gives 6 months on jumping mats and metal parts, and 30 days on covers and other parts, which is among the shortest coverage of any brand we track.",
       "SkyBound also started in parts, supplying other brands from 2009 before launching its own trampolines. Its complete range covers several coil lines, rectangles including the AltitudeX, and a springless line using bungee cords and fiberglass rods. Frame coverage is 5 years on nearly every line, with parts coverage of 1 to 5 years by series.",
       "Below we compare the two on warranty coverage, rectangle options, weight limits, and the springless question.",
     ],
@@ -148,7 +148,7 @@ export const SKYBOUND_COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
       "The warranty gap is the widest in this series: SkyBound covers frames for 5 years while Upper Bounce covers mats and metal parts for 6 months and other components for 30 days.",
       "Both brands rate their mainstream rounds at exactly 330 lb per jumper, so capacity only separates them at the rectangles, where Upper Bounce reaches 500 lb.",
       "SkyBound starts cheaper ($149 vs $235); at the top, Upper Bounce's 16x16 ft square ($2,212) is the largest and most expensive model in the table.",
-      "Both ranges cover round, rectangle, and square shapes - Upper Bounce through its gymnastics-style sets, SkyBound through the AltitudeX and its coil lines.",
+      "Both ranges include round, rectangle, and square shapes - Upper Bounce through its gymnastics-style sets, SkyBound through the AltitudeX and its coil lines.",
     ],
     keyTakeaways: [
       "Warranty gap: This is the largest warranty difference on any page in this series — SkyBound covers frames for 5 years while Upper Bounce covers mats and metal parts for 6 months and other components for 30 days.",
@@ -231,12 +231,12 @@ export const SKYBOUND_COMPARISON_DEFINITIONS: ComparisonDefinition[] = [
     metaTitle: "SkyBound vs Springfree — Trampoline Comparison 2026 | Bounce Arena",
     metaDescription: "SkyBound vs Springfree: two springless designs at different prices. Compare warranties, jumper limits, and what the price gap buys.",
     introParagraphs: [
-      "This is the comparison people find when they want a springless trampoline and then see the Springfree price tag. Springfree invented the category and remains its benchmark; SkyBound's springless line is one of the few budget alternatives that uses a genuinely springless design rather than just padded springs. The question is what the three-to-four-times price difference actually buys.",
+      "SkyBound and Springfree are the springless comparison shoppers hit after seeing Springfree's price tag. Springfree invented the category and remains its benchmark; SkyBound's springless line is one of the few budget alternatives that uses a genuinely springless design rather than just padded springs. The question is what the three-to-four-times price difference actually buys.",
       "Springfree removes metal springs entirely, using flexible composite rods mounted below the mat, a frame positioned out of the fall zone, and a flexible enclosure. Every model carries a 10-year warranty on all components. Prices run from $849 for the 6 ft Mini Round to $3,999 for the Jumbo Oval, with single-jumper ratings of 175 lb on compact models and 220 lb on the rest.",
       "SkyBound's springless line takes a simpler approach: bungee cords replace the metal springs, curved fiberglass rods hold the net, and a zipper seals the mat to the enclosure. Prices run $360–$650 across 8 ft to 14 ft sizes, with single-jumper ratings of 242–286 lb and a 5-year warranty on frame and parts. SkyBound itself dates to 2009, when it began as a replacement-parts supplier.",
       "Below we compare the two on how the springless designs differ, warranty coverage, weight limits, and what the price gap means in practice.",
     ],
-    intro: "This is the comparison people find when they want a springless trampoline and then see the Springfree price tag.",
+    intro: "SkyBound and Springfree are the springless comparison shoppers hit after seeing Springfree's price tag.",
     specTableKeyTakeaways: [
       "Springfree covers every component for 10 years; SkyBound's springless line covers frame and parts for 5.",
       "SkyBound's springless models rate higher per jumper (242-286 lb) than Springfree (175 lb compact, 220 lb standard) - Springfree's limits are conservative published figures, not a strength measure.",

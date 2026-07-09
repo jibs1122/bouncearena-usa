@@ -27,7 +27,7 @@ Choose North if you want a system engineered for in-ground use. Choose Berg if y
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: North (243 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
+- North caps a single jumper at 243 lb; Berg publishes no single-user figure — its 600 kg number is a static test, not a jumper rating.
 - North publishes round, oval, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Best-for: North reads as a premium brand with both above and in-ground models; Berg as a premium European family/performance brand.

@@ -17,7 +17,7 @@ title: ACON vs Berg — Trampoline Comparison 2026 | Bounce Arena
 
 ACON and Berg are both premium and both can install above-ground or in-ground, so the real question is how wide a range you want and how the warranty is structured.
 
-ACON is a focused performance coil brand with consistent cover across the mat and springs. Berg is a much broader European brand, sold across many lines and in above-ground, flat-ground, and in-ground formats; its frame warranty is long, but the mat, spring, and pad terms are shorter and change from line to line.
+ACON is a focused performance coil brand with consistent warranty terms across the mat and springs. Berg is a much broader European brand, sold across many lines and in above-ground, flat-ground, and in-ground formats; its frame warranty is long, but the mat, spring, and pad terms are shorter and change from line to line.
 
 Choose ACON if you want a straightforward performance trampoline you can judge on one consistent spec. Choose Berg if you want more lines and installation options and don't mind comparing the warranty model by model.
 
@@ -27,7 +27,7 @@ Choose ACON if you want a straightforward performance trampoline you can judge o
 
 Key takeaways
 
-- Single-user weight isn't directly comparable: ACON (no published single-user limit; ACON recommends a limit of 300 lb); Berg (varies by line; 600 kg is a static test, not a single-user figure).
+- ACON recommends about 300 lb per jumper with no hard cap; Berg publishes no single-user figure at all — its 600 kg number is a static test, not a jumper rating.
 - ACON publishes round, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: ACON is mainly above-ground with an in-ground option, while Berg is above- or in-ground.

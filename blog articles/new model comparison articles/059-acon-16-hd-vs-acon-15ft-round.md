@@ -3,7 +3,7 @@ comparison_id: 59
 title: ACON 16 HD vs ACON 15ft Round
 slug: acon-16-hd-vs-acon-15ft-round
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON 16 HD vs ACON 15ft Round — Trampoline Comparison 2026
   meta_description: "ACON 16 HD vs ACON 15ft Round: same brand, different shape. The round suits central family use; the rectangle gives a more even bounce for flips and tricks."

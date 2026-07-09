@@ -3,7 +3,7 @@ comparison_id: 62
 title: ACON X vs North Performer / Legend
 slug: acon-x-vs-north-performer-legend
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: ACON X vs North Performer / Legend — Trampoline Comparison 2026
   meta_description: "ACON X vs North Performer/Legend: a single large flagship rectangle against North's Legend range of rounds, ovals, and rectangles with more shape choice."

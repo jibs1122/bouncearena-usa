@@ -3,10 +3,10 @@ comparison_id: 98
 title: Akrobat 17x10 FlatGround vs ACON 16 HD
 slug: akrobat-17x10-flatground-vs-acon-16-hd
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Akrobat 17x10 FlatGround vs ACON 16 HD — Trampoline Comparison 2026
-  meta_description: "Akrobat 17x10 FlatGround vs ACON 16 HD: a dedicated in-ground rectangle against an above-ground one that can be sunk. Akrobat has longer cover; the 16 HD costs less."
+  meta_description: "Akrobat 17x10 FlatGround vs ACON 16 HD: a dedicated in-ground rectangle against an above-ground one that can be sunk. Akrobat has a longer warranty; the 16 HD costs less."
 data_issues: []
 assumptions:
 - 'ACON 16 HD: Used the standard ACON 16 HD row, not the Pro package.'
@@ -24,11 +24,11 @@ sides:
 ---
 # Akrobat 17x10 FlatGround vs ACON 16 HD
 
-Both are premium performance rectangles, but built for different installs. The Akrobat 17x10 is a dedicated flat in-ground rectangle; the ACON 16 HD ships above-ground and can also be sunk in-ground at a lower price.
+The Akrobat 17x10 FlatGround and ACON 16 HD are both premium performance rectangles, but built for different installs. The Akrobat 17x10 is a dedicated flat in-ground rectangle; the ACON 16 HD ships above-ground and can also be sunk in-ground at a lower price.
 
 ## Quick verdict
 
-Choose the Akrobat if you are committing to an in-ground install and want the longest warranty cover. Choose the ACON 16 HD for a flexible install and several hundred dollars in savings.
+Choose the Akrobat if you are committing to an in-ground install and want the longest warranty. Choose the ACON 16 HD for a flexible install and several hundred dollars in savings.
 
 ## Full spec comparison
 

@@ -29,7 +29,7 @@ Key takeaways
 
 - The two brands differ on bounce system — Upper Bounce uses traditional coil springs, while JumpKing uses coil springs, with one bungee model.
 - Upper Bounce lists a higher single-user weight limit — up to 500 lb vs 350 lb.
-- Upper Bounce offers round, square, rectangle; JumpKing covers round, oval, rectangle, hexagon.
+- Both make rounds and rectangles; Upper Bounce adds squares, JumpKing adds ovals and hexagons.
 - If you want a very large trampoline, Upper Bounce goes up to 10×17 ft rectangle; JumpKing tops out at 10×18 ft rectangle.
 - Warranty is split: Upper Bounce leads on springs 6-month, while JumpKing leads on frame 1 yr, mat 1 yr, net 3-month.
 

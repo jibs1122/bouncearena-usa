@@ -28,7 +28,7 @@ Choose Vuly if you want a versatile family setup with accessories and a simpler 
 Key takeaways
 
 - The two brands differ on bounce system — Vuly uses a mix of coil-spring and leaf-spring models, while Akrobat uses high-performance coil springs.
-- Vuly offers round; Akrobat covers rectangle.
+- Vuly is round only; Akrobat is rectangle only.
 - If you want a very large trampoline, Vuly goes up to 16 ft round; Akrobat tops out at 12×17 ft rectangle.
 - Akrobat leads on warranty (frame lifetime, springs 12 yr, net 5 yr).
 - Installation differs: Vuly is above-ground only, while Akrobat is above- or in-ground.

@@ -15,9 +15,9 @@ title: North vs Avyna — Trampoline Comparison 2026 | Bounce Arena
 
 # North vs Avyna
 
-Both are serious in-ground choices, so capacity and warranty decide it.
+North and Avyna are both serious in-ground choices, so capacity and warranty decide it.
 
-Avyna carries the higher single-jumper limit and a lifetime frame warranty with long spring cover. North is the more focused in-ground build, with a 10-year frame warranty and an installation engineered to sit flush.
+Avyna carries the higher single-jumper limit and a lifetime warranty on the frame and a long one on the springs. North is the more focused in-ground build, with a 10-year frame warranty and an installation engineered to sit flush.
 
 Choose Avyna if you want the higher weight limit and a lifetime frame warranty. Choose North if you want a focused in-ground build and its coverage suits your needs.
 
@@ -28,6 +28,6 @@ Choose Avyna if you want the higher weight limit and a lifetime frame warranty. 
 Key takeaways
 
 - Avyna lists a higher single-user weight limit — up to 352 lb vs 243 lb.
-- North offers round, oval, rectangle; Avyna covers round, square, rectangle.
+- Both make rounds and rectangles; North adds ovals, Avyna adds squares.
 - If you want a very large trampoline, North goes up to 10×18 ft rectangle; Avyna tops out at 12×18 ft rectangle.
 - Warranty is split: North leads on mat 5 yr, net 2 yr, while Avyna leads on frame lifetime, springs 10 yr.

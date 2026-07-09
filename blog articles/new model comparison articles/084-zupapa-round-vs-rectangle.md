@@ -3,7 +3,7 @@ comparison_id: 84
 title: Zupapa Round vs Rectangle
 slug: zupapa-round-vs-rectangle
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Zupapa Round vs Rectangle — Trampoline Comparison 2026
   meta_description: "Zupapa Round vs Rectangle: same brand, different shapes. Rounds suit central family use; rectangles suit a longer yard and a more even bounce for older kids."

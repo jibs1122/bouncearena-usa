@@ -3,7 +3,7 @@ comparison_id: 46
 title: Vuly Thunder 2 Pro vs ACON 16 HD
 slug: vuly-thunder-2-pro-vs-acon-16-hd
 comparison_type: model
-publish_status: needs_review
+publish_status: ready
 seo:
   meta_title: Vuly Thunder 2 Pro vs ACON 16 HD — Trampoline Comparison 2026
   meta_description: "Vuly Thunder 2 Pro vs ACON 16 HD: a round leaf-spring trampoline against a performance coil rectangle. Family bouncing vs a more even bounce for flips and tricks."
@@ -25,7 +25,7 @@ sides:
 ---
 # Vuly Thunder 2 Pro vs ACON 16 HD
 
-This pairs a round leaf-spring trampoline with a performance coil rectangle. The Thunder 2 Pro keeps a spring bounce out of the jumping path; the ACON 16 HD is built around a rectangular shape and a firmer, more even rebound.
+The Vuly Thunder 2 Pro and ACON 16 HD pair a round leaf-spring trampoline with a performance coil rectangle. The Thunder 2 Pro keeps a spring bounce out of the jumping path; the ACON 16 HD is built around a rectangular shape and a firmer, more even rebound.
 
 ## Quick verdict
 

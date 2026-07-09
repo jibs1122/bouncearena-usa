@@ -23,7 +23,7 @@ sides:
 ---
 # Jumpflex 12ft HERO vs 14ft HERO
 
-These are the same HERO trampoline in two sizes, with identical 350 lb ratings, warranties, and build. Only the diameter and price change.
+The Jumpflex 12ft HERO and 14ft HERO are the same HERO trampoline in two sizes, with identical 350 lb ratings, warranties, and build. Only the diameter and price change.
 
 ## Quick verdict
 
