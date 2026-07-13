@@ -66,7 +66,6 @@ export default function BrandsPage() {
         </h1>
         <p className="text-black/60 max-w-2xl mb-8">
           {brands.length} brands independently reviewed and compared.
-          All dimensions in feet and inches.
         </p>
 
         {brands.length > 0 ? (

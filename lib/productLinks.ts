@@ -2,6 +2,7 @@ import { BRAND_SHOP_URLS } from "@/lib/brandLogos";
 
 const ACON_AFFILIATE_PARAM = "sca_ref";
 const ACON_AFFILIATE_REF = "11261719.jjbGKHHa7yLAnuwn";
+const VULY_AFFILIATE_URL = "https://www.vulyplay.com/aff/100/";
 const ZUPAPA_AFFILIATE_PARAM = "ref";
 const ZUPAPA_AFFILIATE_REF = "bltzjtnf";
 const AMAZON_AFFILIATE_PARAM = "tag";
@@ -31,6 +32,28 @@ function isAconUrl(url: URL): boolean {
   return hostname === "acon24.com" || hostname.endsWith(".acon24.com");
 }
 
+function isVulyUrl(url: URL): boolean {
+  const hostname = url.hostname.toLowerCase();
+  return hostname === "vulyplay.com" || hostname === "www.vulyplay.com";
+}
+
+function toVulyAffiliateUrl(url: URL): string {
+  if (url.pathname.startsWith("/aff/100")) {
+    return url.toString();
+  }
+
+  const destinationPath = url.pathname
+    .replace(/^\/en-[a-z]{2}\//i, "/")
+    .replace(/^\/+/, "");
+
+  if (!destinationPath) return VULY_AFFILIATE_URL;
+
+  const destination = encodeURIComponent(`${destinationPath}${url.search}`)
+    .replace(/%2F/g, "/");
+
+  return `${VULY_AFFILIATE_URL}?url=${destination}`;
+}
+
 function isZupapaUrl(url: URL): boolean {
   return url.hostname.toLowerCase() === "www.zupapa.us";
 }
@@ -45,6 +68,9 @@ export function withAffiliateTracking(url: string | null): string | null {
 
   try {
     const parsed = new URL(url);
+    if (isVulyUrl(parsed)) {
+      return toVulyAffiliateUrl(parsed);
+    }
     if (isAconUrl(parsed)) {
       parsed.searchParams.set(ACON_AFFILIATE_PARAM, ACON_AFFILIATE_REF);
     }
