@@ -56,7 +56,9 @@ export const budgetRanges: Record<BudgetId, [number, number]> = {
   '500-1000': [500, 1000],
   '1000-1500': [1000, 1500],
   '1500-2500': [1500, 2500],
-  '2500-plus': [2500, 999999],
+  // Capped at $6,000 so five-figure commercial builds don't dominate "$2,500+" results.
+  // Models between $6,000 and $9,000 still surface with the over-budget penalty.
+  '2500-plus': [2500, 6000],
   flexible: [0, 999999],
 };
 
@@ -145,10 +147,14 @@ function buildModelSizeReason(entry: QuizEntry, backyardSize: QuizAnswers['backy
   return `${sizePhrase} fits your ${yardLabel[backyardSize]} preference`;
 }
 
+function positiveRange(range: [number, number] | null): [number, number] | null {
+  return range && range[1] > 0 ? range : null;
+}
+
 function buildModelSpringReason(entry: QuizEntry): string {
   const springSystem = cleanSpringSystem(entry.springSystem, entry.springType);
-  const springCount = formatRange(entry.springCountRange);
-  const springLength = formatRange(entry.springLengthRange, formatInches);
+  const springCount = formatRange(positiveRange(entry.springCountRange));
+  const springLength = formatRange(positiveRange(entry.springLengthRange), formatInches);
   const prefix = springCount && springLength
     ? `${springCount} ${springLength}`
     : springLength ?? springCount;
@@ -648,7 +654,9 @@ export function buildSummaryText(answers: QuizAnswers): string {
             if (!bounds) return budgetLabel.flexible;
             const [min, max] = bounds;
             const lower = min === 0 ? 'under $500' : `$${min.toLocaleString('en-US')}`;
-            const upper = max >= 999999 ? 'above $2,500' : `$${max.toLocaleString('en-US')}`;
+            const upper = answers.budget.includes('2500-plus')
+              ? 'above $2,500'
+              : `$${max.toLocaleString('en-US')}`;
             return `a budget range from ${lower} to ${upper}`;
           })();
 

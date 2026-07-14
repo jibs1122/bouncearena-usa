@@ -10,6 +10,8 @@ import {
 } from '@/lib/promoCtas';
 
 const HIDDEN_PROMO_PATHS = new Set(['/privacy', '/terms', '/contact', '/admin', '/zupapa-promo-code']);
+// The mobile bottom pill covers the first answer options on the quiz, so hide it there.
+const HIDDEN_MOBILE_PROMO_PATHS = new Set(['/quiz']);
 
 const PROMOS = [
   { brand: 'Vuly', code: 'BOUNCE15', href: VULY_PROMO_AFFILIATE_URL },
@@ -25,6 +27,7 @@ export default function PromoBell() {
 
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
   if (HIDDEN_PROMO_PATHS.has(normalizedPath)) return null;
+  const hideMobile = HIDDEN_MOBILE_PROMO_PATHS.has(normalizedPath);
 
   async function copyCode(brand: string, code: string) {
     const copiedKey = `${brand}:${code}`;
@@ -147,13 +150,13 @@ export default function PromoBell() {
       )}
 
       {/* Mobile: fixed bottom pill */}
-      {!mobileClosed && (
+      {!mobileClosed && !hideMobile && (
         <div
           aria-hidden="true"
           className="h-[6.75rem] lg:hidden"
         />
       )}
-      {!mobileClosed && (
+      {!mobileClosed && !hideMobile && (
         <div className="fixed inset-x-0 z-30 px-3 lg:hidden" style={{ bottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}>
           <div className="mx-auto max-w-[26rem] rounded-[1.35rem] border border-black/10 bg-white/[0.96] px-3 py-2 shadow-[0_14px_34px_-22px_rgba(0,0,0,0.45)] backdrop-blur">
             <div className="flex items-center justify-between gap-2">

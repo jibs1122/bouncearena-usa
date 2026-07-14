@@ -316,4 +316,23 @@ function runSweep(groundFilter?: QuizAnswers['groundTypePreference']) {
 const mode = process.argv[2] ?? 'personas';
 if (mode === 'entries') dumpEntries();
 else if (mode === 'sweep') runSweep(process.argv[3] as QuizAnswers['groundTypePreference'] | undefined);
+else if (mode === 'links') auditLinks();
 else runPersonas();
+
+// ─── Mode: links — audit affiliate URLs on quiz entries ─────────────────────
+function auditLinks() {
+  const entries = getQuizEntriesForAdmin();
+  const issues: string[] = [];
+  for (const e of entries) {
+    const b = normBrand(e.brand);
+    if (!['vuly', 'acon', 'zupapa'].includes(b)) continue;
+    const u = e.sourceUrl ?? '(null)';
+    const ok =
+      (b === 'vuly' && u.includes('vulyplay.com/aff/100')) ||
+      (b === 'acon' && u.includes('sca_ref=11261719')) ||
+      (b === 'zupapa' && (u.includes('ref=bltzjtnf') || u.includes('tag=bounce092-20')));
+    console.log(`${ok ? '✓' : '✗ MISSING TAG'} ${e.brand.padEnd(8)} ${e.model.padEnd(45).slice(0,45)} ${u}`);
+    if (!ok) issues.push(e.id);
+  }
+  console.log(issues.length ? `\n${issues.length} PROBLEM(S): ${issues.join(', ')}` : '\nAll affiliate quiz links tagged correctly.');
+}

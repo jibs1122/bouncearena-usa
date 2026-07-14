@@ -136,6 +136,9 @@ function AnswerRecap({ answers }: { answers: QuizAnswers }) {
 
 function budgetNote(priceFrom: number | null, budgets: BudgetId[]): string | null {
   if (priceFrom === null) return null;
+  // "$2,500+" is open-ended from the user's point of view, so any price at or
+  // above $2,500 matches their stated budget even past the internal ranking cap.
+  if (budgets.includes('2500-plus') && priceFrom >= 2500) return null;
   const bounds = getBudgetBounds(budgets);
   if (!bounds) return null;
   const [, max] = bounds;
