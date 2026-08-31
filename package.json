@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "validate:csv": "node scripts/validate-csv.mjs",
+    "images:berg": "node scripts/download-berg-images.mjs",
     "refresh": "node scripts/refresh-products.mjs"
   },
   "dependencies": {

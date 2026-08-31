@@ -106,6 +106,18 @@ export const QUIZ_BRAND_DATA: QuizBrandData[] = [
     },
   },
   {
+    slug: 'berg',
+    springType: 'traditional',
+    metricScores: { bounce: 8, durability: 9, value: 6, assembly: 5, warranty: 8 },
+    matchReasons: {
+      traditional: 'SoloSpring and TwinSpring coil systems span family and performance models',
+      valueForMoney: 'Premium pricing buys a broad range of formats and long frame coverage',
+      warranty: 'Up to 13 years on premium frames, with shorter component coverage by line',
+      bounce: 'TwinSpring and AirFlow Pro combinations target a responsive family-performance bounce',
+      durability: 'Steel frames, UV-resistant padding, and model-specific static test ratings',
+    },
+  },
+  {
     slug: 'capital-play',
     springType: 'traditional',
     metricScores: { bounce: 8, durability: 9, value: 6, assembly: 4, warranty: 8 },

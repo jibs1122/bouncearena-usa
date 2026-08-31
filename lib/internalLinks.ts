@@ -12,6 +12,16 @@ export const PROMO_PAGE_BY_BRAND: Record<string, InternalLink> = {
 };
 
 export const BRAND_POPULAR_LINKS: Record<string, InternalLink[]> = {
+  BERG: [
+    { label: "ACON vs BERG", href: "/compare/acon-vs-berg/" },
+    { label: "Springfree vs BERG", href: "/compare/springfree-vs-berg/" },
+    { label: "Vuly vs BERG", href: "/compare/vuly-vs-berg/" },
+    { label: "Jumpflex vs BERG", href: "/compare/jumpflex-vs-berg/" },
+    { label: "North vs BERG", href: "/compare/north-vs-berg/" },
+    { label: "Akrobat vs BERG", href: "/compare/akrobat-vs-berg/" },
+    { label: "Avyna vs BERG", href: "/compare/avyna-vs-berg/" },
+    { label: "BERG vs Capital Play", href: "/compare/berg-vs-capital-play/" },
+  ],
   Vuly: [
     { label: "Vuly Ultra 2 vs Ultra 2 Pro", href: "/compare/vuly-ultra-2-vs-ultra-2-pro/" },
     { label: "Vuly Thunder 2 vs Thunder 2 Pro", href: "/compare/vuly-thunder-2-vs-thunder-2-pro/" },

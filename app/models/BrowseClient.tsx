@@ -77,6 +77,7 @@ const BRAND_COLOURS: Record<string, BrandColour> = {
   Avyna:                    { bg: '#f58220', text: '#1f1305', chipText: '#b95409' },
   BCAN:                     { bg: '#c8102e', text: '#fff' },
   Beast:                    { bg: '#262626', text: '#fff' },
+  BERG:                     { bg: '#d71920', text: '#fff' },
   'Capital Play':           { bg: '#00a7a7', text: '#fff', chipText: '#007575' },
   'Crazy Ape':              { bg: '#00a8e2', text: '#fff', chipText: '#0078a1' },
   JUMPZYLLA:                { bg: '#f08a00', text: '#211000', chipText: '#a95d00' },

@@ -8,7 +8,7 @@ import { getAllBlogPosts } from "@/lib/blog";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenareviews.com";
 
 // Date the product/comparison data set was last meaningfully updated.
-const DATA_UPDATED = new Date("2026-04-01");
+const DATA_UPDATED = new Date("2026-08-31");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const brands = getAllBrands();

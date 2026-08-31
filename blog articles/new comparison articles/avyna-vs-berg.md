@@ -27,7 +27,7 @@ Choose Avyna if you want the higher weight limit and a lifetime frame warranty f
 
 Key takeaways
 
-- Avyna rates a single jumper to 352 lb; Berg publishes no single-user figure — its 600 kg number is a static test, not a jumper rating.
+- Avyna rates a single jumper to 352 lb; BERG lists model-specific user limits of 220 to 265 lb across most full-size models. BERG's much higher figures are static test ratings, not jumper limits.
 - Avyna publishes round, square, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Best-for: Avyna reads as a premium Dutch in-ground / high-capacity brand; Berg as a premium European family/performance brand.

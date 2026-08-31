@@ -27,7 +27,7 @@ Choose Berg if you want a wider choice of formats and lines and are ready to com
 
 Key takeaways
 
-- Capital Play caps a single jumper at 265 lb; Berg publishes no single-user figure — its 600 kg number is a static test, not a jumper rating.
+- Capital Play caps a single jumper at 265 lb; BERG's full-size catalog generally lists model-specific user limits from 220 to 265 lb. BERG's much higher figures are static test ratings, not jumper limits.
 - Capital Play publishes rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: Berg is above- or in-ground, while Capital Play is in-ground.

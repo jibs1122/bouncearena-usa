@@ -63,6 +63,7 @@ const BRAND_COLOURS: Record<string, { bg: string; text: string }> = {
   ORCC:                     { bg: '#2e7d32', text: '#fff' },
   JUMPZYLLA:                { bg: '#1565c0', text: '#fff' },
   BCAN:                     { bg: '#00838f', text: '#fff' },
+  BERG:                     { bg: '#d71920', text: '#fff' },
 };
 
 function brandBadge(name: string) {

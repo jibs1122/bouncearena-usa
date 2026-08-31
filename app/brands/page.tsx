@@ -10,12 +10,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bouncearenarev
 export const metadata: Metadata = {
   title: "All Trampoline Brands — Compare Brands 2026",
   description:
-    "Browse major trampoline brands — Springfree, Acon, Vuly, Skywalker, JumpKing, and more. Filter by price, size (ft/in), and ASTM safety certification.",
+    "Browse major trampoline brands — BERG, Springfree, ACON, Vuly, Skywalker, JumpKing, and more. Filter by price, size (ft/in), and ASTM safety certification.",
   alternates: { canonical: `${SITE_URL}/brands/` },
   openGraph: {
     title: "All Trampoline Brands — Compare Brands 2026",
     description:
-      "Browse major trampoline brands — Springfree, Acon, Vuly, Skywalker, JumpKing, and more. Filter by price, size, and ASTM safety certification.",
+      "Browse major trampoline brands — BERG, Springfree, ACON, Vuly, Skywalker, JumpKing, and more. Filter by price, size, and ASTM safety certification.",
     url: `${SITE_URL}/brands/`,
   },
 };

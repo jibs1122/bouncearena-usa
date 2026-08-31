@@ -4,6 +4,13 @@
  * Each entry is an array of short paragraphs (1–2 sentences each).
  */
 export const BRAND_INTROS: Record<string, string[]> = {
+  BERG: [
+    "BERG is a European outdoor-play brand whose trampoline catalog spans family, performance, fitness, and toddler models.",
+    "The current US data set covers 66 models across the Favorit, Champion, Elite, Grand Champion, Ultim, Pro Bouncer, Pro Launcher, Hoppaa, and Fitness ranges. Shapes include round, oval, rectangular, and square designs from compact 3ft models up to 17ft outdoor trampolines.",
+    "BERG offers above-ground, InGround, and fully flush FlatGround formats. Its main outdoor ranges use SoloSpring, TwinSpring, or TwinSpring Pro coil systems with AirFlow or AirFlow Pro mats; the Hoppaa and Fitness models use elastic bands.",
+    "Frame coverage varies by line: the main Champion, Elite, and Pro ranges list up to 13 years, Favorit models list 8 years, and the compact specialty models carry shorter terms. Current US stockist pricing is available for selected configurations rather than every model in the international catalog.",
+  ],
+
   Skywalker: [
     "Skywalker Trampolines is a US brand founded in 2005 and based in Brigham City, Utah, owned by Skywalker Holdings.",
     "The brand sells a wide range of round, rectangular, square, and oval trampolines, from small Mini models for younger kids through 17ft round and 17x10ft rectangular outdoor setups, plus indoor mini fitness trampolines. Models are organized into Classic, Signature, Epic, and Premium series, with pricing that runs from under $100 for mini models to around $2,400 for larger premium outdoor sets.",

@@ -27,7 +27,7 @@ Choose ACON if you want a straightforward performance trampoline you can judge o
 
 Key takeaways
 
-- ACON recommends about 300 lb per jumper with no hard cap; Berg publishes no single-user figure at all — its 600 kg number is a static test, not a jumper rating.
+- ACON recommends about 300 lb per jumper with no hard cap; BERG lists model-specific user limits of 220 to 265 lb across most full-size models. BERG's much higher figures are static test ratings, not jumper limits.
 - ACON publishes round, rectangle models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: ACON is mainly above-ground with an in-ground option, while Berg is above- or in-ground.

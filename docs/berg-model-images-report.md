@@ -1,0 +1,79 @@
+# BERG Model Images Report
+
+## Summary
+- BERG catalog models: 66
+- Official product images imported: 66
+- Missing images: 0
+- Downloaded size: 2.3 MB
+- Source: official BERG product-page `og:image` metadata
+
+## Imported Images
+- `berg-berg-grand-champion-regular-470` — [product page](https://www.berg.com/int_en/berg-grand-champion-regular-470-grey-safety-net-deluxe) — `berg-berg-grand-champion-regular-470.jpg`
+- `berg-berg-grand-champion-inground-520` — [product page](https://www.berg.com/int_en/berg-sports-grand-champion-inground-520-grey) — `berg-berg-grand-champion-inground-520.jpg`
+- `berg-berg-champion-inground-380` — [product page](https://www.berg.com/int_en/berg-sports-champion-inground-380-grey) — `berg-berg-champion-inground-380.jpg`
+- `berg-berg-champion-regular-430` — [product page](https://www.berg.com/int_en/berg-champion-regular-430-grey-safety-net-deluxe) — `berg-berg-champion-regular-430.jpg`
+- `berg-berg-champion-regular-380` — [product page](https://www.berg.com/int_en/berg-champion-regular-380-grey-safety-net-deluxe) — `berg-berg-champion-regular-380.jpg`
+- `berg-berg-ultim-champion-flatground-330` — [product page](https://www.berg.com/int_en/berg-sports-ultim-champion-flatground-330-grey) — `berg-berg-ultim-champion-flatground-330.jpg`
+- `berg-berg-ultim-champion-flatground-410` — [product page](https://www.berg.com/int_en/berg-sports-ultim-champion-flatground-410-grey) — `berg-berg-ultim-champion-flatground-410.jpg`
+- `berg-berg-champion-inground-430` — [product page](https://www.berg.com/int_en/berg-sports-champion-inground-430-grey) — `berg-berg-champion-inground-430.jpg`
+- `berg-berg-grand-champion-regular-350` — [product page](https://www.berg.com/int_en/berg-grand-champion-regular-350-grey-safety-net-deluxe) — `berg-berg-grand-champion-regular-350.jpg`
+- `berg-berg-ultim-pro-bouncer-flatground-5x5` — [product page](https://www.berg.com/int_en/berg-sports-ultim-pro-bouncer-flatground-5x5) — `berg-berg-ultim-pro-bouncer-flatground-5x5.jpg`
+- `berg-berg-ultim-favorit-regular-410` — [product page](https://www.berg.com/int_en/berg-ultim-favorit-regular-410-grey-safety-net-comfort) — `berg-berg-ultim-favorit-regular-410.jpg`
+- `berg-berg-ultim-pro-bouncer-regular-5x5` — [product page](https://www.berg.com/int_en/berg-sports-ultim-pro-bouncer-regular-5x5-safety-net-xl) — `berg-berg-ultim-pro-bouncer-regular-5x5.jpg`
+- `berg-berg-ultim-champion-flatground-500` — [product page](https://www.berg.com/int_en/berg-sports-ultim-champion-flatground-500-grey) — `berg-berg-ultim-champion-flatground-500.jpg`
+- `berg-berg-favorit-regular-330` — [product page](https://www.berg.com/int_en/berg-favorit-regular-330-grey-safety-net-comfort) — `berg-berg-favorit-regular-330.jpg`
+- `berg-berg-champion-regular-330` — [product page](https://www.berg.com/int_en/berg-champion-regular-330-grey-safety-net-deluxe) — `berg-berg-champion-regular-330.jpg`
+- `berg-berg-favorit-regular-380` — [product page](https://www.berg.com/int_en/berg-favorit-regular-380-black-safety-net-comfort) — `berg-berg-favorit-regular-380.jpg`
+- `berg-berg-favorit-regular-430` — [product page](https://www.berg.com/int_en/berg-favorit-regular-430-black-safety-net-comfort) — `berg-berg-favorit-regular-430.jpg`
+- `berg-berg-grand-champion-inground-470` — [product page](https://www.berg.com/int_en/berg-sports-grand-champion-inground-470-grey) — `berg-berg-grand-champion-inground-470.jpg`
+- `berg-berg-ultim-champion-regular-500` — [product page](https://www.berg.com/int_en/berg-ultim-champion-regular-500-grey-safety-net-dlx-xl) — `berg-berg-ultim-champion-regular-500.jpg`
+- `berg-berg-champion-flatground-380` — [product page](https://www.berg.com/int_en/berg-sports-champion-flatground-380-grey) — `berg-berg-champion-flatground-380.jpg`
+- `berg-berg-ultim-favorit-regular-280` — [product page](https://www.berg.com/int_en/berg-ultim-favorit-regular-280-grey-safety-net-comfort) — `berg-berg-ultim-favorit-regular-280.jpg`
+- `berg-berg-grand-favorit-inground-520` — [product page](https://www.berg.com/int_en/berg-sports-grand-favorit-inground-520-grey) — `berg-berg-grand-favorit-inground-520.jpg`
+- `berg-berg-elite-regular-430` — [product page](https://www.berg.com/int_en/berg-elite-regular-430-grey-safety-net-deluxe) — `berg-berg-elite-regular-430.jpg`
+- `berg-berg-elite-regular-430-levels` — [product page](https://www.berg.com/int_en/berg-elite-regular-430-grey-levels-safety-net-deluxe) — `berg-berg-elite-regular-430-levels.jpg`
+- `berg-berg-favorit-inground-200` — [product page](https://www.berg.com/int_en/berg-sports-favorit-inground-200-grey) — `berg-berg-favorit-inground-200.jpg`
+- `berg-berg-ultim-favorit-inground-410` — [product page](https://www.berg.com/int_en/berg-ultim-favorit-inground-410-grey-safety-net-comfort) — `berg-berg-ultim-favorit-inground-410.jpg`
+- `berg-berg-ultim-champion-regular-410` — [product page](https://www.berg.com/int_en/berg-ultim-champion-regular-410-grey-safety-net-dlx-xl) — `berg-berg-ultim-champion-regular-410.jpg`
+- `berg-berg-ultim-elite-flatground-500` — [product page](https://www.berg.com/int_en/berg-sports-ultim-elite-flatground-500-grey) — `berg-berg-ultim-elite-flatground-500.jpg`
+- `berg-berg-grand-elite-regular-520` — [product page](https://www.berg.com/int_en/berg-grand-elite-regular-520-grey-safety-net-dlx-xl) — `berg-berg-grand-elite-regular-520.jpg`
+- `berg-berg-favorit-inground-430` — [product page](https://www.berg.com/int_en/berg-sports-favorit-inground-430-black) — `berg-berg-favorit-inground-430.jpg`
+- `berg-berg-favorit-inground-380` — [product page](https://www.berg.com/int_en/berg-sports-favorit-inground-380-grey) — `berg-berg-favorit-inground-380.jpg`
+- `berg-berg-ultim-pro-bouncer-regular-500` — [product page](https://www.berg.com/int_en/berg-sports-ultim-pro-bouncer-regular-500-safety-net-xl) — `berg-berg-ultim-pro-bouncer-regular-500.jpg`
+- `berg-berg-favorit-inground-330` — [product page](https://www.berg.com/int_en/berg-sports-favorit-inground-330-grey) — `berg-berg-favorit-inground-330.jpg`
+- `berg-berg-ultim-favorit-inground-330` — [product page](https://www.berg.com/int_en/berg-sports-ultim-favorit-inground-330-grey) — `berg-berg-ultim-favorit-inground-330.jpg`
+- `berg-berg-favorit-regular-200` — [product page](https://www.berg.com/int_en/berg-favorit-regular-200-grey-safety-net-comfort) — `berg-berg-favorit-regular-200.jpg`
+- `berg-berg-favorit-inground-270` — [product page](https://www.berg.com/int_en/berg-sports-favorit-inground-270-grey) — `berg-berg-favorit-inground-270.jpg`
+- `berg-berg-ultim-champion-inground-330` — [product page](https://www.berg.com/int_en/berg-sports-ultim-champion-inground-330-grey) — `berg-berg-ultim-champion-inground-330.jpg`
+- `berg-berg-champion-inground-330` — [product page](https://www.berg.com/int_en/berg-champion-inground-330-grey-safety-net-deluxe) — `berg-berg-champion-inground-330.jpg`
+- `berg-berg-champion-flatground-330` — [product page](https://www.berg.com/int_en/berg-sports-champion-flatground-330-grey) — `berg-berg-champion-flatground-330.jpg`
+- `berg-berg-ultim-champion-eco-flatground-410` — [product page](https://www.berg.com/int_en/berg-ultim-champion-eco-flatground-410-safety-net-dlx-xl) — `berg-berg-ultim-champion-eco-flatground-410.jpg`
+- `berg-berg-grand-favorit-regular-520` — [product page](https://www.berg.com/int_en/berg-grand-favorit-regular-520-black-safety-net-comfort) — `berg-berg-grand-favorit-regular-520.jpg`
+- `berg-berg-favorit-regular-270` — [product page](https://www.berg.com/int_en/berg-favorit-regular-270-grey-safety-net-comfort) — `berg-berg-favorit-regular-270.jpg`
+- `berg-berg-ultim-elite-regular-500` — [product page](https://www.berg.com/int_en/berg-ultim-elite-regular-500-grey-safety-net-dlx-xl) — `berg-berg-ultim-elite-regular-500.jpg`
+- `berg-berg-ultim-favorit-inground-280` — [product page](https://www.berg.com/int_en/berg-sports-ultim-favorit-inground-280-green) — `berg-berg-ultim-favorit-inground-280.jpg`
+- `berg-berg-ultim-favorit-regular-330` — [product page](https://www.berg.com/int_en/berg-ultim-favorit-regular-330-grey-safety-net-comfort) — `berg-berg-ultim-favorit-regular-330.jpg`
+- `berg-berg-ultim-pro-bouncer-flatground-500` — [product page](https://www.berg.com/int_en/berg-sports-ultim-pro-bouncer-flatground-500-safety-net-xl) — `berg-berg-ultim-pro-bouncer-flatground-500.jpg`
+- `berg-berg-elite-regular-330` — [product page](https://www.berg.com/int_en/berg-elite-regular-330-grey-safety-net-deluxe) — `berg-berg-elite-regular-330.jpg`
+- `berg-berg-elite-inground-380` — [product page](https://www.berg.com/int_en/berg-elite-inground-380-grey-safety-net-deluxe) — `berg-berg-elite-inground-380.jpg`
+- `berg-berg-grand-elite-inground-520` — [product page](https://www.berg.com/int_en/berg-sports-grand-elite-inground-520-grey) — `berg-berg-grand-elite-inground-520.jpg`
+- `berg-berg-favorit-regular-430-levels` — [product page](https://www.berg.com/int_en/berg-favorit-regular-430-grey-levels-safety-net-comfort) — `berg-berg-favorit-regular-430-levels.jpg`
+- `berg-berg-elite-flatground-380` — [product page](https://www.berg.com/int_en/berg-sports-elite-flatground-380-grey) — `berg-berg-elite-flatground-380.jpg`
+- `berg-berg-elite-flatground-430` — [product page](https://www.berg.com/int_en/berg-sports-elite-flatground-430-grey) — `berg-berg-elite-flatground-430.jpg`
+- `berg-berg-grand-champion-inground-350` — [product page](https://www.berg.com/int_en/berg-sports-grand-champion-inground-350-grey) — `berg-berg-grand-champion-inground-350.jpg`
+- `berg-berg-champion-regular-430-levels` — [product page](https://www.berg.com/int_en/berg-champion-regular-430-grey-levels-safety-net-dlx-xl) — `berg-berg-champion-regular-430-levels.jpg`
+- `berg-berg-champion-flatground-430` — [product page](https://www.berg.com/int_en/berg-sports-champion-flatground-430-grey) — `berg-berg-champion-flatground-430.jpg`
+- `berg-berg-ultim-champion-eco-regular-410` — [product page](https://www.berg.com/int_en/berg-ultim-champion-eco-regular-410-safety-net-dlx-xl) — `berg-berg-ultim-champion-eco-regular-410.jpg`
+- `berg-berg-elite-inground-430` — [product page](https://www.berg.com/int_en/berg-sports-elite-inground-430-grey) — `berg-berg-elite-inground-430.jpg`
+- `berg-berg-elite-inground-430-levels` — [product page](https://www.berg.com/int_en/berg-sports-elite-inground-430-grey-levels) — `berg-berg-elite-inground-430-levels.jpg`
+- `berg-berg-elite-regular-380` — [product page](https://www.berg.com/int_en/berg-elite-regular-380-grey-safety-net-deluxe) — `berg-berg-elite-regular-380.jpg`
+- `berg-berg-elite-inground-330` — [product page](https://www.berg.com/int_en/berg-elite-inground-330-grey-safety-net-deluxe) — `berg-berg-elite-inground-330.jpg`
+- `berg-berg-elite-flatground-330` — [product page](https://www.berg.com/int_en/berg-sports-elite-flatground-330-grey) — `berg-berg-elite-flatground-330.jpg`
+- `berg-berg-pro-launcher` — [product page](https://www.berg.com/int_en/berg-pro-launcher) — `berg-berg-pro-launcher.jpg`
+- `berg-berg-hoppaa` — [product page](https://www.berg.com/int_en/berg-hoppaa) — `berg-berg-hoppaa.jpg`
+- `berg-berg-fitness-trampoline-110` — [product page](https://www.berg.com/int_en/berg-fitness-trampoline-110-black) — `berg-berg-fitness-trampoline-110.jpg`
+- `berg-berg-grand-champion-regular-520` — [product page](https://www.berg.com/int_en/berg-grand-champion-regular-520-grey-safety-net-deluxe) — `berg-berg-grand-champion-regular-520.jpg`
+- `berg-berg-ultim-champion-regular-330` — [product page](https://www.berg.com/int_en/berg-ultim-champion-regular-330-grey-safety-net-deluxe) — `berg-berg-ultim-champion-regular-330.jpg`
+
+## Missing Images
+- None

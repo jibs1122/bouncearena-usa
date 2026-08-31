@@ -28,7 +28,7 @@ Choose Vuly if you want a simpler lineup with a wide accessory range. Choose Ber
 Key takeaways
 
 - The two brands differ on bounce system — Vuly uses a mix of coil-spring and leaf-spring models, while Berg uses traditional coil springs.
-- Vuly rates a single jumper to 330 lb; Berg publishes no single-user figure — its 600 kg number is a static test, not a jumper rating.
+- Vuly rates a single jumper to 330 lb; BERG lists model-specific user limits of 220 to 265 lb across most full-size models. BERG's much higher figures are static test ratings, not jumper limits.
 - Vuly publishes round models; Berg's line-up varies by range; use the table rows for the exact models shown.
 - Berg warranty is set by product line — 10 years standard on frame for most lines; extends to 13 years with registration. Favorit line differs from Berg's higher-tier ranges.
 - Installation differs: Vuly is above-ground only, while Berg is above- or in-ground.
