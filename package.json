@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run validate:model-comparisons && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "validate:csv": "node scripts/validate-csv.mjs",
+    "validate:model-comparisons": "node scripts/validate-model-comparisons.mjs",
     "images:berg": "node scripts/download-berg-images.mjs",
     "refresh": "node scripts/refresh-products.mjs"
   },

@@ -17,6 +17,8 @@ import {
 import {
   getApprovedModelComparison,
   getApprovedModelComparisons,
+  resolveModelComparisonProducts,
+  resolveModelComparisonSideProducts,
   type ModelComparisonArticle,
 } from "@/lib/modelComparisons";
 import { brandSlug, getAllProducts } from "@/lib/products";
@@ -159,14 +161,10 @@ function buildFeaturedModel(products: Product[]): FeaturedModel | null {
 function buildModelComparisonCards(article: ModelComparisonArticle): ModelComparisonCard[] {
   if (article.sides.length < 2) return [];
 
-  const productsBySourceRow = new Map(
-    getAllProducts().map((product) => [product.sourceRowIndex, product]),
-  );
+  const products = getAllProducts();
 
   const cards = article.sides.map((side) => {
-    const candidates = side.rowIndices
-      .map((rowIndex) => productsBySourceRow.get(rowIndex))
-      .filter((product): product is Product => Boolean(product))
+    const candidates = resolveModelComparisonSideProducts(side, products)
       .filter((product) => product.sourceUrls.length > 0)
       .filter((product) => hasModelImage(product.brand, product.model))
       .sort((a, b) => {
@@ -185,35 +183,20 @@ function buildModelComparisonCards(article: ModelComparisonArticle): ModelCompar
   return cards.filter((card): card is ModelComparisonCard => card !== null);
 }
 
-function getProductsBySourceRow(): Map<number, Product> {
-  return new Map(getAllProducts().map((product) => [product.sourceRowIndex, product]));
-}
-
 function getModelComparisonProducts(
   article: ModelComparisonArticle,
-  productsBySourceRow = getProductsBySourceRow(),
+  products = getAllProducts(),
 ): Product[] {
-  const products = new Map<number, Product>();
-
-  for (const side of article.sides) {
-    for (const rowIndex of side.rowIndices) {
-      const product = productsBySourceRow.get(rowIndex);
-      if (product) {
-        products.set(product.sourceRowIndex, product);
-      }
-    }
-  }
-
-  return Array.from(products.values());
+  return resolveModelComparisonProducts(article, products);
 }
 
 function getModelComparisonBrands(
   article: ModelComparisonArticle,
-  productsBySourceRow = getProductsBySourceRow(),
+  products = getAllProducts(),
 ): ModelComparisonBrand[] {
   const brands = new Map<string, ModelComparisonBrand>();
 
-  for (const product of getModelComparisonProducts(article, productsBySourceRow)) {
+  for (const product of getModelComparisonProducts(article, products)) {
     const slug = brandSlug(product.brand);
     if (!brands.has(slug)) {
       brands.set(slug, { name: product.brand, slug });
@@ -224,8 +207,8 @@ function getModelComparisonBrands(
 }
 
 function buildModelComparisonRelatedLinks(article: ModelComparisonArticle): RelatedReadingLink[] {
-  const productsBySourceRow = getProductsBySourceRow();
-  const articleBrands = getModelComparisonBrands(article, productsBySourceRow);
+  const products = getAllProducts();
+  const articleBrands = getModelComparisonBrands(article, products);
   const articleBrandSlugs = new Set(articleBrands.map((brand) => brand.slug));
   const links: RelatedReadingLink[] = [];
   const seenHrefs = new Set<string>();
@@ -241,7 +224,7 @@ function buildModelComparisonRelatedLinks(article: ModelComparisonArticle): Rela
     if (promoPage) addLink(promoPage.href, promoPage.label);
   }
 
-  for (const product of getModelComparisonProducts(article, productsBySourceRow)) {
+  for (const product of getModelComparisonProducts(article, products)) {
     getModelComparisonLinks(product.brand, product.model).forEach((link) =>
       {
         if (link.href !== `/compare/${article.slug}/`) addLink(link.href, link.label);
@@ -261,7 +244,7 @@ function buildModelComparisonRelatedLinks(article: ModelComparisonArticle): Rela
   getApprovedModelComparisons()
     .filter((comparison) => comparison.slug !== article.slug)
     .filter((comparison) =>
-      getModelComparisonBrands(comparison, productsBySourceRow).some((brand) =>
+      getModelComparisonBrands(comparison, products).some((brand) =>
         articleBrandSlugs.has(brand.slug),
       ),
     )

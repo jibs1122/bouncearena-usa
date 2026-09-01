@@ -3,6 +3,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import { getApprovedComparisons } from "@/lib/comparisons";
 import {
   getApprovedModelComparisons,
+  resolveModelComparisonProducts,
   type ModelComparisonArticle,
 } from "@/lib/modelComparisons";
 import { brandSlug, getAllProducts } from "@/lib/products";
@@ -71,18 +72,14 @@ function addBrandStat(
 
 function getModelComparisonBrands(
   article: ModelComparisonArticle,
-  productsBySourceRow: Map<number, Product>,
+  products: Product[],
   knownBrands: HubBrandRef[],
 ): HubBrandRef[] {
   const brands = new Map<string, HubBrandRef>();
 
-  for (const side of article.sides) {
-    for (const rowIndex of side.rowIndices) {
-      const product = productsBySourceRow.get(rowIndex);
-      if (!product) continue;
-      const brand = makeBrandRef(product.brand);
-      brands.set(brand.slug, brand);
-    }
+  for (const product of resolveModelComparisonProducts(article, products)) {
+    const brand = makeBrandRef(product.brand);
+    brands.set(brand.slug, brand);
   }
 
   if (brands.size === 0) {
@@ -101,9 +98,7 @@ function getModelComparisonBrands(
 function buildHubData() {
   const approvedComparisons = getApprovedComparisons();
   const approvedModelComparisons = getApprovedModelComparisons();
-  const productsBySourceRow = new Map(
-    getAllProducts().map((product) => [product.sourceRowIndex, product]),
-  );
+  const products = getAllProducts();
   const knownBrandRefs = new Map<string, HubBrandRef>();
   const stats = new Map<string, HubBrand>();
 
@@ -141,7 +136,7 @@ function buildHubData() {
   const modelComparisons: HubModelComparison[] = approvedModelComparisons.map((comparison) => {
     const brands = getModelComparisonBrands(
       comparison,
-      productsBySourceRow,
+      products,
       Array.from(knownBrandRefs.values()),
     );
 
